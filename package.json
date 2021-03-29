@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "cordova":"ng build --base-href . --output-path cordova/www",
+    "cordova":"ng build --base-href . --output-path cordova-madrid-digital/www --watch",
     "android":"cd cordova-madrid-digital && cordova run android",
     "browser":"cd cordova-madrid-digital && cordova run browser --target=chrome --port=5000"
   },
