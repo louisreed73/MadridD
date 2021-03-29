@@ -3,11 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "cordova":"ng build --base-href . --output-path cordova/www",
+    "android":"cd cordova-madrid-digital && cordova run android",
+    "browser":"cd cordova-madrid-digital && cordova run browser --target=chrome --port=5000"
   },
   "private": true,
   "dependencies": {
