@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header>\n    <p>provisional Header</p>\n</header>\n<router-outlet></router-outlet>\n\n"
+module.exports = "<header>\r\n    <p>provisional Header</p>\r\n</header>\r\n<router-outlet></router-outlet>\r\n\r\n"
 
 /***/ }),
 
@@ -41,7 +41,18 @@ module.exports = "<header>\n    <p>provisional Header</p>\n</header>\n<router-ou
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<a [routerLink]=\"['/documentos']\" routerLinkActive=\"active\">documentos</a>\n<a [routerLink]=\"['/escritos']\" routerLinkActive=\"active\">escritos</a>\n<a [routerLink]=\"['/resoluciones']\" routerLinkActive=\"active\">resoluciones</a>\n"
+module.exports = "<a [routerLink]=\"['/documentos']\" routerLinkActive=\"active\">documentos</a>\r\n<a [routerLink]=\"['/escritos']\" routerLinkActive=\"active\">escritos</a>\r\n<a [routerLink]=\"['/resoluciones']\" routerLinkActive=\"active\">resoluciones</a>\r\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/layouts/detail-layout/detail-layout.component.html":
+/*!**********************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/layouts/detail-layout/detail-layout.component.html ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<aside>\r\n    detail layout Component\r\n</aside>\r\n<main>\r\n  <router-outlet></router-outlet>\r\n</main>\r\n"
 
 /***/ }),
 
@@ -52,51 +63,18 @@ module.exports = "<a [routerLink]=\"['/documentos']\" routerLinkActive=\"active\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<main>\n    <section>\n        <div class=\"search\">\n            <!-- <label for=\"search\">Search</label> -->\n            <input type=\"text\" name=\"\" id=\"search\" placeholder=\"Buscar\">\n        </div>\n    </section>\n    <section class=\"filterTabs\">\n        <app-filter-tabs></app-filter-tabs>\n    </section>\n</main>\n<router-outlet></router-outlet>\n\n"
+module.exports = "<main>\r\n    <section>\r\n        <div class=\"search\">\r\n            <!-- <label for=\"search\">Search</label> -->\r\n            <input \r\n            type=\"text\" \r\n            name=\"\" \r\n            id=\"search\" \r\n            placeholder=\"Buscar\"\r\n            [formControl]=\"searchInput\">\r\n        </div>\r\n\r\n            <!-- <p>{{inputString}}</p> -->\r\n\r\n    </section>\r\n    <section class=\"filterTabs\">\r\n        <app-filter-tabs></app-filter-tabs>\r\n    </section>\r\n</main>\r\n<router-outlet></router-outlet>\r\n\r\n"
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/pages/detail/detail.component.html":
-/*!******************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/pages/detail/detail.component.html ***!
-  \******************************************************************************/
+/***/ "./node_modules/raw-loader/index.js!./src/app/pages/documento/documento.component.html":
+/*!************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/pages/documento/documento.component.html ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>detail works!</p>\n\n"
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/app/pages/documentos/search-documents/search-documents.component.html":
-/*!*************************************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/pages/documentos/search-documents/search-documents.component.html ***!
-  \*************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<section>\n    \n    <p>search-documents works!</p>\n</section>\n\n\n\n"
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/app/pages/documentos/search-escritos/search-escritos.component.html":
-/*!***********************************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/pages/documentos/search-escritos/search-escritos.component.html ***!
-  \***********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<section>\n    <p>search-escritos works!</p>\n</section>\n"
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/app/pages/documentos/search-resoluciones/search-resoluciones.component.html":
-/*!*******************************************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/pages/documentos/search-resoluciones/search-resoluciones.component.html ***!
-  \*******************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<section>\n    <p>search-resoluciones works!</p>\n</section>"
+module.exports = "<a [routerLink]=\"['documentos']\">Volver</a>\r\n<p>documento works!</p>\r\n<!-- <router-outlet></router-outlet> -->\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -114,11 +92,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _layouts_search_layout_search_layout_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layouts/search-layout/search-layout.component */ "./src/app/layouts/search-layout/search-layout.component.ts");
-/* harmony import */ var _pages_detail_detail_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/detail/detail.component */ "./src/app/pages/detail/detail.component.ts");
-/* harmony import */ var _pages_documentos_search_documents_search_documents_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/documentos/search-documents/search-documents.component */ "./src/app/pages/documentos/search-documents/search-documents.component.ts");
-/* harmony import */ var _components_filter_tabs_filter_tabs_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/filter-tabs/filter-tabs.component */ "./src/app/components/filter-tabs/filter-tabs.component.ts");
-/* harmony import */ var _pages_documentos_search_resoluciones_search_resoluciones_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/documentos/search-resoluciones/search-resoluciones.component */ "./src/app/pages/documentos/search-resoluciones/search-resoluciones.component.ts");
-/* harmony import */ var _pages_documentos_search_escritos_search_escritos_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/documentos/search-escritos/search-escritos.component */ "./src/app/pages/documentos/search-escritos/search-escritos.component.ts");
+/* harmony import */ var _pages_documento_documento_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/documento/documento.component */ "./src/app/pages/documento/documento.component.ts");
+/* harmony import */ var _components_filter_tabs_filter_tabs_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/filter-tabs/filter-tabs.component */ "./src/app/components/filter-tabs/filter-tabs.component.ts");
+/* harmony import */ var _layouts_detail_layout_detail_layout_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./layouts/detail-layout/detail-layout.component */ "./src/app/layouts/detail-layout/detail-layout.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 
 
 
@@ -130,13 +108,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var routes = [
     { path: '', pathMatch: 'full', redirectTo: 'documentos' },
-    { path: '', component: _layouts_search_layout_search_layout_component__WEBPACK_IMPORTED_MODULE_3__["SearchLayoutComponent"], children: [
-            { path: 'documentos', component: _pages_documentos_search_documents_search_documents_component__WEBPACK_IMPORTED_MODULE_5__["SearchDocumentsComponent"] },
-            { path: 'resoluciones', component: _pages_documentos_search_resoluciones_search_resoluciones_component__WEBPACK_IMPORTED_MODULE_7__["SearchResolucionesComponent"] },
-            { path: 'escritos', component: _pages_documentos_search_escritos_search_escritos_component__WEBPACK_IMPORTED_MODULE_8__["SearchEscritosComponent"] },
-        ]
+    {
+        path: '',
+        component: _layouts_search_layout_search_layout_component__WEBPACK_IMPORTED_MODULE_3__["SearchLayoutComponent"],
+        loadChildren: function () { return __webpack_require__.e(/*! import() | modules-documentos-page-documentos-module */ "modules-documentos-page-documentos-module").then(__webpack_require__.bind(null, /*! ./modules/documentos/page-documentos.module */ "./src/app/modules/documentos/page-documentos.module.ts")).then(function (m) { return m.PagesDocumentsModule; }); }
     },
-    { path: 'detail', component: _pages_detail_detail_component__WEBPACK_IMPORTED_MODULE_4__["DetailComponent"] },
+    { path: '', component: _layouts_detail_layout_detail_layout_component__WEBPACK_IMPORTED_MODULE_6__["DetailLayoutComponent"], children: [
+            { path: 'documento/:id', component: _pages_documento_documento_component__WEBPACK_IMPORTED_MODULE_4__["DocumentoComponent"] },
+        ] },
     { path: '**', redirectTo: "documentos" }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -145,16 +124,17 @@ var AppRoutingModule = /** @class */ (function () {
     AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             imports: [
-                _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes)
+                _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes, { preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_2__["PreloadAllModules"] }),
+                _angular_common__WEBPACK_IMPORTED_MODULE_8__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_7__["ReactiveFormsModule"],
             ],
             exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
             declarations: [
                 _layouts_search_layout_search_layout_component__WEBPACK_IMPORTED_MODULE_3__["SearchLayoutComponent"],
-                _pages_detail_detail_component__WEBPACK_IMPORTED_MODULE_4__["DetailComponent"],
-                _pages_documentos_search_documents_search_documents_component__WEBPACK_IMPORTED_MODULE_5__["SearchDocumentsComponent"],
-                _pages_documentos_search_escritos_search_escritos_component__WEBPACK_IMPORTED_MODULE_8__["SearchEscritosComponent"],
-                _pages_documentos_search_resoluciones_search_resoluciones_component__WEBPACK_IMPORTED_MODULE_7__["SearchResolucionesComponent"],
-                _components_filter_tabs_filter_tabs_component__WEBPACK_IMPORTED_MODULE_6__["FilterTabsComponent"],
+                _layouts_detail_layout_detail_layout_component__WEBPACK_IMPORTED_MODULE_6__["DetailLayoutComponent"],
+                _pages_documento_documento_component__WEBPACK_IMPORTED_MODULE_4__["DocumentoComponent"],
+                _components_filter_tabs_filter_tabs_component__WEBPACK_IMPORTED_MODULE_5__["FilterTabsComponent"],
             ]
         })
     ], AppRoutingModule);
@@ -221,8 +201,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+
 
 
 
@@ -234,14 +216,15 @@ var AppModule = /** @class */ (function () {
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"]
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"]
             ],
             providers: [],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -258,7 +241,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host {\n  margin: 2rem 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  height: 3rem;\n}\n\na {\n  color: inherit;\n  text-decoration: none;\n  width: 11rem;\n  text-align: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9maWx0ZXItdGFicy9DOlxcVXNlcnNcXGx1aXMuc2FuY2hlei5hbGNhemFyXFxEQVRBXFxXb3JrXFxNYWRyaWQtRGlnaXRhbC9zcmNcXGFwcFxcY29tcG9uZW50c1xcZmlsdGVyLXRhYnNcXGZpbHRlci10YWJzLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRzL2ZpbHRlci10YWJzL2ZpbHRlci10YWJzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtFQUdBLGFBQUE7RUFDQSw4QkFBQTtFQUNBLG1CQUFBO0VBQ0EsWUFBQTtBQ0RKOztBRElBO0VBQ0ksY0FBQTtFQUNBLHFCQUFBO0VBQ0EsWUFBQTtFQUNBLGtCQUFBO0FDREoiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2ZpbHRlci10YWJzL2ZpbHRlci10YWJzLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xyXG4gICAgbWFyZ2luOjJyZW0gMDtcclxuICAgIC8vIGJhY2tncm91bmQ6cmVkO1xyXG4gICAgLy8gY29sb3I6d2hpdGU7XHJcbiAgICBkaXNwbGF5OmZsZXg7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XHJcbiAgICBhbGlnbi1pdGVtczpjZW50ZXI7XHJcbiAgICBoZWlnaHQ6M3JlbTtcclxufVxyXG5cclxuYSB7XHJcbiAgICBjb2xvcjppbmhlcml0O1xyXG4gICAgdGV4dC1kZWNvcmF0aW9uOm5vbmU7XHJcbiAgICB3aWR0aDoxMXJlbTtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufSIsIjpob3N0IHtcbiAgbWFyZ2luOiAycmVtIDA7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgaGVpZ2h0OiAzcmVtO1xufVxuXG5hIHtcbiAgY29sb3I6IGluaGVyaXQ7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgd2lkdGg6IDExcmVtO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59Il19 */"
+module.exports = ":host {\n  margin: 2rem 0;\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n  align-items: center;\n  height: 3rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9maWx0ZXItdGFicy9DOlxcVXNlcnNcXGx1aXMuc2FuY2hlei5hbGNhemFyXFxEQVRBXFxXb3JrXFxNYWRyaWQtRGlnaXRhbC9zcmNcXGFwcFxcY29tcG9uZW50c1xcZmlsdGVyLXRhYnNcXGZpbHRlci10YWJzLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRzL2ZpbHRlci10YWJzL2ZpbHRlci10YWJzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtFQUdBLGFBQUE7RUFDQSxtQkFBQTtFQUNBLDhCQUFBO0VBQ0EsbUJBQUE7RUFDQSxZQUFBO0FDREoiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2ZpbHRlci10YWJzL2ZpbHRlci10YWJzLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xyXG4gICAgbWFyZ2luOjJyZW0gMDtcclxuICAgIC8vIGJhY2tncm91bmQ6cmVkO1xyXG4gICAgLy8gY29sb3I6d2hpdGU7XHJcbiAgICBkaXNwbGF5OmZsZXg7XHJcbiAgICBmbGV4LWZsb3c6cm93IHdyYXA7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XHJcbiAgICBhbGlnbi1pdGVtczpjZW50ZXI7XHJcbiAgICBoZWlnaHQ6M3JlbTtcclxufVxyXG5cclxuIiwiOmhvc3Qge1xuICBtYXJnaW46IDJyZW0gMDtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1mbG93OiByb3cgd3JhcDtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBoZWlnaHQ6IDNyZW07XG59Il19 */"
 
 /***/ }),
 
@@ -296,6 +279,51 @@ var FilterTabsComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/layouts/detail-layout/detail-layout.component.scss":
+/*!********************************************************************!*\
+  !*** ./src/app/layouts/detail-layout/detail-layout.component.scss ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ":host {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: center;\n  color: white;\n}\n\naside {\n  flex: 0 1 33rem;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  background: red;\n}\n\nmain {\n  flex: 1 1 60rem;\n  background: #685a0b;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbGF5b3V0cy9kZXRhaWwtbGF5b3V0L0M6XFxVc2Vyc1xcbHVpcy5zYW5jaGV6LmFsY2F6YXJcXERBVEFcXFdvcmtcXE1hZHJpZC1EaWdpdGFsL3NyY1xcYXBwXFxsYXlvdXRzXFxkZXRhaWwtbGF5b3V0XFxkZXRhaWwtbGF5b3V0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9sYXlvdXRzL2RldGFpbC1sYXlvdXQvZGV0YWlsLWxheW91dC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUVJLGFBQUE7RUFDQSxtQkFBQTtFQUNBLHVCQUFBO0VBQ0EsWUFBQTtBQ0ZKOztBREtBO0VBQ0ksZUFBQTtFQUNBLG9CQUFBO0VBQ0EsbUJBQUE7RUFDQSx1QkFBQTtFQUNBLGVBQUE7QUNGSjs7QURLQTtFQUNJLGVBQUE7RUFDQSxtQkFBQTtBQ0ZKIiwiZmlsZSI6InNyYy9hcHAvbGF5b3V0cy9kZXRhaWwtbGF5b3V0L2RldGFpbC1sYXlvdXQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuXHJcbjpob3N0IFxyXG4ge1xyXG4gICAgZGlzcGxheTpmbGV4O1xyXG4gICAgZmxleC1mbG93OnJvdyB3cmFwO1xyXG4gICAganVzdGlmeS1jb250ZW50OmNlbnRlcjtcclxuICAgIGNvbG9yOndoaXRlO1xyXG59XHJcblxyXG5hc2lkZSB7XHJcbiAgICBmbGV4OiAwIDEgMzNyZW07XHJcbiAgICBkaXNwbGF5OiBpbmxpbmUtZmxleDtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICAgIGJhY2tncm91bmQ6cmVkO1xyXG59XHJcblxyXG5tYWluIHtcclxuICAgIGZsZXg6IDEgMSA2MHJlbTtcclxuICAgIGJhY2tncm91bmQ6cmdiKDEwNCwgOTAsIDExKTtcclxufSIsIjpob3N0IHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1mbG93OiByb3cgd3JhcDtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGNvbG9yOiB3aGl0ZTtcbn1cblxuYXNpZGUge1xuICBmbGV4OiAwIDEgMzNyZW07XG4gIGRpc3BsYXk6IGlubGluZS1mbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYmFja2dyb3VuZDogcmVkO1xufVxuXG5tYWluIHtcbiAgZmxleDogMSAxIDYwcmVtO1xuICBiYWNrZ3JvdW5kOiAjNjg1YTBiO1xufSJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/layouts/detail-layout/detail-layout.component.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/layouts/detail-layout/detail-layout.component.ts ***!
+  \******************************************************************/
+/*! exports provided: DetailLayoutComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DetailLayoutComponent", function() { return DetailLayoutComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var DetailLayoutComponent = /** @class */ (function () {
+    function DetailLayoutComponent() {
+    }
+    DetailLayoutComponent.prototype.ngOnInit = function () {
+    };
+    DetailLayoutComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-detail-layout',
+            template: __webpack_require__(/*! raw-loader!./detail-layout.component.html */ "./node_modules/raw-loader/index.js!./src/app/layouts/detail-layout/detail-layout.component.html"),
+            styles: [__webpack_require__(/*! ./detail-layout.component.scss */ "./src/app/layouts/detail-layout/detail-layout.component.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], DetailLayoutComponent);
+    return DetailLayoutComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/layouts/search-layout/search-layout.component.scss":
 /*!********************************************************************!*\
   !*** ./src/app/layouts/search-layout/search-layout.component.scss ***!
@@ -303,7 +331,7 @@ var FilterTabsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host ::ng-deep section {\n  padding: 1rem 3rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbGF5b3V0cy9zZWFyY2gtbGF5b3V0L0M6XFxVc2Vyc1xcbHVpcy5zYW5jaGV6LmFsY2F6YXJcXERBVEFcXFdvcmtcXE1hZHJpZC1EaWdpdGFsL3NyY1xcYXBwXFxsYXlvdXRzXFxzZWFyY2gtbGF5b3V0XFxzZWFyY2gtbGF5b3V0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9sYXlvdXRzL3NlYXJjaC1sYXlvdXQvc2VhcmNoLWxheW91dC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUVJLGtCQUFBO0FDRkoiLCJmaWxlIjoic3JjL2FwcC9sYXlvdXRzL3NlYXJjaC1sYXlvdXQvc2VhcmNoLWxheW91dC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG5cclxuOmhvc3QgOjpuZy1kZWVwIHNlY3Rpb25cclxuIHtcclxuICAgIHBhZGRpbmc6MXJlbSAzcmVtO1xyXG59IiwiOmhvc3QgOjpuZy1kZWVwIHNlY3Rpb24ge1xuICBwYWRkaW5nOiAxcmVtIDNyZW07XG59Il19 */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2xheW91dHMvc2VhcmNoLWxheW91dC9zZWFyY2gtbGF5b3V0LmNvbXBvbmVudC5zY3NzIn0= */"
 
 /***/ }),
 
@@ -319,20 +347,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchLayoutComponent", function() { return SearchLayoutComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_app_services_documentos_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/documentos.service */ "./src/app/services/documentos.service.ts");
+
+
+
 
 
 var SearchLayoutComponent = /** @class */ (function () {
-    function SearchLayoutComponent() {
+    // inputString:string;
+    function SearchLayoutComponent(documentos) {
+        this.documentos = documentos;
+        this.searchInput = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]();
     }
     SearchLayoutComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.Subc = this.searchInput.valueChanges
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["debounceTime"])(500), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (v) {
+            console.log(JSON.stringify(v, null, 2));
+        }))
+            .subscribe(function (inp) {
+            _this.documentos.inputAndFiltersData$.next({
+                searchInput: inp,
+                host: _this
+            });
+            _this.inputString = inp;
+        });
     };
+    SearchLayoutComponent.prototype.ngOnDestroy = function () {
+        //Called once, before the instance is destroyed.
+        //Add 'implements OnDestroy' to the class.
+        this.Subc.unsubscribe();
+    };
+    SearchLayoutComponent.ctorParameters = function () { return [
+        { type: src_app_services_documentos_service__WEBPACK_IMPORTED_MODULE_4__["DocumentosService"] }
+    ]; };
     SearchLayoutComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-search-layout',
             template: __webpack_require__(/*! raw-loader!./search-layout.component.html */ "./node_modules/raw-loader/index.js!./src/app/layouts/search-layout/search-layout.component.html"),
             styles: [__webpack_require__(/*! ./search-layout.component.scss */ "./src/app/layouts/search-layout/search-layout.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_documentos_service__WEBPACK_IMPORTED_MODULE_4__["DocumentosService"]])
     ], SearchLayoutComponent);
     return SearchLayoutComponent;
 }());
@@ -341,180 +398,112 @@ var SearchLayoutComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/pages/detail/detail.component.scss":
-/*!****************************************************!*\
-  !*** ./src/app/pages/detail/detail.component.scss ***!
-  \****************************************************/
+/***/ "./src/app/pages/documento/documento.component.scss":
+/*!**********************************************************!*\
+  !*** ./src/app/pages/documento/documento.component.scss ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host ::ng-deep > * {\n  padding: 2rem 3rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvZGV0YWlsL0M6XFxVc2Vyc1xcbHVpcy5zYW5jaGV6LmFsY2F6YXJcXERBVEFcXFdvcmtcXE1hZHJpZC1EaWdpdGFsL3NyY1xcYXBwXFxwYWdlc1xcZGV0YWlsXFxkZXRhaWwuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3BhZ2VzL2RldGFpbC9kZXRhaWwuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFFSSxrQkFBQTtBQ0FKIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvZGV0YWlsL2RldGFpbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IDo6bmctZGVlcCA+ICpcclxuIHtcclxuICAgIHBhZGRpbmc6MnJlbSAzcmVtO1xyXG59IiwiOmhvc3QgOjpuZy1kZWVwID4gKiB7XG4gIHBhZGRpbmc6IDJyZW0gM3JlbTtcbn0iXX0= */"
+module.exports = ":host ::ng-deep > * {\n  padding: 2rem 3rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvZG9jdW1lbnRvL0M6XFxVc2Vyc1xcbHVpcy5zYW5jaGV6LmFsY2F6YXJcXERBVEFcXFdvcmtcXE1hZHJpZC1EaWdpdGFsL3NyY1xcYXBwXFxwYWdlc1xcZG9jdW1lbnRvXFxkb2N1bWVudG8uY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3BhZ2VzL2RvY3VtZW50by9kb2N1bWVudG8uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFFSSxrQkFBQTtBQ0FKIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvZG9jdW1lbnRvL2RvY3VtZW50by5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IDo6bmctZGVlcCA+ICpcclxuIHtcclxuICAgIHBhZGRpbmc6MnJlbSAzcmVtO1xyXG59IiwiOmhvc3QgOjpuZy1kZWVwID4gKiB7XG4gIHBhZGRpbmc6IDJyZW0gM3JlbTtcbn0iXX0= */"
 
 /***/ }),
 
-/***/ "./src/app/pages/detail/detail.component.ts":
-/*!**************************************************!*\
-  !*** ./src/app/pages/detail/detail.component.ts ***!
-  \**************************************************/
-/*! exports provided: DetailComponent */
+/***/ "./src/app/pages/documento/documento.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/pages/documento/documento.component.ts ***!
+  \********************************************************/
+/*! exports provided: DocumentoComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DetailComponent", function() { return DetailComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DocumentoComponent", function() { return DocumentoComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
-var DetailComponent = /** @class */ (function () {
-    function DetailComponent() {
+
+var DocumentoComponent = /** @class */ (function () {
+    function DocumentoComponent(route) {
+        this.route = route;
     }
-    DetailComponent.prototype.ngOnInit = function () {
+    DocumentoComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.paramMap.subscribe(function (map) {
+            console.log(map.get("id"));
+            _this.historylastURL = _this.route.snapshot.url[0];
+            console.log(_this.historylastURL.path);
+        });
     };
-    DetailComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    DocumentoComponent.ctorParameters = function () { return [
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }
+    ]; };
+    DocumentoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-detail',
-            template: __webpack_require__(/*! raw-loader!./detail.component.html */ "./node_modules/raw-loader/index.js!./src/app/pages/detail/detail.component.html"),
-            styles: [__webpack_require__(/*! ./detail.component.scss */ "./src/app/pages/detail/detail.component.scss")]
+            selector: 'app-documento',
+            template: __webpack_require__(/*! raw-loader!./documento.component.html */ "./node_modules/raw-loader/index.js!./src/app/pages/documento/documento.component.html"),
+            styles: [__webpack_require__(/*! ./documento.component.scss */ "./src/app/pages/documento/documento.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-    ], DetailComponent);
-    return DetailComponent;
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+    ], DocumentoComponent);
+    return DocumentoComponent;
 }());
 
 
 
 /***/ }),
 
-/***/ "./src/app/pages/documentos/search-documents/search-documents.component.scss":
-/*!***********************************************************************************!*\
-  !*** ./src/app/pages/documentos/search-documents/search-documents.component.scss ***!
-  \***********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ":host ::ng-deep section {\n  padding: 2rem 3rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvZG9jdW1lbnRvcy9zZWFyY2gtZG9jdW1lbnRzL0M6XFxVc2Vyc1xcbHVpcy5zYW5jaGV6LmFsY2F6YXJcXERBVEFcXFdvcmtcXE1hZHJpZC1EaWdpdGFsL3NyY1xcYXBwXFxwYWdlc1xcZG9jdW1lbnRvc1xcc2VhcmNoLWRvY3VtZW50c1xcc2VhcmNoLWRvY3VtZW50cy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvcGFnZXMvZG9jdW1lbnRvcy9zZWFyY2gtZG9jdW1lbnRzL3NlYXJjaC1kb2N1bWVudHMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFFSSxrQkFBQTtBQ0FKIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvZG9jdW1lbnRvcy9zZWFyY2gtZG9jdW1lbnRzL3NlYXJjaC1kb2N1bWVudHMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCA6Om5nLWRlZXAgc2VjdGlvblxyXG4ge1xyXG4gICAgcGFkZGluZzoycmVtIDNyZW07XHJcbn0iLCI6aG9zdCA6Om5nLWRlZXAgc2VjdGlvbiB7XG4gIHBhZGRpbmc6IDJyZW0gM3JlbTtcbn0iXX0= */"
-
-/***/ }),
-
-/***/ "./src/app/pages/documentos/search-documents/search-documents.component.ts":
-/*!*********************************************************************************!*\
-  !*** ./src/app/pages/documentos/search-documents/search-documents.component.ts ***!
-  \*********************************************************************************/
-/*! exports provided: SearchDocumentsComponent */
+/***/ "./src/app/services/documentos.service.ts":
+/*!************************************************!*\
+  !*** ./src/app/services/documentos.service.ts ***!
+  \************************************************/
+/*! exports provided: DocumentosService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchDocumentsComponent", function() { return SearchDocumentsComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DocumentosService", function() { return DocumentosService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 
 
-var SearchDocumentsComponent = /** @class */ (function () {
-    function SearchDocumentsComponent() {
+
+
+
+var url = "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos";
+var DocumentosService = /** @class */ (function () {
+    function DocumentosService(http) {
+        var _this = this;
+        this.http = http;
+        this.inputAndFiltersData$ = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"]({ searchInput: "" });
+        this.productos$ = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"]({});
+        this.inputAndFiltersData$
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (v) { return v.searchInput; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (v) {
+            console.log(v);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (v) { return _this.http.get(url + "/?q=" + v); }))
+            .subscribe(function (d) {
+            console.log(d);
+            _this.productos$.next(d);
+        });
     }
-    SearchDocumentsComponent.prototype.ngOnInit = function () {
+    DocumentosService.prototype.handleError = function (e) {
+        throw new Error(e);
     };
-    SearchDocumentsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-search-documents',
-            template: __webpack_require__(/*! raw-loader!./search-documents.component.html */ "./node_modules/raw-loader/index.js!./src/app/pages/documentos/search-documents/search-documents.component.html"),
-            styles: [__webpack_require__(/*! ./search-documents.component.scss */ "./src/app/pages/documentos/search-documents/search-documents.component.scss")]
+    DocumentosService.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
+    ]; };
+    DocumentosService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+            providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-    ], SearchDocumentsComponent);
-    return SearchDocumentsComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/pages/documentos/search-escritos/search-escritos.component.scss":
-/*!*********************************************************************************!*\
-  !*** ./src/app/pages/documentos/search-escritos/search-escritos.component.scss ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ":host ::ng-deep section {\n  padding: 2rem 3rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvZG9jdW1lbnRvcy9zZWFyY2gtZXNjcml0b3MvQzpcXFVzZXJzXFxsdWlzLnNhbmNoZXouYWxjYXphclxcREFUQVxcV29ya1xcTWFkcmlkLURpZ2l0YWwvc3JjXFxhcHBcXHBhZ2VzXFxkb2N1bWVudG9zXFxzZWFyY2gtZXNjcml0b3NcXHNlYXJjaC1lc2NyaXRvcy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvcGFnZXMvZG9jdW1lbnRvcy9zZWFyY2gtZXNjcml0b3Mvc2VhcmNoLWVzY3JpdG9zLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBRUksa0JBQUE7QUNBSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2RvY3VtZW50b3Mvc2VhcmNoLWVzY3JpdG9zL3NlYXJjaC1lc2NyaXRvcy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IDo6bmctZGVlcCBzZWN0aW9uXHJcbiB7XHJcbiAgICBwYWRkaW5nOjJyZW0gM3JlbTtcclxufSIsIjpob3N0IDo6bmctZGVlcCBzZWN0aW9uIHtcbiAgcGFkZGluZzogMnJlbSAzcmVtO1xufSJdfQ== */"
-
-/***/ }),
-
-/***/ "./src/app/pages/documentos/search-escritos/search-escritos.component.ts":
-/*!*******************************************************************************!*\
-  !*** ./src/app/pages/documentos/search-escritos/search-escritos.component.ts ***!
-  \*******************************************************************************/
-/*! exports provided: SearchEscritosComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchEscritosComponent", function() { return SearchEscritosComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-
-
-var SearchEscritosComponent = /** @class */ (function () {
-    function SearchEscritosComponent() {
-    }
-    SearchEscritosComponent.prototype.ngOnInit = function () {
-    };
-    SearchEscritosComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-search-escritos',
-            template: __webpack_require__(/*! raw-loader!./search-escritos.component.html */ "./node_modules/raw-loader/index.js!./src/app/pages/documentos/search-escritos/search-escritos.component.html"),
-            styles: [__webpack_require__(/*! ./search-escritos.component.scss */ "./src/app/pages/documentos/search-escritos/search-escritos.component.scss")]
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-    ], SearchEscritosComponent);
-    return SearchEscritosComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/pages/documentos/search-resoluciones/search-resoluciones.component.scss":
-/*!*****************************************************************************************!*\
-  !*** ./src/app/pages/documentos/search-resoluciones/search-resoluciones.component.scss ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ":host ::ng-deep section {\n  padding: 2rem 3rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvZG9jdW1lbnRvcy9zZWFyY2gtcmVzb2x1Y2lvbmVzL0M6XFxVc2Vyc1xcbHVpcy5zYW5jaGV6LmFsY2F6YXJcXERBVEFcXFdvcmtcXE1hZHJpZC1EaWdpdGFsL3NyY1xcYXBwXFxwYWdlc1xcZG9jdW1lbnRvc1xcc2VhcmNoLXJlc29sdWNpb25lc1xcc2VhcmNoLXJlc29sdWNpb25lcy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvcGFnZXMvZG9jdW1lbnRvcy9zZWFyY2gtcmVzb2x1Y2lvbmVzL3NlYXJjaC1yZXNvbHVjaW9uZXMuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFFSSxrQkFBQTtBQ0FKIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvZG9jdW1lbnRvcy9zZWFyY2gtcmVzb2x1Y2lvbmVzL3NlYXJjaC1yZXNvbHVjaW9uZXMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCA6Om5nLWRlZXAgc2VjdGlvblxyXG4ge1xyXG4gICAgcGFkZGluZzoycmVtIDNyZW07XHJcbn0iLCI6aG9zdCA6Om5nLWRlZXAgc2VjdGlvbiB7XG4gIHBhZGRpbmc6IDJyZW0gM3JlbTtcbn0iXX0= */"
-
-/***/ }),
-
-/***/ "./src/app/pages/documentos/search-resoluciones/search-resoluciones.component.ts":
-/*!***************************************************************************************!*\
-  !*** ./src/app/pages/documentos/search-resoluciones/search-resoluciones.component.ts ***!
-  \***************************************************************************************/
-/*! exports provided: SearchResolucionesComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchResolucionesComponent", function() { return SearchResolucionesComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-
-
-var SearchResolucionesComponent = /** @class */ (function () {
-    function SearchResolucionesComponent() {
-    }
-    SearchResolucionesComponent.prototype.ngOnInit = function () {
-    };
-    SearchResolucionesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-search-resoluciones',
-            template: __webpack_require__(/*! raw-loader!./search-resoluciones.component.html */ "./node_modules/raw-loader/index.js!./src/app/pages/documentos/search-resoluciones/search-resoluciones.component.html"),
-            styles: [__webpack_require__(/*! ./search-resoluciones.component.scss */ "./src/app/pages/documentos/search-resoluciones/search-resoluciones.component.scss")]
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-    ], SearchResolucionesComponent);
-    return SearchResolucionesComponent;
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], DocumentosService);
+    return DocumentosService;
 }());
 
 

@@ -1,12 +1,15 @@
 <section>
     
-    <p>search-documents works!</p>
+    <!-- <p>search-documents works!</p> -->
     <div *ngIf="documentos$ | async as documents">
         <!-- <p>{{document | json}}</p> -->
         <div *ngIf="isArray(documents);else document">
             <p *ngFor="let document of documents">{{document | json}}</p>
         </div>
         <ng-template #document>{{documents | json}}</ng-template>
+        <div *ngIf="!documents.length">
+            <p [style.color]="'red'">No hay documentos</p>
+        </div>
         
     </div>
 

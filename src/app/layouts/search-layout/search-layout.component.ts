@@ -13,7 +13,7 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
 
   Subc: Subscription;
   searchInput = new FormControl();
-  inputString:string;
+  // inputString:string;
 
   constructor(private documentos: DocumentosService) { }
 
