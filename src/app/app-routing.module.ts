@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { SearchLayoutComponent } from './layouts/search-layout/search-layout.component';
-import { DetailComponent } from './pages/detail/detail.component';
+import { DocumentoComponent } from './pages/documento/documento.component';
 import { FilterTabsComponent } from './components/filter-tabs/filter-tabs.component';
+import { DetailLayoutComponent } from './layouts/detail-layout/detail-layout.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'documentos' },
@@ -11,20 +14,26 @@ const routes: Routes = [
     component: SearchLayoutComponent,
     loadChildren: () => import('./modules/documentos/page-documentos.module').then(m => m.PagesDocumentsModule)
   },
-
-  { path: 'detail', component: DetailComponent },
+  
+  { path: '', component: DetailLayoutComponent,children:[
+    { path: 'documento/:id', component: DocumentoComponent },
+  ] },
   { path: '**', redirectTo: "documentos" }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes,
-      {preloadingStrategy:PreloadAllModules})
+      {preloadingStrategy:PreloadAllModules}),
+      CommonModule,
+      FormsModule,
+      ReactiveFormsModule,  
   ],
   exports: [RouterModule],
   declarations: [
     SearchLayoutComponent,
-    DetailComponent,
+    DetailLayoutComponent,
+    DocumentoComponent,
     FilterTabsComponent,
   ]
 })

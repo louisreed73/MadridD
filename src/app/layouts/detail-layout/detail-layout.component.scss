@@ -1,0 +1,22 @@
+
+
+:host 
+ {
+    display:flex;
+    flex-flow:row wrap;
+    justify-content:center;
+    color:white;
+}
+
+aside {
+    flex: 0 1 33rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background:red;
+}
+
+main {
+    flex: 1 1 60rem;
+    background:rgb(104, 90, 11);
+}

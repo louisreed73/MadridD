@@ -5,6 +5,7 @@ import { SearchDocumentsComponent } from 'src/app/pages/documentos/search-docume
 import { SearchResolucionesComponent } from 'src/app/pages/documentos/search-resoluciones/search-resoluciones.component';
 import { SearchEscritosComponent } from 'src/app/pages/documentos/search-escritos/search-escritos.component';
 
+
 const routes:Routes=[
     { path: 'documentos', component: SearchDocumentsComponent },
     { path: 'resoluciones', component: SearchResolucionesComponent },
@@ -19,7 +20,7 @@ const routes:Routes=[
         SearchEscritosComponent
     ],
     imports: [ 
-        CommonModule,        
+        CommonModule,      
         RouterModule.forChild(routes)
      ],
     exports: [],
