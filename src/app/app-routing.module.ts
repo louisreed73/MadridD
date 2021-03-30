@@ -6,6 +6,7 @@ import { FilterTabsComponent } from './components/filter-tabs/filter-tabs.compon
 import { DetailLayoutComponent } from './layouts/detail-layout/detail-layout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'documentos' },
@@ -35,6 +36,7 @@ const routes: Routes = [
     DetailLayoutComponent,
     DocumentoComponent,
     FilterTabsComponent,
+    SearchFormComponent,
   ]
 })
 export class AppRoutingModule { }

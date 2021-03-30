@@ -45,6 +45,17 @@ module.exports = "<a [routerLink]=\"['/documentos']\" routerLinkActive=\"active\
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/components/search-form/search-form.component.html":
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/components/search-form/search-form.component.html ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"search\">\n    <!-- <label for=\"search\">Search</label> -->\n    <input \n    type=\"text\" \n    name=\"\" \n    id=\"search\" \n    placeholder=\"Buscar\"\n    [formControl]=\"searchInput\">\n</div>\n"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/layouts/detail-layout/detail-layout.component.html":
 /*!**********************************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/layouts/detail-layout/detail-layout.component.html ***!
@@ -63,7 +74,7 @@ module.exports = "<aside>\r\n    detail layout Component\r\n</aside>\r\n<main>\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<main>\r\n    <section>\r\n        <div class=\"search\">\r\n            <!-- <label for=\"search\">Search</label> -->\r\n            <input \r\n            type=\"text\" \r\n            name=\"\" \r\n            id=\"search\" \r\n            placeholder=\"Buscar\"\r\n            [formControl]=\"searchInput\">\r\n        </div>\r\n\r\n            <!-- <p>{{inputString}}</p> -->\r\n\r\n    </section>\r\n    <section class=\"filterTabs\">\r\n        <app-filter-tabs></app-filter-tabs>\r\n    </section>\r\n</main>\r\n<router-outlet></router-outlet>\r\n\r\n"
+module.exports = "<main>\r\n    <section>\r\n\r\n        <app-search-form></app-search-form>\r\n\r\n            <!-- <p>{{inputString}}</p> -->\r\n\r\n    </section>\r\n    <section class=\"filterTabs\">\r\n        <app-filter-tabs></app-filter-tabs>\r\n    </section>\r\n</main>\r\n<router-outlet></router-outlet>\r\n\r\n"
 
 /***/ }),
 
@@ -97,6 +108,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layouts_detail_layout_detail_layout_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./layouts/detail-layout/detail-layout.component */ "./src/app/layouts/detail-layout/detail-layout.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _components_search_form_search_form_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/search-form/search-form.component */ "./src/app/components/search-form/search-form.component.ts");
+
 
 
 
@@ -135,6 +148,7 @@ var AppRoutingModule = /** @class */ (function () {
                 _layouts_detail_layout_detail_layout_component__WEBPACK_IMPORTED_MODULE_6__["DetailLayoutComponent"],
                 _pages_documento_documento_component__WEBPACK_IMPORTED_MODULE_4__["DocumentoComponent"],
                 _components_filter_tabs_filter_tabs_component__WEBPACK_IMPORTED_MODULE_5__["FilterTabsComponent"],
+                _components_search_form_search_form_component__WEBPACK_IMPORTED_MODULE_9__["SearchFormComponent"],
             ]
         })
     ], AppRoutingModule);
@@ -279,6 +293,80 @@ var FilterTabsComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/search-form/search-form.component.scss":
+/*!*******************************************************************!*\
+  !*** ./src/app/components/search-form/search-form.component.scss ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvc2VhcmNoLWZvcm0vc2VhcmNoLWZvcm0uY29tcG9uZW50LnNjc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/components/search-form/search-form.component.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/components/search-form/search-form.component.ts ***!
+  \*****************************************************************/
+/*! exports provided: SearchFormComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchFormComponent", function() { return SearchFormComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_app_services_documentos_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/documentos.service */ "./src/app/services/documentos.service.ts");
+
+
+
+
+
+var SearchFormComponent = /** @class */ (function () {
+    // inputString:string;
+    function SearchFormComponent(documentos) {
+        this.documentos = documentos;
+        this.searchInput = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]();
+    }
+    SearchFormComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.Subc = this.searchInput.valueChanges
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["debounceTime"])(500), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (v) {
+            console.log(JSON.stringify(v, null, 2));
+        }))
+            .subscribe(function (inp) {
+            _this.documentos.inputAndFiltersData$.next({
+                searchInput: inp,
+                host: _this
+            });
+            // this.inputString=inp;
+        });
+    };
+    SearchFormComponent.prototype.ngOnDestroy = function () {
+        //Called once, before the instance is destroyed.
+        //Add 'implements OnDestroy' to the class.
+        this.Subc.unsubscribe();
+    };
+    SearchFormComponent.ctorParameters = function () { return [
+        { type: src_app_services_documentos_service__WEBPACK_IMPORTED_MODULE_4__["DocumentosService"] }
+    ]; };
+    SearchFormComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-search-form',
+            template: __webpack_require__(/*! raw-loader!./search-form.component.html */ "./node_modules/raw-loader/index.js!./src/app/components/search-form/search-form.component.html"),
+            styles: [__webpack_require__(/*! ./search-form.component.scss */ "./src/app/components/search-form/search-form.component.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_documentos_service__WEBPACK_IMPORTED_MODULE_4__["DocumentosService"]])
+    ], SearchFormComponent);
+    return SearchFormComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/layouts/detail-layout/detail-layout.component.scss":
 /*!********************************************************************!*\
   !*** ./src/app/layouts/detail-layout/detail-layout.component.scss ***!
@@ -347,49 +435,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchLayoutComponent", function() { return SearchLayoutComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_app_services_documentos_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/documentos.service */ "./src/app/services/documentos.service.ts");
-
-
-
 
 
 var SearchLayoutComponent = /** @class */ (function () {
-    // inputString:string;
-    function SearchLayoutComponent(documentos) {
-        this.documentos = documentos;
-        this.searchInput = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]();
+    function SearchLayoutComponent() {
     }
     SearchLayoutComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.Subc = this.searchInput.valueChanges
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["debounceTime"])(500), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (v) {
-            console.log(JSON.stringify(v, null, 2));
-        }))
-            .subscribe(function (inp) {
-            _this.documentos.inputAndFiltersData$.next({
-                searchInput: inp,
-                host: _this
-            });
-            _this.inputString = inp;
-        });
     };
-    SearchLayoutComponent.prototype.ngOnDestroy = function () {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
-        this.Subc.unsubscribe();
-    };
-    SearchLayoutComponent.ctorParameters = function () { return [
-        { type: src_app_services_documentos_service__WEBPACK_IMPORTED_MODULE_4__["DocumentosService"] }
-    ]; };
     SearchLayoutComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-search-layout',
             template: __webpack_require__(/*! raw-loader!./search-layout.component.html */ "./node_modules/raw-loader/index.js!./src/app/layouts/search-layout/search-layout.component.html"),
             styles: [__webpack_require__(/*! ./search-layout.component.scss */ "./src/app/layouts/search-layout/search-layout.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_documentos_service__WEBPACK_IMPORTED_MODULE_4__["DocumentosService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], SearchLayoutComponent);
     return SearchLayoutComponent;
 }());
