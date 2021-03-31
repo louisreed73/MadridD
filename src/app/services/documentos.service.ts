@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subscription, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 const url = "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
@@ -8,7 +8,7 @@ const url = "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
 @Injectable({
   providedIn: 'root'
 })
-export class DocumentosService {
+export class DocumentosService implements OnDestroy {
 
   inputAndFiltersData$:BehaviorSubject<any>=new BehaviorSubject({searchInput:""});
   documentos$:BehaviorSubject<any>=new BehaviorSubject(null);
@@ -17,10 +17,11 @@ export class DocumentosService {
   documentosResoluciones$:BehaviorSubject<any>=new BehaviorSubject(null);
   documentosEscritosLength$:BehaviorSubject<any>=new BehaviorSubject(null);
   documentosResolucionesLength$:BehaviorSubject<any>=new BehaviorSubject(null);
+  inputandFiltersData$Subscription:Subscription;
 
   constructor(private http:HttpClient) {
 
-    this.inputAndFiltersData$
+    this.inputandFiltersData$Subscription=this.inputAndFiltersData$
     .pipe(
       map(v=>v.searchInput),
       tap(v=>{
@@ -63,6 +64,13 @@ export class DocumentosService {
    handleError(e) {
      console.log(e);
      return throwError(e)
+   }
+
+   ngOnDestroy(): void {
+     //Called once, before the instance is destroyed.
+     //Add 'implements OnDestroy' to the class.
+     this.inputandFiltersData$Subscription.unsubscribe()
+     
    }
 
 
