@@ -29,7 +29,7 @@ export class SearchDocumentsComponent {
   }
   
 
-
+  // Método para comprobar que los datos del OBservable son efectivamente un array
   isArray(obj) {
     return Array.isArray(obj)
   }

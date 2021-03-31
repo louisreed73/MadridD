@@ -9,7 +9,7 @@ import { DocumentosService } from 'src/app/services/documentos.service';
 })
 export class SearchEscritosComponent {
 
-  documentos$=this.documentos.documentos$
+  // documentos$=this.documentos.documentos$
   documentosE$=this.documentos.documentosEscritos$
 
   
@@ -21,7 +21,7 @@ export class SearchEscritosComponent {
   }
   
 
-
+  // Método para comprobar que los datos del OBservable son efectivamente un array
   isArray(obj) {
     return Array.isArray(obj)
   }

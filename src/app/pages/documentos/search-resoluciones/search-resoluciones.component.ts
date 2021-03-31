@@ -9,7 +9,7 @@ import { DocumentosService } from 'src/app/services/documentos.service';
 })
 export class SearchResolucionesComponent {
 
-  documentos$=this.documentos.documentos$
+  // documentos$=this.documentos.documentos$
   documentosR$=this.documentos.documentosResoluciones$
 
 
@@ -21,6 +21,7 @@ export class SearchResolucionesComponent {
 
 
 
+  // Método para comprobar que los datos del OBservable son efectivamente un array
   isArray(obj) {
     return Array.isArray(obj)
   }

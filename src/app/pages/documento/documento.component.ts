@@ -7,16 +7,18 @@ import { ActivatedRoute, UrlSegment } from '@angular/router';
   styleUrls: ['./documento.component.scss']
 })
 export class DocumentoComponent implements OnInit {
-  historylastURL:UrlSegment;
+  // historylastURL:UrlSegment;
   constructor(
     private route:ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(map=>{
+      //Comprobación del id del documento referido
       console.log(map.get("id"));
-      this.historylastURL=this.route.snapshot.url[0];
-      console.log(this.historylastURL.path)
+      // Checkeo de la comprobacion de la URL
+      // this.historylastURL=this.route.snapshot.url[0];
+      // console.log(this.historylastURL.path)
       
     })
   }
