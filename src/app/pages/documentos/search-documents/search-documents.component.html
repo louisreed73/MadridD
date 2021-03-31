@@ -4,7 +4,10 @@
     <div *ngIf="documentos$ | async as documents">
 
         <div *ngIf="isArray(documents);else document">
-            <p *ngFor="let document of documents">{{document | json}}</p>
+            <!-- <p *ngFor="let document of documents">{{document | json}}</p> -->
+            <app-document-card 
+            *ngFor="let document of documents"
+            [documento]="document"></app-document-card>
         </div>
         <div *ngIf="!documents.length && !documents.message">
             <p [style.color]="'red'">No hay documentos</p>
@@ -15,9 +18,6 @@
         </div>
         
     </div>
-
-
-    <!-- <a *ngFor="let num of products" [routerLink]="['../documento',num]">una ruta {{num}}</a> -->
 </section>
 
 

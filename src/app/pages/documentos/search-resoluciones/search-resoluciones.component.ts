@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { DocumentosService } from 'src/app/services/documentos.service';
 
 @Component({
   selector: 'app-search-resoluciones',
   templateUrl: './search-resoluciones.component.html',
-  styleUrls: ['./search-resoluciones.component.scss']
+  styleUrls: ['./search-resoluciones.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchResolucionesComponent implements OnInit {
+export class SearchResolucionesComponent {
 
-  constructor() { }
+  documentos$=this.documentos.documentos$
+  documentosR$=this.documentos.documentosResoluciones$
 
-  ngOnInit() {
+
+
+
+  constructor(private documentos: DocumentosService) {
+
   }
 
+
+
+  isArray(obj) {
+    return Array.isArray(obj)
+  }
 }

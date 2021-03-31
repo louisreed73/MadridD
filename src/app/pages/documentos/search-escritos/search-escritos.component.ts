@@ -1,15 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { DocumentosService } from 'src/app/services/documentos.service';
 
 @Component({
   selector: 'app-search-escritos',
   templateUrl: './search-escritos.component.html',
-  styleUrls: ['./search-escritos.component.scss']
+  styleUrls: ['./search-escritos.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchEscritosComponent implements OnInit {
+export class SearchEscritosComponent {
 
-  constructor() { }
+  documentos$=this.documentos.documentos$
+  documentosE$=this.documentos.documentosEscritos$
 
-  ngOnInit() {
+  
+
+  
+
+  constructor(private documentos: DocumentosService) { 
+
+  }
+  
+
+
+  isArray(obj) {
+    return Array.isArray(obj)
   }
 
 }

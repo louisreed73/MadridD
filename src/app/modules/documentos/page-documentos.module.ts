@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SearchDocumentsComponent } from 'src/app/pages/documentos/search-documents/search-documents.component';
 import { SearchResolucionesComponent } from 'src/app/pages/documentos/search-resoluciones/search-resoluciones.component';
 import { SearchEscritosComponent } from 'src/app/pages/documentos/search-escritos/search-escritos.component';
+import { DocumentCardComponent } from '../../components/document-card/document-card.component';
 
 
 const routes:Routes=[
@@ -17,7 +18,8 @@ const routes:Routes=[
     declarations: [
         SearchDocumentsComponent,
         SearchResolucionesComponent,
-        SearchEscritosComponent
+        SearchEscritosComponent,
+        DocumentCardComponent,
     ],
     imports: [ 
         CommonModule,      

@@ -20,7 +20,7 @@ export class SearchFormComponent implements OnInit {
   ngOnInit() {
     this.Subc=this.searchInput.valueChanges
     .pipe(
-      debounceTime(500),
+      debounceTime(300),
       tap(v=>{
         console.log(JSON.stringify(v,null,2)); 
       })

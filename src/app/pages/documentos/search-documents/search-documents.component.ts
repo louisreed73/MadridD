@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { filter, map, tap } from 'rxjs/operators';
 import { DocumentosService } from 'src/app/services/documentos.service';
 
 const range=(start,end)=>{
@@ -10,13 +9,18 @@ const range=(start,end)=>{
 @Component({
   selector: 'app-search-documents',
   templateUrl: './search-documents.component.html',
-  styleUrls: ['./search-documents.component.scss']
+  styleUrls: ['./search-documents.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchDocumentsComponent {
 
 
 
-  documentos$=this.documentos.productos$;
+  documentos$=this.documentos.documentos$;
+  // documentosL$=this.documentos.documentosLength$
+  // documentosR$=this.documentos.documentosResoluciones$
+  
+
   
 
   constructor(private documentos: DocumentosService) { 

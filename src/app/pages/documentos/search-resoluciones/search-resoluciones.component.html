@@ -1,3 +1,17 @@
 <section>
-    <p>search-resoluciones works!</p>
+    <div *ngIf="documentosR$ | async as documents">
+            <div *ngIf="isArray(documents);else document">
+                <app-document-card 
+                *ngFor="let document of documents"
+                [documento]="document"></app-document-card>
+            </div>
+            <div *ngIf="!documents.length && !documents.message">
+                <p [style.color]="'red'">No hay documentos</p>
+            </div>
+            <div *ngIf="documents.message">
+                <p [style.color]="'red'">{{documents?.name}}</p>
+                <p [style.color]="'red'">{{documents?.message}}</p>
+            </div>
+            
+        </div>
 </section>
