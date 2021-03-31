@@ -1,17 +1,21 @@
 <section>
     
-    <!-- <p>search-documents works!</p> -->
+
     <div *ngIf="documentos$ | async as documents">
-        <!-- <p>{{document | json}}</p> -->
+
         <div *ngIf="isArray(documents);else document">
             <p *ngFor="let document of documents">{{document | json}}</p>
         </div>
-        <ng-template #document>{{documents | json}}</ng-template>
-        <div *ngIf="!documents.length">
+        <div *ngIf="!documents.length && !documents.message">
             <p [style.color]="'red'">No hay documentos</p>
+        </div>
+        <div *ngIf="documents.message">
+            <p [style.color]="'red'">{{documents?.name}}</p>
+            <p [style.color]="'red'">{{documents?.message}}</p>
         </div>
         
     </div>
+
 
     <!-- <a *ngFor="let num of products" [routerLink]="['../documento',num]">una ruta {{num}}</a> -->
 </section>

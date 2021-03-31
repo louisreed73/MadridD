@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 const url = "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
@@ -21,16 +21,28 @@ export class DocumentosService {
       tap(v=>{
         console.log(v)
       }),
-      switchMap(v=>this.http.get<any>(`${url}/?q=${v}`)),
-      // catchError(this.handleError)
+      switchMap(v=>{
+        return this.http.get<any>(`${url}/?q=${v}`)
+        .pipe(
+          catchError(this.handleError)
+        )
+      }),
+      
     )
     .subscribe(d=>{
-      console.log(d)
+      console.log(d,this)
       this.productos$.next(d);
-    })
+    },
+    (e)=>{
+      this.productos$.next(e);
+    }
+    )
    }
 
-   handleError(e):Error {
-     throw new Error(e)
+   handleError(e) {
+     console.log(e);
+     return throwError(e)
    }
+
+
 }

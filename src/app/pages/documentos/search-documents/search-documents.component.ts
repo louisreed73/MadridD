@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { DocumentosService } from 'src/app/services/documentos.service';
 
 const range=(start,end)=>{
@@ -10,25 +12,19 @@ const range=(start,end)=>{
   templateUrl: './search-documents.component.html',
   styleUrls: ['./search-documents.component.scss']
 })
-export class SearchDocumentsComponent implements OnInit {
+export class SearchDocumentsComponent {
 
-  products:Array<number>=range(12,45);
 
-  documentos$
+
+  documentos$=this.documentos.productos$;
+  
 
   constructor(private documentos: DocumentosService) { 
-
     
-    console.log(range(12,30))
+
   }
   
-  ngOnInit() {
-    this.documentos$=this.documentos.productos$
-    // .subscribe(d=>{
-    //   console.log(d)
-    // });
-    // console.log(this.documentos$)
-  }
+
 
   isArray(obj) {
     return Array.isArray(obj)
