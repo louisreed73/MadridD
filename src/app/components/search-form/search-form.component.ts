@@ -32,7 +32,9 @@ export class SearchFormComponent implements OnInit {
       )
       .subscribe(inp=>{
         // almacenamos el string del input;
-        this.inp=inp;
+        //TODO use trim in the string to remove spaces
+        let input=inp.trim();
+        this.inp=input;
         // Enviamos los datos del string de búsqueda, y dejamos un fake 'host', para posteriormente insertar los filtros que apliquen
         this.documentos.inputAndFiltersData$.next({
           searchInput:this.inp,

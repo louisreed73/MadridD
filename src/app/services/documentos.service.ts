@@ -32,7 +32,7 @@ export class DocumentosService implements OnDestroy {
  */
   documentosEscritos$: BehaviorSubject<any> = new BehaviorSubject(null);
   /**
- * @property {BehaviorSubject<any>} documentosResoluciones$ Behaviour Subject que envia los datos de la api por el término de búsqueda y si aplica, los filtros pero 'sólo escritos'!! . lo realiza en la linea 67. cuando se subscribe para realizar el filtrado de la API, en el callback de next del observable. Se subscribe search-resoluciones.component
+ * @property {BehaviorSubject<any>} documentosResoluciones$ Behaviour Subject que envia los datos de la api por el término de búsqueda y si aplica, los filtros pero 'sólo resoluciones'!! . lo realiza en la linea 67. cuando se subscribe para realizar el filtrado de la API, en el callback de next del observable. Se subscribe search-resoluciones.component
  */
   documentosResoluciones$: BehaviorSubject<any> = new BehaviorSubject(null);
   /**
