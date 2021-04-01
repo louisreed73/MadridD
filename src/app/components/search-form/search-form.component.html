@@ -7,3 +7,14 @@
     placeholder="Buscar"
     [formControl]="searchInput">
 </div>
+<form action="">
+    <label for="tipo_documental">Tipo Documental</label>
+        <select name="tipo_documental" id="tipo_documental" ngModel>
+            <option value=""></option>
+            <option value="tipo 1">Tipo 1</option>
+            <option value="tipo 2">Tipo 2</option>
+            <option value="tipo 3">Tipo 3</option>
+        </select>
+    
+</form>
+<button (click)="avanza()">Avanza paginas</button>

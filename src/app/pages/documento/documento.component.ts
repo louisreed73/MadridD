@@ -15,7 +15,7 @@ export class DocumentoComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(map=>{
       //Comprobación del id del documento referido
-      console.log(map.get("id"));
+      // console.log(map.get("id"));
       // Checkeo de la comprobacion de la URL
       // this.historylastURL=this.route.snapshot.url[0];
       // console.log(this.historylastURL.path)

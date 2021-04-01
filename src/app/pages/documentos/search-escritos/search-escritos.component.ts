@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs/operators';
+import { CombinacionService } from 'src/app/services/combinacion.service';
 import { DocumentosService } from 'src/app/services/documentos.service';
+import { log } from 'src/app/utilities/utilities';
 
 @Component({
   selector: 'app-search-escritos',
@@ -9,14 +12,19 @@ import { DocumentosService } from 'src/app/services/documentos.service';
 })
 export class SearchEscritosComponent {
 
-  // documentos$=this.documentos.documentos$
-  documentosE$=this.documentos.documentosEscritos$
+  documentos$=this.documentos.documentos$
+  documentosE$=this.combinado.documentosEscritos$
 
   
 
   
 
-  constructor(private documentos: DocumentosService) { 
+  
+
+  constructor(
+    private documentos: DocumentosService,
+    private combinado : CombinacionService
+    ) { 
 
   }
   

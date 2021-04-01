@@ -55,7 +55,7 @@ export class DocumentosService implements OnDestroy {
         // Por el momento, no usamos los datos de filtro devolvemos solo el string de búsqueda desde search-form.component. Existe otra propiedad: 'host' que todavia no utilizamos. Solo 'searchInput' el string de búsqueda.
         map(v => v.searchInput),
         tap(v => {
-          console.log(v)
+          // console.log(v)
         }),
         switchMap(v => {
           // hacemos una llamada a la api con la query del string de busqueda.
@@ -63,14 +63,14 @@ export class DocumentosService implements OnDestroy {
             .pipe(
               //manejamos el error de llamada a API. Lo que devuelve el error puede reenviarse en el callback de error en la subscripción: linea 61
               catchError(this.handleError),
-              tap((documents) => {
-                //Realizamos el filtro de escritos.
-                let filtroEscritos = documents.filter(doc => doc.tipo === "escrito")
-                // Enviamos el filtro de 'solo escritos' de los datos de busqueda + filtros. Será recibido en search-escritos.component.
-                this.documentosEscritos$.next(filtroEscritos);
-                // Enviamos el contador de registros del dato anterior al componente que se subscribe a este Subject: filter-tabs.component      
-                this.documentosEscritosLength$.next(filtroEscritos.length);
-              }),
+              // tap((documents) => {
+              //   //Realizamos el filtro de escritos.
+              //   let filtroEscritos = documents.filter(doc => doc.tipo === "escrito")
+              //   // Enviamos el filtro de 'solo escritos' de los datos de busqueda + filtros. Será recibido en search-escritos.component.
+              //   this.documentosEscritos$.next(filtroEscritos);
+              //   // Enviamos el contador de registros del dato anterior al componente que se subscribe a este Subject: filter-tabs.component      
+              //   this.documentosEscritosLength$.next(filtroEscritos.length);
+              // }),
               tap((documents) => {
                 //Realizamos el filtro de resoluciones.
                 let filtroResolucion = documents.filter(doc => doc.tipo === "resolucion")
@@ -84,7 +84,7 @@ export class DocumentosService implements OnDestroy {
 
       )
       .subscribe(d => {
-        console.log(d, this)
+        // console.log(d, this)
 
         // enviamos los datos de busqueda y filtrado si existen.
         this.documentos$.next(d);
@@ -102,7 +102,7 @@ export class DocumentosService implements OnDestroy {
 
   // Manejador de Error, reenviamos un Observable con el error.
   handleError(e) {
-    console.log(e);
+    // console.log(e);
     return throwError(e)
   }
 
