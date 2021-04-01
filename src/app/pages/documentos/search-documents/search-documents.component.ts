@@ -1,6 +1,6 @@
 // import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 // import { from, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { CombinacionService } from 'src/app/services/combinacion.service';
@@ -25,9 +25,25 @@ export class SearchDocumentsComponent {
     search;
     formulario;
     pagina;
-    numDocs:number
+    numDocs:number;
+    inicio:boolean=true;
 
-    documentos$
+    // documentos$=new Observable((obs) => {
+    //   obs.next([])
+    // })
+    documentos$=this.combinado
+    .combinado$
+    .pipe(
+      tap((v) => {
+        this.inicio=false;
+        log(v, "resultado Fin","lightblue")
+        console.log(`%cYa se han terminado los resultados? :${v.length%5===0}`)
+      }),
+      catchError((e:any)=>{
+        log(e,"esto es un error?","red")
+        return of(e)
+      })
+    )
 
   // documentos$=this.documentos.documentos$;
   // documentosL$=this.documentos.documentosLength$
@@ -41,18 +57,7 @@ export class SearchDocumentsComponent {
     private combinado:CombinacionService,
     // private http:HttpClient
     ) { 
-      this.documentos$=this.combinado
-    .combinado$
-    .pipe(
-      tap((v) => {
-        log(v, "resultado Fin","lightblue")
-        console.log(`%cYa se han terminado los resultados? :${v.length%5===0}`)
-      }),
-      catchError((e:any)=>{
-        log(e,"esto es un error?","red")
-        return of(e)
-      })
-    )
+      // this.documentos$
     // .subscribe()
     
 

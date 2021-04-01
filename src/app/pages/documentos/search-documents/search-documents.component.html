@@ -13,4 +13,5 @@
       <p [style.color]="'red'">{{documents?.message}}</p>
     </div> 
   </div>
+  <p *ngIf="inicio" [style.color]="'red'">{{'No hay documentos'}}</p>
 </section>
