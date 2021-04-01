@@ -76,7 +76,7 @@ export class CombinacionService {
         // Enviamos el contador de resoluciones del dato anterior al componente que se subscribe a este Subject: filter-tabs.component      
         this.documentosResolucionesLength$.next(filtroResoluciones.length);
       }),
-      shareReplay()
+      // shareReplay()
 
 
     )
