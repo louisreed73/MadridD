@@ -12,8 +12,9 @@ import { log } from 'src/app/utilities/utilities';
 })
 export class SearchEscritosComponent {
 
-  documentos$=this.documentos.documentos$
+  // documentos$=this.documentos.documentos$
   documentosE$=this.combinado.documentosEscritos$
+  
 
   
 

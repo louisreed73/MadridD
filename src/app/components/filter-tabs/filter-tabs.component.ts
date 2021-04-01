@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CombinacionService } from 'src/app/services/combinacion.service';
 import { DocumentosService } from 'src/app/services/documentos.service';
 
 @Component({
@@ -10,13 +11,16 @@ import { DocumentosService } from 'src/app/services/documentos.service';
 export class FilterTabsComponent implements OnInit {
 
   // Recibimos el Observable con los datos del número total de documentos filtrados por término de búsqueda + filtros aplicados.
-  documentosLength$=this.documentos.documentosLength$;
+  documentosLength$=this.combinado.documentosLength$;
   // Recibimos el Observable con los datos del número total de documentos filtrados por término de búsqueda + filtros aplicados. 'Solo Escritos'!!!
-  escritosLength$=this.documentos.documentosEscritosLength$;
+  escritosLength$=this.combinado.documentosEscritosLength$;
   // Recibimos el Observable con los datos del número total de documentos filtrados por término de búsqueda + filtros aplicados. 'Solo Resoluciones'!!!
-  resolucionesLength$=this.documentos.documentosResolucionesLength$;
+  resolucionesLength$=this.combinado.documentosResolucionesLength$;
 
-  constructor(private documentos: DocumentosService) { }
+  constructor(
+    private documentos: DocumentosService,
+    private combinado: CombinacionService
+    ) { }
 
   ngOnInit() {
   }

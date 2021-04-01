@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, of, Subject } from 'rxjs';
-import { concatMap, map, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, of, pipe, Subject, throwError } from 'rxjs';
+import { catchError, concatMap, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { log } from '../utilities/utilities';
 
 const url = "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
@@ -21,8 +21,14 @@ export class CombinacionService {
   pagina;
   data = [];
 
-  documentosEscritos$: Subject<any> = new Subject();
-  documentosEscritosLength$: Subject<any> = new Subject();
+  
+  
+  // documentosLength$: BehaviorSubject<any> = new BehaviorSubject({});
+  documentosLength$: BehaviorSubject<number> = new BehaviorSubject(null);
+  documentosEscritos$: BehaviorSubject<{}> = new BehaviorSubject({});
+  documentosEscritosLength$: BehaviorSubject<number> = new BehaviorSubject(null);
+  documentosResoluciones$: BehaviorSubject<{}> = new BehaviorSubject({});
+  documentosResolucionesLength$: BehaviorSubject<number> = new BehaviorSubject(null);
 
 
 
@@ -40,6 +46,7 @@ export class CombinacionService {
       }),
       switchMap(([search, formulario, pagina]) => {
         return this.http.get<any>(`${url}?q=${this.search}&_page=${this.pagina}&_limit=3`)
+
       }),
       concatMap((v) => {
         log(v, "Este es el combinado desde search", "lightgreen");
@@ -55,13 +62,21 @@ export class CombinacionService {
         return of(this.data)
       }),
       tap((documents) => {
+        this.documentosLength$.next(documents.length);
         //Realizamos el filtro de escritos.
         let filtroEscritos = documents.filter(doc => doc.tipo === "escrito")
         // Enviamos el filtro de 'solo escritos' de los datos de busqueda + filtros. Será recibido en search-escritos.component.
         this.documentosEscritos$.next(filtroEscritos);
         // Enviamos el contador de registros del dato anterior al componente que se subscribe a este Subject: filter-tabs.component      
         this.documentosEscritosLength$.next(filtroEscritos.length);
+        //Realizamos el filtro de resoluciones.
+        let filtroResoluciones = documents.filter(doc => doc.tipo === "resolucion")
+        // Enviamos el filtro de 'solo resoluciones' de los datos de busqueda + filtros. Será recibido en search-resoluciones.component.
+        this.documentosResoluciones$.next(filtroResoluciones);
+        // Enviamos el contador de resoluciones del dato anterior al componente que se subscribe a este Subject: filter-tabs.component      
+        this.documentosResolucionesLength$.next(filtroResoluciones.length);
       }),
+      shareReplay()
 
 
     )
@@ -69,5 +84,10 @@ export class CombinacionService {
 
   constructor(private http: HttpClient) {
 
+  }
+
+  handleError(e) {
+    // console.log(e);
+    return throwError(e)
   }
 }

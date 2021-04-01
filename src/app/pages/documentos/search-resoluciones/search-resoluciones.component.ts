@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CombinacionService } from 'src/app/services/combinacion.service';
 import { DocumentosService } from 'src/app/services/documentos.service';
 
 @Component({
@@ -10,12 +11,16 @@ import { DocumentosService } from 'src/app/services/documentos.service';
 export class SearchResolucionesComponent {
 
   // documentos$=this.documentos.documentos$
-  documentosR$=this.documentos.documentosResoluciones$
+  documentosR$=this.combinado.documentosResoluciones$
 
 
 
 
-  constructor(private documentos: DocumentosService) {
+  constructor(
+    private documentos: DocumentosService,
+    private combinado : CombinacionService
+
+    ) {
 
   }
 
