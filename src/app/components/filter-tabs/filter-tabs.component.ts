@@ -18,7 +18,7 @@ export class FilterTabsComponent implements OnInit {
   resolucionesLength$=this.combinado.documentosResolucionesLength$;
 
   constructor(
-    private documentos: DocumentosService,
+    // private documentos: DocumentosService,
     private combinado: CombinacionService
     ) { }
 

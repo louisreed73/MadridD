@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs/operators';
+// import { tap } from 'rxjs/operators';
 import { CombinacionService } from 'src/app/services/combinacion.service';
-import { DocumentosService } from 'src/app/services/documentos.service';
+// import { DocumentosService } from 'src/app/services/documentos.service';
 import { log } from 'src/app/utilities/utilities';
 
 @Component({
@@ -23,7 +23,7 @@ export class SearchEscritosComponent {
   
 
   constructor(
-    private documentos: DocumentosService,
+    // private documentos: DocumentosService,
     private combinado : CombinacionService
     ) { 
 
@@ -34,5 +34,7 @@ export class SearchEscritosComponent {
   isArray(obj) {
     return Array.isArray(obj)
   }
+
+
 
 }

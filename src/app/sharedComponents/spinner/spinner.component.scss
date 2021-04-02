@@ -1,0 +1,14 @@
+
+:host(.mat-spinner) {
+}
+
+.uploader-status ::ng-deep .mat-spinner circle {
+    // stroke: #000000;
+    stroke: #860d8a;
+}
+.uploader-status ::ng-deep .mat-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}

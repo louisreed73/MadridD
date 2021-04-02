@@ -17,7 +17,7 @@ export class SearchResolucionesComponent {
 
 
   constructor(
-    private documentos: DocumentosService,
+    // private documentos: DocumentosService,
     private combinado : CombinacionService
 
     ) {
