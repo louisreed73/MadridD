@@ -54,7 +54,7 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
     this.paginaSub.unsubscribe();
-    this.isTotalListSub.unsubscribe()
+    // this.isTotalListSub.unsubscribe()
   }
 
 
