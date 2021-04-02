@@ -17,11 +17,12 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
   spinner$:Subject<boolean>=this.infiniteScroll.requestSpinner$
   pagina$:Subject<number>;
   paginaSub:Subscription;
-  isTotalList:boolean=false;
+  total:boolean=false;
+
 
 
   constructor(
-    private combinacion: CombinacionService,
+    private combinado: CombinacionService,
     private infiniteScroll: InfiniteScrollService
 
   ) { 
@@ -29,7 +30,7 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.paginaSub=this.combinacion.pagina$
+    this.paginaSub=this.combinado.pagina$
     .pipe(
       tap((numPag) => {
         this.pagina=numPag
@@ -45,7 +46,7 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
       // ++this.pagina;
       // console.log(this.pagina);
       log(this.pagina,"Este es el número de página","pink")
-    this.combinacion.pagina$.next(this.pagina + 1);
+    this.combinado.pagina$.next(this.pagina + 1);
     // this.infiniteScroll.requestSpinner$.next(true)
   }
 
@@ -53,6 +54,7 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
     this.paginaSub.unsubscribe();
+    this.isTotalListSub.unsubscribe()
   }
 
 

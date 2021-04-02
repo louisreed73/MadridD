@@ -31,6 +31,7 @@ export class CombinacionService {
   documentosEscritosLength$: BehaviorSubject<number> = new BehaviorSubject(null);
   documentosResoluciones$: BehaviorSubject<{}> = new BehaviorSubject({});
   documentosResolucionesLength$: BehaviorSubject<number> = new BehaviorSubject(null);
+  
 
 
 
