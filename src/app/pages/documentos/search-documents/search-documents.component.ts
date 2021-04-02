@@ -32,6 +32,8 @@ export class SearchDocumentsComponent {
     // documentos$=new Observable((obs) => {
     //   obs.next([])
     // })
+
+    
     documentos$=this.combinado
     .combinado$
     .pipe(

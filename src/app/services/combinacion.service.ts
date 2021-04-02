@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, of, pipe, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, pipe, Subject, throwError } from 'rxjs';
 import { catchError, concatMap, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { log } from '../utilities/utilities';
 
@@ -19,12 +19,14 @@ export class CombinacionService {
   search;
   formulario;
   pagina;
+  totalDocsQuery$:Observable<any>;
   data = [];
 
   
   
   // documentosLength$: BehaviorSubject<any> = new BehaviorSubject({});
   documentosLength$: BehaviorSubject<number> = new BehaviorSubject(null);
+  documentosTotalQueryLength$: BehaviorSubject<number> = new BehaviorSubject(null);
   documentosEscritos$: BehaviorSubject<{}> = new BehaviorSubject({});
   documentosEscritosLength$: BehaviorSubject<number> = new BehaviorSubject(null);
   documentosResoluciones$: BehaviorSubject<{}> = new BehaviorSubject({});
@@ -45,13 +47,22 @@ export class CombinacionService {
         this.pagina = v[2];
       }),
       switchMap(([search, formulario, pagina]) => {
-        return this.http.get<any>(`${url}?q=${this.search}&_page=${this.pagina}&_limit=3`)
-
+        return this.http.get<any>(`${url}?q=${this.search}&_page=${this.pagina}&_limit=2`)
+    
+        // return of(datosQuery)
       }),
-      concatMap((v) => {
+      tap((v) => {
+        this.totalDocsQuery$=this.http.get<any>(`${url}?q=${this.search}`)
+      }),
+      switchMap((v) => {
         // log(v, "Este es el combinado desde search", "lightgreen");
         log(this.search, "Este es el combinado desde search", "purple");
         log(this.formulario, "Este es el combinado desde search", "gold");
+        this.totalDocsQuery$.subscribe(d=>{
+
+          log(d, "Este es el número total de documentos de esta query: ", "lightred");
+          this.documentosTotalQueryLength$.next(d.length)
+        })
         if (this.pagina === 1) {
           this.data = v;
         }
