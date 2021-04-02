@@ -24,7 +24,9 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
   constructor(
     private documentos: DocumentosService,
     private combinacion: CombinacionService
-    ) { }
+    ) {
+      console.log("Soy el formulario e inputs y me acabo de crear!!!!")
+     }
 
   ngOnInit() {
     this.searchInputElemNative.nativeElement.focus()
@@ -45,13 +47,15 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
         this.inp=inp;
         this.pagina=1;
         // Enviamos los datos del string de búsqueda, y dejamos un fake 'host', para posteriormente insertar los filtros que apliquen
-        this.documentos.inputAndFiltersData$.next({
-          searchInput:this.inp,
-          host:this
-        })
+        // this.documentos.inputAndFiltersData$.next({
+        //   searchInput:this.inp,
+        //   host:this
+        // })
         this.combinacion.inputSearch$.next(this.inp);
         console.log(this.pagina);
         this.combinacion.pagina$.next(this.pagina);
+        this.combinacion.stopSpinner$.next(false);
+
 
       });
 
@@ -75,6 +79,7 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
         this.combinacion.formularioFiltros$.next(d);
         console.log(this.pagina);
         this.combinacion.pagina$.next(this.pagina);
+        this.combinacion.stopSpinner$.next(false);
         // log(d,"Este es el formulario:","lightgreen")
         
         
@@ -86,6 +91,7 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
       ++this.pagina;
       console.log(this.pagina);
       this.combinacion.pagina$.next(this.pagina);
+      // this.combinacion.stopSpinner$.next(false);
     }
 
 }

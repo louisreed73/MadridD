@@ -1,4 +1,11 @@
 <!-- <a [routerLink]="['/documentos']" routerLinkActive="active">documentos</a> -->
-<a [routerLink]="['/documentos']" routerLinkActive="active">{{'documentos' | titlecase}}  <span class="length">( {{(documentosLength$ | async) || 0}}  / {{ (documentosTotalQueryLength$ | async) || 0}} )</span></a>
-<a [routerLink]="['/escritos']" routerLinkActive="active">{{'escritos' | titlecase}}  <span class="length">( {{(escritosLength$ | async) || 0}} )</span></a>
-<a [routerLink]="['/resoluciones']" routerLinkActive="active">{{'resoluciones' | titlecase}}  <span class="length">( {{(resolucionesLength$ | async) || 0}} )</span></a>
+<div class="tabs">
+    <a [routerLink]="['/documentos']" routerLinkActive="active">{{'documentos' | titlecase}}  <span class="length">( {{(documentosLength$ | async) || 0}}  / {{ (documentosTotalQueryLength$ | async) || 0}} )</span></a>
+    <a [routerLink]="['/escritos']" routerLinkActive="active">{{'escritos' | titlecase}}  <span class="length">( {{(escritosLength$ | async) || 0}} )</span></a>
+    <a [routerLink]="['/resoluciones']" routerLinkActive="active">{{'resoluciones' | titlecase}}  <span class="length">( {{(resolucionesLength$ | async) || 0}} )</span></a>
+</div>
+<p class="percentage" 
+
+[style.width.%]="((documentosLength$ | async) / (documentosTotalQueryLength$ | async) * 100)?(documentosLength$ | async) / (documentosTotalQueryLength$ | async) * 100:0"></p>
+<!-- <p *ngIf="(documentosLength$ | async) / (documentosTotalQueryLength$ | async) * 100"
+></p> -->

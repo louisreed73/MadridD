@@ -40,7 +40,7 @@ export class SearchDocumentsComponent {
       tap((v) => {
         this.inicio=false;
         // log(v, "resultado Fin","lightblue")
-        console.log(`%cYa se han terminado los resultados? :${v.length%5===0}`)
+        // console.log(`%cYa se han terminado los resultados? :${v.length%5===0}`)
       }),
       catchError((e:any)=>{
         log(e,"esto es un error?","red")

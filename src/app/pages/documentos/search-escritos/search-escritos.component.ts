@@ -15,6 +15,7 @@ export class SearchEscritosComponent {
   // documentos$=this.documentos.documentos$
   documentosE$=this.combinado.documentosEscritos$
   
+  
 
   
 
@@ -26,6 +27,7 @@ export class SearchEscritosComponent {
     // private documentos: DocumentosService,
     private combinado : CombinacionService
     ) { 
+
 
   }
   

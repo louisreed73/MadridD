@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { CombinacionService } from 'src/app/services/combinacion.service';
 import { DocumentosService } from 'src/app/services/documentos.service';
@@ -23,12 +24,17 @@ export class FilterTabsComponent implements OnInit {
 
 
 
+
   constructor(
     // private documentos: DocumentosService,
     private combinado: CombinacionService
     ) { }
 
   ngOnInit() {
+
+
   }
+
+
 
 }

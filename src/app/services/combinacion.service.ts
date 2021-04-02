@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, of, pipe, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, pipe, Subject, Subscription, throwError } from 'rxjs';
 import { catchError, concatMap, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { log } from '../utilities/utilities';
+import { InfiniteScrollService } from './infinite-scroll.service';
 
 const url = "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
 
@@ -20,7 +21,10 @@ export class CombinacionService {
   formulario;
   pagina;
   totalDocsQuery$:Observable<any>;
+  documentosTotalQueryLengthS:Subscription;
   data = [];
+  docsQueryTotal:number;
+  percentage:number;
 
   
   
@@ -31,6 +35,8 @@ export class CombinacionService {
   documentosEscritosLength$: BehaviorSubject<number> = new BehaviorSubject(null);
   documentosResoluciones$: BehaviorSubject<{}> = new BehaviorSubject({});
   documentosResolucionesLength$: BehaviorSubject<number> = new BehaviorSubject(null);
+  stopSpinner$:BehaviorSubject<boolean> = new BehaviorSubject(false);
+  // rangePercentageDocuments$:BehaviorSubject<number> = new BehaviorSubject(0);
   
 
 
@@ -48,12 +54,22 @@ export class CombinacionService {
         this.pagina = v[2];
       }),
       switchMap(([search, formulario, pagina]) => {
-        return this.http.get<any>(`${url}?q=${this.search}&_page=${this.pagina}&_limit=2`)
-    
-        // return of(datosQuery)
+        this.documentosTotalQueryLengthS=this.http.get<any>(`${url}?q=${this.search}`).subscribe(d=>{
+
+          // log(d, "Este es el número total de documentos de esta query: ", "lightred");
+          this.documentosTotalQueryLength$.next(d.length)
+          this.totalDocsQuery$=d;
+          this.docsQueryTotal=d.length;
+        })
+        this.infiniteScroll.requestSpinner$.next(true);
+
+
+        return this.http.get<any>(`${url}?q=${this.search}&_page=${this.pagina}&_limit=5`)
+
       }),
       tap((v) => {
-        this.totalDocsQuery$=this.http.get<any>(`${url}?q=${this.search}`)
+        this.documentosTotalQueryLengthS
+        .unsubscribe();
       }),
       switchMap((v) => {
         // log(v, "Este es el combinado desde search", "lightgreen");
@@ -63,19 +79,20 @@ export class CombinacionService {
 
         if (this.pagina === 1) {
           this.data = v;
-          this.totalDocsQuery$.subscribe(d=>{
-
-            log(d, "Este es el número total de documentos de esta query: ", "lightred");
-            this.documentosTotalQueryLength$.next(d.length)
-          })
         }
         else {
           this.data = this.data.concat(v);
         }
-        // log(this.data,"Array acumulado!!! ?","yellow")
         return of(this.data)
       }),
       tap((documents) => {
+        this.percentage=documents.length/this.docsQueryTotal;
+        console.log(this.percentage.toString())
+        // this.rangePercentageDocuments$.next(this.percentage);
+
+          log(null,"ahora has comprobado todos los documentos","yellow");
+          this.stopSpinner$.next(this.percentage===1);
+
         this.documentosLength$.next(documents.length);
         //Realizamos el filtro de escritos.
         let filtroEscritos = documents.filter(doc => doc.tipo === "escrito")
@@ -96,8 +113,12 @@ export class CombinacionService {
     )
 
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private infiniteScroll: InfiniteScrollService
 
+    ) {
+        
   }
 
   handleError(e) {
