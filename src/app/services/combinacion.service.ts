@@ -58,13 +58,15 @@ export class CombinacionService {
         // log(v, "Este es el combinado desde search", "lightgreen");
         log(this.search, "Este es el combinado desde search", "purple");
         log(this.formulario, "Este es el combinado desde search", "gold");
-        this.totalDocsQuery$.subscribe(d=>{
+        
 
-          log(d, "Este es el número total de documentos de esta query: ", "lightred");
-          this.documentosTotalQueryLength$.next(d.length)
-        })
         if (this.pagina === 1) {
           this.data = v;
+          this.totalDocsQuery$.subscribe(d=>{
+
+            log(d, "Este es el número total de documentos de esta query: ", "lightred");
+            this.documentosTotalQueryLength$.next(d.length)
+          })
         }
         else {
           this.data = this.data.concat(v);
