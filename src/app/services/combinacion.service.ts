@@ -49,7 +49,7 @@ export class CombinacionService {
 
       }),
       concatMap((v) => {
-        log(v, "Este es el combinado desde search", "lightgreen");
+        // log(v, "Este es el combinado desde search", "lightgreen");
         log(this.search, "Este es el combinado desde search", "purple");
         log(this.formulario, "Este es el combinado desde search", "gold");
         if (this.pagina === 1) {
@@ -76,7 +76,7 @@ export class CombinacionService {
         // Enviamos el contador de resoluciones del dato anterior al componente que se subscribe a este Subject: filter-tabs.component      
         this.documentosResolucionesLength$.next(filtroResoluciones.length);
       }),
-      // shareReplay()
+      shareReplay()
 
 
     )

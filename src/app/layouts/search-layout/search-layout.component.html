@@ -1,14 +1,15 @@
 <div 
 class="search-results" 
-infiniteScroll 
+infiniteScroll
+[infiniteScrollDisabled]="isTotalList" 
 [infiniteScrollDistance]=".9" 
-[infiniteScrollThrottle]="50"
+[infiniteScrollThrottle]="200"
   (scrolled)="onScroll()">
   <!-- Parent container for infinite scroll -->
 
 <main>
-    <div class="spinner" *ngIf="spinner$ | async">
-        <p>Loading.......</p>
+    <div class="spinner-container" *ngIf="spinner$ | async">
+        <!-- <p>Loading.......</p> -->
         <app-spinner></app-spinner>
     </div>
     <section>

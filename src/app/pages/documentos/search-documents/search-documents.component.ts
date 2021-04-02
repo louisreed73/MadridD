@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 // import { from, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { CombinacionService } from 'src/app/services/combinacion.service';
+import { DocumentosService } from 'src/app/services/documentos.service';
 // import { DocumentosService } from 'src/app/services/documentos.service';
 import { log } from 'src/app/utilities/utilities';
 
@@ -36,7 +37,7 @@ export class SearchDocumentsComponent {
     .pipe(
       tap((v) => {
         this.inicio=false;
-        log(v, "resultado Fin","lightblue")
+        // log(v, "resultado Fin","lightblue")
         console.log(`%cYa se han terminado los resultados? :${v.length%5===0}`)
       }),
       catchError((e:any)=>{
