@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, tap } from 'rxjs/operators';
@@ -19,6 +19,7 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
   searchInput = new FormControl();
   inp:string;
   @ViewChild(NgForm,{static:true}) formulario:NgForm
+  @ViewChild("searchInputElem",{static:true}) searchInputElemNative:ElementRef
   pagina:number;
   constructor(
     private documentos: DocumentosService,
@@ -26,7 +27,10 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
     ) { }
 
   ngOnInit() {
+    this.searchInputElemNative.nativeElement.focus()
+    // this.searchInputEl.nativeElement.focus()
     // Chekeamos los cambios del input de búsqueda, Observable.
+    // this.searchInput
     this.Subc=this.searchInput.valueChanges
     .pipe(
       debounceTime(300),
