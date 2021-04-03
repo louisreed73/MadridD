@@ -35,7 +35,7 @@ export class CombinacionService {
   documentosEscritosLength$: BehaviorSubject<number> = new BehaviorSubject(null);
   documentosResoluciones$: BehaviorSubject<{}> = new BehaviorSubject({});
   documentosResolucionesLength$: BehaviorSubject<number> = new BehaviorSubject(null);
-  stopSpinner$:BehaviorSubject<boolean> = new BehaviorSubject(false);
+  stopScroll$:BehaviorSubject<boolean> = new BehaviorSubject(false);
   // rangePercentageDocuments$:BehaviorSubject<number> = new BehaviorSubject(0);
   
 
@@ -57,7 +57,7 @@ export class CombinacionService {
         if (this.pagina < 2) {
 
           this.documentosTotalQueryLengthS=this.http.get<any>(`${url}?q=${this.search}`).subscribe(d=>{
-  
+            
             // log(d, "Este es el número total de documentos de esta query: ", "lightred");
             this.documentosTotalQueryLength$.next(d.length)
             // this.totalDocsQuery$=d;
@@ -65,8 +65,9 @@ export class CombinacionService {
           })
         }
         // this.infiniteScroll.requestSpinner$.next(true);
-
-
+        
+        
+        this.stopScroll$.next(true);
         return this.http.get<any>(`${url}?q=${this.search}&_page=${this.pagina}&_limit=5`)
 
       }),
@@ -93,8 +94,12 @@ export class CombinacionService {
         log(documents.length,"tamaño de documentos recuperados: ","lime")
         log(this.docsQueryTotal,"de un total de x documentos: ","lime")
         // this.rangePercentageDocuments$.next(this.percentage);
-        if(documents.length/this.docsQueryTotal===1) {
-          this.stopSpinner$.next(true)
+        if(documents.length/this.docsQueryTotal>=1) {
+          this.stopScroll$.next(true);
+        }
+        else {
+          this.stopScroll$.next(false);
+          // this
         }
 
           log(null,"ahora has comprobado todos los documentos","yellow");

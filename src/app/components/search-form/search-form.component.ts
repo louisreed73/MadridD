@@ -19,7 +19,7 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
   inp:string;
   @ViewChild(NgForm,{static:true}) formulario:NgForm
   @ViewChild("searchInputElem",{static:true}) searchInputElemNative:ElementRef
-  pagina:number=1;
+  pagina:number;
   constructor(
     private combinacion: CombinacionService
     ) {
@@ -50,7 +50,7 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
         this.combinacion.inputSearch$.next(inputSearch);
         console.log(this.pagina);
         this.combinacion.pagina$.next(this.pagina);
-        this.combinacion.stopSpinner$.next(false);
+        // this.combinacion.stopSpinner$.next(false);
 
 
       });
@@ -72,10 +72,10 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
         this.pagina=1;
 
     
+        // this.combinacion.stopScroll$.next(false);
         this.combinacion.formularioFiltros$.next(d);
-        console.log(this.pagina);
+        // console.log(this.pagina);
         this.combinacion.pagina$.next(this.pagina);
-        this.combinacion.stopSpinner$.next(false);
         // log(d,"Este es el formulario:","lightgreen")
         
         
@@ -86,8 +86,8 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
     avanza() {
       ++this.pagina;
       console.log(this.pagina);
+      // this.combinacion.stopScroll$.next(false);
       this.combinacion.pagina$.next(this.pagina);
-      // this.combinacion.stopSpinner$.next(false);
     }
 
 }

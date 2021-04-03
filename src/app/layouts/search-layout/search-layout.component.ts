@@ -17,8 +17,8 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
   // spinner$:Subject<boolean>=this.infiniteScroll.requestSpinner$
   pagina$:Subject<number>;
   paginaSub:Subscription;
-  stopSpinner:boolean;
-  stopSpinnerSub:Subscription;
+  stopScroll:boolean;
+  stopScrollSub:Subscription;
   // total:boolean=false;
 
 
@@ -41,10 +41,10 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-      this.stopSpinnerSub==this.combinado.stopSpinner$
+      this.stopScrollSub==this.combinado.stopScroll$
       .subscribe(
         mustStop=>{
-          this.stopSpinner=mustStop;
+          this.stopScroll=mustStop;
         }
       );
     }
@@ -67,7 +67,7 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
     this.paginaSub.unsubscribe();
-    this.stopSpinnerSub.unsubscribe();
+    this.stopScrollSub.unsubscribe();
     // this.isTotalListSub.unsubscribe()
   }
 

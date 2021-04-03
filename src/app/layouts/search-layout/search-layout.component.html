@@ -1,10 +1,11 @@
 <div 
 class="search-results" 
 infiniteScroll
-
+[infiniteScrollDisabled]="stopScroll"
+[infiniteScrollUpDistance]=""
 [infiniteScrollDistance]="2.5" 
-[infiniteScrollThrottle]="350"
-  (scrolled)="(!stopSpinner) && onScroll()">
+[infiniteScrollThrottle]="180"
+  (scrolled)="(!stopScroll) && onScroll()">
   <!-- Parent container for infinite scroll -->
 
 <main>
