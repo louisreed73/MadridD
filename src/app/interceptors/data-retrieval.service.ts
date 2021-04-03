@@ -3,7 +3,7 @@ import {
   HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse
 } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
-import { InfiniteScrollService } from '../services/infinite-scroll.service';
+import { SpinnerService } from '../services/spinner.service';
 
 let count = 1;
 
@@ -13,18 +13,18 @@ let count = 1;
 export class DataRetrievalInterceptor implements HttpInterceptor {
 
   constructor(
-    private infiniteScroll: InfiniteScrollService
+    private spinner: SpinnerService
 
   ) {}
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     return next.handle(req)
       .pipe(
         map((event: HttpEvent<any>) => {
-          this.infiniteScroll.requestSpinner$.next(true)
+          this.spinner.requestSpinner$.next(true)
           if (event instanceof HttpResponse) {
             // console.log(`%cEstoy recibiendo una respuesta del servidor: ${JSON.stringify(event,null,2)}`,'color:gold');
             console.log(`%cEstoy recibiendo una respuesta del servidor!!! contador:${count++}`, 'color:gold');
-            this.infiniteScroll.requestSpinner$.next(false)
+            this.spinner.requestSpinner$.next(false);
           }
           return event
         })

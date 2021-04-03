@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { CombinacionService } from 'src/app/services/combinacion.service';
-import { InfiniteScrollService } from 'src/app/services/infinite-scroll.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 import { log } from 'src/app/utilities/utilities';
 
 
@@ -14,7 +14,7 @@ import { log } from 'src/app/utilities/utilities';
 export class SearchLayoutComponent implements OnInit, OnDestroy {
 
   pagina:number;
-  // spinner$:Subject<boolean>=this.infiniteScroll.requestSpinner$
+  spinner$:Subject<boolean>=this.spinner.requestSpinner$
   pagina$:Subject<number>;
   paginaSub:Subscription;
   stopScroll:boolean;
@@ -25,7 +25,7 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
 
   constructor(
     private combinado: CombinacionService,
-    private infiniteScroll: InfiniteScrollService
+    private spinner: SpinnerService
 
   ) { 
 

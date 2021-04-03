@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class InfiniteScrollService {
+export class SpinnerService {
 
   requestSpinner$:Subject<boolean>=new Subject();
 

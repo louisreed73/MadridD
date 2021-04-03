@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, of, pipe, Subject, Subscription, throwError } from 'rxjs';
 import { catchError, concatMap, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { log } from '../utilities/utilities';
-import { InfiniteScrollService } from './infinite-scroll.service';
+import { SpinnerService } from './spinner.service';
 
 const url = "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
 
@@ -109,17 +109,16 @@ export class CombinacionService {
         this.documentosResolucionesLength$.next(filtroResoluciones.length);
 
 
-        
+
         // this.percentage=documents.length/this.docsQueryTotal;
-        log(documents.length,"tamaño de documentos recuperados: ","lime")
-        log(this.docsQueryTotal,"de un total de x documentos: ","lime")
+        // log(documents.length,"tamaño de documentos recuperados: ","lime")
+        // log(this.docsQueryTotal,"de un total de x documentos: ","lime")
         // this.rangePercentageDocuments$.next(this.percentage);
         if(documents.length/this.docsQueryTotal>=1) {
           this.stopScroll$.next(true);
         }
         else {
           this.stopScroll$.next(false);
-          // this
         }
       }),
       shareReplay()
@@ -130,14 +129,13 @@ export class CombinacionService {
 
   constructor(
     private http: HttpClient,
-    private infiniteScroll: InfiniteScrollService
+    private Spinner: SpinnerService
 
     ) {
         
   }
 
   handleError(e) {
-    // console.log(e);
     return throwError(e)
   }
 }

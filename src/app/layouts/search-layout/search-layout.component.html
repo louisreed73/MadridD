@@ -8,12 +8,12 @@ infiniteScroll
   (scrolled)="(!stopScroll) && onScroll()">
   <!-- Parent container for infinite scroll -->
 
+  {{stopSpinner$ | async}}
+  <div class="spinner-container" *ngIf="spinner$ | async">
+      <!-- <p>Loading.......</p> -->
+      <app-spinner></app-spinner>
+  </div>
 <main>
-    {{stopSpinner$ | async}}
-    <div class="spinner-container" *ngIf="spinner$ | async">
-        <!-- <p>Loading.......</p> -->
-        <app-spinner></app-spinner>
-    </div>
     <section>
 
         <app-search-form></app-search-form>
