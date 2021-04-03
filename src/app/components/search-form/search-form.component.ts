@@ -19,7 +19,7 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
   inp:string;
   @ViewChild(NgForm,{static:true}) formulario:NgForm
   @ViewChild("searchInputElem",{static:true}) searchInputElemNative:ElementRef
-  pagina:number;
+  pagina:number=1;
   constructor(
     private combinacion: CombinacionService
     ) {
@@ -28,9 +28,7 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.searchInputElemNative.nativeElement.focus()
-    // this.searchInputEl.nativeElement.focus()
-    // Chekeamos los cambios del input de búsqueda, Observable.
-    // this.searchInput
+
     this.Subc=this.searchInput.valueChanges
     .pipe(
       debounceTime(300),
@@ -40,16 +38,16 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
         // console.log(JSON.stringify(v,null,2)); 
       })
       )
-      .subscribe(inp=>{
+      .subscribe(inputSearch=>{
         // almacenamos el string del input;
-        this.inp=inp;
-        this.pagina=1;
+        // this.inp=inp;
+        // this.pagina=1;
         // Enviamos los datos del string de búsqueda, y dejamos un fake 'host', para posteriormente insertar los filtros que apliquen
         // this.documentos.inputAndFiltersData$.next({
         //   searchInput:this.inp,
         //   host:this
         // })
-        this.combinacion.inputSearch$.next(this.inp);
+        this.combinacion.inputSearch$.next(inputSearch);
         console.log(this.pagina);
         this.combinacion.pagina$.next(this.pagina);
         this.combinacion.stopSpinner$.next(false);

@@ -14,10 +14,12 @@ import { log } from 'src/app/utilities/utilities';
 export class SearchLayoutComponent implements OnInit, OnDestroy {
 
   pagina:number;
-  spinner$:Subject<boolean>=this.infiniteScroll.requestSpinner$
+  // spinner$:Subject<boolean>=this.infiniteScroll.requestSpinner$
   pagina$:Subject<number>;
   paginaSub:Subscription;
-  total:boolean=false;
+  stopSpinner:boolean;
+  stopSpinnerSub:Subscription;
+  // total:boolean=false;
 
 
 
@@ -37,16 +39,27 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
         log(numPag,"Este es el número de página","pink")
       })
       )
-      .subscribe()
+      .subscribe();
+
+      this.stopSpinnerSub==this.combinado.stopSpinner$
+      .subscribe(
+        mustStop=>{
+          this.stopSpinner=mustStop;
+        }
+      );
     }
+
     
     onScroll() {
       log(null,"Haciendo scrol!!!","pink");
       // this.pagina=1;
       // ++this.pagina;
-      // console.log(this.pagina);
-      log(this.pagina,"Este es el número de página","pink")
-    this.combinado.pagina$.next(this.pagina + 1);
+      log(this.pagina,"Este es el número de página","pink");
+      // if(!this.stopSpinner) {
+
+        this.combinado.pagina$.next(++this.pagina);
+        console.log(this.pagina);
+      // }
     // this.infiniteScroll.requestSpinner$.next(true)
   }
 
@@ -54,6 +67,7 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
     this.paginaSub.unsubscribe();
+    this.stopSpinnerSub.unsubscribe();
     // this.isTotalListSub.unsubscribe()
   }
 

@@ -20,7 +20,7 @@ export class CombinacionService {
   search;
   formulario;
   pagina;
-  totalDocsQuery$:Observable<any>;
+  // totalDocsQuery$:Observable<any>;
   documentosTotalQueryLengthS:Subscription;
   data = [];
   docsQueryTotal:number;
@@ -54,14 +54,17 @@ export class CombinacionService {
         this.pagina = v[2];
       }),
       switchMap(([search, formulario, pagina]) => {
-        this.documentosTotalQueryLengthS=this.http.get<any>(`${url}?q=${this.search}`).subscribe(d=>{
+        if (this.pagina < 2) {
 
-          // log(d, "Este es el número total de documentos de esta query: ", "lightred");
-          this.documentosTotalQueryLength$.next(d.length)
-          this.totalDocsQuery$=d;
-          this.docsQueryTotal=d.length;
-        })
-        this.infiniteScroll.requestSpinner$.next(true);
+          this.documentosTotalQueryLengthS=this.http.get<any>(`${url}?q=${this.search}`).subscribe(d=>{
+  
+            // log(d, "Este es el número total de documentos de esta query: ", "lightred");
+            this.documentosTotalQueryLength$.next(d.length)
+            // this.totalDocsQuery$=d;
+            this.docsQueryTotal=d.length;
+          })
+        }
+        // this.infiniteScroll.requestSpinner$.next(true);
 
 
         return this.http.get<any>(`${url}?q=${this.search}&_page=${this.pagina}&_limit=5`)
@@ -86,12 +89,16 @@ export class CombinacionService {
         return of(this.data)
       }),
       tap((documents) => {
-        this.percentage=documents.length/this.docsQueryTotal;
-        console.log(this.percentage.toString())
+        // this.percentage=documents.length/this.docsQueryTotal;
+        log(documents.length,"tamaño de documentos recuperados: ","lime")
+        log(this.docsQueryTotal,"de un total de x documentos: ","lime")
         // this.rangePercentageDocuments$.next(this.percentage);
+        if(documents.length/this.docsQueryTotal===1) {
+          this.stopSpinner$.next(true)
+        }
 
           log(null,"ahora has comprobado todos los documentos","yellow");
-          this.stopSpinner$.next(this.percentage===1);
+          // this.stopSpinner$.next(this.percentage===1);
 
         this.documentosLength$.next(documents.length);
         //Realizamos el filtro de escritos.
