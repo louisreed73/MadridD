@@ -49,7 +49,10 @@ export class CombinacionService {
   )
     .pipe(
       tap((v) => {
-        log(v, "Este es el combinado desde search", "lightgreen");
+        // log(v, "Este es el combinado desde search", "lightgreen");
+        // this.stopScroll$.next(true);
+        // window.addEventListener('scroll', noScroll);
+
         this.search = v[0];
         this.formulario = v[1];
         this.pagina = v[2];
@@ -60,7 +63,9 @@ export class CombinacionService {
           this.documentosTotalQueryLengthS=this.http.get<any>(`${url}?q=${this.search}`).subscribe(d=>{
             
             // log(d, "Este es el número total de documentos de esta query: ", "lightred");
-            this.documentosTotalQueryLength$.next(d.length)
+            this.documentosTotalQueryLength$.next(d.length);
+          // this.stopScroll$.next(true);
+
             // this.totalDocsQuery$=d;
             this.docsQueryTotal=d.length;
           })
@@ -78,14 +83,14 @@ export class CombinacionService {
       }),
       switchMap((v) => {
         // log(v, "Este es el combinado desde search", "lightgreen");
-        log(this.search, "Este es el combinado desde search", "purple");
-        log(this.formulario, "Este es el combinado desde search", "gold");
+        // log(this.search, "Este es el combinado desde search", "purple");
+        // log(this.formulario, "Este es el combinado desde search", "gold");
         
 
-        if (this.pagina === 1) {
+        if (this.pagina <2) {
           this.data = v;
         }
-        else {
+        if(this.pagina>1) {
           this.data = this.data.concat(v);
         }
         return of(this.data)
@@ -116,9 +121,13 @@ export class CombinacionService {
         // this.rangePercentageDocuments$.next(this.percentage);
         if(documents.length/this.docsQueryTotal>=1) {
           this.stopScroll$.next(true);
+          console.log(`%c${documents.length/this.docsQueryTotal}`,"lightred");
+          // console.log(`%cDesactivado Scroll Infinito!!!!`,"lime");
         }
         else {
           this.stopScroll$.next(false);
+          console.log(`%c${documents.length/this.docsQueryTotal}`,"lightred");
+          // console.log(`%cActivado Scroll Infinito!!!!`,"lime");
         }
       }),
       shareReplay()

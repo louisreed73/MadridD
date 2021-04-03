@@ -2,10 +2,10 @@
 class="search-results" 
 infiniteScroll
 [infiniteScrollDisabled]="stopScroll"
-[infiniteScrollUpDistance]=""
-[infiniteScrollDistance]="2.5" 
-[infiniteScrollThrottle]="200"
-  (scrolled)="(!stopScroll) && onScroll()">
+[infiniteScrollUpDistance]=".1"
+[infiniteScrollDistance]="4" 
+[infiniteScrollThrottle]="10"
+  (scrolled)="onScroll()">
   <!-- Parent container for infinite scroll -->
 
   {{stopSpinner$ | async}}

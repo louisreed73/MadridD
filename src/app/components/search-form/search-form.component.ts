@@ -21,7 +21,8 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
   @ViewChild("searchInputElem",{static:true}) searchInputElemNative:ElementRef
   pagina:number;
   constructor(
-    private combinacion: CombinacionService
+    private combinacion: CombinacionService,
+    
     ) {
       console.log("Soy el formulario e inputs y me acabo de crear!!!!")
      }
@@ -31,8 +32,9 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
 
     this.Subc=this.searchInput.valueChanges
     .pipe(
-      debounceTime(300),
-      tap(v=>{
+        debounceTime(300),
+        tap(v=>{
+        // this.combinacion.stopScroll$.next(true)
         // debug para verificar el objeto 
         //TODO para quitar el tap completo
         // console.log(JSON.stringify(v,null,2)); 
@@ -47,6 +49,7 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
         //   searchInput:this.inp,
         //   host:this
         // })
+        this.combinacion.stopScroll$.next(true);
         this.combinacion.inputSearch$.next(inputSearch);
         console.log(this.pagina);
         this.combinacion.pagina$.next(this.pagina);

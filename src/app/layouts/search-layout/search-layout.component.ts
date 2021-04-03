@@ -14,7 +14,7 @@ import { log } from 'src/app/utilities/utilities';
 export class SearchLayoutComponent implements OnInit, OnDestroy {
 
   pagina:number;
-  spinner$:Subject<boolean>=this.spinner.requestSpinner$
+  // spinner$:Subject<boolean>=this.spinner.requestSpinner$
   pagina$:Subject<number>;
   paginaSub:Subscription;
   stopScroll:boolean;
@@ -54,14 +54,16 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
       log(null,"Haciendo scrol!!!","pink");
       // this.pagina=1;
       // ++this.pagina;
-      log(this.pagina,"Este es el número de página","pink");
+      // log(this.pagina,"Este es el número de página","pink");
       // if(!this.stopSpinner) {
+        
+        
         this.combinado.stopScroll$.next(true);
-
-        this.combinado.pagina$.next(++this.pagina);
+        this.combinado.pagina$.next(this.pagina + 1);
+        console.log(`%cDesactivado Scroll Infinito!!!!`,"lime");
         console.log(this.pagina);
       // }
-    // this.infiniteScroll.requestSpinner$.next(true)
+    // this.spinner.requestSpinner$.next(true)
   }
 
   ngOnDestroy(): void {
