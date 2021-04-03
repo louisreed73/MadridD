@@ -1,3 +1,11 @@
+:host {
+    position:fixed;
+    width:calc(100vw - 75px);
+    background:white;
+    top:11rem;
+    z-index:10;
+}
+
 button {
     position:fixed;
     bottom:3rem;

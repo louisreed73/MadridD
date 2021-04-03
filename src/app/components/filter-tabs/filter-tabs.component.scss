@@ -1,4 +1,13 @@
+:host {
+    position:fixed;
+    width:calc(100vw - 75px);
+    background:white;
+    top:16rem;
+    z-index:11;
+}
+
 .tabs {
+    
     margin:2rem 0 0rem 0;
     // background:red;
     // color:white;
@@ -27,6 +36,6 @@
     margin-top:1.35rem;
     margin-left:30px;
     transition: width 1s ease-in-out;
-    max-width: 100%;
+    // max-width: 100%;
 }
 

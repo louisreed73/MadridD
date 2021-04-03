@@ -91,21 +91,9 @@ export class CombinacionService {
         return of(this.data)
       }),
       tap((documents) => {
-        // this.percentage=documents.length/this.docsQueryTotal;
-        log(documents.length,"tamaño de documentos recuperados: ","lime")
-        log(this.docsQueryTotal,"de un total de x documentos: ","lime")
-        // this.rangePercentageDocuments$.next(this.percentage);
-        if(documents.length/this.docsQueryTotal>=1) {
-          this.stopScroll$.next(true);
-        }
-        else {
-          this.stopScroll$.next(false);
-          // this
-        }
-
-          log(null,"ahora has comprobado todos los documentos","yellow");
-          // this.stopSpinner$.next(this.percentage===1);
-
+        
+        
+        
         this.documentosLength$.next(documents.length);
         //Realizamos el filtro de escritos.
         let filtroEscritos = documents.filter(doc => doc.tipo === "escrito")
@@ -119,6 +107,20 @@ export class CombinacionService {
         this.documentosResoluciones$.next(filtroResoluciones);
         // Enviamos el contador de resoluciones del dato anterior al componente que se subscribe a este Subject: filter-tabs.component      
         this.documentosResolucionesLength$.next(filtroResoluciones.length);
+
+
+        
+        // this.percentage=documents.length/this.docsQueryTotal;
+        log(documents.length,"tamaño de documentos recuperados: ","lime")
+        log(this.docsQueryTotal,"de un total de x documentos: ","lime")
+        // this.rangePercentageDocuments$.next(this.percentage);
+        if(documents.length/this.docsQueryTotal>=1) {
+          this.stopScroll$.next(true);
+        }
+        else {
+          this.stopScroll$.next(false);
+          // this
+        }
       }),
       shareReplay()
 
