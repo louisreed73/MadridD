@@ -4,7 +4,6 @@ import { Observable, of, throwError } from 'rxjs';
 // import { from, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { CombinacionService } from 'src/app/services/combinacion.service';
-import { DocumentosService } from 'src/app/services/documentos.service';
 // import { DocumentosService } from 'src/app/services/documentos.service';
 import { log } from 'src/app/utilities/utilities';
 
@@ -23,10 +22,10 @@ import { log } from 'src/app/utilities/utilities';
 })
 export class SearchDocumentsComponent {
 
-    search;
-    formulario;
-    pagina;
-    numDocs:number;
+    // search;
+    // formulario;
+    // pagina;
+    // numDocs:number;
     inicio:boolean=true;
 
     // documentos$=new Observable((obs) => {
@@ -71,5 +70,7 @@ export class SearchDocumentsComponent {
   isArray(obj) {
     return Array.isArray(obj)
   }
+
+
 
 }

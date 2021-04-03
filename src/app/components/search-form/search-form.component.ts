@@ -3,7 +3,6 @@ import { FormControl, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, tap } from 'rxjs/operators';
 import { CombinacionService } from 'src/app/services/combinacion.service';
-import { DocumentosService } from 'src/app/services/documentos.service';
 import { log} from 'src/app/utilities/utilities';
 
 @Component({
@@ -22,7 +21,6 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
   @ViewChild("searchInputElem",{static:true}) searchInputElemNative:ElementRef
   pagina:number;
   constructor(
-    private documentos: DocumentosService,
     private combinacion: CombinacionService
     ) {
       console.log("Soy el formulario e inputs y me acabo de crear!!!!")

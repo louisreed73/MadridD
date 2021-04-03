@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CombinacionService } from 'src/app/services/combinacion.service';
-import { DocumentosService } from 'src/app/services/documentos.service';
 
 @Component({
   selector: 'app-search-resoluciones',
@@ -8,16 +8,13 @@ import { DocumentosService } from 'src/app/services/documentos.service';
   styleUrls: ['./search-resoluciones.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchResolucionesComponent {
+export class SearchResolucionesComponent implements OnDestroy {
 
-  // documentos$=this.documentos.documentos$
   documentosR$=this.combinado.documentosResoluciones$
-
-
+  documentosSub:Subscription=this.combinado.combinado$.subscribe()
 
 
   constructor(
-    // private documentos: DocumentosService,
     private combinado : CombinacionService
 
     ) {
@@ -30,4 +27,11 @@ export class SearchResolucionesComponent {
   isArray(obj) {
     return Array.isArray(obj)
   }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.documentosSub.unsubscribe();
+  }
+
 }
