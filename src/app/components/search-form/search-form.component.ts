@@ -83,11 +83,11 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
       
       
     }
-    avanza() {
-      ++this.pagina;
-      console.log(this.pagina);
-      // this.combinacion.stopScroll$.next(false);
-      this.combinacion.pagina$.next(this.pagina);
-    }
+    // avanza() {
+    //   console.log(this.pagina);
+    //   // this.combinacion.stopScroll$.next(false);
+    //   this.combinacion.pagina$.next();
+    //   ++this.pagina;
+    // }
 
 }

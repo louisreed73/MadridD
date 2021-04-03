@@ -20,6 +20,7 @@ export class CombinacionService {
   search;
   formulario;
   pagina;
+  pageLimit=5;
   // totalDocsQuery$:Observable<any>;
   documentosTotalQueryLengthS:Subscription;
   data = [];
@@ -68,7 +69,7 @@ export class CombinacionService {
         
         
         this.stopScroll$.next(true);
-        return this.http.get<any>(`${url}?q=${this.search}&_page=${this.pagina}&_limit=5`)
+        return this.http.get<any>(`${url}?q=${this.search}&_page=${this.pagina}&_limit=${this.pageLimit}`)
 
       }),
       tap((v) => {

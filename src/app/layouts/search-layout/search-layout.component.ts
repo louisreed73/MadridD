@@ -56,6 +56,7 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
       // ++this.pagina;
       log(this.pagina,"Este es el número de página","pink");
       // if(!this.stopSpinner) {
+        this.combinado.stopScroll$.next(true);
 
         this.combinado.pagina$.next(++this.pagina);
         console.log(this.pagina);
