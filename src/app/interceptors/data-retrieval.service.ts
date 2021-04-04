@@ -20,7 +20,7 @@ export class DataRetrievalInterceptor implements HttpInterceptor {
     return next.handle(req)
       .pipe(
         map((event: HttpEvent<any>) => {
-          this.spinner.requestSpinner$.next(true)
+          this.spinner.requestSpinner$.next(true);
           if (event instanceof HttpResponse) {
             // console.log(`%cEstoy recibiendo una respuesta del servidor: ${JSON.stringify(event,null,2)}`,'color:gold');
             // console.log(`%cEstoy recibiendo una respuesta del servidor!!! contador:${count++}`, 'color:gold');

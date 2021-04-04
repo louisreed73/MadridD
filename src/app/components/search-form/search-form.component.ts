@@ -3,6 +3,7 @@ import { FormControl, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, tap } from 'rxjs/operators';
 import { CombinacionService } from 'src/app/services/combinacion.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 import { log} from 'src/app/utilities/utilities';
 
 @Component({
@@ -22,6 +23,7 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
   pagina:number;
   constructor(
     private combinacion: CombinacionService,
+    private spinner: SpinnerService
     
     ) {
       console.log("Soy el formulario e inputs y me acabo de crear!!!!")
@@ -50,6 +52,7 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
         //   host:this
         // })
         this.combinacion.stopScroll$.next(true);
+        // this.spinner.requestSpinner$.next(true);
         this.combinacion.inputSearch$.next(inputSearch);
         console.log(this.pagina);
         this.combinacion.pagina$.next(this.pagina);
@@ -76,6 +79,7 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
 
     
         // this.combinacion.stopScroll$.next(false);
+        // this.spinner.requestSpinner$.next(true);
         this.combinacion.formularioFiltros$.next(d);
         // console.log(this.pagina);
         this.combinacion.pagina$.next(this.pagina);

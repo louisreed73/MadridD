@@ -14,7 +14,7 @@ import { log } from 'src/app/utilities/utilities';
 export class SearchLayoutComponent implements OnInit, OnDestroy {
 
   pagina:number;
-  // spinner$:Subject<boolean>=this.spinner.requestSpinner$
+  spinner$:Subject<boolean>=this.spinner.requestSpinner$;
   pagina$:Subject<number>;
   paginaSub:Subscription;
   stopScroll:boolean;
