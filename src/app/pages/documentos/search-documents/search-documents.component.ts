@@ -1,17 +1,8 @@
-// import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-// import { from, of } from 'rxjs';
+import { ChangeDetectionStrategy, Component} from '@angular/core';
+import { of} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { CombinacionService } from 'src/app/services/combinacion.service';
-// import { DocumentosService } from 'src/app/services/documentos.service';
+import { DocumentosService } from 'src/app/services/documentos.service';
 import { log } from 'src/app/utilities/utilities';
-
-// const range=(start,end)=>{
-//   return Array.from(Array((end-start) + 1).fill(0),(v,i)=>start+i)
-// }
-
-// const url = "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
 
 
 @Component({
@@ -22,49 +13,31 @@ import { log } from 'src/app/utilities/utilities';
 })
 export class SearchDocumentsComponent {
 
-    // search;
-    // formulario;
-    // pagina;
-    // numDocs:number;
-    inicio:boolean=true;
+  inicio: boolean = true;
 
-    // documentos$=new Observable((obs) => {
-    //   obs.next([])
-    // })
-
-    
-    documentos$=this.combinado
-    .combinado$
+  // Recibimos el Observable con los datos del número total de documentos por término de búsqueda acumulado en pagination.
+  documentos$ = this.documentos
+    .documentos$
     .pipe(
       tap((v) => {
-        this.inicio=false;
-        // log(v, "resultado Fin","lightblue")
-        // console.log(`%cYa se han terminado los resultados? :${v.length%5===0}`)
+        this.inicio = false;
       }),
-      catchError((e:any)=>{
-        log(e,"esto es un error?","red")
+      catchError((e: any) => {
+        log(e, "esto es un error?", "red")
         return of(e)
       })
     )
 
-  // documentos$=this.documentos.documentos$;
-  // documentosL$=this.documentos.documentosLength$
-  // documentosR$=this.documentos.documentosResoluciones$
-  
 
-  
 
   constructor(
-    // private documentos: DocumentosService,
-    private combinado:CombinacionService,
-    // private http:HttpClient
-    ) { 
-      // this.documentos$
-    // .subscribe()
-    
+    private documentos: DocumentosService,
+  ) {
+
+
 
   }
-  
+
 
   // Método para comprobar que los datos del OBservable son efectivamente un array
   isArray(obj) {

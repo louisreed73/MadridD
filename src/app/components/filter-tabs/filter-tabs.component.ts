@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { CombinacionService } from 'src/app/services/combinacion.service';
+import { DocsEscritosService } from 'src/app/services/docs-escritos.service';
+import { DocsResolucionesService } from 'src/app/services/docs-resoluciones.service';
+import { DocumentosService } from 'src/app/services/documentos.service';
 // import { DocumentosService } from 'src/app/services/documentos.service';
 import { log } from 'src/app/utilities/utilities';
 
@@ -13,20 +15,23 @@ import { log } from 'src/app/utilities/utilities';
 })
 export class FilterTabsComponent implements OnInit {
 
-  // Recibimos el Observable con los datos del número total de documentos filtrados por término de búsqueda + filtros aplicados.
-  documentosLength$=this.combinado.documentosLength$;
+  // Recibimos el Observable con los datos del número total de documentos por término de búsqueda.
+  documentosTotalQueryLength$=this.documentos.documentosTotalQueryLength$;
+  // Recibimos el Observable con los datos del número total de documentos filtrados por término de búsqueda + filtros aplicados o pagination.
+  documentosLength$=this.documentos.documentosLength$;
   // Recibimos el Observable con los datos del número total de documentos filtrados por término de búsqueda + filtros aplicados. 'Solo Escritos'!!!
-  escritosLength$=this.combinado.documentosEscritosLength$;
+  escritosLength$=this.docsEscritos.documentosEscritosLength$;
   // Recibimos el Observable con los datos del número total de documentos filtrados por término de búsqueda + filtros aplicados. 'Solo Resoluciones'!!!
-  resolucionesLength$=this.combinado.documentosResolucionesLength$;
+  resolucionesLength$=this.docsResoluciones.documentosResolucionesLength$;
   
-  documentosTotalQueryLength$=this.combinado.documentosTotalQueryLength$;
 
 
 
 
   constructor(
-    private combinado: CombinacionService
+    private documentos: DocumentosService,
+    private docsEscritos: DocsEscritosService,
+    private docsResoluciones: DocsResolucionesService
     ) { }
 
   ngOnInit() {

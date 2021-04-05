@@ -4,8 +4,8 @@
     <a [routerLink]="['/escritos']" routerLinkActive="active">{{'escritos' | titlecase}}  <span class="length">( {{(escritosLength$ | async) || 0}} )</span></a>
     <a [routerLink]="['/resoluciones']" routerLinkActive="active">{{'resoluciones' | titlecase}}  <span class="length">( {{(resolucionesLength$ | async) || 0}} )</span></a>
 </div>
+<!-- Barra de percentaje de docs acumulados del total -->
 <p class="percentage" 
-
 [style.width.%]="((documentosLength$ | async) / (documentosTotalQueryLength$ | async) * 100)?(documentosLength$ | async) / (documentosTotalQueryLength$ | async) * 100:0"></p>
 <!-- <p *ngIf="(documentosLength$ | async) / (documentosTotalQueryLength$ | async) * 100"
 ></p> -->

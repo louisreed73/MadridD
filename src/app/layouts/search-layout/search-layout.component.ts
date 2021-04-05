@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { CombinacionService } from 'src/app/services/combinacion.service';
+import { DocumentosService } from 'src/app/services/documentos.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { log } from 'src/app/utilities/utilities';
 
@@ -24,7 +24,7 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    private combinado: CombinacionService,
+    private documentos: DocumentosService,
     private spinner: SpinnerService
 
   ) { 
@@ -32,7 +32,7 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.paginaSub=this.combinado.pagina$
+    this.paginaSub=this.documentos.pagina$
     .pipe(
       tap((numPag) => {
         this.pagina=numPag
@@ -41,7 +41,7 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-      this.stopScrollSub==this.combinado.stopScroll$
+      this.stopScrollSub=this.documentos.stopScroll$
       .subscribe(
         mustStop=>{
           this.stopScroll=mustStop;
@@ -58,8 +58,8 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
       // if(!this.stopSpinner) {
         
         
-        this.combinado.stopScroll$.next(true);
-        this.combinado.pagina$.next(this.pagina + 1);
+        this.documentos.stopScroll$.next(true);
+        this.documentos.pagina$.next(this.pagina + 1);
         console.log(`%cDesactivado Scroll Infinito!!!!`,"lime");
         console.log(this.pagina);
       // }

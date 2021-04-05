@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CombinacionService } from 'src/app/services/combinacion.service';
+import { tap } from 'rxjs/operators';
+import { DocsResolucionesService } from 'src/app/services/docs-resoluciones.service';
+import { DocumentosService } from 'src/app/services/documentos.service';
+import { log } from 'src/app/utilities/utilities';
 
 @Component({
   selector: 'app-search-resoluciones',
@@ -10,12 +13,22 @@ import { CombinacionService } from 'src/app/services/combinacion.service';
 })
 export class SearchResolucionesComponent implements OnDestroy {
 
-  documentosR$=this.combinado.documentosResoluciones$
-  documentosSub:Subscription=this.combinado.combinado$.subscribe()
+  // Nos subscribimos al Observable de Documentos acumulados de pagination. Para actualizar en esta sección el filtro global del término de búsqueda.
+  documentosSub:Subscription=this.documentos.documentos$.subscribe();
+
+  // Recibimos el Observable con los datos del número total de documentos/Tipo resoluciones por término de búsqueda acumulado en pagination.
+  docsResoluciones$=this.docsResoluciones.docsResolucionesSource$
+  .pipe(
+    tap((resoluciones) => {
+      log(resoluciones,"El array acumulado es:","lime");
+
+    })
+  )
 
 
   constructor(
-    private combinado : CombinacionService
+    private documentos : DocumentosService,
+    private docsResoluciones : DocsResolucionesService
 
     ) {
 

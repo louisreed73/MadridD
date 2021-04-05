@@ -1,5 +1,5 @@
 <section>
-  <div *ngIf="documentosE$ | async as documents">
+  <div *ngIf="docsEscritos$ | async as documents">
     <div *ngIf="isArray(documents)">
 
 
@@ -16,4 +16,5 @@
       <p [style.color]="'red'">{{documents?.message}}</p>
     </div>
   </div>
+  <p *ngIf="inicio" [style.color]="'red'">{{'No hay documentos'}}</p>
 </section>

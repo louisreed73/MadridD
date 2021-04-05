@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SharedUtilitiesModule } from './sharedModules/shared-utilities/shared-utilities.module';
-import { SpinnerComponent } from './sharedComponents/spinner/spinner.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'documentos' },
