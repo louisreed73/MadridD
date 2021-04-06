@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import {
      BehaviorSubject,
      combineLatest,
@@ -9,7 +9,6 @@ import {
      throwError,
 } from "rxjs";
 import { catchError, shareReplay, switchMap, tap } from "rxjs/operators";
-import { log } from "../utilities/utilities";
 import { DocsEscritosService } from "./docs-escritos.service";
 import { DocsResolucionesService } from "./docs-resoluciones.service";
 
@@ -21,31 +20,71 @@ const urlWrong =
 @Injectable({
      providedIn: "root",
 })
-export class DocumentosService {
+export class DocumentosService implements OnDestroy {
+     /*=============================================
+     =            Observables            =
+     =============================================*/
+
+     // input string Observable to receive input user string
      inputSearch$: Subject<string> = new Subject();
+     // User Forms Selections - to aplly filters Observable to receive input user string
      formularioFiltros$: Subject<{}> = new Subject();
+     // Actual page Observable - pagination for http request - actual page
      pagina$: Subject<number> = new Subject();
 
-     search;
-     formulario;
-     pagina;
-     pageLimit = 5;
-
-     documentosTotalQueryLengthS: Subscription;
-     data = [];
-     docsQueryTotal: number;
-     percentage: number;
-     url: string;
-
+     // Observable - to use for passing information to tabs - Acumulated Array length for documents
      documentosLength$: BehaviorSubject<number> = new BehaviorSubject(null);
+     // Observable - to use for passing information to tabs - Total documents of query string
      documentosTotalQueryLength$: BehaviorSubject<number> = new BehaviorSubject(
           null
      );
+     // Observable for disabling scroll handler while in htttp request operations
      stopScroll$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+     //TODO remove only for checking testing wrong url
+     // Observable for checking http request Error
      url$: BehaviorSubject<string> = new BehaviorSubject(
           "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
      );
 
+     /*=====  End of Observables  ======*/
+
+     /*=============================================
+     =            Subscriptions            =
+     =============================================*/
+
+     //Subscription for http request query string
+     documentosTotalQueryLengthS: Subscription;
+
+     /*=====  End of Subscriptions  ======*/
+
+     /*=============================================
+     =            Class members            =
+     =============================================*/
+
+     // query string, received from input user - to save in pipe
+     search;
+     // forms selections of user Filters to apply - to save in pipe
+     formulario;
+     // actual pagination number - to save in pipe
+     pagina;
+
+     // page limit for http request pagination - to use in pipe
+     pageLimit = 5;
+     // saving an array for acumulating pages - to use depending of actual page -acumulated
+     data = [];
+     // saving total number of documents for query string - to send in observer of total documents
+     docsQueryTotal: number;
+
+     //TODO remove only for checking testing wrong url
+     // save url from observable toggling url right and wrong
+     url: string;
+
+     /*=====  End of Class members  ======*/
+
+     // Observable to react to input query string / Form Filters / page change
+     // in this pipeline we are going to make http request based in this information
+     // Logic to check acumulated data, based in page number - API pagination
      documentos$ = combineLatest(
           this.inputSearch$.asObservable(),
           this.formularioFiltros$.asObservable(),
@@ -53,39 +92,49 @@ export class DocumentosService {
           this.url$.asObservable()
      ).pipe(
           tap(([search, formulario, pagina, url]) => {
+               // saving all the data
                this.search = search;
                this.formulario = formulario;
                this.pagina = pagina;
                this.url = url;
           }),
           switchMap((obsCombined) => {
+               // if page is 1 / we send new data with the new string query -or change in filters - new API request - to get total documents
                if (this.pagina < 2) {
                     this.documentosTotalQueryLengthS = this.http
                          .get<any>(`${this.url}?q=${this.search}`)
                          .subscribe((d) => {
                               this.documentosTotalQueryLength$.next(d.length);
 
+                              // data to calculate total perc of documents received from pagination with respecto to documents.
                               this.docsQueryTotal = d.length;
                          });
                }
 
+               // during this operation we cannot trigger scroll handler to prevent more API calls
                this.stopScroll$.next(true);
+
+               // we return observable with API call with pagination
                return this.http.get<any>(
                     `${this.url}?q=${this.search}&_page=${this.pagina}&_limit=${this.pageLimit}`
                );
           }),
           catchError((err) => {
+               //Error throwing to handle data in each observable pipe
                this.docsEscritos.docsEscritosSource$.error(err);
                this.docsResoluciones.docsResolucionesSource$.error(err);
+
                return throwError(err);
           }),
           switchMap((obsPagination) => {
+               //Depending of page number we overwrite acumulated array or inserting more documents based on query string and filters
                if (this.pagina < 2) {
                     this.data = obsPagination;
                }
                if (this.pagina > 1) {
                     this.data = this.data.concat(obsPagination);
                }
+               // returning acumulated array as observable // saved in data class member;
                return of(this.data);
           }),
           tap((documentsQueryAcum) => {
@@ -111,13 +160,13 @@ export class DocumentosService {
                this.docsResoluciones.docsResolucionesSource$.next(
                     filtroResoluciones
                );
-               // Enviamos el contador de resoluciones del dato anterior al componente que se subscribe a este Subject: filter-tabs.component
-               log(filtroResoluciones.length, "esto es un error?", "pink");
 
+               // Enviamos el contador de resoluciones del dato anterior al componente que se subscribe a este Subject: filter-tabs.component
                this.docsResoluciones.documentosResolucionesLength$.next(
                     +filtroResoluciones.length
                );
 
+               // if we get total documents we stop scroll handler to prevent more API calls
                if (documentsQueryAcum.length / this.docsQueryTotal >= 1) {
                     this.stopScroll$.next(true);
                     console.log(
@@ -125,6 +174,7 @@ export class DocumentosService {
                          "lightred"
                     );
                } else {
+                    // if not we continue making new API calls and handling scrolls
                     this.stopScroll$.next(false);
                     console.log(
                          `%c${documentsQueryAcum.length / this.docsQueryTotal}`,
@@ -132,6 +182,7 @@ export class DocumentosService {
                     );
                }
           }),
+          //cache of acumulated array of documents - pagination
           shareReplay()
      );
 
@@ -141,7 +192,8 @@ export class DocumentosService {
           private docsResoluciones: DocsResolucionesService
      ) {}
 
-     // handleError(e) {
-     //   return throwError(e)
-     // }
+     ngOnDestroy(): void {
+          //Unsubscribe from http request query string
+          this.documentosTotalQueryLengthS.unsubscribe();
+     }
 }
