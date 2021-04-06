@@ -1,31 +1,23 @@
-<div 
-class="search-results" 
-infiniteScroll
-[infiniteScrollDisabled]="stopScroll"
-[infiniteScrollUpDistance]=".1"
-[infiniteScrollDistance]="2" 
-[infiniteScrollThrottle]="10"
-  (scrolled)="onScroll()">
+<div class="search-results" infiniteScroll [infiniteScrollDisabled]="stopScroll" [infiniteScrollUpDistance]=".1"
+  [infiniteScrollDistance]="2" [infiniteScrollThrottle]="10" (scrolled)="onScroll()">
   <!-- Parent container for infinite scroll -->
 
   {{stopSpinner$ | async}}
   <div class="spinner-container" *ngIf="spinner$ | async">
-      <!-- <p>Loading.......</p> -->
-      <app-spinner></app-spinner>
+    <!-- <p>Loading.......</p> -->
+    <app-spinner></app-spinner>
   </div>
-<main>
+  <main>
     <section>
 
-        <app-search-form></app-search-form>
+      <app-search-form></app-search-form>
 
-            <!-- <p>{{inputString}}</p> -->
 
     </section>
     <section class="filterTabs">
-        <app-filter-tabs></app-filter-tabs>
+      <app-filter-tabs></app-filter-tabs>
     </section>
-    
-</main>
-<router-outlet></router-outlet>
-</div>
 
+  </main>
+  <router-outlet></router-outlet>
+</div>

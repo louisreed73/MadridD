@@ -1,78 +1,84 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { DocumentosService } from 'src/app/services/documentos.service';
-import { SpinnerService } from 'src/app/services/spinner.service';
-import { log } from 'src/app/utilities/utilities';
-
+import {
+     ChangeDetectionStrategy,
+     Component,
+     OnDestroy,
+     OnInit,
+} from "@angular/core";
+import { Subject, Subscription } from "rxjs";
+import { tap } from "rxjs/operators";
+import { DocumentosService } from "src/app/services/documentos.service";
+import { SpinnerService } from "src/app/services/spinner.service";
 
 @Component({
-  selector: 'app-search-layout',
-  templateUrl: './search-layout.component.html',
-  styleUrls: ['./search-layout.component.scss']
+     selector: "app-search-layout",
+     templateUrl: "./search-layout.component.html",
+     styleUrls: ["./search-layout.component.scss"],
+     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchLayoutComponent implements OnInit, OnDestroy {
+     /*=============================================
+  =            Subscriptions            =
+  =============================================*/
 
-  pagina:number;
-  spinner$:Subject<boolean>=this.spinner.requestSpinner$;
-  pagina$:Subject<number>;
-  paginaSub:Subscription;
-  stopScroll:boolean;
-  stopScrollSub:Subscription;
-  // total:boolean=false;
+     paginaSub: Subscription;
+     stopScrollSub: Subscription;
 
+     /*=====  End of Subscriptions  ======*/
 
+     /*=============================================
+=            Observables            =
+=============================================*/
+     spinner$: Subject<boolean> = this.spinner.requestSpinner$;
+     pagina$: Subject<number>;
 
-  constructor(
-    private documentos: DocumentosService,
-    private spinner: SpinnerService
+     /*=====  End of Observables  ======*/
 
-  ) { 
+     /*=============================================
+=            class members            =
+=============================================*/
+     //Saving actual num Page
+     pagina: number;
+     // Saving stop Scroll to properly stop scroll
+     stopScroll: boolean;
 
-  }
+     /*=====  End of Pagination memeber  ======*/
 
-  ngOnInit() {
-    this.paginaSub=this.documentos.pagina$
-    .pipe(
-      tap((numPag) => {
-        this.pagina=numPag
-        log(numPag,"Este es el número de página","pink")
-      })
-      )
-      .subscribe();
+     constructor(
+          private documentos: DocumentosService,
+          private spinner: SpinnerService
+     ) {}
 
-      this.stopScrollSub=this.documentos.stopScroll$
-      .subscribe(
-        mustStop=>{
-          this.stopScroll=mustStop;
-        }
-      );
-    }
+     ngOnInit() {
+          // on Init we subscribe to initial page - ie page 1
+          this.paginaSub = this.documentos.pagina$
+               .pipe(
+                    tap((numPag) => {
+                         this.pagina = numPag;
+                         console.log(
+                              numPag,
+                              "Este es el número de página",
+                              "pink"
+                         );
+                    })
+               )
+               .subscribe();
+          // We subscribe to stop Scroll Observable and save it into variable
+          this.stopScrollSub = this.documentos.stopScroll$.subscribe(
+               (mustStop) => {
+                    this.stopScroll = mustStop;
+               }
+          );
+     }
 
-    
-    onScroll() {
-      log(null,"Haciendo scrol!!!","pink");
-      // this.pagina=1;
-      // ++this.pagina;
-      // log(this.pagina,"Este es el número de página","pink");
-      // if(!this.stopSpinner) {
-        
-        
-        this.documentos.stopScroll$.next(true);
-        this.documentos.pagina$.next(this.pagina + 1);
-        console.log(`%cDesactivado Scroll Infinito!!!!`,"lime");
-        console.log(this.pagina);
-      // }
-    // this.spinner.requestSpinner$.next(true)
-  }
+     onScroll() {
+          // On scroll we stopped the handler to prevent continously sending request to API
+          this.documentos.stopScroll$.next(true);
+          // We increment pagination for the next request
+          this.documentos.pagina$.next(this.pagina + 1);
+     }
 
-  ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
-    this.paginaSub.unsubscribe();
-    this.stopScrollSub.unsubscribe();
-    // this.isTotalListSub.unsubscribe()
-  }
-
-
+     ngOnDestroy(): void {
+          // We unsubscribe from actual page
+          this.paginaSub.unsubscribe();
+     }
 }
