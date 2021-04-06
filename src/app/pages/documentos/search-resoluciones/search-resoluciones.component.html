@@ -3,21 +3,11 @@
     <div *ngIf="isArray(documents)">
       <app-document-card *ngFor="let document of documents" [documento]="document"></app-document-card>
     </div>
-    <!-- Mensaje de el filtrado no devuelve documentos, ni es error -->
-    <!-- Mensaje de error de llamada de API -->
-    <!-- <div *ngIf="documents.message">
-      <p [style.color]="'red'">{{documents?.name}}</p>
-      <p [style.color]="'red'">{{documents?.message}}</p>
-    </div> -->
   </div>
-  
 </section>
-
-  <div *ngIf="!errorObj">
-    <p  class="voidSearch">{{!!(docsResolucionesLength$ | async) ? null:"Esta búsqueda no devuelve documentos"}}</p>
-  </div>
-
-<!-- <p *ngIf="documents?.length===0">{{cualquiera | json}}</p> -->
+<div *ngIf="!errorObj">
+  <p class="voidSearch">{{!!(docsResolucionesLength$ | async) ? null:"Esta búsqueda no devuelve documentos"}}</p>
+</div>
 <div class="httpError" *ngIf="errorObj">
   <p>{{errorObj}}</p>
 </div>

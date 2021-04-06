@@ -3,16 +3,6 @@
     <div *ngIf="isArray(documents)">
       <app-document-card *ngFor="let document of documents" [documento]="document"></app-document-card>
     </div>
-    <!-- Mensaje de el filtrado no devuelve documentos, ni es error -->
-    <!-- <div *ngIf="!documents.length && !documents.message">
-      <p [style.color]="'red'">No hay documentos</p>
-      <p [style.color]="'red'">{{errorObj?.message}}</p>
-    </div> -->
-    <!-- Mensaje de error de llamada de API -->
-    <!-- <div *ngIf="documents.message">
-      <p [style.color]="'red'">{{documents?.name}}</p>
-      <p [style.color]="'red'">{{documents?.message}}</p>
-    </div> -->
   </div>
 </section>
 <div *ngIf="!errorObj">
@@ -21,5 +11,3 @@
 <div class="httpError" *ngIf="errorObj">
   <p>{{errorObj}}</p>
 </div>
-
-
