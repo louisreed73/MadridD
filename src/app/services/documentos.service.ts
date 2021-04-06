@@ -73,10 +73,6 @@ export class DocumentosService {
         
 
       }),
-      tap((obsPagination) => {
-        this.documentosTotalQueryLengthS
-          .unsubscribe();
-      }),
       catchError((err) => {
         this.docsEscritos.docsEscritosSource$.error(err);
         this.docsResoluciones.docsResolucionesSource$.error(err);
