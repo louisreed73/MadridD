@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse
+  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse, HttpErrorResponse
 } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { SpinnerService } from '../services/spinner.service';
+import { log } from '../utilities/utilities';
 
 let count = 1;
 

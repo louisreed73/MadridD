@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, of, Subject, Subscription, throwError } from 'rxjs';
-import { shareReplay, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, empty, of, Subject, Subscription, throwError } from 'rxjs';
+import { catchError, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { log } from '../utilities/utilities';
 import { DocsEscritosService } from './docs-escritos.service';
 import { DocsResolucionesService } from './docs-resoluciones.service';
 
-const url = "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
+const urlWell = "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
+const urlWrong = "https://my-json-server2.typicode.com/louisreed73/fakeAPI/documentos"
+
 
 
 @Injectable({
@@ -26,12 +29,14 @@ export class DocumentosService {
   data = [];
   docsQueryTotal: number;
   percentage: number;
+  url:string
 
 
 
   documentosLength$: BehaviorSubject<number> = new BehaviorSubject(null);
   documentosTotalQueryLength$: BehaviorSubject<number> = new BehaviorSubject(null);
   stopScroll$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  url$: BehaviorSubject<string> = new BehaviorSubject("https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos");
 
 
 
@@ -40,18 +45,20 @@ export class DocumentosService {
   documentos$ = combineLatest(
     this.inputSearch$.asObservable(),
     this.formularioFiltros$.asObservable(),
-    this.pagina$.asObservable()
+    this.pagina$.asObservable(),
+    this.url$.asObservable()
   )
     .pipe(
-      tap((v) => {
-        this.search = v[0];
-        this.formulario = v[1];
-        this.pagina = v[2];
+      tap(([search,formulario,pagina,url]) => {
+        this.search = search;
+        this.formulario = formulario;
+        this.pagina = pagina;
+        this.url = url;
       }),
-      switchMap(([search, formulario, pagina]) => {
+      switchMap((obsCombined) => {
         if (this.pagina < 2) {
 
-          this.documentosTotalQueryLengthS = this.http.get<any>(`${url}?q=${this.search}`).subscribe(d => {
+          this.documentosTotalQueryLengthS = this.http.get<any>(`${this.url}?q=${this.search}`).subscribe(d => {
 
             this.documentosTotalQueryLength$.next(d.length);
 
@@ -61,52 +68,61 @@ export class DocumentosService {
 
 
         this.stopScroll$.next(true);
-        return this.http.get<any>(`${url}?q=${this.search}&_page=${this.pagina}&_limit=${this.pageLimit}`)
+        return this.http.get<any>(`${this.url}?q=${this.search}&_page=${this.pagina}&_limit=${this.pageLimit}`)
+
+        
 
       }),
-      tap((v) => {
+      tap((obsPagination) => {
         this.documentosTotalQueryLengthS
           .unsubscribe();
       }),
-      switchMap((v) => {
+      catchError((err) => {
+        this.docsEscritos.docsEscritosSource$.error(err);
+        this.docsResoluciones.docsResolucionesSource$.error(err);
+        return throwError(err);
+      }),
+      switchMap((obsPagination) => {
         if (this.pagina < 2) {
-          this.data = v;
+          this.data = obsPagination;
         }
         if (this.pagina > 1) {
-          this.data = this.data.concat(v);
+          this.data = this.data.concat(obsPagination);
         }
         return of(this.data)
       }),
-      tap((documents) => {
+      tap((documentsQueryAcum) => {
 
         //Realizamos el filtro de escritos.
-        let filtroEscritos = documents.filter(doc => doc.tipo === "escrito");
+        let filtroEscritos = documentsQueryAcum.filter(doc => doc.tipo === "escrito");
 
         // Enviamos el filtro de 'solo escritos' de los datos de busqueda + filtros. Será recibido en search-escritos.component.
         this.docsEscritos.docsEscritosSource$.next(filtroEscritos);
         // Enviamos el contador de registros del dato anterior al componente que se subscribe a este Subject: filter-tabs.component              
-        this.docsEscritos.documentosEscritosLength$.next(filtroEscritos.length);
+        this.docsEscritos.documentosEscritosLength$.next(+filtroEscritos.length);
 
 
 
 
 
-        this.documentosLength$.next(documents.length);
+        this.documentosLength$.next(documentsQueryAcum.length);
 
         //Realizamos el filtro de resoluciones.
-        let filtroResoluciones = documents.filter(doc => doc.tipo === "resolucion")
+        let filtroResoluciones = documentsQueryAcum.filter(doc => doc.tipo === "resolucion")
         // Enviamos el filtro de 'solo resoluciones' de los datos de busqueda + filtros. Será recibido en search-resoluciones.component.
         this.docsResoluciones.docsResolucionesSource$.next(filtroResoluciones);
-        // Enviamos el contador de resoluciones del dato anterior al componente que se subscribe a este Subject: filter-tabs.component      
-        this.docsResoluciones.documentosResolucionesLength$.next(filtroResoluciones.length);
+        // Enviamos el contador de resoluciones del dato anterior al componente que se subscribe a este Subject: filter-tabs.component 
+      log(filtroResoluciones.length, "esto es un error?", "pink");
 
-        if (documents.length / this.docsQueryTotal >= 1) {
+        this.docsResoluciones.documentosResolucionesLength$.next(+filtroResoluciones.length);
+
+        if (documentsQueryAcum.length / this.docsQueryTotal >= 1) {
           this.stopScroll$.next(true);
-          console.log(`%c${documents.length / this.docsQueryTotal}`, "lightred");
+          console.log(`%c${documentsQueryAcum.length / this.docsQueryTotal}`, "lightred");
         }
         else {
           this.stopScroll$.next(false);
-          console.log(`%c${documents.length / this.docsQueryTotal}`, "lightred");
+          console.log(`%c${documentsQueryAcum.length / this.docsQueryTotal}`, "lightred");
         }
       }),
       shareReplay()
@@ -124,7 +140,9 @@ export class DocumentosService {
 
   }
 
-  handleError(e) {
-    return throwError(e)
-  }
+  // handleError(e) {
+  //   return throwError(e)
+  // }
+
+  
 }

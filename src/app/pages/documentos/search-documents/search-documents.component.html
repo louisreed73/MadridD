@@ -4,14 +4,20 @@
       <app-document-card *ngFor="let document of documents" [documento]="document"></app-document-card>
     </div>
     <!-- Mensaje de el filtrado no devuelve documentos, ni es error  -->
-    <div *ngIf="!documents.length && !documents.message">
+    <!-- <div *ngIf="!documents && !documents.message">
       <p [style.color]="'red'">No hay documentos</p>
-    </div>
+    </div> -->
     <!-- Mensaje de error de llamada de API -->
-    <div *ngIf="documents.message">
+    <!-- <div *ngIf="documents.message">
       <p [style.color]="'red'">{{documents?.name}}</p>
       <p [style.color]="'red'">{{documents?.message}}</p>
-    </div> 
+    </div>  -->
   </div>
-  <p *ngIf="inicio" [style.color]="'red'">{{'No hay documentos'}}</p>
+  <!-- <p *ngIf="!documents?.length" [style.color]="'red'">{{'No hay documentos'}}</p> -->
 </section>
+<div *ngIf="!errorObj">
+  <p class="voidSearch">{{!!(docsLength$ | async) ? null:"Esta búsqueda no devuelve documentos"}}</p>
+</div>
+<div class="httpError" *ngIf="errorObj">
+  <p>{{errorObj}}</p>
+</div>

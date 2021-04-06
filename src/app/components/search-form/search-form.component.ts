@@ -1,8 +1,12 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { DocumentosService } from 'src/app/services/documentos.service';
+
+const urlWell = "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
+const urlWrong = "https://my-json-server2.typicode.com/louisreed73/fakeAPI/documentos"
+
 
 @Component({
   selector: 'app-search-form',
@@ -19,8 +23,10 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
   @ViewChild(NgForm, { static: true }) formulario: NgForm
   @ViewChild("searchInputElem", { static: true }) searchInputElemNative: ElementRef
   pagina: number;
+  url:string=urlWell;
+
   constructor(
-    private combinacion: DocumentosService,
+    private combinacion: DocumentosService
 
   ) {
     console.log("Soy el formulario e inputs y me acabo de crear!!!!")
@@ -64,7 +70,13 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
 
     }))
 
-
+    
+    
+  }
+  toggleURL() {
+    this.url=this.url===urlWell?urlWrong:urlWell;
+    console.log(this.url)
+    this.combinacion.url$.next(this.url)
   }
 
 
