@@ -9,6 +9,8 @@ import { CommonModule } from "@angular/common";
 import { SearchFormComponent } from "./components/search-form/search-form.component";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { SharedUtilitiesModule } from "./sharedModules/shared-utilities/shared-utilities.module";
+import { FijarDirective } from './directives/fijar.directive';
+import { UserInputComponent } from './components/user-input/user-input.component';
 
 const routes: Routes = [
      { path: "", pathMatch: "full", redirectTo: "documentos" },
@@ -47,6 +49,8 @@ const routes: Routes = [
           DocumentoComponent,
           FilterTabsComponent,
           SearchFormComponent,
+          FijarDirective,
+          UserInputComponent,
      ],
 })
 export class AppRoutingModule {}

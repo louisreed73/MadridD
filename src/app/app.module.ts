@@ -21,6 +21,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
                useClass: DataRetrievalInterceptor,
                multi: true,
           },
+          {
+               provide:Window,
+               useValue:window
+          }
      ],
      bootstrap: [AppComponent],
 })
