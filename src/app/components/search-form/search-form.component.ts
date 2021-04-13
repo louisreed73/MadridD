@@ -10,10 +10,7 @@ import { Subscription } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { DocumentosService } from "src/app/services/documentos.service";
 
-const urlWell =
-     "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos";
-const urlWrong =
-     "https://my-json-server2.typicode.com/louisreed73/fakeAPI/documentos";
+
 
 @Component({
      selector: "app-search-form",
@@ -21,7 +18,7 @@ const urlWrong =
      styleUrls: ["./search-form.component.scss"],
      changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchFormComponent implements OnInit, AfterViewInit {
+export class SearchFormComponent implements OnInit {
      /*=============================================
     =            Subscriptions for this component  =
       =============================================*/
@@ -47,13 +44,14 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
 
      // Pagination request increment or reset to 1
      pagina: number = 1;
-     //TODO to remove after correct Error HTTP request Handling
-     // only for checking http request errors
-     url: string = urlWell;
 
      /*=====  End of class members  ======*/
 
-     constructor(private combinacion: DocumentosService) {}
+     constructor(
+          private combinacion: DocumentosService,
+          private _window :Window
+          
+          ) {}
 
      ngOnInit() {
           // String query for get documents based in this term
@@ -61,6 +59,8 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
           this.Subc = this.searchInput.valueChanges
                .pipe(debounceTime(300))
                .subscribe((inputSearch) => {
+              this._window.scrollTo(0,0);
+
                     // Stopping the scroll trigger until http request response
                     this.combinacion.stopScroll$.next(true);
                     // Communicate to subscribers change in search query string
@@ -75,24 +75,6 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
           this.Subc.unsubscribe();
      }
 
-     ngAfterViewInit(): void {
-          // Send first null data to get something in load
-          // this.combinacion.formularioFiltros$.next(null);
-          // subscribing to changes in selections user inputs
-          // this.formulario.valueChanges.subscribe((d) => {
-          //      // this.pagina = 1;
+     
 
-          //      // Send first null data to get something in load
-          //      // this.combinacion.formularioFiltros$.next(d);
-          //      // Sending page 1 - always when changed input or selections
-          //      // Scroll is unique responsible for increment pagination
-          //      // this.combinacion.pagina$.next(this.pagina);
-          // });
-     }
-     //TODO to remove after correct Error HTTP request Handling
-     // toggleURL() {
-     //      // Only for checking http Errors / Toggling valid and wrong URL API
-     //      this.url = this.url === urlWell ? urlWrong : urlWell;
-     //      this.combinacion.url$.next(this.url);
-     // }
 }
