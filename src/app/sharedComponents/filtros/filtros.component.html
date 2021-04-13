@@ -1,0 +1,85 @@
+<!-- <p>formulario works!</p> -->
+<form [formGroup]="formFilters">
+    <div class="formFilterGroup" *ngFor="let _formGroup of formFilters.controls;let i=index">
+      <input type="checkbox" name="" [id]="arrayForm[i].formGroup_Title+'_'+i" class="showFilterOptions">
+      <label class="toggleFilter"[for]="arrayForm[i].formGroup_Title+'_'+i">{{arrayForm[i].formGroup_Title}}</label>
+      <div [formGroup]="_formGroup" class="filter_common">
+        <div class="input_flexItem" [ngClass]="{'input_flexItem--date': arrayForm[i].type==='date'}"*ngFor="let control of arrayForm[i].formGroup_controls;let _i=index;">
+          <ng-container *ngIf="arrayForm[i].multi && arrayForm[i].type==='checkB-radio'">
+  
+            <input type="checkbox" [name]="control.formControl_Name+'_'+i+_i" [id]="control.for_label+'_'+i+_i"
+              [formControlName]="control.formControl_Name+'_'+i+_i" [value]="control.value" class="custom-radio-check">
+            <label [for]="control.for_label+'_'+i+_i">{{control.value | titlecase}}</label>
+          </ng-container>
+          <ng-container *ngIf="!arrayForm[i].multi && arrayForm[i].type==='checkB-radio'">
+            <input type="radio" [name]="control.formControl_Name" [id]="control.for_label+i+'_'+_i"
+            [formControlName]="control.formControl_Name" [value]="control.value" class="custom-radio-check">
+            <label [for]="control.for_label+i+'_'+_i">{{control.value | titlecase}}</label>
+            
+          </ng-container>
+          <ng-container *ngIf="arrayForm[i].type==='date'">
+  
+            <label [for]="control.for_label+'_'+i+_i">{{control.value | titlecase}}</label>
+            <input type="date" [id]="control.for_label+'_'+i+_i"
+              [formControlName]="control.formControl_Name+'_'+i+_i" >
+          </ng-container>
+  
+  
+  
+  
+  
+        </div>
+  
+      </div>
+    </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </form>
+  
+  <!-- <div class="formFilterGroup">
+      <label for="title_descriptionFilter">Descripcion</label>
+      <input type="checkbox" name="" id="title_descriptionFilter" class="showFilterOptions">
+      <div formGroupName="filter_TipoDocumental" class="filter_TipoDocumental">
+        <div class="input_flexItem">
+          <input type="radio" name="mismo" id="filt_descripcion_tipo1" formControlName="mismo" value="tipo 1">
+          <label for="filt_descripcion_tipo1">
+            Tipo 1
+          </label>
+        </div>
+        <div class="input_flexItem">
+          <input type="radio" name="mismo" id="filt_descripcion_tipo2" formControlName="mismo" value="tipo 2">
+          <label for="filt_descripcion_tipo2">
+            Tipo 2
+          </label>
+        </div>
+      </div>
+  
+    </div>
+    <div class="formFilterGroup">
+      <label for="title_descriptionFilter1">Descripcion 2</label>
+      <input type="checkbox" name="" id="title_descriptionFilter1" class="showFilterOptions">
+      <div formGroupName="filter_TipoDocumental1" class="filter_TipoDocumental">
+        <div class="input_flexItem">
+          <input type="radio" name="mismo1" id="filt_descripcion_tipo3" formControlName="mismo1" value="tipo 1">
+          <label for="filt_descripcion_tipo3">
+            Tipo 1
+          </label>
+        </div>
+        <div class="input_flexItem">
+          <input type="radio" name="mismo1" id="filt_descripcion_tipo4" formControlName="mismo1" value="tipo 2">
+          <label for="filt_descripcion_tipo4">
+            Tipo 2
+          </label>
+        </div>
+      </div> --->
+  

@@ -9,11 +9,17 @@
 // }
 
 
-button {
-    position:fixed;
-    bottom:3rem;
-    left:50%;
-    transform:translateX(-50%);
-    padding:2rem;
-    z-index: 100;
+// button {
+//     position:fixed;
+//     bottom:3rem;
+//     left:50%;
+//     transform:translateX(-50%);
+//     padding:2rem;
+//     z-index: 100;
+// }
+
+input {
+    width: 28rem;
+    padding: 0.6rem;
+    font-size:1.2rem;
 }

@@ -97,6 +97,7 @@ export class DocumentosService implements OnDestroy {
                this.formulario = formulario;
                this.pagina = pagina;
                this.url = url;
+               console.log(`%cEsto es lo que recibo de los filtros: ${JSON.stringify(this.formulario)}`,"color:gold")
           }),
           switchMap((obsCombined) => {
                // if page is 1 / we send new data with the new string query -or change in filters - new API request - to get total documents

@@ -90,9 +90,9 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
           });
      }
      //TODO to remove after correct Error HTTP request Handling
-     toggleURL() {
-          // Only for checking http Errors / Toggling valid and wrong URL API
-          this.url = this.url === urlWell ? urlWrong : urlWell;
-          this.combinacion.url$.next(this.url);
-     }
+     // toggleURL() {
+     //      // Only for checking http Errors / Toggling valid and wrong URL API
+     //      this.url = this.url === urlWell ? urlWrong : urlWell;
+     //      this.combinacion.url$.next(this.url);
+     // }
 }
