@@ -46,7 +46,7 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
     =============================================*/
 
      // Pagination request increment or reset to 1
-     pagina: number;
+     pagina: number = 1;
      //TODO to remove after correct Error HTTP request Handling
      // only for checking http request errors
      url: string = urlWell;
@@ -77,17 +77,17 @@ export class SearchFormComponent implements OnInit, AfterViewInit {
 
      ngAfterViewInit(): void {
           // Send first null data to get something in load
-          this.combinacion.formularioFiltros$.next(null);
+          // this.combinacion.formularioFiltros$.next(null);
           // subscribing to changes in selections user inputs
-          this.formulario.valueChanges.subscribe((d) => {
-               this.pagina = 1;
+          // this.formulario.valueChanges.subscribe((d) => {
+          //      // this.pagina = 1;
 
-               // Send first null data to get something in load
-               this.combinacion.formularioFiltros$.next(d);
-               // Sending page 1 - always when changed input or selections
-               // Scroll is unique responsible for increment pagination
-               this.combinacion.pagina$.next(this.pagina);
-          });
+          //      // Send first null data to get something in load
+          //      // this.combinacion.formularioFiltros$.next(d);
+          //      // Sending page 1 - always when changed input or selections
+          //      // Scroll is unique responsible for increment pagination
+          //      // this.combinacion.pagina$.next(this.pagina);
+          // });
      }
      //TODO to remove after correct Error HTTP request Handling
      // toggleURL() {

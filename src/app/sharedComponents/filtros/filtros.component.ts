@@ -13,7 +13,7 @@ export class FiltrosComponent implements OnInit, OnDestroy {
      formFilters: FormArray = new FormArray([]);
      arrayForm = this.Formularios_Service.getFormulario(1);
      // Pagination request increment or reset to 1
-     pagina: number;
+     pagina: number = 1;
      filtrosSubsc: Subscription;
      constructor(
           private fb: FormBuilder,
@@ -59,15 +59,17 @@ export class FiltrosComponent implements OnInit, OnDestroy {
 
           // this.combinacion.formularioFiltros$.next();
 
+          this.combinacion.formularioFiltros$.next(null);
           this.filtrosSubsc = this.formFilters.valueChanges.subscribe((d) => {
                console.log(d);
               //  this.pagina = 1;
+              this.combinacion.stopScroll$.next(true);
 
               //  // Send first null data to get something in load
-              //  this.combinacion.formularioFiltros$.next(d);
+               this.combinacion.formularioFiltros$.next(d);
               //  // Sending page 1 - always when changed input or selections
               //  // Scroll is unique responsible for increment pagination
-              //  this.combinacion.pagina$.next(this.pagina);
+               this.combinacion.pagina$.next(this.pagina);
           });
      }
 
