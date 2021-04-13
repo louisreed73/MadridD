@@ -1,6 +1,7 @@
 import {
   Directive,
   ElementRef,
+  Input,
   OnDestroy,
   OnInit,
   Renderer2,
@@ -13,6 +14,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class FijarDirective implements OnInit, OnDestroy {
   windowSub: Subscription;
+  @Input() offset:string;
   constructor(
     private elRef: ElementRef,
     private render: Renderer2,
@@ -21,11 +23,12 @@ export class FijarDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log(this._window);
+    console.log(this.offset);
     this.windowSub = fromEvent(this._window, 'scroll')
       .pipe(debounceTime(10))
       .subscribe((e: Event) => {
         let offSet = this._window.pageYOffset;
-        if (offSet >= 100) {
+        if (offSet >= +this.offset) {
           this.render.setAttribute(this.elRef.nativeElement, 'class', 'fijo');
         } else {
           // this.render.setAttribute(this.elRef.nativeElement, 'class', '');
