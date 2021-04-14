@@ -66,7 +66,7 @@ export class FiltrosComponent implements OnInit, OnDestroy {
           this.filtrosSubsc = this.formFilters.valueChanges.subscribe((d) => {
                console.log(d);
               //  this.pagina = 1;
-              this._window.scrollTo(0,90);
+              this._window.scrollTo(0,0);
               this.combinacion.stopScroll$.next(true);
 
               //  // Send first null data to get something in load

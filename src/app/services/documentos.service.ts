@@ -12,10 +12,7 @@ import { catchError, shareReplay, switchMap, tap } from "rxjs/operators";
 import { DocsEscritosService } from "./docs-escritos.service";
 import { DocsResolucionesService } from "./docs-resoluciones.service";
 
-const urlWell =
-     "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos";
-const urlWrong =
-     "https://my-json-server2.typicode.com/louisreed73/fakeAPI/documentos";
+
 
 @Injectable({
      providedIn: "root",

@@ -33,7 +33,7 @@ export class SearchEscritosComponent implements OnDestroy {
                //TODO to remove only for checking response and reload page
                setTimeout(() => {
                     this._document.defaultView.location.reload();
-               }, 2000);
+               }, 4000);
                return of([]);
           })
      );
