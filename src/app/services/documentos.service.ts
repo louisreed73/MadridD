@@ -40,9 +40,9 @@ export class DocumentosService implements OnDestroy {
 
      //TODO remove only for checking testing wrong url
      // Observable for checking http request Error
-     url$: BehaviorSubject<string> = new BehaviorSubject(
-          "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
-     );
+     // url$: BehaviorSubject<string> = new BehaviorSubject(
+     //      "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos"
+     // );
 
      /*=====  End of Observables  ======*/
 
@@ -75,7 +75,7 @@ export class DocumentosService implements OnDestroy {
 
      //TODO remove only for checking testing wrong url
      // save url from observable toggling url right and wrong
-     url: string;
+     url: string="https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos";
 
      /*=====  End of Class members  ======*/
 
@@ -86,14 +86,12 @@ export class DocumentosService implements OnDestroy {
           this.inputSearch$.asObservable(),
           this.formularioFiltros$.asObservable(),
           this.pagina$.asObservable(),
-          this.url$.asObservable()
      ).pipe(
-          tap(([search, formulario, pagina, url]) => {
+          tap(([search, formulario, pagina]) => {
                // saving all the data
                this.search = search;
                this.formulario = formulario;
                this.pagina = pagina;
-               this.url = url;
                console.log(`%cEsto es lo que recibo de los filtros: ${JSON.stringify(this.formulario)}`,"color:gold")
           }),
           switchMap((obsCombined) => {
