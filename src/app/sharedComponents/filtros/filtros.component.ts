@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { DocumentosService } from "src/app/services/documentos.service";
@@ -10,8 +10,9 @@ import { FormulariosService } from "src/app/services/formularios-data.service";
      styleUrls: ["./filtros.component.scss"],
 })
 export class FiltrosComponent implements OnInit, OnDestroy {
+    @Input() srcData:number;
      formFilters: FormArray = new FormArray([]);
-     arrayForm = this.Formularios_Service.getFormulario(1);
+     arrayForm:Array<any>;
      // Pagination request increment or reset to 1
      pagina: number = 1;
      filtrosSubsc: Subscription;
@@ -24,6 +25,7 @@ export class FiltrosComponent implements OnInit, OnDestroy {
 
      ngOnInit(): void {
           console.log(this.arrayForm);
+          this.arrayForm=this.Formularios_Service.getFormulario(this.srcData);
 
           this.arrayForm.forEach((formGroup, i) => {
                let formGroup_part = {};
@@ -64,7 +66,7 @@ export class FiltrosComponent implements OnInit, OnDestroy {
           this.filtrosSubsc = this.formFilters.valueChanges.subscribe((d) => {
                console.log(d);
               //  this.pagina = 1;
-              this._window.scrollTo(0,0);
+              this._window.scrollTo(0,90);
               this.combinacion.stopScroll$.next(true);
 
               //  // Send first null data to get something in load

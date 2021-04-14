@@ -59,7 +59,7 @@ export class SearchFormComponent implements OnInit {
           this.Subc = this.searchInput.valueChanges
                .pipe(debounceTime(300))
                .subscribe((inputSearch) => {
-              this._window.scrollTo(0,0);
+              this._window.scrollTo(0,90);
 
                     // Stopping the scroll trigger until http request response
                     this.combinacion.stopScroll$.next(true);

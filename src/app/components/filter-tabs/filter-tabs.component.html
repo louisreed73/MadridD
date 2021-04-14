@@ -9,6 +9,7 @@
 <p class="percentage" 
 [style.width.%]="((documentosLength$ | async) / (documentosTotalQueryLength$ | async) * 100)?(documentosLength$ | async) / (documentosTotalQueryLength$ | async) * 100:0"></p>
 <!-- <p>placeHolder for Fomrs Filters</p> -->
-<app-filtros class="nuevo"></app-filtros>
+<app-filtros [srcData]="1"></app-filtros>
+<!-- <app-filtros [srcData]="2"></app-filtros> -->
 <!-- <p *ngIf="(documentosLength$ | async) / (documentosTotalQueryLength$ | async) * 100"
 ></p> -->
