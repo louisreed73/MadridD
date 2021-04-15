@@ -4,19 +4,18 @@
 @import "base";
 
 body {
-    font-family:$font-main;
+  font-family: $font-main;
 }
 
 
 input {
-    // width: 28rem;
-    // padding: 0.6rem;
-    // font-size:1.2rem;
+  // width: 28rem;
+  // padding: 0.6rem;
+  // font-size:1.2rem;
 }
 
-section
-{
-    padding:1rem 3rem;
+section {
+  padding: 1rem 3rem;
 }
 
 // .active {
@@ -38,34 +37,48 @@ section
 //     margin-bottom:-2px;
 // }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+input {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 header {
-    height: 9rem;
-    background: red;
-    color: white;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    // margin-bottom: 2rem;
-    font-size: 1.5rem;
-  }
+  height: 9rem;
+  background: red;
+  color: white;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  // margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
 
 
-  .voidSearch,.httpError {
-    margin: 5rem 0rem 0rem 3rem;
-    color: white;
-    position: absolute;
-    top: -17.9rem;
-    left: 0;
-    z-index: 10;
-    background: red;
-    width: 30rem;
-    text-align: center;
-  }
+.voidSearch,
+.httpError {
+  margin: 5rem 0rem 0rem 3rem;
+  color: white;
+  position: absolute;
+  top: -16.4rem;
+  left: 0;
+  z-index: 10;
+  background: red;
+  width: 30rem;
+  text-align: center;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+

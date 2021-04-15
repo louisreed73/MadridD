@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { Subscription } from "rxjs";
+import { Formulario } from "src/app/interfaces/formulario";
 import { DocumentosService } from "src/app/services/documentos.service";
 import { FormulariosService } from "src/app/services/formularios-data.service";
 
@@ -10,9 +11,9 @@ import { FormulariosService } from "src/app/services/formularios-data.service";
      styleUrls: ["./filtros.component.scss"],
 })
 export class FiltrosComponent implements OnInit, OnDestroy {
-    @Input() srcData:number;
+     @Input() srcData: string;
      formFilters: FormArray = new FormArray([]);
-     arrayForm:Array<any>;
+     arrayForm: Array<Formulario>;
      // Pagination request increment or reset to 1
      pagina: number = 1;
      filtrosSubsc: Subscription;
@@ -20,12 +21,13 @@ export class FiltrosComponent implements OnInit, OnDestroy {
           private fb: FormBuilder,
           private Formularios_Service: FormulariosService,
           private combinacion: DocumentosService,
-          private _window :Window
+          private _window: Window
      ) {}
 
      ngOnInit(): void {
+          // console.log(this.arrayForm);
+          this.arrayForm = this.Formularios_Service.getFormulario(this.srcData);
           console.log(this.arrayForm);
-          this.arrayForm=this.Formularios_Service.getFormulario(this.srcData);
 
           this.arrayForm.forEach((formGroup, i) => {
                let formGroup_part = {};
@@ -65,14 +67,21 @@ export class FiltrosComponent implements OnInit, OnDestroy {
           this.combinacion.formularioFiltros$.next(null);
           this.filtrosSubsc = this.formFilters.valueChanges.subscribe((d) => {
                console.log(d);
-              //  this.pagina = 1;
-              this._window.scrollTo(0,0);
-              this.combinacion.stopScroll$.next(true);
+               //  this.pagina = 1;
+               this._window.scrollTo(0, 0);
+               this.combinacion.stopScroll$.next(true);
 
-              //  // Send first null data to get something in load
+               d.forEach((d) => {
+                    if (Object.keys(d).length > 1) {
+                         console.log(`%c es multi: ${JSON.stringify(d)}`, "color:lime");
+                    }
+                    console.log(`%c es multi: ${JSON.stringify(d)}`, "color:purple");
+               });
+
+               //  // Send first null data to get something in load
                this.combinacion.formularioFiltros$.next(d);
-              //  // Sending page 1 - always when changed input or selections
-              //  // Scroll is unique responsible for increment pagination
+               //  // Sending page 1 - always when changed input or selections
+               //  // Scroll is unique responsible for increment pagination
                this.combinacion.pagina$.next(this.pagina);
           });
      }
