@@ -62,31 +62,40 @@ export class FiltrosComponent implements OnInit, OnDestroy {
                console.log(this.formFilters.controls);
           });
 
-          // this.combinacion.formularioFiltros$.next();
 
-          this.combinacion.formularioFiltros$.next(null);
+          // this.combinacion.formularioFiltros$.next(null);
           this.filtrosSubsc = this.formFilters.valueChanges.subscribe((d) => {
-               console.log(d);
-               //  this.pagina = 1;
-               this._window.scrollTo(0, 0);
-               this.combinacion.stopScroll$.next(true);
-
-               d.forEach((d) => {
-                    if (Object.keys(d).length > 1) {
-                         console.log(`%c es multi: ${JSON.stringify(d)}`, "color:lime");
-                    }
-                    console.log(`%c es multi: ${JSON.stringify(d)}`, "color:purple");
-               });
-
-               //  // Send first null data to get something in load
-               this.combinacion.formularioFiltros$.next(d);
-               //  // Sending page 1 - always when changed input or selections
-               //  // Scroll is unique responsible for increment pagination
-               this.combinacion.pagina$.next(this.pagina);
+               
+               this.triggerNewSearch(d);
           });
      }
 
      ngOnDestroy(): void {
           this.filtrosSubsc.unsubscribe();
+     }
+
+     triggerNewSearch(data) {
+          console.log(data);
+          //  this.pagina = 1;
+          this._window.scrollTo(0, 0);
+          this.combinacion.stopScroll$.next(true);
+
+          data.forEach((d) => {
+               if (Object.keys(data).length > 1) {
+                    console.log(
+                         `%c es multi: ${JSON.stringify(data)}`,
+                         "color:lime"
+                    );
+               }
+               console.log(
+                    `%c es multi: ${JSON.stringify(data)}`,
+                    "color:purple"
+               );
+          });
+
+
+          this.combinacion.formularioFiltros$.next(data);
+
+          this.combinacion.pagina$.next(this.pagina);
      }
 }

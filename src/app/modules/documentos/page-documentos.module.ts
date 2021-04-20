@@ -5,6 +5,7 @@ import { SearchDocumentsComponent } from "src/app/pages/documentos/search-docume
 import { SearchResolucionesComponent } from "src/app/pages/documentos/search-resoluciones/search-resoluciones.component";
 import { SearchEscritosComponent } from "src/app/pages/documentos/search-escritos/search-escritos.component";
 import { DocumentCardComponent } from "../../components/document-card/document-card.component";
+import { SharedUtilitiesModule } from "src/app/sharedModules/shared-utilities/shared-utilities.module";
 
 const routes: Routes = [
      { path: "documentos", component: SearchDocumentsComponent },
@@ -19,7 +20,10 @@ const routes: Routes = [
           SearchEscritosComponent,
           DocumentCardComponent,
      ],
-     imports: [CommonModule, RouterModule.forChild(routes)],
+     imports: [
+          CommonModule, 
+          SharedUtilitiesModule,
+          RouterModule.forChild(routes)],
      exports: [],
      providers: [],
 })

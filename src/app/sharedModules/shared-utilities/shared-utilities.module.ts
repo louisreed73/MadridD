@@ -4,15 +4,26 @@ import { SpinnerComponent } from "../../sharedComponents/spinner/spinner.compone
 import { MatProgressSpinnerModule } from "@angular/material";
 import { FiltrosComponent } from "../../sharedComponents/filtros/filtros.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { FijarDirective } from "src/app/directives/fijar.directive";
 
 @NgModule({
-     declarations: [SpinnerComponent, FiltrosComponent],
-     imports: [CommonModule, MatProgressSpinnerModule, ReactiveFormsModule],
+     declarations: [
+          SpinnerComponent,
+          FiltrosComponent,
+          FijarDirective,
+
+          ],
+     imports: [
+          CommonModule, 
+          MatProgressSpinnerModule, 
+          ReactiveFormsModule
+     ],
      exports: [
           ReactiveFormsModule,
           SpinnerComponent, 
           MatProgressSpinnerModule, 
-          FiltrosComponent
+          FiltrosComponent,
+          FijarDirective
      ],
 })
 export class SharedUtilitiesModule {}

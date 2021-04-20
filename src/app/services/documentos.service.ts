@@ -25,7 +25,7 @@ export class DocumentosService implements OnDestroy {
      // input string Observable to receive input user string
      inputSearch$: Subject<string> = new Subject();
      // User Forms Selections - to aplly filters Observable to receive input user string
-     formularioFiltros$: Subject<{}> = new Subject();
+     formularioFiltros$: BehaviorSubject<{}> = new BehaviorSubject(null);
      // Actual page Observable - pagination for http request - actual page
      pagina$: Subject<number> = new Subject();
 

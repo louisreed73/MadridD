@@ -10,8 +10,6 @@ import { Subscription } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { DocumentosService } from "src/app/services/documentos.service";
 
-
-
 @Component({
      selector: "app-search-form",
      templateUrl: "./search-form.component.html",
@@ -49,9 +47,8 @@ export class SearchFormComponent implements OnInit {
 
      constructor(
           private combinacion: DocumentosService,
-          private _window :Window
-          
-          ) {}
+          private _window: Window
+     ) {}
 
      ngOnInit() {
           // String query for get documents based in this term
@@ -59,15 +56,7 @@ export class SearchFormComponent implements OnInit {
           this.Subc = this.searchInput.valueChanges
                .pipe(debounceTime(300))
                .subscribe((inputSearch) => {
-              this._window.scrollTo(0,0);
-
-                    // Stopping the scroll trigger until http request response
-                    this.combinacion.stopScroll$.next(true);
-                    // Communicate to subscribers change in search query string
-                    this.combinacion.inputSearch$.next(inputSearch);
-                    // Sending page 1 - always when changed input or selections
-                    // Scroll is unique responsible for increment pagination
-                    this.combinacion.pagina$.next(this.pagina);
+                    this.triggerNewSearch(inputSearch)
                });
      }
      ngOnDestroy(): void {
@@ -75,6 +64,15 @@ export class SearchFormComponent implements OnInit {
           this.Subc.unsubscribe();
      }
 
-     
+     triggerNewSearch(inputSearch) {
+          this._window.scrollTo(0, 0);
 
+          // Stopping the scroll trigger until http request response
+          this.combinacion.stopScroll$.next(true);
+          // Communicate to subscribers change in search query string
+          this.combinacion.inputSearch$.next(inputSearch);
+          // Sending page 1 - always when changed input or selections
+          // Scroll is unique responsible for increment pagination
+          this.combinacion.pagina$.next(this.pagina);
+     }
 }

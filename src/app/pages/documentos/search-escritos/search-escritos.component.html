@@ -1,4 +1,6 @@
+
 <section>
+  <app-filtros appFijar [offset]="10" [srcData]="'Documentos'" ></app-filtros>
   <div *ngIf="docsEscritos$ | async as documents;else error">
     <div *ngIf="isArray(documents)">
       <p class="voidSearch" *ngIf="documents.length===0">Esta búsqueda no devuelve documentos</p>

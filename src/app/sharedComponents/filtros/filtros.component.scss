@@ -1,7 +1,14 @@
-:host(.nuevo) {
-    margin-top:3rem;
-}
+// :host(.nuevo) {
+//     margin-top:3rem;
+// }
 
+:host(.fijo) {
+    position: fixed;
+    display: block;
+    width: calc(100% - 6rem);
+    top: 13.4rem;
+    z-index: 10;
+}
 
 
 form {
