@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { DocumentosService } from 'src/app/services/documentos.service';
 
 @Component({
   selector: 'app-filtro',
@@ -15,6 +16,16 @@ export class FiltroComponent implements OnInit, OnDestroy {
   indice = [];
   sugerencia: Object;
   filtrosArrayFormsSubs$$:Subscription;
+
+  // Pagination request increment or reset to 1
+  pagina: number = 1;
+  filtrosSubsc: Subscription;
+  
+  constructor(
+    private combinacion: DocumentosService,
+    private _window: Window
+
+  ) {}
 
   get keys() {
     return Object.keys(this.filtroFormGroup.controls);
@@ -54,7 +65,6 @@ export class FiltroComponent implements OnInit, OnDestroy {
     }
     return tipo;
   }
-  constructor() {}
 
   ngOnInit(): void {
     this.configFiltro = this.filtroscombinado1[0];
@@ -64,13 +74,15 @@ export class FiltroComponent implements OnInit, OnDestroy {
       .pipe(debounceTime(300))
       .subscribe((data) => {
         console.log(data);
+        this.triggerNewSearch(data)
       });
 
   }
 
   ngOnDestroy(): void {
 
-    this.filtrosArrayFormsSubs$$.unsubscribe()
+    this.filtrosSubsc.unsubscribe();
+    this.filtrosArrayFormsSubs$$.unsubscribe();
         
   }
 
@@ -111,6 +123,18 @@ export class FiltroComponent implements OnInit, OnDestroy {
       )
     
   }
+
+  triggerNewSearch(data) {
+    console.log(data);
+    //  this.pagina = 1;
+    this._window.scrollTo(0, 0);
+    this.combinacion.stopScroll$.next(true);
+
+    
+    this.combinacion.formularioFiltros$.next(data);
+
+    this.combinacion.pagina$.next(this.pagina);
+}
 
 
 
