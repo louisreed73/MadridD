@@ -1,0 +1,235 @@
+:host(.fijo) {
+    position: fixed;
+    display: block;
+    width: calc(100% - 6rem);
+    top: 13.4rem;
+    z-index: 10;
+}
+
+
+form {
+    display:flex;
+    flex-flow:row wrap;
+    background: gainsboro;
+    // height: 3rem;
+    display: flex;
+    align-items: flex-start;
+    /* overflow: hidden; */
+    // padding: 0.5rem 0rem 3rem;
+    border-radius: .3rem;
+    margin: 0 auto;
+    // width:95vw;
+    user-select: none;
+}
+
+
+.formFilterGroup {
+    width:auto;
+    min-width: 10.5rem;
+}
+
+.filter_common {
+    display:none;
+    height: auto;
+    padding-bottom: 1.5rem;
+}
+
+input.showFilterOptions:checked ~ .filter_common {
+    position:relative;
+    display:flex; 
+    flex-direction:column;
+    justify-content: space-evenly;
+    align-items:flex-start;   
+    padding: 1rem 1rem 1.2rem 1rem;
+    border-radius: 0.5rem;
+    // border: 0.5px solid gainsboro;
+    border-radius: 0.5rem;
+    outline: 1px solid #bbbaba;
+    background:white;
+    outline-offset: -0.1rem;
+}
+
+input.showFilterOptions:checked ~ .filter_common-static {
+    padding: 0rem 1rem 1.2rem 1rem;
+}
+
+
+
+input.showFilterOptions {
+    display:none;
+    
+}
+
+
+
+.input_flexItem {
+    position:relative;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+}
+
+input[type="date"] {
+    padding: 0.5rem;
+    margin: 0.5rem .5rem .5rem 1.1rem;
+    width: 11.7rem;
+    font-family: inherit;
+    font-size: 1rem;
+    &:first-child {
+        margin-right: 0.5rem;
+        margin-top: 1.4rem;  
+    }
+}
+
+.filter_common .input_flexItem--date:first-of-type {
+    margin-top:1rem;
+}
+
+label.toggleFilter {
+
+    // margin: 0.5rem 1rem 0.5rem 0.5rem;
+    // padding: 0.5rem 1rem 0.5rem 0.5rem;
+    padding: 1rem 1rem 1rem 0.5rem;
+    background:gainsboro;
+    text-align: center;
+}
+
+label.toggleFilter::after {
+    display: inline-flex;
+    justify-content:center;
+    align-items: center;
+    content: "\003E";
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+    background-color: rgb(167, 167, 167);
+    font-size: 1.25rem;
+    left: 0.7rem;;
+    color:white;
+    border-radius: 50%;
+    transition: background-color .3s, color .3s, transform .1s ease-in-out; 
+}
+
+input.showFilterOptions:checked ~ label.toggleFilter::after {
+    // background-color:rgba(211, 101, 101, 1);
+    transform:rotate(90deg);
+    background-color:white;
+    color:gainsboro;
+}
+
+label {
+    display:block;
+    position:relative;
+    // width:100%;
+    cursor:pointer;
+    width: 100%;
+    
+}
+label.dynamicControl {
+
+    margin: 0 2.6rem 0 2rem;
+}
+label.staticControl {
+
+    margin: 0 0 0 2rem;
+}
+
+
+.input_flexItem--date label {
+    width: auto;
+}
+
+input.custom-radio-check {
+    // opacity:0;
+    display:none;
+    margin-right: 2.2rem;
+}
+
+input.custom-radio-check + label::before{
+    position:relative;
+}
+
+input.custom-radio-check + label::before {
+    display:block;
+    content:"";
+    position:relative;
+    top: 14px;
+    left: -2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: red;
+    border: 0.3px solid gainsboro;
+    border-radius: .3rem;
+}
+
+
+
+
+input.custom-radio-check + label::after {
+    display:block;
+    content:"\2713";
+    position:absolute;
+    top: 13.9px;
+    left: -1.7rem;
+    color:red;
+}
+
+input.custom-radio-check:checked + label::after {
+    color: white;
+}
+
+.removeControl {
+    position: absolute;
+    bottom: -0.1rem;
+    right: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    background: darkred;
+    outline: none;
+    border: none;
+    border:none;
+    cursor:pointer;
+    font-size: 0.75rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.removeControl::before {
+    display: block;
+    content: "X";
+    position: relative;
+    top: 0.05rem;
+    left: 0rem;
+    color: white;
+}
+
+// input[type="radio"] {
+//     // opacity:0;
+//     border:none;
+// }
+// input::before {
+//     display:block;
+//     content:"♥";
+//     width:.5rem;
+//     height:.5rem;
+//     background:red;
+// }
+
+// label::before {
+//     content: "";
+//     display: inline-block;
+//     vertical-align: bottom;
+//     width: 1rem;
+//     height: 1rem;
+//     margin-right: 0.3rem;
+//     border-radius: 50%;
+//     border-style: solid;
+//     border-width: 0.1rem;
+//     border-color: gray;
+//     background:red;
+//   }
+
+

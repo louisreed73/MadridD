@@ -1,8 +1,9 @@
 import { DOCUMENT } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Inject } from "@angular/core";
-import { of } from "rxjs";
+import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from "@angular/core";
+import { combineLatest, of } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { DocumentosService } from "src/app/services/documentos.service";
+import { FiltrosService } from "src/app/services/filtros.service";
 import { SpinnerService } from "src/app/services/spinner.service";
 
 @Component({
@@ -11,7 +12,7 @@ import { SpinnerService } from "src/app/services/spinner.service";
      styleUrls: ["./search-documents.component.scss"],
      changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchDocumentsComponent {
+export class SearchDocumentsComponent implements OnInit, OnDestroy {
      /*=============================================
     =            Observables            =
     =============================================*/
@@ -46,15 +47,73 @@ export class SearchDocumentsComponent {
 
      /*=====  End of Error Obj member  ======*/
 
+     
+     /*=============================================
+     =    Incorporacion Integracion nuevo Filtro 20-04-2021 =
+     =============================================*/
+
+     nombrado$_$ =this.filtroS.config$;
+
+     formA$_$ = this.filtroS.formGrupo$;
+
+     nombrado1$_$ =this.filtroS.config1$;
+
+     formA1$_$ = this.filtroS.formGrupo1$;
+
+     combinado1$;
+     combinado2$;
+
+     filtro1$_$=combineLatest([
+          this.nombrado$_$,
+          this.formA$_$
+        ])
+        .pipe()
+        .subscribe((data) => {
+          console.log(data);
+          this.combinado1$=data;
+        })
+        filtro2$_$=combineLatest([
+          this.nombrado1$_$,
+          this.formA1$_$
+        ])
+        .pipe()
+        .subscribe((data) => {
+          console.log(data);
+          this.combinado2$=data;
+        })
+      
+   
+     
+     
+     /*=====  End of Incorporacion Integracion nuevo Filtro  ======*/
+     
+     
+
      constructor(
           private documentos: DocumentosService,
           private spinner: SpinnerService,
           //TODO to remove only for checking response and reload page
-          @Inject(DOCUMENT) private _document: Document
+          @Inject(DOCUMENT) private _document: Document,
+          public filtroS: FiltrosService
      ) {}
 
      // Método para comprobar que los datos del OBservable son efectivamente un array
      isArray(obj) {
           return Array.isArray(obj);
+     }
+
+     ngOnInit(): void {
+          //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+          //Add 'implements OnInit' to the class.
+          
+     }
+
+     ngOnDestroy(): void {
+          //Called once, before the instance is destroyed.
+          //Add 'implements OnDestroy' to the class.
+          this.filtro1$_$.unsubscribe();
+          this.filtro2$_$.unsubscribe();
+      
+          
      }
 }

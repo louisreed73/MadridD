@@ -1,6 +1,7 @@
-
 <section>
-  <app-filtros appFijar [offset]="10" [srcData]="'Documentos'" ></app-filtros>
+  <app-filtros appFijar [offset]="10" [srcData]="'Documentos'"></app-filtros>
+  <app-filtro appFijar [offset]="10" [filtroscombinado1]="combinado2$"></app-filtro>
+
   <div *ngIf="documentos$ | async as documents">
     <div *ngIf="isArray(documents)">
       <app-document-card *ngFor="let document of documents" [documento]="document"></app-document-card>
