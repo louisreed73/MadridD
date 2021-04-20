@@ -6,6 +6,7 @@ import { FiltrosComponent } from "../../sharedComponents/filtros/filtros.compone
 import { ReactiveFormsModule } from "@angular/forms";
 import { FijarDirective } from "src/app/directives/fijar.directive";
 import { FiltroComponent } from '../../sharedComponents/filtro/filtro.component';
+import { AutocompleteComponent } from '../../sharedComponents/autocomplete/autocomplete.component';
 
 @NgModule({
      declarations: [
@@ -13,12 +14,13 @@ import { FiltroComponent } from '../../sharedComponents/filtro/filtro.component'
           FiltrosComponent,
           FijarDirective,
           FiltroComponent,
+          AutocompleteComponent,
 
           ],
      imports: [
           CommonModule, 
+          ReactiveFormsModule,
           MatProgressSpinnerModule, 
-          ReactiveFormsModule
      ],
      exports: [
           ReactiveFormsModule,
@@ -26,7 +28,8 @@ import { FiltroComponent } from '../../sharedComponents/filtro/filtro.component'
           MatProgressSpinnerModule, 
           FiltrosComponent,
           FiltroComponent,
-          FijarDirective
+          FijarDirective,
+          AutocompleteComponent
      ],
 })
 export class SharedUtilitiesModule {}

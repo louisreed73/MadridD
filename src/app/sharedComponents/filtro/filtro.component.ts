@@ -19,7 +19,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
 
   // Pagination request increment or reset to 1
   pagina: number = 1;
-  filtrosSubsc: Subscription;
+  // filtrosSubsc: Subscription;
   
   constructor(
     private combinacion: DocumentosService,
@@ -81,7 +81,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
 
-    this.filtrosSubsc.unsubscribe();
+    // this.filtrosSubsc.unsubscribe();
     this.filtrosArrayFormsSubs$$.unsubscribe();
         
   }

@@ -49,9 +49,9 @@
         <div [formArrayName]="'arrayData'+i" class="filter_common">
           <!-- <button (click)="anadeForma('arrayData'+i,configFiltro[i].name)">Añadir tipo</button> -->
 
-          <!-- <app-autocomplete [sugerenciasData]="configFiltro[i].values" [autocompleteInstance]="i"
+          <app-autocomplete [sugerenciasData]="configFiltro[i].values" [autocompleteInstance]="i"
             (sugerenciasOut)="getSugerencia($event)">
-          </app-autocomplete> -->
+          </app-autocomplete>
           <ng-container *ngFor="let item of dameformGroupArray(i); index as i2" [formGroupName]="i2">
             <ng-container *ngFor="let key of dameControlsKeys(item)">
               <div class="input_flexItem">
