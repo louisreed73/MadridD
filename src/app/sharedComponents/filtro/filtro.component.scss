@@ -1,8 +1,8 @@
 :host(.fijo) {
     position: fixed;
     display: block;
-    width: calc(100% - 6rem);
-    top: 13.4rem;
+    width: calc(100% - 5.9rem);
+    top: 12.8rem;
     z-index: 10;
 }
 
@@ -154,8 +154,10 @@ input.custom-radio-check + label::before {
     display:block;
     content:"";
     position:relative;
-    top: 14px;
-    left: -2rem;
+    // top: 14px;
+    // left: -2rem;
+    top: 13px;
+    left: -20px; 
     width: 1.2rem;
     height: 1.2rem;
     background: red;
@@ -170,8 +172,10 @@ input.custom-radio-check + label::after {
     display:block;
     content:"\2713";
     position:absolute;
-    top: 13.9px;
-    left: -1.7rem;
+    // top: 13.9px;
+    // left: -1.7rem;
+    top: 12.3px;
+    left: -17.5px;
     color:red;
 }
 

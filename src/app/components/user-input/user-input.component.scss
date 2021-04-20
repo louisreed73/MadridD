@@ -11,12 +11,12 @@
     transition: top .2s cubic-bezier(0, 1.09, 1, 1);
 }
 :host(.fijo) {
-    position:fixed;
-    display:block;
+    // position:fixed;
+    // display:block;
     // background:white;
-    width:100%;
+    // width:100%;
     top:0rem;
     // background: orange;
-    z-index: 10;
-    padding: 1rem 3rem;
+    // z-index: 10;
+    padding: 1rem 3rem 6rem;
 }

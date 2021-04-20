@@ -6,6 +6,7 @@ import { SearchResolucionesComponent } from "src/app/pages/documentos/search-res
 import { SearchEscritosComponent } from "src/app/pages/documentos/search-escritos/search-escritos.component";
 import { DocumentCardComponent } from "../../components/document-card/document-card.component";
 import { SharedUtilitiesModule } from "src/app/sharedModules/shared-utilities/shared-utilities.module";
+import { AutocompleteComponent } from "src/app/sharedComponents/autocomplete/autocomplete.component";
 
 const routes: Routes = [
      { path: "documentos", component: SearchDocumentsComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
           SearchResolucionesComponent,
           SearchEscritosComponent,
           DocumentCardComponent,
+          // AutocompleteComponent
      ],
      imports: [
           CommonModule, 

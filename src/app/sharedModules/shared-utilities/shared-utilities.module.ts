@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { SpinnerComponent } from "../../sharedComponents/spinner/spinner.component";
 import { MatProgressSpinnerModule } from "@angular/material";
 import { FiltrosComponent } from "../../sharedComponents/filtros/filtros.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FijarDirective } from "src/app/directives/fijar.directive";
 import { FiltroComponent } from '../../sharedComponents/filtro/filtro.component';
 import { AutocompleteComponent } from '../../sharedComponents/autocomplete/autocomplete.component';
@@ -13,16 +13,18 @@ import { AutocompleteComponent } from '../../sharedComponents/autocomplete/autoc
           SpinnerComponent,
           FiltrosComponent,
           FijarDirective,
-          FiltroComponent,
           AutocompleteComponent,
+          FiltroComponent,
 
           ],
      imports: [
-          CommonModule, 
+          CommonModule,
+          FormsModule, 
           ReactiveFormsModule,
           MatProgressSpinnerModule, 
      ],
      exports: [
+          FormsModule, 
           ReactiveFormsModule,
           SpinnerComponent, 
           MatProgressSpinnerModule, 
