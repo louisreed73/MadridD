@@ -1,6 +1,5 @@
 
 <section>
-  <!-- <app-filtros appFijar [offset]="10" [srcData]="'Documentos'" ></app-filtros> -->
   <app-filtro appFijar [offset]="10" [filtroscombinado1]="combinado1$"></app-filtro>
 
   <div *ngIf="docsEscritos$ | async as documents;else error">
