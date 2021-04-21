@@ -72,6 +72,7 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
           console.log(data);
           this.combinado1$=data;
         })
+        
         filtro2$_$=combineLatest([
           this.nombrado1$_$,
           this.formA1$_$
