@@ -7,6 +7,9 @@ import { AppComponent } from "./app.component";
 import { DataRetrievalInterceptor } from "./interceptors/data-retrieval.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
+import {serverAPI} from "./mirage.api";
+
+
 @NgModule({
      declarations: [AppComponent],
      imports: [
@@ -28,4 +31,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
      ],
      bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+
+     constructor() {
+          console.log("Starting Application!!!");
+
+          serverAPI()
+     }
+}

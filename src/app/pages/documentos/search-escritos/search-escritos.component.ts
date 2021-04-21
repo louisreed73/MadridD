@@ -6,7 +6,7 @@ import {
      OnDestroy,
 } from "@angular/core";
 import { combineLatest, of, Subscription } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, delay, tap } from "rxjs/operators";
 import { DocsEscritosService } from "src/app/services/docs-escritos.service";
 import { DocumentosService } from "src/app/services/documentos.service";
 import { FiltrosService } from "src/app/services/filtros.service";
@@ -66,40 +66,35 @@ export class SearchEscritosComponent implements OnDestroy {
      =    Incorporacion Integracion nuevo Filtro 20-04-2021 =
      =============================================*/
 
-     nombrado$_$ =this.filtroS.config$;
+     // nombrado$_$ = this.filtroS.config$;
 
-     formA$_$ = this.filtroS.formGrupo$;
+     // formA$_$ = this.filtroS.formGrupo$;
 
-     nombrado1$_$ =this.filtroS.config1$;
+     // nombrado1$_$ = this.filtroS.config1$;
 
-     formA1$_$ = this.filtroS.formGrupo1$;
+     // formA1$_$ = this.filtroS.formGrupo1$;
 
-     combinado1$;
-     combinado2$;
+     filtrosDocumentos;
+     filtrosEscritos;
 
-     filtro1$_$=combineLatest([
-          this.nombrado$_$,
-          this.formA$_$
-        ])
-        .pipe()
-        .subscribe((data) => {
-          console.log(data);
-          this.combinado1$=data;
-        })
-        
-        filtro2$_$=combineLatest([
-          this.nombrado1$_$,
-          this.formA1$_$
-        ])
-        .pipe()
-        .subscribe((data) => {
-          console.log(data);
-          this.combinado2$=data;
-        })
-      
-   
-     
-     
+     filtroDocumentosSub = this.filtroS
+          .getFiltrosDocumentos()
+          .pipe(
+               // delay(100)
+          )
+          .subscribe((data) => {
+               console.log(data);
+               this.filtrosDocumentos = data;
+          });
+
+     filtroEscritosSub = this.filtroS
+          .getFiltrosEscritos()
+          .pipe()
+          .subscribe((data) => {
+               console.log(data);
+               this.filtrosEscritos = data;
+          });
+
      /*=====  End of Incorporacion Integracion nuevo Filtro  ======*/
 
 
@@ -121,7 +116,7 @@ export class SearchEscritosComponent implements OnDestroy {
 
      ngOnDestroy(): void {
           this.documentosSub.unsubscribe();
-          this.filtro1$_$.unsubscribe();
-          this.filtro2$_$.unsubscribe();
+          this.filtroDocumentosSub.unsubscribe();
+          this.filtroEscritosSub.unsubscribe();
      }
 }

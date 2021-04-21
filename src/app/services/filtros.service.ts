@@ -1,219 +1,94 @@
-import { Injectable } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { of } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { FormArray, FormControl, FormGroup } from "@angular/forms";
+import { combineLatest, forkJoin, merge, of } from "rxjs";
+import { map, mergeMap, switchMap, tap } from "rxjs/operators";
+import {
+     config1,
+     config2,
+     config3,
+     form1,
+     form2,
+     form3,
+     filtro,
+     config,
+} from "../formulariosFiltrado/formulariosFiltrado.data";
+import { PruebaAPIService } from "./prueba-api.service";
 
 @Injectable({
-  providedIn: 'root',
+     providedIn: "root",
 })
 export class FiltrosService {
-  // nombrado = {
-  //   0: {
-  //     tipo: 'array',
-  //     name: 'procedimiento',
-  //     values: [
-  //       'Acta', 
-  //       'Acta conciliación', 
-  //       'Acuerdo',
-  //       'Acuse de recibo',
-  //       'Auto',        
-  //     ],
-  //   },
-  //   1: {
-  //     tipo: 'checkbox',
-  //     name: 'procesal',
-  //     multi: false,
-  //     values: ['tipo 1', 'tipo 2', 'tipo 3'],
-  //   },
-  //   2: {
-  //     tipo: 'array',
-  //     name: 'procedimiento 2',
-  //     values:[
+     datosDynamicValues: Array<Array<string>>;
+     //  filtrosDocumentos=of()
 
-  //         'Acta B', 
-  //         'Acta conciliación B', 
-  //         'Acuerdo B',
-  //         'Acuse de recibo B',
-  //         'Auto B',        
+     constructor(private api: PruebaAPIService, private http: HttpClient) {
+          this.getRequestValoresFormularios();
+          console.log(config2);
+     }
 
-  //     ]
-  //   },
-  //   3: {
-  //     tipo: 'date',
-  //     name: 'magistrado',
-  //   },
-  //   4: {
-  //     tipo: 'checkbox',
-  //     name: 'resolucion',
-  //     multi: true,
-  //   },
-  //   5: {
-  //     tipo: 'checkbox',
-  //     name: 'procedimental',
-  //     multi: false,
-  //     values: ['proc 1', 'proc 2', 'proc 3'],
-  //   },
-  // };
-  nombrado = {
-    0: {
-      tipo: 'array',
-      name: 'procedimiento',
-      values: [
-        'Acta', 
-        'Acta conciliación', 
-        'Acuerdo',
-        'Acuse de recibo',
-        'Auto',        
-      ],
-    },
-    1: {
-      tipo: 'array',
-      name: 'procedimiento 2',
-      values:[
+     getRequestValoresFormularios() {
+          combineLatest(
+               this.http.get<any>("/api/documentos"),
+               this.http.get<any>("/api/documentos2")
+          )
+               .pipe(
+                    mergeMap(([documentos, documentos2]) => {
+                         let _documentos = documentos.data.tiposDocumentales.map(
+                              (it) => it.descripcion
+                         );
+                         let _documentos2 = documentos2.data.tiposDocumentales.map(
+                              (it) => it.descripcion
+                         );
+                         // documentos.tiposDocumentales.map(it=>it.descripcion)
+                         return of([_documentos, _documentos2]);
+                    }),
 
-          'Acta B', 
-          'Acta conciliación B', 
-          'Acuerdo B',
-          'Acuse de recibo B',
-          'Auto B',        
+                    tap((d) => {
+                          console.log(d);
+                    })
+               )
+               .subscribe((data) => {
+                    this.datosDynamicValues = data;
+                    this.creaConfig(
+                         data,
+                         filtro.documentos2,
+                         config1,
+                         config.procedimiento2
+                    );
+                    this.creaConfig(
+                         data,
+                         filtro.documentos2,
+                         config1,
+                         config.procedimiento
+                    );
+                    console.log(this.datosDynamicValues);
+               });
+     }
 
-      ]
-    },
-    2: {
-      tipo: 'array',
-      name: 'tramite',
-      values:[
+     creaConfig(reqVal, reqValNumb, configVar, configNumb) {
+          let datosReq = [];
+          reqVal[reqValNumb].forEach((item) => {
+               datosReq.push(item);
+          });
+          console.log(datosReq)
+          console.log(configVar[configNumb])
 
-          'Tramite AB', 
-          'Tramite conciliación B', 
-          'Tramite B',
-          'Tramite de recibo B',
-          'Tramite C',        
+          
+          configVar[configNumb].values = datosReq;
+          console.log(config1)
 
-      ]
-    },
-    3: {
-      tipo: 'date',
-      name: 'magistrado',
-    },
+          // console.log(configVar[configNumb])
+     }
 
-  };
-
-  // formA: FormGroup = new FormGroup({
-  //   [`arrayData0`]: new FormArray([]),
-
-  //   procesal: new FormGroup({
-  //     procesal: new FormControl(''),
-  //   }),
-
-  //   [`arrayData2`]: new FormArray([]),
-
-  //   magistrado: new FormGroup({
-  //     magistrado0: new FormControl(''),
-  //     magistrado1: new FormControl(''),
-  //     magistrado2: new FormControl(''),
-  //   }),
-
-  //   resolucion: new FormGroup({
-  //     resolucion0: new FormControl(''),
-  //     resolucion1: new FormControl(''),
-  //     resolucion2: new FormControl(''),
-  //   }),
-
-  //   procedimental: new FormGroup({
-  //     procedimental: new FormControl(''),
-  //   }),
-  // });
-
-    formA: FormGroup = new FormGroup({
-    [`arrayData0`]: new FormArray([]),
-
-    [`arrayData1`]: new FormArray([]),
-
-    [`arrayData2`]: new FormArray([]),
-
-    magistrado: new FormGroup({
-      magistrado0: new FormControl(''),
-      magistrado1: new FormControl(''),
-      magistrado2: new FormControl(''),
-    }),
-  });
-
-  /**
-   *
-   * Block comment
-   *
-   */
-
-  nombrado1 = {
-    0: {
-      tipo: 'checkbox',
-      name: 'procesal',
-      multi: false,
-      values: ['tipo 1', 'tipo 2', 'tipo 3'],
-    },
-    1: {
-      tipo: 'array',
-      name: 'procedimiento',
-      values: [
-        'Acta', 
-        'Acta conciliación', 
-        'Acuerdo',
-        'Acuse de recibo',
-        'Auto',        
-      ],
-    },
-    2: {
-      tipo: 'date',
-      name: 'magistrado',
-    },
-    3: {
-      tipo: 'checkbox',
-      name: 'resolucion',
-      multi: true,
-    },
-    4: {
-      tipo: 'array',
-      name: 'procedimiento 2',
-      values:[
-
-          'Acta B', 
-          'Acta conciliación B', 
-          'Acuerdo B',
-          'Acuse de recibo B',
-          'Auto B',        
-
-      ]
-    },
-  };
-  formA1: FormGroup = new FormGroup({
-    procesal: new FormGroup({
-      procesal: new FormControl(''),
-    }),
-    [`arrayData1`]: new FormArray([]),
-    magistrado: new FormGroup({
-      magistrado0: new FormControl(''),
-      magistrado1: new FormControl(''),
-      magistrado2: new FormControl(''),
-    }),
-    resolucion: new FormGroup({
-      resolucion0: new FormControl(''),
-      resolucion1: new FormControl(''),
-      resolucion2: new FormControl(''),
-    }),
-    [`arrayData4`]: new FormArray([]),
-  });
-
-  /**
-   *
-   * Block comment
-   *
-   */
-
-  config$ = of(this.nombrado);
-  formGrupo$ = of(this.formA);
-  config1$ = of(this.nombrado1);
-  formGrupo1$ = of(this.formA1);
-
-  constructor() {}
+     getFiltrosDocumentos() {
+          return of([config1, form1]);
+     }
+     getFiltrosEscritos() {
+       
+          return of([config2, form2]);
+     }
+     getFiltrosResoluciones() {
+          return of([config3, form3]);
+     }
 }
-

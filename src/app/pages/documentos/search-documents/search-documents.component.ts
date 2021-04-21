@@ -52,41 +52,36 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
      =    Incorporacion Integracion nuevo Filtro 20-04-2021 =
      =============================================*/
 
-     nombrado$_$ =this.filtroS.config$;
+     // nombrado$_$ = this.filtroS.config$;
 
-     formA$_$ = this.filtroS.formGrupo$;
+     // formA$_$ = this.filtroS.formGrupo$;
 
-     nombrado1$_$ =this.filtroS.config1$;
+     // nombrado1$_$ = this.filtroS.config1$;
 
-     formA1$_$ = this.filtroS.formGrupo1$;
+     // formA1$_$ = this.filtroS.formGrupo1$;
 
-     combinado1$;
-     combinado2$;
+     filtrosDocumentos;
+     filtrosEscritos;
 
-     filtro1$_$=combineLatest([
-          this.nombrado$_$,
-          this.formA$_$
-        ])
-        .pipe()
-        .subscribe((data) => {
-          console.log(data);
-          this.combinado1$=data;
-        })
-        
-        filtro2$_$=combineLatest([
-          this.nombrado1$_$,
-          this.formA1$_$
-        ])
-        .pipe()
-        .subscribe((data) => {
-          console.log(data);
-          this.combinado2$=data;
-        })
-      
-   
-     
-     
+     filtroDocumentosSub = this.filtroS
+          .getFiltrosDocumentos()
+          .pipe()
+          .subscribe((data) => {
+               console.log(data);
+               this.filtrosDocumentos = data;
+          });
+
+     filtroEscritosSub = this.filtroS
+          .getFiltrosEscritos()
+          .pipe()
+          .subscribe((data) => {
+               console.log(data);
+               this.filtrosEscritos = data;
+          });
+
      /*=====  End of Incorporacion Integracion nuevo Filtro  ======*/
+
+     
      
      
 
@@ -112,8 +107,9 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
      ngOnDestroy(): void {
           //Called once, before the instance is destroyed.
           //Add 'implements OnDestroy' to the class.
-          this.filtro1$_$.unsubscribe();
-          this.filtro2$_$.unsubscribe();
+          this.filtroDocumentosSub.unsubscribe();
+          this.filtroEscritosSub.unsubscribe();
+
       
           
      }

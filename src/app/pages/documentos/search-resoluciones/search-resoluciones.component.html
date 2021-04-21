@@ -1,5 +1,5 @@
 <section>
-  <app-filtro appFijar [offset]="10" [filtroscombinado1]="combinado1$"></app-filtro>
+  <app-filtro appFijar [offset]="10" [filtroscombinado1]="filtrosResoluciones"></app-filtro>
   <div *ngIf="docsResoluciones$ | async as documents">
     <div *ngIf="isArray(documents)">
       <p class="voidSearch" *ngIf="documents.length===0">Esta búsqueda no devuelve documentos</p>

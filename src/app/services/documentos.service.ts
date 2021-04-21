@@ -12,8 +12,6 @@ import { catchError, shareReplay, switchMap, tap } from "rxjs/operators";
 import { DocsEscritosService } from "./docs-escritos.service";
 import { DocsResolucionesService } from "./docs-resoluciones.service";
 
-
-
 @Injectable({
      providedIn: "root",
 })
@@ -75,7 +73,9 @@ export class DocumentosService implements OnDestroy {
 
      //TODO remove only for checking testing wrong url
      // save url from observable toggling url right and wrong
-     url: string="https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos";
+     url: string =
+          "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos";
+     // url: string="/api/documentos";
 
      /*=====  End of Class members  ======*/
 
@@ -85,14 +85,19 @@ export class DocumentosService implements OnDestroy {
      documentos$ = combineLatest(
           this.inputSearch$.asObservable(),
           this.formularioFiltros$.asObservable(),
-          this.pagina$.asObservable(),
+          this.pagina$.asObservable()
      ).pipe(
           tap(([search, formulario, pagina]) => {
                // saving all the data
                this.search = search;
                this.formulario = formulario;
                this.pagina = pagina;
-               console.log(`%cEsto es lo que recibo de los filtros: ${JSON.stringify(this.formulario)}`,"color:gold")
+               console.log(
+                    `%cEsto es lo que recibo de los filtros: ${JSON.stringify(
+                         this.formulario
+                    )}`,
+                    "color:gold"
+               );
           }),
           switchMap((obsCombined) => {
                // if page is 1 / we send new data with the new string query -or change in filters - new API request - to get total documents
@@ -179,7 +184,7 @@ export class DocumentosService implements OnDestroy {
                }
           }),
           //cache of acumulated array of documents - pagination
-          shareReplay()
+          shareReplay(1)
      );
 
      constructor(
