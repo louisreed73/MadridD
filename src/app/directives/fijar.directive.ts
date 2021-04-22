@@ -22,8 +22,8 @@ export class FijarDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log(this._window);
-    console.log(this.offset);
+    // console.log(this._window);
+    // console.log(this.offset);
     this.windowSub = fromEvent(this._window, 'scroll')
       .pipe(debounceTime(10))
       .subscribe((e: Event) => {

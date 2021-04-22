@@ -17,7 +17,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
   filtroFormGroup: FormGroup;
   indice = [];
   sugerencia: Object;
-  filtrosArrayFormsSubs$$:Subscription;
+  filtrosArrayFormsSubs:Subscription;
 
   // Pagination request increment or reset to 1
   pagina: number = 1;
@@ -79,28 +79,19 @@ export class FiltroComponent implements OnInit, OnDestroy {
     this.filtroFormGroup = this.filtroscombinado1[1];
     this.propiedadesConfigKeys= Object.keys(this.filtroscombinado1[0]);
     
-    this.filtrosArrayFormsSubs$$=this.filtroFormGroup.valueChanges
+    this.filtrosArrayFormsSubs=this.filtroFormGroup.valueChanges
     .pipe(debounceTime(300))
     .subscribe((data) => {
-      console.log(this.configFiltro);
-      console.log(data);
+      // console.log(this.configFiltro);
+      // console.log(data);
       let transformedData={};
       let indice=0;
       for(let value of Object.values(data)) {
-        console.log(this.configFiltro[indice]);
-        // console.log(value);
-        // if(this.configFiltro[indice].tipo==="date") {
-        //   console.log("Fecha!!!!")
-        //   this.configFiltro[indice].values.forEach((title,ind) => {
-        //     console.log(title,ind)
-        //   })
-
-        // }
         transformedData[this.configFiltro[indice].name]=value;
         indice++;
         }
         console.log(transformedData)
-        this.triggerNewSearch(data)
+        this.triggerNewSearch(transformedData)
       });
 
   }
@@ -108,7 +99,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     // this.filtrosSubsc.unsubscribe();
-    this.filtrosArrayFormsSubs$$.unsubscribe();
+    this.filtrosArrayFormsSubs.unsubscribe();
         
   }
 

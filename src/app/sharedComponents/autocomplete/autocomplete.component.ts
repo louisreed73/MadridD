@@ -15,7 +15,7 @@ import { debounceTime, startWith } from 'rxjs/operators';
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
-  // changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AutocompleteComponent implements OnInit, OnDestroy {
   autocompleteFormG: FormGroup = new FormGroup({});
@@ -24,7 +24,7 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
   @Output('sugerenciasOut')
   sugerenciasEmit: EventEmitter<Object> = new EventEmitter<Object>();
   sugerencias: Array<string>;
-  autoCompleteInputEv$$: Subscription;
+  autoCompleteInputEvSub: Subscription;
 
   set nuevo(v) {
     console.log(`%cEl nuevo valor es:${v}`,"color:gold");
@@ -35,7 +35,7 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
       return
     }
     this.sugerencias = this.sugerenciasData.filter((ciudad) => {
-      console.log("estoy filtrando", ciudad)
+      // console.log("estoy filtrando", ciudad)
       // return ciudad.search(new RegExp(`${data}`, 'gi')) !== -1;
       return ciudad.search(new RegExp(`${v}`, 'gi')) !== -1;
     })
@@ -43,10 +43,10 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
     
   }
 
-  get sugerenciasdar () {
-    console.log("dando sugerencias!")
-    return this.sugerencias
-  }
+  // get sugerenciasdar () {
+  //   console.log("dando sugerencias!")
+  //   return this.sugerencias
+  // }
   constructor() {
     
   }
@@ -56,7 +56,7 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
       'autocomplete' + this.autocompleteInstance,
       new FormControl('')
     );
-    this.autoCompleteInputEv$$ = this.autocompleteFormG
+    this.autoCompleteInputEvSub = this.autocompleteFormG
       .get('autocomplete' + this.autocompleteInstance)
       .valueChanges
       .pipe(
@@ -84,7 +84,7 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.autoCompleteInputEv$$.unsubscribe();
+    this.autoCompleteInputEvSub.unsubscribe();
   }
 
   getSugerencia(i: number) {

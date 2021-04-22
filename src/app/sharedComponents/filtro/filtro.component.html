@@ -22,7 +22,7 @@
               <ng-container *ngIf="configFiltro[i].tipo==='checkbox' && configFiltro[i].multi===false">
 
                 <ng-container *ngFor="let item of getValuesFromRadios(i);index as i3">
-                  <p>{{item}}</p>
+                  <!-- <p>{{item}}</p> -->
                   <div class="input_flexItem">
                     <input type="radio" [id]="key+'_'+i3" [formControlName]="key" [name]="key" [value]="item"
                       class="custom-radio-check">

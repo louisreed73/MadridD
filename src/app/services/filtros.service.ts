@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 // import { FormArray, FormControl, FormGroup } from "@angular/forms";
-import { BehaviorSubject, combineLatest, forkJoin, merge, of } from "rxjs";
+import { BehaviorSubject, combineLatest, forkJoin, merge, of, Subscription } from "rxjs";
 import { switchMap, tap } from "rxjs/operators";
 import {
      config1,
@@ -13,23 +13,31 @@ import {
      filtro,
      config,
 } from "../formulariosFiltrado/formulariosFiltrado.data";
-import { PruebaAPIService } from "./prueba-api.service";
+// import { PruebaAPIService } from "./prueba-api.service";
 
 @Injectable({
      providedIn: "root",
 })
-export class FiltrosService {
+export class FiltrosService implements OnDestroy {
      datosDynamicValues: Array<Array<string>>;
+     reqValoresDocumentosSub:Subscription;
      //  filtrosDocumentos=of()
-     showFilters$:BehaviorSubject<boolean>=new BehaviorSubject(false);
+     showFilters$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-     constructor(private api: PruebaAPIService, private http: HttpClient) {
+     constructor(
+          private http: HttpClient
+     ) {
           this.getRequestValoresDocumentos();
-          console.log(config2);
+          // console.log(config2);
+     }
+
+     ngOnDestroy(): void {
+          this.reqValoresDocumentosSub.unsubscribe();
+          
      }
 
      getRequestValoresDocumentos() {
-          combineLatest(
+          this.reqValoresDocumentosSub=combineLatest(
                this.http.get<any>("/api/documentos"),
                this.http.get<any>("/api/documentos2")
           )
@@ -46,7 +54,7 @@ export class FiltrosService {
                     }),
 
                     tap((d) => {
-                          console.log(d);
+                         // console.log(d);
                     })
                )
                .subscribe((data) => {
@@ -63,7 +71,7 @@ export class FiltrosService {
                          config1,
                          config.procedimiento2
                     );
-                    console.log(this.datosDynamicValues);
+                    // console.log(this.datosDynamicValues);
                     this.showFilters$.next(true);
                });
      }
@@ -73,12 +81,11 @@ export class FiltrosService {
           reqVal[reqValNumb].forEach((item) => {
                datosReq.push(item);
           });
-          console.log(datosReq)
-          console.log(configVar[configNumb])
+          // console.log(datosReq);
+          console.log(configVar[configNumb]);
 
-          
           configVar[configNumb].values = datosReq;
-          console.log(config1)
+          // console.log(config1);
 
           // console.log(configVar[configNumb])
      }
@@ -87,7 +94,6 @@ export class FiltrosService {
           return of([config1, form1]);
      }
      getFiltrosEscritos() {
-       
           return of([config2, form2]);
      }
      getFiltrosResoluciones() {

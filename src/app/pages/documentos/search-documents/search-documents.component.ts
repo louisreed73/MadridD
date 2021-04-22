@@ -67,7 +67,7 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
           .getFiltrosDocumentos()
           .pipe()
           .subscribe((data) => {
-               console.log(data);
+               // console.log(data);
                this.filtrosDocumentos = data;
           });
 
@@ -75,7 +75,7 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
           .getFiltrosEscritos()
           .pipe()
           .subscribe((data) => {
-               console.log(data);
+               // console.log(data);
                this.filtrosEscritos = data;
           });
 
@@ -87,7 +87,7 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
 
      constructor(
           private documentos: DocumentosService,
-          private spinner: SpinnerService,
+          // private spinner: SpinnerService,
           //TODO to remove only for checking response and reload page
           @Inject(DOCUMENT) private _document: Document,
           public filtroS: FiltrosService

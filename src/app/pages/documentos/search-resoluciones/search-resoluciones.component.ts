@@ -83,7 +83,7 @@ export class SearchResolucionesComponent implements OnDestroy {
           .getFiltrosDocumentos()
           .pipe()
           .subscribe((data) => {
-               console.log(data);
+               // console.log(data);
                this.filtrosDocumentos = data;
           });
 
@@ -91,14 +91,14 @@ export class SearchResolucionesComponent implements OnDestroy {
           .getFiltrosEscritos()
           .pipe()
           .subscribe((data) => {
-               console.log(data);
+               // console.log(data);
                this.filtrosEscritos = data;
           });
      filtroResolucionesSub = this.filtroS
           .getFiltrosResoluciones()
           .pipe()
           .subscribe((data) => {
-               console.log(data);
+               // console.log(data);
                this.filtrosResoluciones = data;
           });
 
@@ -108,7 +108,7 @@ export class SearchResolucionesComponent implements OnDestroy {
      constructor(
           private documentos: DocumentosService,
           private docsResoluciones: DocsResolucionesService,
-          private spinner: SpinnerService,
+          // private spinner: SpinnerService,
           //TODO to remove only for checking response and reload page
           @Inject(DOCUMENT) private _document: Document,
           public filtroS: FiltrosService

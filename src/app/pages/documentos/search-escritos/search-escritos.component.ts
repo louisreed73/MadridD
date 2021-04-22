@@ -83,7 +83,7 @@ export class SearchEscritosComponent implements OnDestroy {
                // delay(100)
           )
           .subscribe((data) => {
-               console.log(data);
+               // console.log(data);
                this.filtrosDocumentos = data;
           });
 
@@ -91,7 +91,7 @@ export class SearchEscritosComponent implements OnDestroy {
           .getFiltrosEscritos()
           .pipe()
           .subscribe((data) => {
-               console.log(data);
+               // console.log(data);
                this.filtrosEscritos = data;
           });
 
@@ -102,7 +102,7 @@ export class SearchEscritosComponent implements OnDestroy {
      constructor(
           private documentos: DocumentosService,
           private docsEscritos: DocsEscritosService,
-          private spinner: SpinnerService,
+          // private spinner: SpinnerService,
           //TODO to remove only for checking response and reload page
           @Inject(DOCUMENT) private _document: Document,
           public filtroS: FiltrosService

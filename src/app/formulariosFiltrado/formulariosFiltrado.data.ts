@@ -37,7 +37,11 @@ let config1 = [
      {
           tipo: "date",
           name: "magistrado",
-          values: ["from", "until", "another"],
+          values: [ 
+               "from", 
+               "until", 
+               "another"
+          ],
      },
 ];
 
@@ -66,7 +70,10 @@ let config2 = [
           tipo: "checkbox",
           name: "procesal",
           multi: false,
-          values: ["tipo 1", "tipo 2", "tipo 3"],
+          values: [
+               "tipo 1", 
+               "tipo 2", 
+               "tipo 3"],
      },
      {
           tipo: "array",
@@ -82,13 +89,21 @@ let config2 = [
      {
           tipo: "date",
           name: "magistrado",
-          values: ["from", "until", "another"],
+          values: [ 
+               "from", 
+               "until", 
+               "another"
+          ],
      },
      {
           tipo: "checkbox",
           name: "resolucion",
           multi: true,
-          values: ["Acta vale", "Acta conciliación", "Acuerdo"],
+          values: [ 
+               "Acta vale", 
+               "Acta conciliación", 
+               "Acuerdo"
+          ],
      },
      {
           tipo: "array",
@@ -113,9 +128,9 @@ let form2: FormGroup = new FormGroup({
           another: new FormControl(""),
      }),
      resolucion: new FormGroup({
-          resolucion0: new FormControl(""),
-          resolucion1: new FormControl(""),
-          resolucion2: new FormControl(""),
+          ["Acta vale"]: new FormControl(""),
+          ["Acta conciliación"]: new FormControl(""),
+          ["Acuerdo"]: new FormControl(""),
      }),
      [`arrayData4`]: new FormArray([]),
 });
@@ -125,7 +140,11 @@ let config3 = [
           tipo: "checkbox",
           name: "procesal",
           multi: false,
-          values: ["tipo 1", "tipo 2", "tipo 3"],
+          values: [ 
+               "tipo 1", 
+               "tipo 2", 
+               "tipo 3"
+          ],
      },
      {
           tipo: "array",
@@ -141,13 +160,20 @@ let config3 = [
      {
           tipo: "date",
           name: "magistrado",
-          values: ["from", "until"],
+          values: [ 
+               "from", 
+               "until"
+          ],
      },
      {
           tipo: "checkbox",
           name: "resolucion",
           multi: true,
-          values: ["Acta vale", "Acta conciliación", "Acuerdo"],
+          values: [ 
+               "Acta vale", 
+               "Acta conciliación", 
+               "Acuerdo"
+          ],
      },
      {
           tipo: "array",
@@ -194,11 +220,11 @@ let creaConfig = (reqVal, reqValNumb, configVar, configNumb) => {
      reqVal[reqValNumb].forEach((item) => {
           datosReq.push(item);
      });
-     console.log(datosReq);
-     console.log(configVar[configNumb]);
+     // console.log(datosReq);
+     // console.log(configVar[configNumb]);
 
      configVar[configNumb].values = datosReq;
-     console.log(config1);
+     // console.log(config1);
 
      // console.log(configVar[configNumb])
 };

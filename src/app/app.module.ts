@@ -34,7 +34,6 @@ import {serverAPI} from "./mirage.api";
 export class AppModule {
 
      constructor() {
-          console.log("Starting Application!!!");
 
           serverAPI()
      }
