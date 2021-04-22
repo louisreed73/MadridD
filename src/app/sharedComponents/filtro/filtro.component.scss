@@ -236,4 +236,12 @@ input.custom-radio-check:checked + label::after {
 //     background:red;
 //   }
 
+.cargandoFiltros {
+    height:35.5px;
+    background:gainsboro;
+    display:flex;
+    align-items:center;
+    padding:1rem;
+}
+
 

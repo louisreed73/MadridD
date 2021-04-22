@@ -2,7 +2,9 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { filtro } from 'src/app/formulariosFiltrado/formulariosFiltrado.data';
 import { DocumentosService } from 'src/app/services/documentos.service';
+import { FiltrosService } from 'src/app/services/filtros.service';
 
 @Component({
   selector: 'app-filtro',
@@ -19,11 +21,15 @@ export class FiltroComponent implements OnInit, OnDestroy {
 
   // Pagination request increment or reset to 1
   pagina: number = 1;
-  // filtrosSubsc: Subscription;
+  show$: any;
+  // filtrosShowSub: Subscription;
+
+  propiedadesConfigKeys:Array<any>;
   
   constructor(
     private combinacion: DocumentosService,
-    private _window: Window
+    private _window: Window,
+    private filtrosServ:FiltrosService
 
   ) {}
 
@@ -67,13 +73,33 @@ export class FiltroComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.show$=this.filtrosServ.showFilters$
     this.configFiltro = this.filtroscombinado1[0];
     this.filtroFormGroup = this.filtroscombinado1[1];
-
+    this.propiedadesConfigKeys= Object.keys(this.filtroscombinado1[0]);
+    
     this.filtrosArrayFormsSubs$$=this.filtroFormGroup.valueChanges
-      .pipe(debounceTime(300))
-      .subscribe((data) => {
-        console.log(data);
+    .pipe(debounceTime(300))
+    .subscribe((data) => {
+      console.log(this.configFiltro);
+      console.log(data);
+      let transformedData={};
+      let indice=0;
+      for(let value of Object.values(data)) {
+        console.log(this.configFiltro[indice]);
+        // console.log(value);
+        // if(this.configFiltro[indice].tipo==="date") {
+        //   console.log("Fecha!!!!")
+        //   this.configFiltro[indice].values.forEach((title,ind) => {
+        //     console.log(title,ind)
+        //   })
+
+        // }
+        transformedData[this.configFiltro[indice].name]=value;
+        indice++;
+        }
+        console.log(transformedData)
         this.triggerNewSearch(data)
       });
 
@@ -125,7 +151,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
   }
 
   triggerNewSearch(data) {
-    console.log(data);
+    // console.log(data);
     //  this.pagina = 1;
     this._window.scrollTo(0, 0);
     this.combinacion.stopScroll$.next(true);

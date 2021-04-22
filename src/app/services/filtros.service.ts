@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { FormArray, FormControl, FormGroup } from "@angular/forms";
-import { combineLatest, forkJoin, merge, of } from "rxjs";
-import { map, mergeMap, switchMap, tap } from "rxjs/operators";
+// import { FormArray, FormControl, FormGroup } from "@angular/forms";
+import { BehaviorSubject, combineLatest, forkJoin, merge, of } from "rxjs";
+import { switchMap, tap } from "rxjs/operators";
 import {
      config1,
      config2,
@@ -21,19 +21,20 @@ import { PruebaAPIService } from "./prueba-api.service";
 export class FiltrosService {
      datosDynamicValues: Array<Array<string>>;
      //  filtrosDocumentos=of()
+     showFilters$:BehaviorSubject<boolean>=new BehaviorSubject(false);
 
      constructor(private api: PruebaAPIService, private http: HttpClient) {
-          this.getRequestValoresFormularios();
+          this.getRequestValoresDocumentos();
           console.log(config2);
      }
 
-     getRequestValoresFormularios() {
+     getRequestValoresDocumentos() {
           combineLatest(
                this.http.get<any>("/api/documentos"),
                this.http.get<any>("/api/documentos2")
           )
                .pipe(
-                    mergeMap(([documentos, documentos2]) => {
+                    switchMap(([documentos, documentos2]) => {
                          let _documentos = documentos.data.tiposDocumentales.map(
                               (it) => it.descripcion
                          );
@@ -52,17 +53,18 @@ export class FiltrosService {
                     this.datosDynamicValues = data;
                     this.creaConfig(
                          data,
-                         filtro.documentos2,
+                         filtro.documentos,
                          config1,
-                         config.procedimiento2
+                         config.procedimiento
                     );
                     this.creaConfig(
                          data,
                          filtro.documentos2,
                          config1,
-                         config.procedimiento
+                         config.procedimiento2
                     );
                     console.log(this.datosDynamicValues);
+                    this.showFilters$.next(true);
                });
      }
 

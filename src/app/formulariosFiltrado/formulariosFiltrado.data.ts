@@ -37,6 +37,7 @@ let config1 = [
      {
           tipo: "date",
           name: "magistrado",
+          values: ["from", "until", "another"],
      },
 ];
 
@@ -48,9 +49,9 @@ let form1: FormGroup = new FormGroup({
      [`arrayData2`]: new FormArray([]),
 
      magistrado: new FormGroup({
-          magistrado0: new FormControl(""),
-          magistrado1: new FormControl(""),
-          magistrado2: new FormControl(""),
+          from: new FormControl(""),
+          until: new FormControl(""),
+          another: new FormControl(""),
      }),
 });
 
@@ -81,11 +82,13 @@ let config2 = [
      {
           tipo: "date",
           name: "magistrado",
+          values: ["from", "until", "another"],
      },
      {
           tipo: "checkbox",
           name: "resolucion",
           multi: true,
+          values: ["Acta vale", "Acta conciliación", "Acuerdo"],
      },
      {
           tipo: "array",
@@ -105,9 +108,9 @@ let form2: FormGroup = new FormGroup({
      }),
      [`arrayData1`]: new FormArray([]),
      magistrado: new FormGroup({
-          magistrado0: new FormControl(""),
-          magistrado1: new FormControl(""),
-          magistrado2: new FormControl(""),
+          from: new FormControl(""),
+          until: new FormControl(""),
+          another: new FormControl(""),
      }),
      resolucion: new FormGroup({
           resolucion0: new FormControl(""),
@@ -138,11 +141,13 @@ let config3 = [
      {
           tipo: "date",
           name: "magistrado",
+          values: ["from", "until"],
      },
      {
           tipo: "checkbox",
           name: "resolucion",
           multi: true,
+          values: ["Acta vale", "Acta conciliación", "Acuerdo"],
      },
      {
           tipo: "array",
@@ -162,14 +167,14 @@ let form3: FormGroup = new FormGroup({
      }),
      [`arrayData1`]: new FormArray([]),
      magistrado: new FormGroup({
-          magistrado0: new FormControl(""),
-          magistrado1: new FormControl(""),
-          magistrado2: new FormControl(""),
+          from: new FormControl(""),
+          until: new FormControl(""),
+          // magistrado2: new FormControl(""),
      }),
      resolucion: new FormGroup({
-          resolucion0: new FormControl(""),
-          resolucion1: new FormControl(""),
-          resolucion2: new FormControl(""),
+          ["Acta vale"]: new FormControl(""),
+          ["Acta conciliación"]: new FormControl(""),
+          ["Acuerdo"]: new FormControl(""),
      }),
      [`arrayData4`]: new FormArray([]),
 });
@@ -184,28 +189,28 @@ enum config {
      tramite,
 }
 
-let creaConfig=(reqVal, reqValNumb, configVar, configNumb)=> {
-    let datosReq = [];
-    reqVal[reqValNumb].forEach((item) => {
-         datosReq.push(item);
-    });
-    console.log(datosReq);
-    console.log(configVar[configNumb]);
+let creaConfig = (reqVal, reqValNumb, configVar, configNumb) => {
+     let datosReq = [];
+     reqVal[reqValNumb].forEach((item) => {
+          datosReq.push(item);
+     });
+     console.log(datosReq);
+     console.log(configVar[configNumb]);
 
-    configVar[configNumb].values = datosReq;
-    console.log(config1);
+     configVar[configNumb].values = datosReq;
+     console.log(config1);
 
-    // console.log(configVar[configNumb])
-}
+     // console.log(configVar[configNumb])
+};
 
-export { 
-    config1, 
-    config2, 
-    config3, 
-    form1, 
-    form2, 
-    form3, 
-    creaConfig,
-    filtro, 
-    config 
+export {
+     config1,
+     config2,
+     config3,
+     form1,
+     form2,
+     form3,
+     creaConfig,
+     filtro,
+     config,
 };
