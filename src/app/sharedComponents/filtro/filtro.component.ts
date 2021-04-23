@@ -73,11 +73,13 @@ export class FiltroComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // console.log(this.filtros)
+    console.log(this.filtroscombinado1)
 
     this.show$=this.filtrosServ.showFilters$
-    this.configFiltro = this.filtroscombinado1[0];
-    this.filtroFormGroup = this.filtroscombinado1[1];
-    this.propiedadesConfigKeys= Object.keys(this.filtroscombinado1[0]);
+    this.configFiltro = this.filtroscombinado1.data[0];
+    this.filtroFormGroup = this.filtroscombinado1.data[1];
+    this.propiedadesConfigKeys= Object.keys(this.filtroscombinado1.data[0]);
     
     this.filtrosArrayFormsSubs=this.filtroFormGroup.valueChanges
     .pipe(debounceTime(300))
@@ -91,7 +93,8 @@ export class FiltroComponent implements OnInit, OnDestroy {
         indice++;
         }
         console.log(transformedData)
-        this.triggerNewSearch(transformedData)
+        this.triggerNewSearch(transformedData);
+        
       });
 
   }
@@ -147,8 +150,53 @@ export class FiltroComponent implements OnInit, OnDestroy {
     this._window.scrollTo(0, 0);
     this.combinacion.stopScroll$.next(true);
 
+    let actual=this.combinacion.formularioFiltros$.getValue();
+    // console.log(actual);
+    // let count= actual?.prop1?.id ?? this.count;
+    // ++count;
+
+    let updateActual;
+
+    switch (this.filtroscombinado1.clase) {
+      case "documentos": {
+
+        updateActual={
+          ...actual,
+          documentos: data
+        }
+        
+        console.log("Es la clase documentos!!!")
+      };            
+      break;
+      case "escritos": {
+
+        updateActual={
+          ...actual,
+          escritos: data
+        }
+        
+        console.log("Es la clase escritos!!!")
+      };            
+      break;
+      case "resoluciones": {
+
+        updateActual={
+          ...actual,
+          resoluciones: data
+        }
+        
+        console.log("Es la clase resoluciones!!!")
+      };            
+      break;
     
-    this.combinacion.formularioFiltros$.next(data);
+      default: console.log("No tiene clase");
+        break;
+    }
+
+    
+    // this.combinacion.formularioFiltros$.next(data);
+    console.log(updateActual);
+    this.combinacion.formularioFiltros$.next(updateActual);
 
     this.combinacion.pagina$.next(this.pagina);
 }

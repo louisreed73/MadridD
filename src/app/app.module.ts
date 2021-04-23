@@ -35,6 +35,6 @@ export class AppModule {
 
      constructor() {
 
-          serverAPI()
+          // serverAPI();
      }
 }

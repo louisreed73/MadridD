@@ -84,7 +84,10 @@ export class SearchResolucionesComponent implements OnDestroy {
           .pipe()
           .subscribe((data) => {
                // console.log(data);
-               this.filtrosDocumentos = data;
+               this.filtrosDocumentos = {
+                    data,
+                    clase:"documentos"
+               };
           });
 
      filtroEscritosSub = this.filtroS
@@ -92,14 +95,20 @@ export class SearchResolucionesComponent implements OnDestroy {
           .pipe()
           .subscribe((data) => {
                // console.log(data);
-               this.filtrosEscritos = data;
+               this.filtrosEscritos = {
+                    data,
+                    clase:"escritos"
+               };
           });
      filtroResolucionesSub = this.filtroS
           .getFiltrosResoluciones()
           .pipe()
           .subscribe((data) => {
                // console.log(data);
-               this.filtrosResoluciones = data;
+               this.filtrosResoluciones = {
+                    data,
+                    clase:"resoluciones"
+               };
           });
 
      /*=====  End of Incorporacion Integracion nuevo Filtro  ======*/

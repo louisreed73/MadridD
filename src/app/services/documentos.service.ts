@@ -23,7 +23,11 @@ export class DocumentosService implements OnDestroy {
      // input string Observable to receive input user string
      inputSearch$: Subject<string> = new Subject();
      // User Forms Selections - to aplly filters Observable to receive input user string
-     formularioFiltros$: BehaviorSubject<{}> = new BehaviorSubject(null);
+     formularioFiltros$: BehaviorSubject<{[k:string]:any}> = new BehaviorSubject({
+          documentos:undefined,
+          escritos:undefined,
+          resoluciones:undefined,
+     });
      // Actual page Observable - pagination for http request - actual page
      pagina$: Subject<number> = new Subject();
 
@@ -92,12 +96,7 @@ export class DocumentosService implements OnDestroy {
                this.search = search;
                this.formulario = formulario;
                this.pagina = pagina;
-               console.log(
-                    `%cEsto es lo que recibo de los filtros: ${JSON.stringify(
-                         this.formulario
-                    )}`,
-                    "color:gold"
-               );
+               console.log(`%cEsto es lo que recibo de los filtros: ${JSON.stringify(this.formulario,null,3)}`,"color:gold");
           }),
           switchMap((obsCombined) => {
                // if page is 1 / we send new data with the new string query -or change in filters - new API request - to get total documents

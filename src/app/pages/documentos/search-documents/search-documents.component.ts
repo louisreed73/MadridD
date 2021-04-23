@@ -68,7 +68,11 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
           .pipe()
           .subscribe((data) => {
                // console.log(data);
-               this.filtrosDocumentos = data;
+               // this.filtrosDocumentos = data;
+               this.filtrosDocumentos = {
+                    data:data,
+                    clase:"documentos"
+               };
           });
 
      filtroEscritosSub = this.filtroS
@@ -76,7 +80,10 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
           .pipe()
           .subscribe((data) => {
                // console.log(data);
-               this.filtrosEscritos = data;
+               this.filtrosEscritos = {
+                    data,
+                    clase:"escritos"
+               };
           });
 
      /*=====  End of Incorporacion Integracion nuevo Filtro  ======*/
