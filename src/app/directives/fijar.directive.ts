@@ -1,6 +1,7 @@
 import {
   Directive,
   ElementRef,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
@@ -18,16 +19,16 @@ export class FijarDirective implements OnInit, OnDestroy {
   constructor(
     private elRef: ElementRef,
     private render: Renderer2,
-    private _window: Window
+    @Inject(Window) private window: Window
   ) {}
 
   ngOnInit(): void {
     // console.log(this._window);
     // console.log(this.offset);
-    this.windowSub = fromEvent(this._window, 'scroll')
+    this.windowSub = fromEvent(this.window, 'scroll')
       .pipe(debounceTime(10))
       .subscribe((e: Event) => {
-        let offSet = this._window.pageYOffset;
+        let offSet = this.window.pageYOffset;
         if (offSet >= +this.offset) {
           this.render.setAttribute(this.elRef.nativeElement, 'class', 'fijo');
         } else {

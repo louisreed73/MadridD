@@ -33,7 +33,7 @@ export class SearchResolucionesComponent implements OnDestroy {
                // this.spinner.requestSpinner$.next(false);
                //TODO to remove only for checking response and reload page
                setTimeout(() => {
-                    this._document.defaultView.location.reload();
+                    this.window.document.defaultView.location.reload();
                }, 4000);
                return of([]);
           })
@@ -119,7 +119,7 @@ export class SearchResolucionesComponent implements OnDestroy {
           private docsResoluciones: DocsResolucionesService,
           // private spinner: SpinnerService,
           //TODO to remove only for checking response and reload page
-          @Inject(DOCUMENT) private _document: Document,
+          @Inject(Window) private window: Window,
           public filtroS: FiltrosService
      ) {}
 

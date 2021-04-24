@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -28,7 +28,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
   
   constructor(
     private combinacion: DocumentosService,
-    private _window: Window,
+    @Inject(Window) private window: Window,
     private filtrosServ:FiltrosService
 
   ) {}
@@ -147,7 +147,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
   triggerNewSearch(data) {
     // console.log(data);
     //  this.pagina = 1;
-    this._window.scrollTo(0, 0);
+    this.window.scrollTo(0, 0);
     this.combinacion.stopScroll$.next(true);
 
     let actual=this.combinacion.formularioFiltros$.getValue();

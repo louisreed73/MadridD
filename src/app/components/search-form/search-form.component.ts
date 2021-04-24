@@ -2,6 +2,7 @@ import {
      AfterViewInit,
      ChangeDetectionStrategy,
      Component,
+     Inject,
      OnInit,
      ViewChild,
 } from "@angular/core";
@@ -47,7 +48,8 @@ export class SearchFormComponent implements OnInit {
 
      constructor(
           private combinacion: DocumentosService,
-          private _window: Window
+          @Inject(Window) private window: Window
+
      ) {}
 
      ngOnInit() {
@@ -65,7 +67,7 @@ export class SearchFormComponent implements OnInit {
      }
 
      triggerNewSearch(inputSearch) {
-          this._window.scrollTo(0, 0);
+          this.window.scrollTo(0, 0);
 
           // Stopping the scroll trigger until http request response
           this.combinacion.stopScroll$.next(true);

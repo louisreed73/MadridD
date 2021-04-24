@@ -25,9 +25,9 @@ import {serverAPI} from "./mirage.api";
                multi: true,
           },
           {
-               provide:Window,
-               useValue:window
-          }
+               provide: Window,
+               useValue: window,
+             },
      ],
      bootstrap: [AppComponent],
 })
@@ -35,6 +35,6 @@ export class AppModule {
 
      constructor() {
 
-          // serverAPI();
+          serverAPI();
      }
 }
