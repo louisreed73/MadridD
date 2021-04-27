@@ -119,7 +119,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
 
       (<FormArray>this.filtroFormGroup.get(arrayData)).push(
         new FormGroup({
-          [`${nombrado}`]: new FormControl(nombrado),
+          [`${nombrado}`]: new FormControl(false),
         })
       );
     };
