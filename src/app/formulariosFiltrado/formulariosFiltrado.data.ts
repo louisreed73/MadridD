@@ -3,46 +3,49 @@ import { FormArray, FormControl, FormGroup } from "@angular/forms";
 let config1 = [
      {
           tipo: "array",
-          name: "procedimiento",
-          values: [
-               "Acta",
-               "Acta conciliación",
-               "Acuerdo",
-               "Acuse de recibo",
-               "Auto",
-          ],
+          name: "tipo documento",
+          // values: [
+          //      "Acta",
+          //      "Acta conciliación",
+          //      "Acuerdo",
+          //      "Acuse de recibo",
+          //      "Auto",
+          // ],
      },
      {
           tipo: "array",
-          name: "procedimiento 2",
-          values: [
-               "Acta B",
-               "Acta conciliación B",
-               "Acuerdo B",
-               "Acuse de recibo B",
-               "Auto B",
-          ],
+          name: "fase procesal",
+          // values: [
+          //      "Acta B",
+          //      "Acta conciliación B",
+          //      "Acuerdo B",
+          //      "Acuse de recibo B",
+          //      "Auto B",
+          // ],
      },
      {
           tipo: "array",
-          name: "tramite",
-          values: [
-               "Tramite AB",
-               "Tramite conciliación B",
-               "Tramite B",
-               "Tramite de recibo B",
-               "Tramite C",
-          ],
+          name: "tipo procedimiento",
+          // values: [
+          //      "Tramite AB",
+          //      "Tramite conciliación B",
+          //      "Tramite B",
+          //      "Tramite de recibo B",
+          //      "Tramite C",
+          // ],
      },
      {
-          tipo: "date",
+          tipo: "array",
           name: "magistrado",
-          values: [ 
-               "from", 
-               "until", 
-               "another"
-          ],
+          // values: [
+          //      "Tramite AB",
+          //      "Tramite conciliación B",
+          //      "Tramite B",
+          //      "Tramite de recibo B",
+          //      "Tramite C",
+          // ],
      },
+
 ];
 
 let form1: FormGroup = new FormGroup({
@@ -52,11 +55,13 @@ let form1: FormGroup = new FormGroup({
 
      [`arrayData2`]: new FormArray([]),
 
-     magistrado: new FormGroup({
-          from: new FormControl(""),
-          until: new FormControl(""),
-          another: new FormControl(""),
-     }),
+     [`arrayData3`]: new FormArray([]),
+
+     // magistrado: new FormGroup({
+     //      from: new FormControl(""),
+     //      until: new FormControl(""),
+     //      another: new FormControl(""),
+     // }),
 });
 
 /**
@@ -70,10 +75,7 @@ let config2 = [
           tipo: "checkbox",
           name: "procesal",
           multi: false,
-          values: [
-               "tipo 1", 
-               "tipo 2", 
-               "tipo 3"],
+          values: ["tipo 1", "tipo 2", "tipo 3"],
      },
      {
           tipo: "array",
@@ -89,21 +91,13 @@ let config2 = [
      {
           tipo: "date",
           name: "magistrado",
-          values: [ 
-               "from", 
-               "until", 
-               "another"
-          ],
+          values: ["from", "until", "another"],
      },
      {
           tipo: "checkbox",
           name: "resolucion",
           multi: true,
-          values: [ 
-               "Acta vale", 
-               "Acta conciliación", 
-               "Acuerdo"
-          ],
+          values: ["Acta vale", "Acta conciliación", "Acuerdo"],
      },
      {
           tipo: "array",
@@ -140,11 +134,7 @@ let config3 = [
           tipo: "checkbox",
           name: "procesal",
           multi: false,
-          values: [ 
-               "tipo 1", 
-               "tipo 2", 
-               "tipo 3"
-          ],
+          values: ["tipo 1", "tipo 2", "tipo 3"],
      },
      {
           tipo: "array",
@@ -160,20 +150,13 @@ let config3 = [
      {
           tipo: "date",
           name: "magistrado",
-          values: [ 
-               "from", 
-               "until"
-          ],
+          values: ["from", "until"],
      },
      {
           tipo: "checkbox",
           name: "resolucion",
           multi: true,
-          values: [ 
-               "Acta vale", 
-               "Acta conciliación", 
-               "Acuerdo"
-          ],
+          values: ["Acta vale", "Acta conciliación", "Acuerdo"],
      },
      {
           tipo: "array",
@@ -206,8 +189,10 @@ let form3: FormGroup = new FormGroup({
 });
 
 enum filtro {
-     documentos,
-     documentos2,
+     tipos_documentales,
+     fases_procesales,
+     tipos_procedimientos,
+     magistrados,
 }
 enum config {
      procedimiento,
@@ -238,5 +223,5 @@ export {
      form3,
      creaConfig,
      filtro,
-     config,
+     // config,
 };

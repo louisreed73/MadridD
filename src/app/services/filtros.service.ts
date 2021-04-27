@@ -1,8 +1,16 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnDestroy } from "@angular/core";
 // import { FormArray, FormControl, FormGroup } from "@angular/forms";
-import { BehaviorSubject, combineLatest, forkJoin, merge, of, Subscription } from "rxjs";
-import { switchMap, tap } from "rxjs/operators";
+import {
+     BehaviorSubject,
+     combineLatest,
+     forkJoin,
+     merge,
+     of,
+     Subscription,
+} from "rxjs";
+import { shareReplay, switchMap, tap } from "rxjs/operators";
+import { environment } from "src/environments/environment";
 import {
      config1,
      config2,
@@ -11,7 +19,7 @@ import {
      form2,
      form3,
      filtro,
-     config,
+     // config,
 } from "../formulariosFiltrado/formulariosFiltrado.data";
 // import { PruebaAPIService } from "./prueba-api.service";
 
@@ -20,56 +28,91 @@ import {
 })
 export class FiltrosService implements OnDestroy {
      datosDynamicValues: Array<Array<string>>;
-     reqValoresDocumentosSub:Subscription;
+     reqValoresDocumentosSub: Subscription;
      //  filtrosDocumentos=of()
      showFilters$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-     constructor(
-          private http: HttpClient
-     ) {
+     constructor(private http: HttpClient) {
           this.getRequestValoresDocumentos();
           // console.log(config2);
      }
 
      ngOnDestroy(): void {
           this.reqValoresDocumentosSub.unsubscribe();
-          
      }
 
      getRequestValoresDocumentos() {
-          this.reqValoresDocumentosSub=combineLatest(
-               this.http.get<any>("/api/documentos"),
-               this.http.get<any>("/api/documentos2")
-          )
+          this.reqValoresDocumentosSub = combineLatest([
+               this.http.get<any>(
+                    `${environment.baseURLApi}/tipos-documentales`
+               ),
+               this.http.get<any>(`${environment.baseURLApi}/fases-procesales`),
+               this.http.get<any>(
+                    `${environment.baseURLApi}/tipos-procedimientos`
+               ),
+               this.http.post<any>(`${environment.baseURLApi}/magistrados`, {})
+               ])
                .pipe(
-                    switchMap(([documentos, documentos2]) => {
-                         let _documentos = documentos.data.tiposDocumentales.map(
-                              (it) => it.descripcion
-                         );
-                         let _documentos2 = documentos2.data.tiposDocumentales.map(
-                              (it) => it.descripcion
-                         );
-                         // documentos.tiposDocumentales.map(it=>it.descripcion)
-                         return of([_documentos, _documentos2]);
-                    }),
+                    switchMap(
+                         ([
+                              tipos_documentales,
+                              fases_procesales,
+                              tipos_procedimientos,
+                              magistrados,
+                         ]) => {
+                              let _tipos_documentales = tipos_documentales.data[
+                                   Object.keys(tipos_documentales.data)[0]
+                              ].map((it) => it.descripcion);
+                              let _fases_procesales = fases_procesales.data[
+                                   Object.keys(fases_procesales.data)[0]
+                              ].map((it) => it.descripcion);
+                              let _tipos_procedimientos = tipos_procedimientos.data[
+                                   Object.keys(tipos_procedimientos.data)[0]
+                              ].map((it) => it.descripcion);
+                              let _magistrados = magistrados.data[
+                                   Object.keys(magistrados.data)[0]
+                              ].map((it) => it.descripcion);
+                              console.log(_magistrados);
+                              // documentos.tiposDocumentales.map(it=>it.descripcion)
+                              return of([
+                                   _tipos_documentales,
+                                   _fases_procesales,
+                                   _tipos_procedimientos,
+                                   _magistrados,
+                              ]);
+                         }
+                    ),
 
                     tap((d) => {
                          // console.log(d);
-                    })
+                    }),
+                    shareReplay(1)
                )
                .subscribe((data) => {
                     this.datosDynamicValues = data;
                     this.creaConfig(
                          data,
-                         filtro.documentos,
+                         filtro.tipos_documentales,
                          config1,
-                         config.procedimiento
+                         filtro.tipos_documentales
                     );
                     this.creaConfig(
                          data,
-                         filtro.documentos2,
+                         filtro.fases_procesales,
                          config1,
-                         config.procedimiento2
+                         filtro.fases_procesales
+                    );
+                    this.creaConfig(
+                         data,
+                         filtro.tipos_procedimientos,
+                         config1,
+                         filtro.tipos_procedimientos
+                    );
+                    this.creaConfig(
+                         data,
+                         filtro.magistrados,
+                         config1,
+                         filtro.magistrados
                     );
                     // console.log(this.datosDynamicValues);
                     this.showFilters$.next(true);
