@@ -1,6 +1,6 @@
 
 <section>
-  <app-filtro appFijar [offset]="10" [filtroscombinado1]="filtrosDocumentos"></app-filtro>
+  <app-filtro appFijar [offset]="10" [filtroscombinado1]="filtrosEscritos"></app-filtro>
 
   <div *ngIf="docsEscritos$ | async as documents;else error">
     <div *ngIf="isArray(documents)">

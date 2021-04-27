@@ -72,133 +72,169 @@ let form1: FormGroup = new FormGroup({
 
 let config2 = [
      {
-          tipo: "checkbox",
-          name: "procesal",
-          multi: false,
-          values: ["tipo 1", "tipo 2", "tipo 3"],
+          tipo: "array",
+          name: "tipo documento",
+          // values: [
+          //      "Acta",
+          //      "Acta conciliación",
+          //      "Acuerdo",
+          //      "Acuse de recibo",
+          //      "Auto",
+          // ],
      },
      {
           tipo: "array",
-          name: "procedimiento",
-          values: [
-               "Acta",
-               "Acta conciliación",
-               "Acuerdo",
-               "Acuse de recibo",
-               "Auto",
-          ],
+          name: "fase procesal",
+          // values: [
+          //      "Acta B",
+          //      "Acta conciliación B",
+          //      "Acuerdo B",
+          //      "Acuse de recibo B",
+          //      "Auto B",
+          // ],
      },
      {
-          tipo: "date",
+          tipo: "array",
+          name: "tipo procedimiento",
+          // values: [
+          //      "Tramite AB",
+          //      "Tramite conciliación B",
+          //      "Tramite B",
+          //      "Tramite de recibo B",
+          //      "Tramite C",
+          // ],
+     },
+     {
+          tipo: "array",
           name: "magistrado",
-          values: ["from", "until", "another"],
-     },
-     {
-          tipo: "checkbox",
-          name: "resolucion",
-          multi: true,
-          values: ["Acta vale", "Acta conciliación", "Acuerdo"],
-     },
-     {
-          tipo: "array",
-          name: "procedimiento 2",
-          values: [
-               "Acta B",
-               "Acta conciliación B",
-               "Acuerdo B",
-               "Acuse de recibo B",
-               "Auto B",
-          ],
+          // values: [
+          //      "Tramite AB",
+          //      "Tramite conciliación B",
+          //      "Tramite B",
+          //      "Tramite de recibo B",
+          //      "Tramite C",
+          // ],
      },
 ];
 let form2: FormGroup = new FormGroup({
-     procesal: new FormGroup({
-          procesal: new FormControl(""),
-     }),
+     [`arrayData0`]: new FormArray([]),
+
      [`arrayData1`]: new FormArray([]),
-     magistrado: new FormGroup({
-          from: new FormControl(""),
-          until: new FormControl(""),
-          another: new FormControl(""),
-     }),
-     resolucion: new FormGroup({
-          ["Acta vale"]: new FormControl(""),
-          ["Acta conciliación"]: new FormControl(""),
-          ["Acuerdo"]: new FormControl(""),
-     }),
-     [`arrayData4`]: new FormArray([]),
+
+     [`arrayData2`]: new FormArray([]),
+
+     [`arrayData3`]: new FormArray([]),
+     // procesal: new FormGroup({
+     //      procesal: new FormControl(""),
+     // }),
+     // [`arrayData1`]: new FormArray([]),
+     // magistrado: new FormGroup({
+     //      from: new FormControl(""),
+     //      until: new FormControl(""),
+     //      another: new FormControl(""),
+     // }),
+     // resolucion: new FormGroup({
+     //      ["Acta vale"]: new FormControl(""),
+     //      ["Acta conciliación"]: new FormControl(""),
+     //      ["Acuerdo"]: new FormControl(""),
+     // }),
+     // [`arrayData4`]: new FormArray([]),
 });
 
 let config3 = [
      {
-          tipo: "checkbox",
-          name: "procesal",
-          multi: false,
-          values: ["tipo 1", "tipo 2", "tipo 3"],
+          tipo: "array",
+          name: "tipo documento",
+          // values: [
+          //      "Acta",
+          //      "Acta conciliación",
+          //      "Acuerdo",
+          //      "Acuse de recibo",
+          //      "Auto",
+          // ],
      },
      {
           tipo: "array",
-          name: "procedimiento",
-          values: [
-               "Acta",
-               "Acta conciliación",
-               "Acuerdo",
-               "Acuse de recibo",
-               "Auto",
-          ],
+          name: "fase procesal",
+          // values: [
+          //      "Acta B",
+          //      "Acta conciliación B",
+          //      "Acuerdo B",
+          //      "Acuse de recibo B",
+          //      "Auto B",
+          // ],
      },
      {
-          tipo: "date",
+          tipo: "array",
+          name: "tipo procedimiento",
+          // values: [
+          //      "Tramite AB",
+          //      "Tramite conciliación B",
+          //      "Tramite B",
+          //      "Tramite de recibo B",
+          //      "Tramite C",
+          // ],
+     },
+     {
+          tipo: "array",
           name: "magistrado",
-          values: ["from", "until"],
+          // values: [
+          //      "Tramite AB",
+          //      "Tramite conciliación B",
+          //      "Tramite B",
+          //      "Tramite de recibo B",
+          //      "Tramite C",
+          // ],
      },
-     {
-          tipo: "checkbox",
-          name: "resolucion",
-          multi: true,
-          values: ["Acta vale", "Acta conciliación", "Acuerdo"],
-     },
-     {
-          tipo: "array",
-          name: "procedimiento 2",
-          values: [
-               "Acta B",
-               "Acta conciliación B",
-               "Acuerdo B",
-               "Acuse de recibo B",
-               "Auto B",
-          ],
-     },
+
 ];
 let form3: FormGroup = new FormGroup({
-     procesal: new FormGroup({
-          procesal: new FormControl(""),
-     }),
-     [`arrayData1`]: new FormArray([]),
-     magistrado: new FormGroup({
-          from: new FormControl(""),
-          until: new FormControl(""),
-          // magistrado2: new FormControl(""),
-     }),
-     resolucion: new FormGroup({
-          ["Acta vale"]: new FormControl(""),
-          ["Acta conciliación"]: new FormControl(""),
-          ["Acuerdo"]: new FormControl(""),
-     }),
-     [`arrayData4`]: new FormArray([]),
-});
+     [`arrayData0`]: new FormArray([]),
 
-enum filtro {
+     [`arrayData1`]: new FormArray([]),
+
+     [`arrayData2`]: new FormArray([]),
+
+     [`arrayData3`]: new FormArray([]),
+     // procesal: new FormGroup({
+     //      procesal: new FormControl(""),
+     // }),
+     // [`arrayData1`]: new FormArray([]),
+     // magistrado: new FormGroup({
+     //      from: new FormControl(""),
+     //      until: new FormControl(""),
+     //      another: new FormControl(""),
+     // }),
+     // resolucion: new FormGroup({
+     //      ["Acta vale"]: new FormControl(""),
+     //      ["Acta conciliación"]: new FormControl(""),
+     //      ["Acuerdo"]: new FormControl(""),
+     // }),
+     // [`arrayData4`]: new FormArray([]),
+});
+enum filtroDocumentos {
      tipos_documentales,
      fases_procesales,
      tipos_procedimientos,
      magistrados,
 }
-enum config {
-     procedimiento,
-     procedimiento2,
-     tramite,
+enum filtroResoluciones {
+     tipos_documentales,
+     fases_procesales,
+     tipos_procedimientos,
+     magistrados,
 }
+enum filtroEscritos {
+     tipos_documentales,
+     fases_procesales,
+     tipos_procedimientos,
+     magistrados,
+}
+// enum config {
+//      procedimiento,
+//      procedimiento2,
+//      tramite,
+// }
 
 let creaConfig = (reqVal, reqValNumb, configVar, configNumb) => {
      let datosReq = [];
@@ -222,6 +258,8 @@ export {
      form2,
      form3,
      creaConfig,
-     filtro,
+     filtroDocumentos,
+     filtroResoluciones,
+     filtroEscritos
      // config,
 };

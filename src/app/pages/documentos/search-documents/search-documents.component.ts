@@ -61,7 +61,7 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
      // formA1$_$ = this.filtroS.formGrupo1$;
 
      filtrosDocumentos;
-     filtrosEscritos;
+     // filtrosEscritos;
 
      filtroDocumentosSub = this.filtroS
           .getFiltrosDocumentos()
@@ -75,16 +75,16 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
                };
           });
 
-     filtroEscritosSub = this.filtroS
-          .getFiltrosEscritos()
-          .pipe()
-          .subscribe((data) => {
-               // console.log(data);
-               this.filtrosEscritos = {
-                    data,
-                    clase:"escritos"
-               };
-          });
+     // filtroEscritosSub = this.filtroS
+     //      .getFiltrosDocumentos()
+     //      .pipe()
+     //      .subscribe((data) => {
+     //           // console.log(data);
+     //           this.filtrosEscritos = {
+     //                data,
+     //                clase:"escritos"
+     //           };
+     //      });
 
      /*=====  End of Incorporacion Integracion nuevo Filtro  ======*/
 
@@ -117,7 +117,7 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
           //Called once, before the instance is destroyed.
           //Add 'implements OnDestroy' to the class.
           this.filtroDocumentosSub.unsubscribe();
-          this.filtroEscritosSub.unsubscribe();
+          // this.filtroEscritosSub.unsubscribe();
 
       
           

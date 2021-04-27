@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { filtro } from 'src/app/formulariosFiltrado/formulariosFiltrado.data';
+// import { filtroDocumentos } from 'src/app/formulariosFiltrado/formulariosFiltrado.data';
 import { DocumentosService } from 'src/app/services/documentos.service';
 import { FiltrosService } from 'src/app/services/filtros.service';
 
