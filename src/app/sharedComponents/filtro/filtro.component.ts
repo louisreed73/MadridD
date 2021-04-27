@@ -168,16 +168,6 @@ export class FiltroComponent implements OnInit, OnDestroy {
         console.log("Es la clase documentos!!!")
       };            
       break;
-      case "escritos": {
-
-        updateActual={
-          ...actual,
-          escritos: data
-        }
-        
-        console.log("Es la clase escritos!!!")
-      };            
-      break;
       case "resoluciones": {
 
         updateActual={
@@ -186,6 +176,16 @@ export class FiltroComponent implements OnInit, OnDestroy {
         }
         
         console.log("Es la clase resoluciones!!!")
+      };            
+      break;
+      case "escritos": {
+
+        updateActual={
+          ...actual,
+          escritos: data
+        }
+        
+        console.log("Es la clase escritos!!!")
       };            
       break;
     

@@ -9,7 +9,7 @@ import {
      of,
      Subscription,
 } from "rxjs";
-import { shareReplay, switchMap, tap } from "rxjs/operators";
+import { mergeMap, shareReplay, switchMap, tap, toArray } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import {
      config1,
@@ -17,11 +17,7 @@ import {
      config3,
      form1,
      form2,
-     form3,
-     filtroDocumentos,
-     filtroResoluciones,
-     filtroEscritos,
-     // config,
+     form3
 } from "../formulariosFiltrado/formulariosFiltrado.data";
 // import { PruebaAPIService } from "./prueba-api.service";
 
@@ -62,34 +58,45 @@ export class FiltrosService implements OnDestroy {
                ])
                .pipe(
                     switchMap(
-                         ([
-                              tipos_documentales,
-                              fases_procesales,
-                              tipos_procedimientos,
-                              magistrados,
-                         ]) => {
-                              let _tipos_documentales = tipos_documentales.data[
-                                   Object.keys(tipos_documentales.data)[0]
-                              ].map((it) => it.descripcion);
-                              let _fases_procesales = fases_procesales.data[
-                                   Object.keys(fases_procesales.data)[0]
-                              ].map((it) => it.descripcion);
-                              let _tipos_procedimientos = tipos_procedimientos.data[
-                                   Object.keys(tipos_procedimientos.data)[0]
-                              ].map((it) => it.descripcion);
-                              let _magistrados = magistrados.data[
-                                   Object.keys(magistrados.data)[0]
-                              ].map((it) => it.descripcion);
-                              console.log(_magistrados);
-                              // documentos.tiposDocumentales.map(it=>it.descripcion)
-                              return of([
-                                   _tipos_documentales,
-                                   _fases_procesales,
-                                   _tipos_procedimientos,
-                                   _magistrados,
-                              ]);
+
+                         (data) => {
+
+                              return data.map((itemData,ind)=>{
+                                   console.log(Object.keys(data[ind].data)[0])
+                                   console.log(itemData.data[Object.keys(data[ind].data)[0]])
+                                   return itemData.data[Object.keys(data[ind].data)[0]].map(it=>it.descripcion)
+                              });
+
                          }
+                         // ([
+                         //      tipos_documentales,
+                         //      fases_procesales,
+                         //      tipos_procedimientos,
+                         //      magistrados,
+                         // ]) => {
+                         //      let _tipos_documentales = tipos_documentales.data[
+                         //           Object.keys(tipos_documentales.data)[0]
+                         //      ].map((it) => it.descripcion);
+                         //      let _fases_procesales = fases_procesales.data[
+                         //           Object.keys(fases_procesales.data)[0]
+                         //      ].map((it) => it.descripcion);
+                         //      let _tipos_procedimientos = tipos_procedimientos.data[
+                         //           Object.keys(tipos_procedimientos.data)[0]
+                         //      ].map((it) => it.descripcion);
+                         //      let _magistrados = magistrados.data[
+                         //           Object.keys(magistrados.data)[0]
+                         //      ].map((it) => it.descripcion);
+                         //      console.log(_magistrados);
+                         //      // documentos.tiposDocumentales.map(it=>it.descripcion)
+                         //      return of([
+                         //           _tipos_documentales,
+                         //           _fases_procesales,
+                         //           _tipos_procedimientos,
+                         //           _magistrados,
+                         //      ]);
+                         // }
                     ),
+                    toArray(),
 
                     tap((d) => {
                          // console.log(d);
@@ -98,30 +105,41 @@ export class FiltrosService implements OnDestroy {
                )
                .subscribe((data) => {
                     // this.datosDynamicValues = data;
-                    this.creaConfig(
-                         data,
-                         filtroDocumentos.tipos_documentales,
-                         config1,
-                         filtroDocumentos.tipos_documentales
-                    );
-                    this.creaConfig(
-                         data,
-                         filtroDocumentos.fases_procesales,
-                         config1,
-                         filtroDocumentos.fases_procesales
-                    );
-                    this.creaConfig(
-                         data,
-                         filtroDocumentos.tipos_procedimientos,
-                         config1,
-                         filtroDocumentos.tipos_procedimientos
-                    );
-                    this.creaConfig(
-                         data,
-                         filtroDocumentos.magistrados,
-                         config1,
-                         filtroDocumentos.magistrados
-                    );
+
+                    data.forEach((filtro,index)=>{
+
+                         this.creaConfig(
+                              data,
+                              index,
+                              config1,
+                              index
+                         );
+
+                    })
+                    // this.creaConfig(
+                    //      data,
+                    //      filtroDocumentos.tipos_documentales,
+                    //      config1,
+                    //      filtroDocumentos.tipos_documentales
+                    // );
+                    // this.creaConfig(
+                    //      data,
+                    //      filtroDocumentos.fases_procesales,
+                    //      config1,
+                    //      filtroDocumentos.fases_procesales
+                    // );
+                    // this.creaConfig(
+                    //      data,
+                    //      filtroDocumentos.tipos_procedimientos,
+                    //      config1,
+                    //      filtroDocumentos.tipos_procedimientos
+                    // );
+                    // this.creaConfig(
+                    //      data,
+                    //      filtroDocumentos.magistrados,
+                    //      config1,
+                    //      filtroDocumentos.magistrados
+                    // );
                     // console.log(this.datosDynamicValues);
                     this.showFilters$.next(true);
                });
@@ -139,34 +157,46 @@ export class FiltrosService implements OnDestroy {
                ])
                .pipe(
                     switchMap(
-                         ([
-                              tipos_documentales,
-                              fases_procesales,
-                              tipos_procedimientos,
-                              magistrados,
-                         ]) => {
-                              let _tipos_documentales = tipos_documentales.data[
-                                   Object.keys(tipos_documentales.data)[0]
-                              ].map((it) => it.descripcion);
-                              let _fases_procesales = fases_procesales.data[
-                                   Object.keys(fases_procesales.data)[0]
-                              ].map((it) => it.descripcion);
-                              let _tipos_procedimientos = tipos_procedimientos.data[
-                                   Object.keys(tipos_procedimientos.data)[0]
-                              ].map((it) => it.descripcion);
-                              let _magistrados = magistrados.data[
-                                   Object.keys(magistrados.data)[0]
-                              ].map((it) => it.descripcion);
-                              console.log(_magistrados);
-                              // documentos.tiposDocumentales.map(it=>it.descripcion)
-                              return of([
-                                   _tipos_documentales,
-                                   _fases_procesales,
-                                   _tipos_procedimientos,
-                                   _magistrados,
-                              ]);
+
+                         (data) => {
+
+                              return data.map((itemData,ind)=>{
+                                   console.log(Object.keys(data[ind].data)[0])
+                                   console.log(itemData.data[Object.keys(data[ind].data)[0]])
+                                   return itemData.data[Object.keys(data[ind].data)[0]].map(it=>it.descripcion)
+                              });
+
                          }
+                         // ([
+                         //      tipos_documentales,
+                         //      fases_procesales,
+                         //      tipos_procedimientos,
+                         //      magistrados,
+                         // ]) => {
+                         //      let _tipos_documentales = tipos_documentales.data[
+                         //           Object.keys(tipos_documentales.data)[0]
+                         //      ].map((it) => it.descripcion);
+                         //      let _fases_procesales = fases_procesales.data[
+                         //           Object.keys(fases_procesales.data)[0]
+                         //      ].map((it) => it.descripcion);
+                         //      let _tipos_procedimientos = tipos_procedimientos.data[
+                         //           Object.keys(tipos_procedimientos.data)[0]
+                         //      ].map((it) => it.descripcion);
+                         //      let _magistrados = magistrados.data[
+                         //           Object.keys(magistrados.data)[0]
+                         //      ].map((it) => it.descripcion);
+                         //      console.log(_magistrados);
+                         //      // documentos.tiposDocumentales.map(it=>it.descripcion)
+                         //      return of([
+                         //           _tipos_documentales,
+                         //           _fases_procesales,
+                         //           _tipos_procedimientos,
+                         //           _magistrados,
+                         //      ]);
+                         // }
                     ),
+                    toArray(),
+
 
                     tap((d) => {
                          // console.log(d);
@@ -175,30 +205,42 @@ export class FiltrosService implements OnDestroy {
                )
                .subscribe((data) => {
                     // this.datosDynamicValues = data;
-                    this.creaConfig(
-                         data,
-                         filtroResoluciones.tipos_documentales,
-                         config2,
-                         filtroResoluciones.tipos_documentales
-                    );
-                    this.creaConfig(
-                         data,
-                         filtroResoluciones.fases_procesales,
-                         config2,
-                         filtroResoluciones.fases_procesales
-                    );
-                    this.creaConfig(
-                         data,
-                         filtroResoluciones.tipos_procedimientos,
-                         config2,
-                         filtroResoluciones.tipos_procedimientos
-                    );
-                    this.creaConfig(
-                         data,
-                         filtroResoluciones.magistrados,
-                         config2,
-                         filtroResoluciones.magistrados
-                    );
+
+                    data.forEach((filtro,index)=>{
+
+                         this.creaConfig(
+                              data,
+                              index,
+                              config2,
+                              index
+                         );
+
+                    })
+
+                    // this.creaConfig(
+                    //      data,
+                    //      filtroResoluciones.tipos_documentales,
+                    //      config2,
+                    //      filtroResoluciones.tipos_documentales
+                    // );
+                    // this.creaConfig(
+                    //      data,
+                    //      filtroResoluciones.fases_procesales,
+                    //      config2,
+                    //      filtroResoluciones.fases_procesales
+                    // );
+                    // this.creaConfig(
+                    //      data,
+                    //      filtroResoluciones.tipos_procedimientos,
+                    //      config2,
+                    //      filtroResoluciones.tipos_procedimientos
+                    // );
+                    // this.creaConfig(
+                    //      data,
+                    //      filtroResoluciones.magistrados,
+                    //      config2,
+                    //      filtroResoluciones.magistrados
+                    // );
                     // console.log(this.datosDynamicValues);
                     this.showFilters$.next(true);
                });
@@ -216,34 +258,46 @@ export class FiltrosService implements OnDestroy {
                ])
                .pipe(
                     switchMap(
-                         ([
-                              tipos_documentales,
-                              fases_procesales,
-                              tipos_procedimientos,
-                              magistrados,
-                         ]) => {
-                              let _tipos_documentales = tipos_documentales.data[
-                                   Object.keys(tipos_documentales.data)[0]
-                              ].map((it) => it.descripcion);
-                              let _fases_procesales = fases_procesales.data[
-                                   Object.keys(fases_procesales.data)[0]
-                              ].map((it) => it.descripcion);
-                              let _tipos_procedimientos = tipos_procedimientos.data[
-                                   Object.keys(tipos_procedimientos.data)[0]
-                              ].map((it) => it.descripcion);
-                              let _magistrados = magistrados.data[
-                                   Object.keys(magistrados.data)[0]
-                              ].map((it) => it.descripcion);
-                              console.log(_magistrados);
-                              // documentos.tiposDocumentales.map(it=>it.descripcion)
-                              return of([
-                                   _tipos_documentales,
-                                   _fases_procesales,
-                                   _tipos_procedimientos,
-                                   _magistrados,
-                              ]);
+
+                         (data) => {
+
+                              return data.map((itemData,ind)=>{
+                                   console.log(Object.keys(data[ind].data)[0])
+                                   console.log(itemData.data[Object.keys(data[ind].data)[0]])
+                                   return itemData.data[Object.keys(data[ind].data)[0]].map(it=>it.descripcion)
+                              });
+
                          }
+
+                         // ([
+                         //      tipos_documentales,
+                         //      fases_procesales,
+                         //      tipos_procedimientos,
+                         //      magistrados,
+                         // ]) => {
+                         //      let _tipos_documentales = tipos_documentales.data[
+                         //           Object.keys(tipos_documentales.data)[0]
+                         //      ].map((it) => it.descripcion);
+                         //      let _fases_procesales = fases_procesales.data[
+                         //           Object.keys(fases_procesales.data)[0]
+                         //      ].map((it) => it.descripcion);
+                         //      let _tipos_procedimientos = tipos_procedimientos.data[
+                         //           Object.keys(tipos_procedimientos.data)[0]
+                         //      ].map((it) => it.descripcion);
+                         //      let _magistrados = magistrados.data[
+                         //           Object.keys(magistrados.data)[0]
+                         //      ].map((it) => it.descripcion);
+                         //      console.log(_magistrados);
+                         //      // documentos.tiposDocumentales.map(it=>it.descripcion)
+                         //      return of([
+                         //           _tipos_documentales,
+                         //           _fases_procesales,
+                         //           _tipos_procedimientos,
+                         //           _magistrados,
+                         //      ]);
+                         // }
                     ),
+                    toArray(),
 
                     tap((d) => {
                          // console.log(d);
@@ -252,30 +306,43 @@ export class FiltrosService implements OnDestroy {
                )
                .subscribe((data) => {
                     // this.datosDynamicValues = data;
-                    this.creaConfig(
-                         data,
-                         filtroEscritos.tipos_documentales,
-                         config3,
-                         filtroEscritos.tipos_documentales
-                    );
-                    this.creaConfig(
-                         data,
-                         filtroEscritos.fases_procesales,
-                         config3,
-                         filtroEscritos.fases_procesales
-                    );
-                    this.creaConfig(
-                         data,
-                         filtroEscritos.tipos_procedimientos,
-                         config3,
-                         filtroEscritos.tipos_procedimientos
-                    );
-                    this.creaConfig(
-                         data,
-                         filtroEscritos.magistrados,
-                         config3,
-                         filtroEscritos.magistrados
-                    );
+
+                    data.forEach((filtro,index)=>{
+
+                         this.creaConfig(
+                              data,
+                              index,
+                              config3,
+                              index
+                         );
+
+                    })
+
+
+                    // this.creaConfig(
+                    //      data,
+                    //      filtroEscritos.tipos_documentales,
+                    //      config3,
+                    //      filtroEscritos.tipos_documentales
+                    // );
+                    // this.creaConfig(
+                    //      data,
+                    //      filtroEscritos.fases_procesales,
+                    //      config3,
+                    //      filtroEscritos.fases_procesales
+                    // );
+                    // this.creaConfig(
+                    //      data,
+                    //      filtroEscritos.tipos_procedimientos,
+                    //      config3,
+                    //      filtroEscritos.tipos_procedimientos
+                    // );
+                    // this.creaConfig(
+                    //      data,
+                    //      filtroEscritos.magistrados,
+                    //      config3,
+                    //      filtroEscritos.magistrados
+                    // );
                     // console.log(this.datosDynamicValues);
                     this.showFilters$.next(true);
                });

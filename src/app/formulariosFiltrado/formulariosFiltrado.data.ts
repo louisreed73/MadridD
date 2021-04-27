@@ -212,24 +212,24 @@ let form3: FormGroup = new FormGroup({
      // }),
      // [`arrayData4`]: new FormArray([]),
 });
-enum filtroDocumentos {
-     tipos_documentales,
-     fases_procesales,
-     tipos_procedimientos,
-     magistrados,
-}
-enum filtroResoluciones {
-     tipos_documentales,
-     fases_procesales,
-     tipos_procedimientos,
-     magistrados,
-}
-enum filtroEscritos {
-     tipos_documentales,
-     fases_procesales,
-     tipos_procedimientos,
-     magistrados,
-}
+// enum filtroDocumentos {
+//      tipos_documentales,
+//      fases_procesales,
+//      tipos_procedimientos,
+//      magistrados,
+// }
+// enum filtroResoluciones {
+//      tipos_documentales,
+//      fases_procesales,
+//      tipos_procedimientos,
+//      magistrados,
+// }
+// enum filtroEscritos {
+//      tipos_documentales,
+//      fases_procesales,
+//      tipos_procedimientos,
+//      magistrados,
+// }
 // enum config {
 //      procedimiento,
 //      procedimiento2,
@@ -258,8 +258,8 @@ export {
      form2,
      form3,
      creaConfig,
-     filtroDocumentos,
-     filtroResoluciones,
-     filtroEscritos
+     // filtroDocumentos,
+     // filtroResoluciones,
+     // filtroEscritos
      // config,
 };
