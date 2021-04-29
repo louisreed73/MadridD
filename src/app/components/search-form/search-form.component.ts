@@ -86,7 +86,7 @@ export class SearchFormComponent implements OnInit {
      }
 
      triggerNewSearch(inputSearch) {
-          this.window.scrollTo(0, 0);
+          // this.window.scrollTo(0, 0);
 
           // Stopping the scroll trigger until http request response
           this.combinacion.stopScroll$.next(true);

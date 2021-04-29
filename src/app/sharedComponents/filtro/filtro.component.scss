@@ -245,4 +245,8 @@ input.custom-radio-check:checked + label::after {
     padding:1rem;
 }
 
+label.dynamicControl {
+    pointer-events:none;
+}
+
 
