@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FijarDirective } from "src/app/directives/fijar.directive";
 import { FiltroComponent } from '../../sharedComponents/filtro/filtro.component';
 import { AutocompleteComponent } from '../../sharedComponents/autocomplete/autocomplete.component';
+import { ButtonTriggerComponent } from '../../sharedComponents/button-trigger/button-trigger.component';
 
 @NgModule({
      declarations: [
@@ -13,8 +14,9 @@ import { AutocompleteComponent } from '../../sharedComponents/autocomplete/autoc
           FijarDirective,
           AutocompleteComponent,
           FiltroComponent,
-
-          ],
+          ButtonTriggerComponent,
+          
+     ],
      imports: [
           CommonModule,
           FormsModule, 
@@ -28,7 +30,8 @@ import { AutocompleteComponent } from '../../sharedComponents/autocomplete/autoc
           MatProgressSpinnerModule, 
           FiltroComponent,
           FijarDirective,
-          AutocompleteComponent
+          AutocompleteComponent,
+          ButtonTriggerComponent,
      ],
 })
 export class SharedUtilitiesModule {}

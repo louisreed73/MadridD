@@ -25,6 +25,10 @@ export class FijarDirective implements OnInit, OnDestroy {
   ngOnInit(): void {
     // console.log(this._window);
     // console.log(this.offset);
+    if(this.window.pageYOffset>= +this.offset) {
+      this.render.setAttribute(this.elRef.nativeElement, 'class', 'fijo');
+    };
+
     this.windowSub = fromEvent(this.window, 'scroll')
       .pipe(debounceTime(10))
       .subscribe((e: Event) => {

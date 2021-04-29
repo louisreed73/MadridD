@@ -17,7 +17,7 @@ import {
      config3,
      form1,
      form2,
-     form3
+     form3,
 } from "../formulariosFiltrado/formulariosFiltrado.data";
 // import { PruebaAPIService } from "./prueba-api.service";
 
@@ -54,19 +54,22 @@ export class FiltrosService implements OnDestroy {
                this.http.get<any>(
                     `${environment.baseURLApi}/tipos-procedimientos`
                ),
-               this.http.post<any>(`${environment.baseURLApi}/magistrados`, {})
-               ])
+               this.http.post<any>(`${environment.baseURLApi}/magistrados`, {}),
+          ])
                .pipe(
                     switchMap(
-
                          (data) => {
-
-                              return data.map((itemData,ind)=>{
-                                   console.log(Object.keys(data[ind].data)[0])
-                                   console.log(itemData.data[Object.keys(data[ind].data)[0]])
-                                   return itemData.data[Object.keys(data[ind].data)[0]].map(it=>it.descripcion)
+                              return data.map((itemData, ind) => {
+                                   console.log(Object.keys(data[ind].data)[0]);
+                                   console.log(
+                                        itemData.data[
+                                             Object.keys(data[ind].data)[0]
+                                        ]
+                                   );
+                                   return itemData.data[
+                                        Object.keys(data[ind].data)[0]
+                                   ].map((it) => it.descripcion);
                               });
-
                          }
                          // ([
                          //      tipos_documentales,
@@ -106,16 +109,9 @@ export class FiltrosService implements OnDestroy {
                .subscribe((data) => {
                     // this.datosDynamicValues = data;
 
-                    data.forEach((filtro,index)=>{
-
-                         this.creaConfig(
-                              data,
-                              index,
-                              config1,
-                              index
-                         );
-
-                    })
+                    data.forEach((filtro, index) => {
+                         this.creaConfig(data, index, config1, index);
+                    });
                     // this.creaConfig(
                     //      data,
                     //      filtroDocumentos.tipos_documentales,
@@ -146,26 +142,27 @@ export class FiltrosService implements OnDestroy {
      }
      getRequestValoresResoluciones() {
           this.reqValoresResolucionesSub = combineLatest([
-               this.http.get<any>(
-                    `${environment.baseURLApi}/tipos-documentales`
-               ),
-               this.http.get<any>(`${environment.baseURLApi}/fases-procesales`),
-               this.http.get<any>(
-                    `${environment.baseURLApi}/tipos-procedimientos`
-               ),
-               this.http.post<any>(`${environment.baseURLApi}/magistrados`, {})
-               ])
+               this.http.get<any>(`${environment.baseURLApi}/tipos-resolucion`),
+               // this.http.get<any>(`${environment.baseURLApi}/fases-procesales`),
+               // this.http.get<any>(
+               //      `${environment.baseURLApi}/tipos-procedimientos`
+               // ),
+               // this.http.post<any>(`${environment.baseURLApi}/magistrados`, {}),
+          ])
                .pipe(
                     switchMap(
-
                          (data) => {
-
-                              return data.map((itemData,ind)=>{
-                                   console.log(Object.keys(data[ind].data)[0])
-                                   console.log(itemData.data[Object.keys(data[ind].data)[0]])
-                                   return itemData.data[Object.keys(data[ind].data)[0]].map(it=>it.descripcion)
+                              return data.map((itemData, ind) => {
+                                   console.log(Object.keys(data[ind].data)[0]);
+                                   console.log(
+                                        itemData.data[
+                                             Object.keys(data[ind].data)[0]
+                                        ]
+                                   );
+                                   return itemData.data[
+                                        Object.keys(data[ind].data)[0]
+                                   ].map((it) => it.descripcion);
                               });
-
                          }
                          // ([
                          //      tipos_documentales,
@@ -197,7 +194,6 @@ export class FiltrosService implements OnDestroy {
                     ),
                     toArray(),
 
-
                     tap((d) => {
                          // console.log(d);
                     }),
@@ -206,16 +202,9 @@ export class FiltrosService implements OnDestroy {
                .subscribe((data) => {
                     // this.datosDynamicValues = data;
 
-                    data.forEach((filtro,index)=>{
-
-                         this.creaConfig(
-                              data,
-                              index,
-                              config2,
-                              index
-                         );
-
-                    })
+                    data.forEach((filtro, index) => {
+                         this.creaConfig(data, index, config2, index);
+                    });
 
                     // this.creaConfig(
                     //      data,
@@ -247,26 +236,27 @@ export class FiltrosService implements OnDestroy {
      }
      getRequestValoresEscritos() {
           this.reqValoresResolucionesSub = combineLatest([
-               this.http.get<any>(
-                    `${environment.baseURLApi}/tipos-documentales`
-               ),
-               this.http.get<any>(`${environment.baseURLApi}/fases-procesales`),
-               this.http.get<any>(
-                    `${environment.baseURLApi}/tipos-procedimientos`
-               ),
-               this.http.post<any>(`${environment.baseURLApi}/magistrados`, {})
-               ])
+               this.http.get<any>(`${environment.baseURLApi}/tipos-escritos`),
+               // this.http.get<any>(`${environment.baseURLApi}/fases-procesales`),
+               // this.http.get<any>(
+               //      `${environment.baseURLApi}/tipos-procedimientos`
+               // ),
+               // this.http.post<any>(`${environment.baseURLApi}/magistrados`, {}),
+          ])
                .pipe(
                     switchMap(
-
                          (data) => {
-
-                              return data.map((itemData,ind)=>{
-                                   console.log(Object.keys(data[ind].data)[0])
-                                   console.log(itemData.data[Object.keys(data[ind].data)[0]])
-                                   return itemData.data[Object.keys(data[ind].data)[0]].map(it=>it.descripcion)
+                              return data.map((itemData, ind) => {
+                                   console.log(Object.keys(data[ind].data)[0]);
+                                   console.log(
+                                        itemData.data[
+                                             Object.keys(data[ind].data)[0]
+                                        ]
+                                   );
+                                   return itemData.data[
+                                        Object.keys(data[ind].data)[0]
+                                   ].map((it) => it.descripcion);
                               });
-
                          }
 
                          // ([
@@ -307,17 +297,9 @@ export class FiltrosService implements OnDestroy {
                .subscribe((data) => {
                     // this.datosDynamicValues = data;
 
-                    data.forEach((filtro,index)=>{
-
-                         this.creaConfig(
-                              data,
-                              index,
-                              config3,
-                              index
-                         );
-
-                    })
-
+                    data.forEach((filtro, index) => {
+                         this.creaConfig(data, index, config3, index);
+                    });
 
                     // this.creaConfig(
                     //      data,
@@ -347,7 +329,6 @@ export class FiltrosService implements OnDestroy {
                     this.showFilters$.next(true);
                });
      }
-
 
      creaConfig(reqVal, reqValNumb, configVar, configNumb) {
           let datosReq = [];

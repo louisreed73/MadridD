@@ -74,21 +74,20 @@ export class SearchEscritosComponent implements OnDestroy {
 
      // formA1$_$ = this.filtroS.formGrupo1$;
 
-     // filtrosDocumentos;
+     filtrosDocumentos;
      filtrosEscritos;
 
-     // filtroDocumentosSub = this.filtroS
-     //      .getFiltrosDocumentos()
-     //      .pipe(
-     //           // delay(100)
-     //      )
-     //      .subscribe((data) => {
-     //           // console.log(data);
-     //           this.filtrosDocumentos  = {
-     //                data,
-     //                clase:"documentos"
-     //           };
-     //      });
+     filtroDocumentosSub = this.filtroS
+          .getFiltrosDocumentos()
+          .pipe()
+          .subscribe((data) => {
+               // console.log(data);
+               // this.filtrosDocumentos = data;
+               this.filtrosDocumentos = {
+                    data:data,
+                    clase:"documentos"
+               };
+          });
 
      filtroEscritosSub = this.filtroS
           .getFiltrosEscritos()
@@ -121,8 +120,8 @@ export class SearchEscritosComponent implements OnDestroy {
      }
 
      ngOnDestroy(): void {
-          this.documentosSub.unsubscribe();
-          // this.filtroDocumentosSub.unsubscribe();
+          // this.documentosSub.unsubscribe();
+          this.filtroDocumentosSub.unsubscribe();
           this.filtroEscritosSub.unsubscribe();
      }
 }

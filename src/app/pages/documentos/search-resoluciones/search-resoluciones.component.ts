@@ -75,31 +75,21 @@ export class SearchResolucionesComponent implements OnDestroy {
 
      // formA1$_$ = this.filtroS.formGrupo1$;
 
-     // filtrosDocumentos;
-     // filtrosEscritos;
+     filtrosDocumentos;
      filtrosResoluciones;
 
-     // filtroDocumentosSub = this.filtroS
-     //      .getFiltrosResoluciones()
-     //      .pipe()
-     //      .subscribe((data) => {
-     //           // console.log(data);
-     //           this.filtrosDocumentos = {
-     //                data,
-     //                clase:"documentos"
-     //           };
-     //      });
+     filtroDocumentosSub = this.filtroS
+          .getFiltrosDocumentos()
+          .pipe()
+          .subscribe((data) => {
+               // console.log(data);
+               // this.filtrosDocumentos = data;
+               this.filtrosDocumentos = {
+                    data:data,
+                    clase:"documentos"
+               };
+          });
 
-     // filtroEscritosSub = this.filtroS
-     //      .getFiltrosEscritos()
-     //      .pipe()
-     //      .subscribe((data) => {
-     //           // console.log(data);
-     //           this.filtrosEscritos = {
-     //                data,
-     //                clase:"escritos"
-     //           };
-     //      });
      filtroResolucionesSub = this.filtroS
           .getFiltrosResoluciones()
           .pipe()
@@ -129,9 +119,9 @@ export class SearchResolucionesComponent implements OnDestroy {
      }
 
      ngOnDestroy(): void {
-          this.documentosSub.unsubscribe();
-          // this.filtroDocumentosSub.unsubscribe();
+          // this.documentosSub.unsubscribe();
           // this.filtroEscritosSub.unsubscribe();
+          this.filtroDocumentosSub.unsubscribe();
           this.filtroResolucionesSub.unsubscribe();
      }
 }

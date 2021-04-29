@@ -1,5 +1,7 @@
 .search {
     position:relative;
+    display:flex;
+    margin-top:1rem;
 }
 
 input {
@@ -9,7 +11,6 @@ input {
 }
 
 input#search {
-    margin-top:1rem;
     border:none;
     outline:none;
     padding:1rem;
@@ -17,10 +18,14 @@ input#search {
 }
 
 img.search {
-    position: absolute;
-    top: 1.9rem;
-    left: 30.5rem;
+    position: relative;
+    top: 0rem;
+    right: 4.5rem;
     width: 2rem;
     height: 2rem;
 
+}
+
+label {
+    position:relative
 }

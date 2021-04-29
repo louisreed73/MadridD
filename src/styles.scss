@@ -54,8 +54,8 @@ input {
 
 header {
   height: 9rem;
-  background: red;
-  color: white;
+  background: white;
+  color: rgba(118, 0, 0, 1);
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -77,6 +77,26 @@ header {
   background: red;
   width: 30rem;
   text-align: center;
+}
+
+.filtrosSection {
+  display: flex;
+  background: gainsboro;
+  width: 100%;
+}
+
+.fijoStart {
+  position: fixed;
+  display: flex;
+  top: 12.8rem;
+}
+
+.fijo {
+  position: fixed;
+  display: flex;
+  width: calc(100% - 5.9rem);
+  top: 12.8rem;
+  z-index: 10;
 }
 
 

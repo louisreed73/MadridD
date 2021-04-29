@@ -7,7 +7,7 @@ import { AppComponent } from "./app.component";
 import { DataRetrievalInterceptor } from "./interceptors/data-retrieval.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import {serverAPI} from "./mirage.api";
+// import {serverAPI} from "./mirage.api";
 
 
 @NgModule({

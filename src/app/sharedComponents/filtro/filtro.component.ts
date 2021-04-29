@@ -15,6 +15,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
   @Input() filtroscombinado1;
   configFiltro;
   filtroFormGroup: FormGroup;
+  clase: string;
   indice = [];
   sugerencia: Object;
   filtrosArrayFormsSubs:Subscription;
@@ -79,6 +80,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
     this.show$=this.filtrosServ.showFilters$
     this.configFiltro = this.filtroscombinado1.data[0];
     this.filtroFormGroup = this.filtroscombinado1.data[1];
+    this.clase=this.filtroscombinado1.clase;
     this.propiedadesConfigKeys= Object.keys(this.filtroscombinado1.data[0]);
     
     this.filtrosArrayFormsSubs=this.filtroFormGroup.valueChanges
@@ -119,7 +121,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
 
       (<FormArray>this.filtroFormGroup.get(arrayData)).push(
         new FormGroup({
-          [`${nombrado}`]: new FormControl(false),
+          [`${nombrado}`]: new FormControl(true),
         })
       );
     };

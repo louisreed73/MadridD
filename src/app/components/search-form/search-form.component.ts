@@ -2,14 +2,16 @@ import {
      AfterViewInit,
      ChangeDetectionStrategy,
      Component,
+     ElementRef,
      Inject,
      OnInit,
      ViewChild,
 } from "@angular/core";
 import { FormControl, NgForm } from "@angular/forms";
 import { Subscription } from "rxjs";
-import { debounceTime } from "rxjs/operators";
+import { debounceTime, tap } from "rxjs/operators";
 import { DocumentosService } from "src/app/services/documentos.service";
+import { SearchTriggerService } from "src/app/services/search-trigger.service";
 
 @Component({
      selector: "app-search-form",
@@ -33,7 +35,7 @@ export class SearchFormComponent implements OnInit {
      //form Control del input del string de búsqueda
      searchInput = new FormControl();
      // Selections Filters to apply for the documents
-     @ViewChild(NgForm, { static: true }) formulario: NgForm;
+     // @ViewChild(NgForm, { static: true }) formulario: NgForm;
 
      /*=====  End of User input references to get data  ======*/
 
@@ -46,21 +48,39 @@ export class SearchFormComponent implements OnInit {
 
      /*=====  End of class members  ======*/
 
+
      constructor(
           private combinacion: DocumentosService,
-          @Inject(Window) private window: Window
+          @Inject(Window) private window: Window,
+       private searchTrigger:SearchTriggerService
+
 
      ) {}
 
      ngOnInit() {
           // String query for get documents based in this term
           // We subscribe to changes in string query
-          this.Subc = this.searchInput.valueChanges
-               .pipe(debounceTime(300))
-               .subscribe((inputSearch) => {
-                    this.triggerNewSearch(inputSearch)
-               });
+          // this.Subc = this.searchInput.valueChanges
+          //      .pipe(debounceTime(300))
+          //      .subscribe((inputSearch) => {
+          //           this.triggerNewSearch(inputSearch)
+          //      });
+               
+               
+               this.Subc = this.searchTrigger.triggerSearch
+               .pipe(
+                    tap(console.log)
+                    )
+                    .subscribe(()=>{
+                         console.log(this.searchInput.value)
+               this.triggerNewSearch(this.searchInput.value)
+
+          })     
+          
+          
      }
+
+
      ngOnDestroy(): void {
           // We subscribe to changes in string query
           this.Subc.unsubscribe();
