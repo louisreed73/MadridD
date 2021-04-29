@@ -13,6 +13,7 @@ import {
 import { catchError, shareReplay, startWith, switchMap, tap, toArray } from "rxjs/operators";
 import { DocsEscritosService } from "./docs-escritos.service";
 import { DocsResolucionesService } from "./docs-resoluciones.service";
+import { InfoService } from "./info.service";
 import { SearchTriggerService } from "./search-trigger.service";
 
 @Injectable({
@@ -194,7 +195,9 @@ export class DocumentosService implements OnDestroy {
           private http: HttpClient,
           private docsEscritos: DocsEscritosService,
           private docsResoluciones: DocsResolucionesService,
-          private searchTrigger:SearchTriggerService
+          private searchTrigger:SearchTriggerService,
+          private infoServ: InfoService
+
      ) {
 
           this.documentos$=this.searchTrigger.newTriggerSearch
@@ -278,8 +281,12 @@ export class DocumentosService implements OnDestroy {
                     this.docsEscritos.documentosEscritosLength$.next(
                          +filtroEscritos.length
                     );
+
      
                     this.documentosLength$.next(documentsQueryAcum.length);
+
+                    this.infoServ.documentosInfo$.next(`Mostrando ${documentsQueryAcum.length} documentos del Total Documentos: ${this.docsQueryTotal}`);
+
      
                     //Realizamos el filtro de resoluciones.
                     let filtroResoluciones = documentsQueryAcum.filter(
