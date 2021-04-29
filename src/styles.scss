@@ -83,6 +83,10 @@ header {
   display: flex;
   background: gainsboro;
   width: 100%;
+  flex-flow: row wrap;
+  max-height: 12rem;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .fijoStart {

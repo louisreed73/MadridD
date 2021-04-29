@@ -200,7 +200,7 @@ export class DocumentosService implements OnDestroy {
           this.documentos$=this.searchTrigger.newTriggerSearch
           .pipe(
                tap(console.log),
-               startWith("Comienzo"),
+               // startWith("Comienzo"),
                switchMap((params) => {
                     console.log(
                          this.searchTrigger.updatedFiltro,
