@@ -60,22 +60,21 @@ export class SearchFormComponent implements OnInit {
      ngOnInit() {
           // String query for get documents based in this term
           // We subscribe to changes in string query
-          // this.Subc = this.searchInput.valueChanges
-          //      .pipe(debounceTime(300))
-          //      .subscribe((inputSearch) => {
-          //           this.triggerNewSearch(inputSearch)
-          //      });
+          this.Subc = this.searchInput.valueChanges
+               .pipe(debounceTime(300))
+               .subscribe((inputSearch) => {
+                    this.triggerNewSearch(inputSearch)
+               });
                
                
-               this.Subc = this.searchTrigger.triggerSearch
-               .pipe(
-                    tap(console.log)
-                    )
-                    .subscribe(()=>{
-                         console.log(this.searchInput.value)
-               this.triggerNewSearch(this.searchInput.value)
+          //      this.Subc = this.searchTrigger.triggerSearch
+          //      .pipe(
+          //           // tap(console.log)
+          //           )
+          //           .subscribe(()=>{
+          //      // this.triggerNewSearch(this.searchInput.value)
 
-          })     
+          // })     
           
           
      }
@@ -92,9 +91,13 @@ export class SearchFormComponent implements OnInit {
           // Stopping the scroll trigger until http request response
           this.combinacion.stopScroll$.next(true);
           // Communicate to subscribers change in search query string
-          this.combinacion.inputSearch$.next(inputSearch);
+          // this.combinacion.inputSearch$.next(inputSearch);
           // Sending page 1 - always when changed input or selections
           // Scroll is unique responsible for increment pagination
-          this.combinacion.pagina$.next(this.pagina);
+          // this.combinacion.pagina$.next(this.pagina);
+
+
+          this.searchTrigger.updatedSearch = inputSearch;
+          this.searchTrigger.updatedPagina = this.pagina;
      }
 }

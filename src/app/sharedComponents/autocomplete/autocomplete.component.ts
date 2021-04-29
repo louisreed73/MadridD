@@ -34,10 +34,10 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
       this.sugerencias = [];
       return
     }
-    this.sugerencias = this.sugerenciasData.filter((ciudad) => {
+    this.sugerencias = this.sugerenciasData.filter((value) => {
       // console.log("estoy filtrando", ciudad)
       // return ciudad.search(new RegExp(`${data}`, 'gi')) !== -1;
-      return ciudad.search(new RegExp(`${v}`, 'gi')) !== -1;
+      return value.search(new RegExp(`${v}`, 'gi')) !== -1;
     })
 
     
@@ -64,21 +64,21 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
         // startWith("")
         )
       .subscribe((data) => {
-        console.log(data)
-        console.log(this.sugerenciasData)
+        // console.log(data)
+        // console.log(this.sugerenciasData)
         
-        this.sugerencias = this.sugerenciasData.filter((ciudad) => {
-          console.log("estoy filtrando", ciudad)
-          // return ciudad.search(new RegExp(`${data}`, 'gi')) !== -1;
-          return ciudad.search(new RegExp(`${data}`, 'gi')) !== -1;
+        this.sugerencias = this.sugerenciasData.filter((value) => {
+          console.log("estoy filtrando", value)
+          // return value.search(new RegExp(`${data}`, 'gi')) !== -1;
+          return value.search(new RegExp(`${data}`, 'gi')) !== -1;
         });
 
         if (data === '') {
-          console.log(`Hay un cambio del input: ${data}`,"color:pink")
+          // console.log(`Hay un cambio del input: ${data}`,"color:pink")
           this.sugerencias = [];
           // return
         }
-        console.log(this.sugerencias)
+        // console.log(this.sugerencias)
 
       });
   }

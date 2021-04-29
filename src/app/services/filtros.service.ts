@@ -60,12 +60,12 @@ export class FiltrosService implements OnDestroy {
                     switchMap(
                          (data) => {
                               return data.map((itemData, ind) => {
-                                   console.log(Object.keys(data[ind].data)[0]);
-                                   console.log(
-                                        itemData.data[
-                                             Object.keys(data[ind].data)[0]
-                                        ]
-                                   );
+                                   // console.log(Object.keys(data[ind].data)[0]);
+                                   // console.log(
+                                   //      itemData.data[
+                                   //           Object.keys(data[ind].data)[0]
+                                   //      ]
+                                   // );
                                    return itemData.data[
                                         Object.keys(data[ind].data)[0]
                                    ].map((it) => it.descripcion);
@@ -153,12 +153,12 @@ export class FiltrosService implements OnDestroy {
                     switchMap(
                          (data) => {
                               return data.map((itemData, ind) => {
-                                   console.log(Object.keys(data[ind].data)[0]);
-                                   console.log(
-                                        itemData.data[
-                                             Object.keys(data[ind].data)[0]
-                                        ]
-                                   );
+                                   // console.log(Object.keys(data[ind].data)[0]);
+                                   // console.log(
+                                   //      itemData.data[
+                                   //           Object.keys(data[ind].data)[0]
+                                   //      ]
+                                   // );
                                    return itemData.data[
                                         Object.keys(data[ind].data)[0]
                                    ].map((it) => it.descripcion);
@@ -247,12 +247,12 @@ export class FiltrosService implements OnDestroy {
                     switchMap(
                          (data) => {
                               return data.map((itemData, ind) => {
-                                   console.log(Object.keys(data[ind].data)[0]);
-                                   console.log(
-                                        itemData.data[
-                                             Object.keys(data[ind].data)[0]
-                                        ]
-                                   );
+                                   // console.log(Object.keys(data[ind].data)[0]);
+                                   // console.log(
+                                   //      itemData.data[
+                                   //           Object.keys(data[ind].data)[0]
+                                   //      ]
+                                   // );
                                    return itemData.data[
                                         Object.keys(data[ind].data)[0]
                                    ].map((it) => it.descripcion);
@@ -336,7 +336,7 @@ export class FiltrosService implements OnDestroy {
                datosReq.push(item);
           });
           // console.log(datosReq);
-          console.log(configVar[configNumb]);
+          // console.log(configVar[configNumb]);
 
           configVar[configNumb].values = datosReq;
           // console.log(config1);

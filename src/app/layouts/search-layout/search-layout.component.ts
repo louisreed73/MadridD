@@ -7,6 +7,7 @@ import {
 import { Subject, Subscription } from "rxjs";
 import { tap } from "rxjs/operators";
 import { DocumentosService } from "src/app/services/documentos.service";
+import { SearchTriggerService } from "src/app/services/search-trigger.service";
 import { SpinnerService } from "src/app/services/spinner.service";
 
 @Component({
@@ -45,7 +46,9 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
 
      constructor(
           private documentos: DocumentosService,
-          private spinner: SpinnerService
+          private spinner: SpinnerService,
+          private searchTrigger:SearchTriggerService
+
      ) {}
 
      ngOnInit() {
@@ -72,9 +75,11 @@ export class SearchLayoutComponent implements OnInit, OnDestroy {
 
      onScroll() {
           // On scroll we stopped the handler to prevent continously sending request to API
-          this.documentos.stopScroll$.next(true);
           // We increment pagination for the next request
-          this.documentos.pagina$.next(this.pagina + 1);
+          this.documentos.stopScroll$.next(true);
+          this.searchTrigger.updatedPagina+=1;
+          this.searchTrigger.newTriggerSearch.next()
+          // this.documentos.pagina$.next(this.searchTrigger.updatedPagina + 1);
      }
 
      ngOnDestroy(): void {

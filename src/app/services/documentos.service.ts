@@ -3,14 +3,17 @@ import { Injectable, OnDestroy } from "@angular/core";
 import {
      BehaviorSubject,
      combineLatest,
+     from,
+     Observable,
      of,
      Subject,
      Subscription,
      throwError,
 } from "rxjs";
-import { catchError, shareReplay, switchMap, tap } from "rxjs/operators";
+import { catchError, shareReplay, startWith, switchMap, tap, toArray } from "rxjs/operators";
 import { DocsEscritosService } from "./docs-escritos.service";
 import { DocsResolucionesService } from "./docs-resoluciones.service";
+import { SearchTriggerService } from "./search-trigger.service";
 
 @Injectable({
      providedIn: "root",
@@ -86,111 +89,235 @@ export class DocumentosService implements OnDestroy {
      // Observable to react to input query string / Form Filters / page change
      // in this pipeline we are going to make http request based in this information
      // Logic to check acumulated data, based in page number - API pagination
-     documentos$ = combineLatest(
-          this.inputSearch$.asObservable(),
-          this.formularioFiltros$.asObservable(),
-          this.pagina$.asObservable()
-     ).pipe(
-          tap(([search, formulario, pagina]) => {
-               // saving all the data
-               this.search = search;
-               this.formulario = formulario;
-               this.pagina = pagina;
-               console.log(`%cEsto es lo que recibo de los filtros: ${JSON.stringify(this.formulario,null,3)}`,"color:gold");
-          }),
-          switchMap((obsCombined) => {
-               // if page is 1 / we send new data with the new string query -or change in filters - new API request - to get total documents
-               if (this.pagina < 2) {
-                    this.documentosTotalQueryLengthS = this.http
-                         .get<any>(`${this.url}?q=${this.search}`)
-                         .subscribe((d) => {
-                              this.documentosTotalQueryLength$.next(d.length);
+     documentos$:Observable<any>;
+     // combineLatest(
+     //      this.inputSearch$.asObservable(),
+     //      this.formularioFiltros$.asObservable(),
+     //      this.pagina$.asObservable()
+     // ).pipe(
+     //      tap(([search, formulario, pagina]) => {
+     //           // saving all the data
+     //           this.search = search;
+     //           this.formulario = formulario;
+     //           this.pagina = pagina;
+     //           console.log(`%cEsto es lo que recibo de los filtros: ${JSON.stringify(this.formulario,null,3)}`,"color:gold");
+     //      }),
+     //      switchMap((obsCombined) => {
+     //           // if page is 1 / we send new data with the new string query -or change in filters - new API request - to get total documents
+     //           if (this.pagina < 2) {
+     //                this.documentosTotalQueryLengthS = this.http
+     //                     .get<any>(`${this.url}?q=${this.search}`)
+     //                     .subscribe((d) => {
+     //                          this.documentosTotalQueryLength$.next(d.length);
 
-                              // data to calculate total perc of documents received from pagination with respecto to documents.
-                              this.docsQueryTotal = d.length;
-                         });
-               }
+     //                          // data to calculate total perc of documents received from pagination with respecto to documents.
+     //                          this.docsQueryTotal = d.length;
+     //                     });
+     //           }
 
-               // during this operation we cannot trigger scroll handler to prevent more API calls
-               this.stopScroll$.next(true);
+     //           // during this operation we cannot trigger scroll handler to prevent more API calls
+     //           this.stopScroll$.next(true);
 
-               // we return observable with API call with pagination
-               return this.http.get<any>(
-                    `${this.url}?q=${this.search}&_page=${this.pagina}&_limit=${this.pageLimit}`
-               );
-          }),
-          catchError((err) => {
-               //Error throwing to handle data in each observable pipe
-               this.docsEscritos.docsEscritosSource$.error(err);
-               this.docsResoluciones.docsResolucionesSource$.error(err);
+     //           // we return observable with API call with pagination
+     //           return this.http.get<any>(
+     //                `${this.url}?q=${this.search}&_page=${this.pagina}&_limit=${this.pageLimit}`
+     //           );
+     //      }),
+     //      catchError((err) => {
+     //           //Error throwing to handle data in each observable pipe
+     //           this.docsEscritos.docsEscritosSource$.error(err);
+     //           this.docsResoluciones.docsResolucionesSource$.error(err);
 
-               return throwError(err);
-          }),
-          switchMap((obsPagination) => {
-               //Depending of page number we overwrite acumulated array or inserting more documents based on query string and filters
-               if (this.pagina < 2) {
-                    this.data = obsPagination;
-               }
-               if (this.pagina > 1) {
-                    this.data = this.data.concat(obsPagination);
-               }
-               // returning acumulated array as observable // saved in data class member;
-               return of(this.data);
-          }),
-          tap((documentsQueryAcum) => {
-               //Realizamos el filtro de escritos.
-               let filtroEscritos = documentsQueryAcum.filter(
-                    (doc) => doc.tipo === "escrito"
-               );
+     //           return throwError(err);
+     //      }),
+     //      switchMap((obsPagination) => {
+     //           //Depending of page number we overwrite acumulated array or inserting more documents based on query string and filters
+     //           if (this.pagina < 2) {
+     //                this.data = obsPagination;
+     //           }
+     //           if (this.pagina > 1) {
+     //                this.data = this.data.concat(obsPagination);
+     //           }
+     //           // returning acumulated array as observable // saved in data class member;
+     //           return of(this.data);
+     //      }),
+     //      tap((documentsQueryAcum) => {
+     //           //Realizamos el filtro de escritos.
+     //           let filtroEscritos = documentsQueryAcum.filter(
+     //                (doc) => doc.tipo === "escrito"
+     //           );
 
-               // Enviamos el filtro de 'solo escritos' de los datos de busqueda + filtros. Será recibido en search-escritos.component.
-               this.docsEscritos.docsEscritosSource$.next(filtroEscritos);
-               // Enviamos el contador de registros del dato anterior al componente que se subscribe a este Subject: filter-tabs.component
-               this.docsEscritos.documentosEscritosLength$.next(
-                    +filtroEscritos.length
-               );
+     //           // Enviamos el filtro de 'solo escritos' de los datos de busqueda + filtros. Será recibido en search-escritos.component.
+     //           this.docsEscritos.docsEscritosSource$.next(filtroEscritos);
+     //           // Enviamos el contador de registros del dato anterior al componente que se subscribe a este Subject: filter-tabs.component
+     //           this.docsEscritos.documentosEscritosLength$.next(
+     //                +filtroEscritos.length
+     //           );
 
-               this.documentosLength$.next(documentsQueryAcum.length);
+     //           this.documentosLength$.next(documentsQueryAcum.length);
 
-               //Realizamos el filtro de resoluciones.
-               let filtroResoluciones = documentsQueryAcum.filter(
-                    (doc) => doc.tipo === "resolucion"
-               );
-               // Enviamos el filtro de 'solo resoluciones' de los datos de busqueda + filtros. Será recibido en search-resoluciones.component.
-               this.docsResoluciones.docsResolucionesSource$.next(
-                    filtroResoluciones
-               );
+     //           //Realizamos el filtro de resoluciones.
+     //           let filtroResoluciones = documentsQueryAcum.filter(
+     //                (doc) => doc.tipo === "resolucion"
+     //           );
+     //           // Enviamos el filtro de 'solo resoluciones' de los datos de busqueda + filtros. Será recibido en search-resoluciones.component.
+     //           this.docsResoluciones.docsResolucionesSource$.next(
+     //                filtroResoluciones
+     //           );
 
-               // Enviamos el contador de resoluciones del dato anterior al componente que se subscribe a este Subject: filter-tabs.component
-               this.docsResoluciones.documentosResolucionesLength$.next(
-                    +filtroResoluciones.length
-               );
+     //           // Enviamos el contador de resoluciones del dato anterior al componente que se subscribe a este Subject: filter-tabs.component
+     //           this.docsResoluciones.documentosResolucionesLength$.next(
+     //                +filtroResoluciones.length
+     //           );
 
-               // if we get total documents we stop scroll handler to prevent more API calls
-               if (documentsQueryAcum.length / this.docsQueryTotal >= 1) {
-                    this.stopScroll$.next(true);
-                    console.log(
-                         `%c${documentsQueryAcum.length / this.docsQueryTotal}`,
-                         "lightred"
-                    );
-               } else {
-                    // if not we continue making new API calls and handling scrolls
-                    this.stopScroll$.next(false);
-                    console.log(
-                         `%c${documentsQueryAcum.length / this.docsQueryTotal}`,
-                         "lightred"
-                    );
-               }
-          }),
-          //cache of acumulated array of documents - pagination
-          shareReplay(1)
-     );
+     //           // if we get total documents we stop scroll handler to prevent more API calls
+     //           if (documentsQueryAcum.length / this.docsQueryTotal >= 1) {
+     //                this.stopScroll$.next(true);
+     //                console.log(
+     //                     `%c${documentsQueryAcum.length / this.docsQueryTotal}`,
+     //                     "lightred"
+     //                );
+     //           } else {
+     //                // if not we continue making new API calls and handling scrolls
+     //                this.stopScroll$.next(false);
+     //                console.log(
+     //                     `%c${documentsQueryAcum.length / this.docsQueryTotal}`,
+     //                     "lightred"
+     //                );
+     //           }
+     //      }),
+     //      //cache of acumulated array of documents - pagination
+     //      shareReplay(1)
+     // );
 
      constructor(
           private http: HttpClient,
           private docsEscritos: DocsEscritosService,
-          private docsResoluciones: DocsResolucionesService
-     ) {}
+          private docsResoluciones: DocsResolucionesService,
+          private searchTrigger:SearchTriggerService
+     ) {
+
+          this.documentos$=this.searchTrigger.newTriggerSearch
+          .pipe(
+               tap(console.log),
+               startWith("Comienzo"),
+               switchMap((params) => {
+                    console.log(
+                         this.searchTrigger.updatedFiltro,
+                         this.searchTrigger.updatedSearch,
+                         this.searchTrigger.updatedPagina,
+                         )
+                         
+                         return from([
+                              this.searchTrigger.updatedFiltro,
+                              this.searchTrigger.updatedSearch,
+                              this.searchTrigger.updatedPagina,
+                         ])
+                         .pipe(
+                              toArray()
+                         )
+                    }),
+               tap(console.log),
+               tap(([formulario, search, pagina]) => {
+                    // saving all the data
+                    this.search = search;
+                    this.formulario = formulario;
+                    this.pagina = pagina;
+                    console.log(`%cEsto es lo que recibo de los filtros: ${JSON.stringify(this.formulario,null,3)}`,"color:gold");
+                    console.log(`%cEsto es lo que recibo de los filtros: ${JSON.stringify(this.pagina,null,3)}`,"color:gold");
+                    console.log(`%cEsto es lo que recibo de los filtros: ${JSON.stringify(this.search,null,3)}`,"color:gold");
+               }),
+               switchMap((obsCombined) => {
+                    // if page is 1 / we send new data with the new string query -or change in filters - new API request - to get total documents
+                    if (this.pagina < 2) {
+                         this.documentosTotalQueryLengthS = this.http
+                              .get<any>(`${this.url}?q=${this.search}`)
+                              .subscribe((d) => {
+                                   this.documentosTotalQueryLength$.next(d.length);
+     
+                                   // data to calculate total perc of documents received from pagination with respecto to documents.
+                                   this.docsQueryTotal = d.length;
+                              });
+                    }
+     
+                    // during this operation we cannot trigger scroll handler to prevent more API calls
+                    this.stopScroll$.next(true);
+     
+                    // we return observable with API call with pagination
+                    return this.http.get<any>(
+                         `${this.url}?q=${this.search}&_page=${this.pagina}&_limit=${this.pageLimit}`
+                    );
+               }),
+               catchError((err) => {
+                    //Error throwing to handle data in each observable pipe
+                    this.docsEscritos.docsEscritosSource$.error(err);
+                    this.docsResoluciones.docsResolucionesSource$.error(err);
+     
+                    return throwError(err);
+               }),
+               switchMap((obsPagination) => {
+                    //Depending of page number we overwrite acumulated array or inserting more documents based on query string and filters
+                    if (this.pagina < 2) {
+                         this.data = obsPagination;
+                    }
+                    if (this.pagina > 1) {
+                         this.data = this.data.concat(obsPagination);
+                    }
+                    // returning acumulated array as observable // saved in data class member;
+                    return of(this.data);
+               }),
+               tap((documentsQueryAcum) => {
+                    //Realizamos el filtro de escritos.
+                    let filtroEscritos = documentsQueryAcum.filter(
+                         (doc) => doc.tipo === "escrito"
+                    );
+     
+                    // Enviamos el filtro de 'solo escritos' de los datos de busqueda + filtros. Será recibido en search-escritos.component.
+                    this.docsEscritos.docsEscritosSource$.next(filtroEscritos);
+                    // Enviamos el contador de registros del dato anterior al componente que se subscribe a este Subject: filter-tabs.component
+                    this.docsEscritos.documentosEscritosLength$.next(
+                         +filtroEscritos.length
+                    );
+     
+                    this.documentosLength$.next(documentsQueryAcum.length);
+     
+                    //Realizamos el filtro de resoluciones.
+                    let filtroResoluciones = documentsQueryAcum.filter(
+                         (doc) => doc.tipo === "resolucion"
+                    );
+                    // Enviamos el filtro de 'solo resoluciones' de los datos de busqueda + filtros. Será recibido en search-resoluciones.component.
+                    this.docsResoluciones.docsResolucionesSource$.next(
+                         filtroResoluciones
+                    );
+     
+                    // Enviamos el contador de resoluciones del dato anterior al componente que se subscribe a este Subject: filter-tabs.component
+                    this.docsResoluciones.documentosResolucionesLength$.next(
+                         +filtroResoluciones.length
+                    );
+     
+                    // if we get total documents we stop scroll handler to prevent more API calls
+                    if (documentsQueryAcum.length / this.docsQueryTotal >= 1) {
+                         this.stopScroll$.next(true);
+                         console.log(
+                              `%c${documentsQueryAcum.length / this.docsQueryTotal}`,
+                              "lightred"
+                         );
+                    } else {
+                         // if not we continue making new API calls and handling scrolls
+                         this.stopScroll$.next(false);
+                         console.log(
+                              `%c${documentsQueryAcum.length / this.docsQueryTotal}`,
+                              "lightred"
+                         );
+                    }
+               }),
+               //cache of acumulated array of documents - pagination
+               shareReplay(1)
+                    )
+          // .subscribe(
+      
+          // )
+     }
 
      ngOnDestroy(): void {
           //Unsubscribe from http request query string
