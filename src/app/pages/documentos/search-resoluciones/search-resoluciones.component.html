@@ -7,7 +7,7 @@
   </div>
   <div *ngIf="docsResoluciones$ | async as documents">
     <div *ngIf="isArray(documents)">
-      <p class="voidSearch" *ngIf="documents.length===0">Esta búsqueda no devuelve documentos</p>
+      <!-- <p class="voidSearch" *ngIf="documents.length===0">Esta búsqueda no devuelve documentos</p> -->
       <app-document-card *ngFor="let document of documents" [documento]="document"></app-document-card>
     </div>
     <div class="httpError" *ngIf="errorObj">

@@ -8,9 +8,6 @@
     <div *ngIf="isArray(documents)">
       <app-document-card *ngFor="let document of documents" [documento]="document"></app-document-card>
     </div>
-    <div *ngIf="documents && !errorObj">
-      <p class="voidSearch">{{!!(docsLength$ | async) ? null:"Esta búsqueda no devuelve documentos"}}</p>
-    </div>
     <div class="httpError" *ngIf="errorObj"><p>{{errorObj}}</p>
     </div>
   </div>
