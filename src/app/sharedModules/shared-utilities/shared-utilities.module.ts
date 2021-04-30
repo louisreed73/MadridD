@@ -7,7 +7,7 @@ import { FijarDirective } from "src/app/directives/fijar.directive";
 import { FiltroComponent } from '../../sharedComponents/filtro/filtro.component';
 import { AutocompleteComponent } from '../../sharedComponents/autocomplete/autocomplete.component';
 import { ButtonTriggerComponent } from '../../sharedComponents/button-trigger/button-trigger.component';
-import { InfoComponent } from '../../sharedComponents/error/info.component';
+import { InfoComponent } from '../../sharedComponents/info/info.component';
 
 @NgModule({
      declarations: [

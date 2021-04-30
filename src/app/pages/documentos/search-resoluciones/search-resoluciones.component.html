@@ -10,9 +10,9 @@
       <!-- <p class="voidSearch" *ngIf="documents.length===0">Esta búsqueda no devuelve documentos</p> -->
       <app-document-card *ngFor="let document of documents" [documento]="document"></app-document-card>
     </div>
-    <div class="httpError" *ngIf="errorObj">
+    <!-- <div class="httpError" *ngIf="errorObj">
       <p>{{errorObj}}</p>
-    </div>
+    </div> -->
   </div>
 </section>
 

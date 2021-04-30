@@ -10,6 +10,7 @@ import { catchError, delay, tap } from "rxjs/operators";
 import { DocsEscritosService } from "src/app/services/docs-escritos.service";
 import { DocumentosService } from "src/app/services/documentos.service";
 import { FiltrosService } from "src/app/services/filtros.service";
+import { InfoService } from "src/app/services/info.service";
 import { SpinnerService } from "src/app/services/spinner.service";
 
 @Component({
@@ -27,7 +28,9 @@ export class SearchEscritosComponent implements OnDestroy {
      docsEscritos$ = this.docsEscritos.docsEscritosSource$.pipe(
           catchError((e: any) => {
                // Saving error message from http Request Error
-               this.errorObj = e.name;
+               // this.errorObj = e.name;
+               this.infoServ.httpErrorInfo$.next(e.name);
+
                //TODO to comment and uncomment if necessary for checking response and reload page
                //TODO stopping spinner on http request error
                // this.spinner.requestSpinner$.next(false);
@@ -110,7 +113,9 @@ export class SearchEscritosComponent implements OnDestroy {
           // private spinner: SpinnerService,
           //TODO to remove only for checking response and reload page
           @Inject(Window) private window: Window,
-          public filtroS: FiltrosService
+          public filtroS: FiltrosService,
+          private infoServ: InfoService
+
 
      ) {}
 
