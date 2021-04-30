@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, OnDestroy } from "@angular/core";
 import {
      BehaviorSubject,
-     combineLatest,
      from,
      Observable,
      of,
@@ -239,7 +238,20 @@ export class DocumentosService implements OnDestroy {
                                    this.documentosTotalQueryLength$.next(d.length);
      
                                    // data to calculate total perc of documents received from pagination with respecto to documents.
+                                   this.infoServ.documentosInfoTotalLength$
+                                   .next(d.length);
                                    this.docsQueryTotal = d.length;
+                                   let filtroResoluciones = d.filter(
+                                        (doc) => doc.tipo === "resolucion"
+                                   );
+                                   this.infoServ.resolucionesInfoTotalLength$.next(filtroResoluciones.length);
+                                   let filtroEscritos = d.filter(
+                                        (doc) => doc.tipo === "escrito"
+                                        );
+                                   this.infoServ.escritosInfoTotalLength$.next(filtroEscritos.length);
+                                   // this.docsEscritos.documentosEscritosLength$.next(
+                                   //      filtroEscritos.length
+                                   // );
                               });
                     }
      
@@ -267,6 +279,7 @@ export class DocumentosService implements OnDestroy {
                          this.data = this.data.concat(obsPagination);
                     }
                     // returning acumulated array as observable // saved in data class member;
+                    this.infoServ.documentosInfoAcumLength$.next(this.data.length)
                     return of(this.data);
                }),
                tap((documentsQueryAcum) => {
@@ -277,30 +290,35 @@ export class DocumentosService implements OnDestroy {
      
                     // Enviamos el filtro de 'solo escritos' de los datos de busqueda + filtros. Será recibido en search-escritos.component.
                     this.docsEscritos.docsEscritosSource$.next(filtroEscritos);
+
                     // Enviamos el contador de registros del dato anterior al componente que se subscribe a este Subject: filter-tabs.component
-                    this.docsEscritos.documentosEscritosLength$.next(
-                         +filtroEscritos.length
-                    );
+                    this.infoServ.escritosInfoAcumLength$.next(filtroEscritos.length);
+                    
 
      
                     this.documentosLength$.next(documentsQueryAcum.length);
 
-                    this.infoServ.documentosInfo$.next(`Mostrando ${documentsQueryAcum.length} documentos del Total Documentos: ${this.docsQueryTotal}`);
+                    // this.infoServ.documentosInfo$.next(`Mostrando ${documentsQueryAcum.length} documentos del Total Documentos: ${this.docsQueryTotal}`);
 
      
                     //Realizamos el filtro de resoluciones.
                     let filtroResoluciones = documentsQueryAcum.filter(
                          (doc) => doc.tipo === "resolucion"
                     );
+                    // console.log(filtroResoluciones.length)
                     // Enviamos el filtro de 'solo resoluciones' de los datos de busqueda + filtros. Será recibido en search-resoluciones.component.
                     this.docsResoluciones.docsResolucionesSource$.next(
                          filtroResoluciones
                     );
+
+
      
                     // Enviamos el contador de resoluciones del dato anterior al componente que se subscribe a este Subject: filter-tabs.component
-                    this.docsResoluciones.documentosResolucionesLength$.next(
-                         +filtroResoluciones.length
-                    );
+                    // this.docsResoluciones.documentosResolucionesLength$.next(
+                    //      +filtroResoluciones.length
+                    // );
+                    this.infoServ.resolucionesInfoAcumLength$.next(filtroResoluciones.length);
+
      
                     // if we get total documents we stop scroll handler to prevent more API calls
                     if (documentsQueryAcum.length / this.docsQueryTotal >= 1) {

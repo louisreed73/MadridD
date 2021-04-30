@@ -40,7 +40,7 @@ export class SearchResolucionesComponent implements OnDestroy {
      );
 
      // Observable con el nº total de documentos / Resoluciones / del término de búsqueda
-     docsResolucionesLength$ = this.docsResoluciones.documentosResolucionesLength$;
+     // docsResolucionesLength$ = this.docsResoluciones.documentosResolucionesLength$;
 
      /*=====  End of Observables  ======*/
 

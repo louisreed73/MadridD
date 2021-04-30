@@ -40,7 +40,7 @@ export class SearchEscritosComponent implements OnDestroy {
      );
 
      // Observable con el nº total de documentos / Escritos / del término de búsqueda
-     docsEscritosLength$ = this.docsEscritos.documentosEscritosLength$;
+     // docsEscritosLength$ = this.docsEscritos.documentosEscritosLength$;
 
      /*=====  End of Observables  ======*/
 
