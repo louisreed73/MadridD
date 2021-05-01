@@ -5,7 +5,7 @@
       <app-filtro [filtroscombinado1]="filtrosResoluciones"></app-filtro>
     </div>
   </div>
-  <div *ngIf="docsResoluciones$ | async as documents">
+  <div *ngIf="docsResoluciones$ | async as documents" class="noJump">
     <div *ngIf="isArray(documents)">
       <!-- <p class="voidSearch" *ngIf="documents.length===0">Esta búsqueda no devuelve documentos</p> -->
       <app-document-card *ngFor="let document of documents" [documento]="document"></app-document-card>

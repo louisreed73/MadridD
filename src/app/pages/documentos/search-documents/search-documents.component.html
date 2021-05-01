@@ -4,7 +4,7 @@
       <app-filtro [filtroscombinado1]="filtrosDocumentos"></app-filtro>
     </div>
   </div>
-  <div *ngIf="documentos$ | async as documents">
+  <div *ngIf="documentos$ | async as documents" class="noJump">
     <div *ngIf="isArray(documents)">
       <app-document-card *ngFor="let document of documents" [documento]="document"></app-document-card>
     </div>

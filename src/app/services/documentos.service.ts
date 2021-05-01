@@ -81,7 +81,7 @@ export class DocumentosService implements OnDestroy {
      //TODO remove only for checking testing wrong url
      // save url from observable toggling url right and wrong
      url: string =
-          "https://my-json-servers.typicode.com/louisreed73/fakeAPI/documentos";
+          "https://my-json-server.typicode.com/louisreed73/fakeAPI/documentos";
      // url: string="/api/documentos";
 
      /*=====  End of Class members  ======*/
