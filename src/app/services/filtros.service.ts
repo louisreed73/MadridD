@@ -1,11 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnDestroy } from "@angular/core";
-import {
-     BehaviorSubject,
-     combineLatest,
-     of,
-     Subscription,
-} from "rxjs";
+import { BehaviorSubject, combineLatest, from, of, Subscription } from "rxjs";
 import { shareReplay, switchMap, toArray } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import {
@@ -63,7 +58,7 @@ export class FiltrosService implements OnDestroy {
                )
                .subscribe((data) => {
                     data.forEach((filtro, index) => {
-                         this.creaConfig(data, index, config1, index);
+                         this.creaConfig(data, index, config1);
                     });
                     this.showFilters$.next(true);
                });
@@ -71,10 +66,53 @@ export class FiltrosService implements OnDestroy {
      getRequestValoresResoluciones() {
           this.reqValoresResolucionesSub = combineLatest([
                this.http.get<any>(`${environment.baseURLApi}/tipos-resolucion`),
+               // from([]),
+               from([
+                    {
+                         data: {
+                              cualquiera: [
+                                   { codigo: "SENT", descripcion: "Sentencia" },
+                                   { codigo: "AUTO", descripcion: "Auto" },
+                              ],
+                         },
+                    },
+               ]),
+               from([
+                    {
+                         data: {
+                              cualquiera: [
+                                   { codigo: "SENT", descripcion: "Tipo 1" },
+                                   { codigo: "AUTO", descripcion: "Tipo 2" },
+                              ],
+                         },
+                    },
+               ]),
+               from([
+                    {
+                         data: {
+                              cualquiera: [
+                                   { codigo: "SENT", descripcion: "Option 1" },
+                                   { codigo: "AUTO", descripcion: "Option 2" },
+                              ],
+                         },
+                    },
+               ]),
+               // from([]),
+               // from([
+               //      {
+               //           data: {
+               //                cualquiera: [
+               //                     { codigo: "SENT", descripcion: "Sentencia" },
+               //                     { codigo: "AUTO", descripcion: "Auto" },
+               //                ],
+               //           },
+               //      },
+               // ]),
           ])
                .pipe(
                     switchMap((data) => {
                          return data.map((itemData, ind) => {
+                              console.log(itemData);
                               return itemData.data[
                                    Object.keys(data[ind].data)[0]
                               ].map((it) => it.descripcion);
@@ -85,7 +123,7 @@ export class FiltrosService implements OnDestroy {
                )
                .subscribe((data) => {
                     data.forEach((filtro, index) => {
-                         this.creaConfig(data, index, config2, index);
+                         this.creaConfig(data, index, config2);
                     });
                     this.showFilters$.next(true);
                });
@@ -107,18 +145,18 @@ export class FiltrosService implements OnDestroy {
                )
                .subscribe((data) => {
                     data.forEach((filtro, index) => {
-                         this.creaConfig(data, index, config3, index);
+                         this.creaConfig(data, index, config3);
                     });
                     this.showFilters$.next(true);
                });
      }
 
-     creaConfig(reqVal, reqValNumb, configVar, configNumb) {
+     creaConfig(reqVal, reqValNumb, configVar) {
           let datosReq = [];
           reqVal[reqValNumb].forEach((item) => {
                datosReq.push(item);
           });
-          configVar[configNumb].values = datosReq;
+          configVar[reqValNumb].values = datosReq;
      }
 
      getFiltrosDocumentos() {

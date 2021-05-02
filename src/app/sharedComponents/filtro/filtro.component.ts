@@ -48,14 +48,15 @@ export class FiltroComponent implements OnInit, OnDestroy {
                .controls;
      }
 
-     dameformGroupControls(key: string) {
-          let controls = (<FormGroup>this.filtroFormGroup.get(key)).controls;
-          let controlsToArray = [];
-          for (let k in controls) {
-               controlsToArray.push(controls[k]);
-          }
-          return controlsToArray;
-     }
+     // dameformGroupControls(key: string) {
+     //      console.log(this.configFiltro)
+     //      let controls = (<FormGroup>this.filtroFormGroup.get(key)).controls;
+     //      let controlsToArray = [];
+     //      for (let k in controls) {
+     //           controlsToArray.push(controls[k]);
+     //      }
+     //      return controlsToArray;
+     // }
 
      dameControlsKeys(item) {
           return Object.keys(item.controls);

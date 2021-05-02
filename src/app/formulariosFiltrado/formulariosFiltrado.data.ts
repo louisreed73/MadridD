@@ -86,12 +86,45 @@ let config2 = [
           name: "fecha resolución",
           values: [
                "resolución",
-          //      "Acta conciliación B",
-          //      "Acuerdo B",
-          //      "Acuse de recibo B",
-          //      "Auto B",
+               "sentencia",
+               //      "Acta conciliación B",
+               //      "Acuerdo B",
+               //      "Acuse de recibo B",
+               //      "Auto B",
           ],
      },
+     {
+          tipo: "checkbox",
+          name: "selección multi",
+          multi: true,
+          values: [
+               // "resolución",
+               // "sentencia"
+               //      "Acta conciliación B",
+               //      "Acuerdo B",
+               //      "Acuse de recibo B",
+               //      "Auto B",
+          ],
+     },
+     {
+          tipo: "checkbox",
+          name: "selección no multi",
+          multi: false,
+          multiValue: "Opción",
+          values: [
+               // "resolución",
+               // "sentencia"
+               //      "Acta conciliación B",
+               //      "Acuerdo B",
+               //      "Acuse de recibo B",
+               //      "Auto B",
+          ],
+     },
+     // {
+     //      tipo:"checkbox",
+     //      name:"cualquiera",
+     //      multi:true
+     // }
      // {
      //      tipo: "array",
      //      name: "tipo procedimiento",
@@ -120,8 +153,20 @@ let form2: FormGroup = new FormGroup({
      [`arrayData0`]: new FormArray([]),
 
      ["fecha resolución"]: new FormGroup({
-          resolución: new FormControl(""),
+          ["Auto"]: new FormControl(""),
+          ["Sentencia"]: new FormControl(""),
      }),
+     ["selección multi"]: new FormGroup({
+          ["Tipo 1"]: new FormControl(""),
+          ["Tipo 2"]: new FormControl(""),
+     }),
+     ["selección no multi"]: new FormGroup({
+          ["Opción"]: new FormControl(""),
+          // ["selección_1"]: new FormControl(""),
+     }),
+     // cualquiera: new FormGroup({
+     //      resolución: new FormControl(""),
+     // }),
 
      // [`arrayData2`]: new FormArray([]),
 

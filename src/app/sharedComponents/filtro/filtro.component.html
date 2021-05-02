@@ -17,35 +17,40 @@
         <!-- Level 0 Loop for Each FormGroup or Array -->
         <ng-container *ngIf="dameTipo(key)==='FormGroup'">
           <div [formGroupName]="key" class="filter_common filter_common-static">
-            <ng-container *ngFor="let item of dameformGroupControls(key); index as i2">
-              <!-- {{key}} {{item}} {{i2}} {{configFiltro[i].tipo}} -->
-              <ng-container *ngIf="configFiltro[i].tipo==='checkbox' && configFiltro[i].multi===false">
+            <ng-container *ngIf="configFiltro[i].tipo==='date'">
+              <!-- {{configFiltro[i].values}}  -->
 
-                <ng-container *ngFor="let item of getValuesFromRadios(i);index as i3">
-                  <!-- <p>{{item}}</p> -->
-                  <div class="input_flexItem">
-                    <input type="radio" [id]="key+'_'+i3" [formControlName]="key" [name]="key" [value]="item"
-                      class="custom-radio-check">
-                    <label class="staticControl" [for]="key+'_'+i3">{{configFiltro[i].values[i3]}}</label>
-                  </div>
-                </ng-container>
-
-              </ng-container>
-              <ng-container *ngIf="configFiltro[i].tipo==='checkbox' && configFiltro[i].multi===true">
-                <div class="input_flexItem">
-                  <input type="checkbox" [id]="key+'_'+i2" [formControlName]="configFiltro[i].values[i2]" class="custom-radio-check">
-                  <label class="staticControl" [for]="key+'_'+i2">{{configFiltro[i].values[i2]}}</label>
-                </div>
-              </ng-container>
-              <ng-container *ngIf="configFiltro[i].tipo==='date'">
-
+              <ng-container *ngFor="let item of configFiltro[i].values;let dateI=index;">
                 <div class="input_flexItem input_flexItem--date">
-                  <label [for]="key+'_'+i2">{{configFiltro[i].values[i2]}}</label>
-                  <input type="date" [id]="key+'_'+i2" [formControlName]="configFiltro[i].values[i2]">
+                  <label [for]="configFiltro[i].name+'_'+dateI">{{item}}</label>
+                  <input type="date" [id]="configFiltro[i].name+'_'+dateI"
+                    [formControlName]="configFiltro[i].values[dateI]">
                 </div>
               </ng-container>
-
             </ng-container>
+
+            <ng-container *ngIf="configFiltro[i].tipo==='checkbox' && configFiltro[i].multi===true">
+              <ng-container *ngFor="let item of configFiltro[i].values;let checkboxI=index;">
+                <div class="input_flexItem">
+                  <input type="checkbox" [id]="configFiltro[i].name+'_'+checkboxI"
+                    [formControlName]="configFiltro[i].values[checkboxI]" class="custom-radio-check">
+                  <label class="staticControl" [for]="configFiltro[i].name+'_'+checkboxI">{{item}}</label>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="configFiltro[i].tipo==='checkbox' && configFiltro[i].multi===false">
+              <!-- {{configFiltro[i].values}}  -->
+              <ng-container *ngFor="let item of configFiltro[i].values;let checkboxI=index;">
+                <div class="input_flexItem">
+                  <input type="radio" [id]="configFiltro[i].name+'_'+checkboxI"
+                    [formControlName]="configFiltro[i].multiValue" [name]="configFiltro[i].multiValue" [value]="item"
+                    class="custom-radio-check">
+                  <label class="staticControl" [for]="configFiltro[i].name+'_'+checkboxI">{{item}}</label>
+                </div>
+              </ng-container>
+            </ng-container>
+
           </div>
 
         </ng-container>
