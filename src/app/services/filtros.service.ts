@@ -22,7 +22,9 @@ export class FiltrosService implements OnDestroy {
      reqValoresEscritosSub: Subscription;
      showFilters$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-     constructor(private http: HttpClient) {
+     constructor(
+          private http: HttpClient
+          ) {
           this.getRequestValoresDocumentos();
           this.getRequestValoresResoluciones();
           this.getRequestValoresEscritos();
@@ -60,7 +62,7 @@ export class FiltrosService implements OnDestroy {
                     data.forEach((filtro, index) => {
                          this.creaConfig(data, index, config1);
                     });
-                    this.showFilters$.next(true);
+                    // this.showFilters$.next(true);
                });
      }
      getRequestValoresResoluciones() {
@@ -125,7 +127,7 @@ export class FiltrosService implements OnDestroy {
                     data.forEach((filtro, index) => {
                          this.creaConfig(data, index, config2);
                     });
-                    this.showFilters$.next(true);
+                    // this.showFilters$.next(true);
                });
      }
      getRequestValoresEscritos() {

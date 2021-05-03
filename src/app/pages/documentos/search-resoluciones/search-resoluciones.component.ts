@@ -102,6 +102,7 @@ export class SearchResolucionesComponent implements OnDestroy {
                     data,
                     clase:"resoluciones"
                };
+               // this.filtroS.showFilters$.next(true);
           });
 
      /*=====  End of Incorporacion Integracion nuevo Filtro  ======*/
