@@ -82,6 +82,17 @@ let config2 = [
           // ],
      },
      {
+          tipo: "input",
+          name: "tipo input",
+          // values: [
+          //      "Acta",
+          //      "Acta conciliación",
+          //      "Acuerdo",
+          //      "Acuse de recibo",
+          //      "Auto",
+          // ],
+     },
+     {
           tipo: "date",
           name: "fecha resolución",
           values: [
@@ -152,6 +163,11 @@ let config2 = [
 let form2: FormGroup = new FormGroup({
      [`arrayData0`]: new FormArray([]),
 
+     ["tipo input"]: new FormGroup({
+          ["Input 1"]: new FormControl(""),
+          ["Input 2 /"]: new FormControl(""),
+          ["Input 3"]: new FormControl(""),
+     }),
      ["fecha resolución"]: new FormGroup({
           ["Auto"]: new FormControl(""),
           ["Sentencia"]: new FormControl(""),

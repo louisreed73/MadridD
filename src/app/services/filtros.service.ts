@@ -71,6 +71,17 @@ export class FiltrosService implements OnDestroy {
                     {
                          data: {
                               cualquiera: [
+                                   { codigo: "SENT", descripcion: "Input 1" },
+                                   { codigo: "AUTO", descripcion: "Input 2 /" },
+                                   { codigo: "AUTOS", descripcion: "Input 3" },
+                              ],
+                         },
+                    },
+               ]),
+               from([
+                    {
+                         data: {
+                              cualquiera: [
                                    { codigo: "SENT", descripcion: "Sentencia" },
                                    { codigo: "AUTO", descripcion: "Auto" },
                               ],

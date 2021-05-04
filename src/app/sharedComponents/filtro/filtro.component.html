@@ -29,6 +29,16 @@
               </ng-container>
             </ng-container>
 
+            <ng-container *ngIf="configFiltro[i].tipo==='input'">
+              <ng-container *ngFor="let item of configFiltro[i].values;let inputI=index;">
+                <div class="input_flexItem input_flexItem--input">
+                  <label class="" [for]="configFiltro[i].name+'_'+inputI">{{item}}</label>
+                  <input type="text" [id]="configFiltro[i].name+'_'+inputI"
+                    [formControlName]="configFiltro[i].values[inputI]" class="">
+                </div>
+              </ng-container>
+            </ng-container>
+
             <ng-container *ngIf="configFiltro[i].tipo==='checkbox' && configFiltro[i].multi===true">
               <ng-container *ngFor="let item of configFiltro[i].values;let checkboxI=index;">
                 <div class="input_flexItem">

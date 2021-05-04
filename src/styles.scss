@@ -84,7 +84,7 @@ header {
   background: gainsboro;
   width: 100%;
   flex-flow: row wrap;
-  max-height: 12rem;
+  max-height: 22rem;
   overflow: hidden;
   overflow-y: auto;
 }
@@ -101,6 +101,12 @@ header {
   width: calc(100% - 5.9rem);
   top: 12.8rem;
   z-index: 10;
+}
+
+.noJump {
+  margin-top: 13rem;
+  position: relative;
+  top: -10rem;
 }
 
 
