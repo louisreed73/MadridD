@@ -14,6 +14,7 @@ import { SearchTriggerService } from "src/app/services/search-trigger.service";
 })
 export class FiltroComponent implements OnInit, OnDestroy {
      @Input() filtroscombinado1;
+     @Input() filtroscombinado2;
      configFiltro;
      filtroFormGroup: FormGroup;
      clase: string;
@@ -37,6 +38,10 @@ export class FiltroComponent implements OnInit, OnDestroy {
 
      get keys() {
           return Object.keys(this.filtroFormGroup.controls);
+     }
+
+     getKeys(v: { [k: string]: any }) {
+          return Object.keys(v.controls);
      }
 
      getValuesFromRadios(ind: number) {
@@ -71,6 +76,19 @@ export class FiltroComponent implements OnInit, OnDestroy {
                tipo = "FormGroup";
           }
           if (this.filtroFormGroup.get(prop) instanceof FormControl) {
+               tipo = "FormControl";
+          }
+          return tipo;
+     }
+     dameTipoReal(formGroup, prop) {
+          let tipo;
+          if (formGroup.get(prop) instanceof FormArray) {
+               tipo = "FormArray";
+          }
+          if (formGroup.get(prop) instanceof FormGroup) {
+               tipo = "FormGroup";
+          }
+          if (formGroup.get(prop) instanceof FormControl) {
                tipo = "FormControl";
           }
           return tipo;

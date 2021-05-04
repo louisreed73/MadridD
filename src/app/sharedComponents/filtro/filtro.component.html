@@ -91,3 +91,67 @@
     Cargando Filtros...
   </p>
 </ng-template>
+
+<!-- <ng-container *ngIf="(show$ | async);else cargando"> -->
+<div *ngIf="filtroscombinado2 | async as test">
+  <!-- {{test}} -->
+  <form [formGroup]="test[1]">
+    <ng-container *ngFor="let key of getKeys(test[1]);let i=index">
+      <!-- Level 0 Flex each filter -->
+      <div class="formFilterGroup">
+        <input type="checkbox" [id]="clase2+'_'+i" class="showFilterOptions">
+        <label class="toggleFilter" [for]="clase2+'_'+i">{{test[0][i].name}}</label>
+
+        <ng-container *ngIf="dameTipoReal(test[1],key)==='FormGroup'">
+          <!-- Es un form Group {{key}} -->
+          <div [formGroupName]="key" class="filter_common filter_common-static">
+
+            <ng-container *ngIf="test[0][i].tipo==='date'">
+              <ng-container *ngFor="let item of test[0][i].values;let dateI=index;">
+                <div class="input_flexItem input_flexItem--date">
+                  <label [for]="test[0][i].name+'_'+dateI">{{item}}</label>
+                  <input type="date" [id]="test[0][i].name+'_'+dateI"
+                    [formControlName]="test[0][i].values[dateI]">
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="test[0][i].tipo==='checkbox' && test[0][i].multi===true">
+              <ng-container *ngFor="let item of test[0][i].values;let checkboxI=index;">
+                <div class="input_flexItem">
+                  <input type="checkbox" [id]="test[0][i].name+'_'+checkboxI"
+                    [formControlName]="test[0][i].values[checkboxI]" class="custom-radio-check">
+                  <label class="staticControl" [for]="test[0][i].name+'_'+checkboxI">{{item}}</label>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="test[0][i].tipo==='checkbox' && test[0][i].multi===false">
+              <ng-container *ngFor="let item of test[0][i].values;let checkboxI=index;">
+                <div class="input_flexItem">
+                  <input type="radio" [id]="test[0][i].name+'_'+checkboxI"
+                    [formControlName]="test[0][i].multiValue" [name]="test[0][i].multiValue" [value]="item"
+                    class="custom-radio-check">
+                  <label class="staticControl" [for]="test[0][i].name+'_'+checkboxI">{{item}}</label>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            
+
+
+          </div>
+
+        </ng-container>
+        <ng-container *ngIf="dameTipoReal(test[1],key)==='FormArray'">
+          <!-- Es un form Group {{key}} -->
+        </ng-container>
+
+
+      </div>
+      <!-- Level 0 Flex each filter End-->
+    </ng-container>
+
+
+  </form>
+</div>
+<!-- </ng-container> -->

@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnDestroy } from "@angular/core";
+import { FormArray, FormControl, FormGroup } from "@angular/forms";
 import { BehaviorSubject, combineLatest, from, of, Subscription } from "rxjs";
-import { shareReplay, switchMap, toArray } from "rxjs/operators";
+import { map, shareReplay, switchMap, toArray } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import {
      config1,
@@ -22,9 +23,9 @@ export class FiltrosService implements OnDestroy {
      reqValoresEscritosSub: Subscription;
      showFilters$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-     constructor(
-          private http: HttpClient
-          ) {
+     formFiltersResoluciones: any = new FormGroup({});
+
+     constructor(private http: HttpClient) {
           this.getRequestValoresDocumentos();
           this.getRequestValoresResoluciones();
           this.getRequestValoresEscritos();
@@ -37,7 +38,7 @@ export class FiltrosService implements OnDestroy {
      }
 
      getRequestValoresDocumentos() {
-          this.reqValoresDocumentosSub = combineLatest([
+          combineLatest([
                this.http.get<any>(
                     `${environment.baseURLApi}/tipos-documentales`
                ),
@@ -66,7 +67,7 @@ export class FiltrosService implements OnDestroy {
                });
      }
      getRequestValoresResoluciones() {
-          this.reqValoresResolucionesSub = combineLatest([
+          return combineLatest([
                this.http.get<any>(`${environment.baseURLApi}/tipos-resolucion`),
                // from([]),
                from([
@@ -110,25 +111,28 @@ export class FiltrosService implements OnDestroy {
                //           },
                //      },
                // ]),
-          ])
-               .pipe(
-                    switchMap((data) => {
-                         return data.map((itemData, ind) => {
-                              console.log(itemData);
-                              return itemData.data[
-                                   Object.keys(data[ind].data)[0]
-                              ].map((it) => it.descripcion);
-                         });
-                    }),
-                    toArray(),
-                    shareReplay(1)
-               )
-               .subscribe((data) => {
+          ]).pipe(
+               switchMap((data) => {
+                    return data.map((itemData, ind) => {
+                         console.log(itemData);
+                         return itemData.data[
+                              Object.keys(data[ind].data)[0]
+                         ].map((it) => it.descripcion);
+                    });
+               }),
+               toArray(),
+               map((data) => {
                     data.forEach((filtro, index) => {
                          this.creaConfig(data, index, config2);
                     });
                     // this.showFilters$.next(true);
-               });
+                    this.creaForm(config2, this.formFiltersResoluciones);
+
+                    return [config2, this.formFiltersResoluciones];
+               }),
+               shareReplay(1)
+          );
+          // .subscribe();
      }
      getRequestValoresEscritos() {
           this.reqValoresResolucionesSub = combineLatest([
@@ -159,6 +163,71 @@ export class FiltrosService implements OnDestroy {
                datosReq.push(item);
           });
           configVar[reqValNumb].values = datosReq;
+     }
+
+     creaForm(config, formTarget) {
+          console.log(config);
+          let count = 0;
+          config.forEach((conf) => {
+               // console.log(conf.tipo,conf.name)
+
+               if (conf.tipo === "array") {
+                    console.log(`Esta es de tipo array!!!`);
+                    console.log(conf.name);
+                    formTarget.addControl(
+                         `${conf.name}${count++}`,
+                         new FormArray([])
+                    );
+               }
+               if (conf.tipo === "date") {
+                    console.log(`Esta es de tipo date!!!`);
+                    console.log(conf.name);
+                    formTarget.addControl(`${conf.name}`, new FormGroup({}));
+                    count++;
+                    for (let val of conf.values) {
+                         formTarget.controls[conf.name].addControl(
+                              val,
+                              new FormControl("")
+                         );
+                    }
+               }
+               if (conf.tipo === "checkbox") {
+                    if (conf.multi) {
+                         console.log(`Esta es multi true!!!`);
+
+                         console.log(conf.name);
+                         formTarget.addControl(
+                              `${conf.name}`,
+                              new FormGroup({})
+                         );
+                         count++;
+                         for (let val of conf.values) {
+                              formTarget.controls[conf.name].addControl(
+                                   val,
+                                   new FormControl("")
+                              );
+                         }
+                    } else {
+                         console.log(`Esta es multi false!!!`);
+
+                         console.log(conf.name);
+
+                         formTarget.addControl(
+                              `${conf.name}`,
+                              new FormGroup({})
+                         );
+                         count++;
+
+                         formTarget.controls[conf.name].addControl(
+                              "Opcion",
+                              new FormControl("")
+                         );
+                    }
+               }
+          });
+
+          console.log(formTarget);
+          console.log(formTarget);
      }
 
      getFiltrosDocumentos() {

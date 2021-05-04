@@ -5,8 +5,8 @@ import {
      Inject,
      OnDestroy,
 } from "@angular/core";
-import { combineLatest, of, Subscription } from "rxjs";
-import { catchError} from "rxjs/operators";
+import { combineLatest, Observable, of, Subscription } from "rxjs";
+import { catchError, tap } from "rxjs/operators";
 import { DocsResolucionesService } from "src/app/services/docs-resoluciones.service";
 import { DocumentosService } from "src/app/services/documentos.service";
 import { FiltrosService } from "src/app/services/filtros.service";
@@ -65,8 +65,7 @@ export class SearchResolucionesComponent implements OnDestroy {
 
      /*=====  End of Error Obj member  ======*/
 
-
-/*=============================================
+     /*=============================================
      =    Incorporacion Integracion nuevo Filtro 20-04-2021 =
      =============================================*/
 
@@ -81,6 +80,8 @@ export class SearchResolucionesComponent implements OnDestroy {
      filtrosDocumentos;
      filtrosResoluciones;
 
+     testObs$: Observable<number> = of(1234);
+
      filtroDocumentosSub = this.filtroS
           .getFiltrosDocumentos()
           .pipe()
@@ -88,8 +89,8 @@ export class SearchResolucionesComponent implements OnDestroy {
                // console.log(data);
                // this.filtrosDocumentos = data;
                this.filtrosDocumentos = {
-                    data:data,
-                    clase:"documentos"
+                    data: data,
+                    clase: "documentos",
                };
           });
 
@@ -100,13 +101,26 @@ export class SearchResolucionesComponent implements OnDestroy {
                // console.log(data);
                this.filtrosResoluciones = {
                     data,
-                    clase:"resoluciones"
+                    clase: "resoluciones",
                };
                // this.filtroS.showFilters$.next(true);
           });
 
-     /*=====  End of Incorporacion Integracion nuevo Filtro  ======*/
+     prueba$ = this.filtroS
+          .getRequestValoresResoluciones()
+          .pipe(
+               tap((data) => {
+                    console.log(
+                         `%cEl dato de creaForm es:${Object.keys(
+                              data[1].controls
+                         )}`,
+                         `color:gold`
+                    );
+               })
+          )
+          // .subscribe();
 
+     /*=====  End of Incorporacion Integracion nuevo Filtro  ======*/
 
      constructor(
           private documentos: DocumentosService,
@@ -116,7 +130,6 @@ export class SearchResolucionesComponent implements OnDestroy {
           @Inject(Window) private window: Window,
           public filtroS: FiltrosService,
           private infoServ: InfoService
-
      ) {}
 
      // Método para comprobar que los datos del OBservable son efectivamente un array
