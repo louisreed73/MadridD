@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from "@angular/core";
+import { AfterViewInit, Component, Inject, Input, OnDestroy, OnInit, QueryList, ViewChildren } from "@angular/core";
 import { FormArray, FormControl, FormGroup } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { debounceTime, tap } from "rxjs/operators";
@@ -6,14 +6,16 @@ import { debounceTime, tap } from "rxjs/operators";
 import { DocumentosService } from "src/app/services/documentos.service";
 import { FiltrosService } from "src/app/services/filtros.service";
 import { SearchTriggerService } from "src/app/services/search-trigger.service";
+import { FiltroToggleComponent } from "../filtro-toggle/filtro-toggle.component";
 
 @Component({
      selector: "app-filtro",
      templateUrl: "./filtro.component.html",
      styleUrls: ["./filtro.component.scss"],
 })
-export class FiltroComponent implements OnInit, OnDestroy {
+export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
      @Input() filtroscombinado1;
+     @ViewChildren(FiltroToggleComponent) toggles:QueryList<FiltroToggleComponent>
      configFiltro;
      filtroFormGroup: FormGroup;
      clase: string;
@@ -200,5 +202,43 @@ export class FiltroComponent implements OnInit, OnDestroy {
 
           this.searchTrigger.updatedFiltro = updatedChangesFiltro;
           this.searchTrigger.updatedPagina = this.pagina;
+     }
+
+     ngAfterViewInit(): void {
+          //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+          //Add 'implements AfterViewInit' to the class.
+          // console.log(this.toggles)
+
+          this.toggles.forEach(toggle=>{
+               // console.log(toggle.input.nativeElement)
+          })
+     }
+
+     collapsando(){
+          let someTrue=this.toggles.some(tog=>tog.input.nativeElement.checked);
+
+          if(someTrue) {
+
+               this.toggles.forEach(toggle=>{
+                    // console.log(toggle.input.nativeElement.parentElement.parentElement.parentElement.firstChild)
+                    // console.log(toggle.input.nativeElement);
+     
+                    // toggle.input.nativeElement.checked=false;
+     
+                    toggle.input.nativeElement.checked=false;
+                    // toggle.input.nativeElement.parentElement.parentElement.previousElementSibling.classList.remove("collapsed");
+               })
+          }
+          
+          else {
+               this.toggles.forEach(toggle=>{
+                    // console.log(toggle.input.nativeElement);
+     
+                    // toggle.input.nativeElement.checked=false;
+     
+                    toggle.input.nativeElement.checked=true;
+               })
+               
+          }
      }
 }

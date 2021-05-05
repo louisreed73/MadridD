@@ -8,6 +8,7 @@ import { FiltroComponent } from '../../sharedComponents/filtro/filtro.component'
 import { AutocompleteComponent } from '../../sharedComponents/autocomplete/autocomplete.component';
 import { ButtonTriggerComponent } from '../../sharedComponents/button-trigger/button-trigger.component';
 import { InfoComponent } from '../../sharedComponents/info/info.component';
+import { FiltroToggleComponent } from '../../sharedComponents/filtro-toggle/filtro-toggle.component';
 
 @NgModule({
      declarations: [
@@ -17,6 +18,7 @@ import { InfoComponent } from '../../sharedComponents/info/info.component';
           FiltroComponent,
           ButtonTriggerComponent,
           InfoComponent,
+          FiltroToggleComponent,
           
      ],
      imports: [
@@ -35,6 +37,7 @@ import { InfoComponent } from '../../sharedComponents/info/info.component';
           AutocompleteComponent,
           ButtonTriggerComponent,
           InfoComponent,
+          FiltroToggleComponent
      ],
 })
 export class SharedUtilitiesModule {}
