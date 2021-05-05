@@ -278,19 +278,19 @@ let form3: FormGroup = new FormGroup({
      // [`arrayData4`]: new FormArray([]),
 });
 
-let creaConfig = (reqVal, reqValNumb, configVar, configNumb) => {
-     let datosReq = [];
-     reqVal[reqValNumb].forEach((item) => {
-          datosReq.push(item);
-     });
-     // console.log(datosReq);
-     // console.log(configVar[configNumb]);
+// let creaConfig = (reqVal, reqValNumb, configVar, configNumb) => {
+//      let datosReq = [];
+//      reqVal[reqValNumb].forEach((item) => {
+//           datosReq.push(item);
+//      });
+//      // console.log(datosReq);
+//      // console.log(configVar[configNumb]);
 
-     configVar[configNumb].values = datosReq;
-     // console.log(config1);
+//      configVar[configNumb].values = datosReq;
+//      // console.log(config1);
 
-     // console.log(configVar[configNumb])
-};
+//      // console.log(configVar[configNumb])
+// };
 
 export {
      config1,
@@ -299,7 +299,7 @@ export {
      form1,
      form2,
      form3,
-     creaConfig,
+     // creaConfig,
      // filtroDocumentos,
      // filtroResoluciones,
      // filtroEscritos

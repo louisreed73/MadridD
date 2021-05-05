@@ -2,7 +2,15 @@
   <div appFijar [offset]="10">
     <div class="filtrosSection" >
       <app-filtro [filtroscombinado1]="filtrosDocumentos"></app-filtro>
-      <app-filtro [filtroscombinado1]="filtrosResoluciones"></app-filtro>
+      <ng-container *ngIf="(filtroS.showFilters$ | async);else nothing">
+        <!-- true -->
+        <app-filtro [filtroscombinado1]="filtrosResoluciones"></app-filtro>
+      </ng-container>
+      <ng-template #nothing>
+        nothing
+      </ng-template>
+      
+      
     </div>
   </div>
   <div *ngIf="docsResoluciones$ | async as documents" class="noJump">

@@ -6,7 +6,7 @@ import {
      OnDestroy,
 } from "@angular/core";
 import { combineLatest, of, Subscription } from "rxjs";
-import { catchError} from "rxjs/operators";
+import { catchError, tap} from "rxjs/operators";
 import { DocsResolucionesService } from "src/app/services/docs-resoluciones.service";
 import { DocumentosService } from "src/app/services/documentos.service";
 import { FiltrosService } from "src/app/services/filtros.service";
@@ -97,11 +97,30 @@ export class SearchResolucionesComponent implements OnDestroy {
           .getFiltrosResoluciones()
           .pipe()
           .subscribe((data) => {
-               // console.log(data);
-               this.filtrosResoluciones = {
-                    data,
-                    clase:"resoluciones"
-               };
+               console.log(data);
+               // this.filtrosResoluciones = {
+               //      data,
+               //      clase:"resoluciones"
+               // };
+          });
+     filtroResolucionesSub2 = this.filtroS
+          .getFiltrosResoluciones2()
+          .pipe(
+               tap(d=>{
+                    this.filtrosResoluciones=d;
+               })
+               )
+               .subscribe((data) => {
+                    // let datos=data.map(dat)
+                    console.log(data);
+                    this.filtrosResoluciones = {
+                         data,
+                         clase:"resoluciones"
+                    };
+                    console.log( this.filtrosResoluciones);
+                    this.filtroS.showFilters$.next(true)
+                    // setTimeout(()=>{
+                    // },1000)
           });
 
      /*=====  End of Incorporacion Integracion nuevo Filtro  ======*/
