@@ -1,11 +1,11 @@
 import { DOCUMENT } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { combineLatest, of } from "rxjs";
+import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, QueryList, ViewChildren } from "@angular/core";
+import { combineLatest, of, Subscription } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { DocumentosService } from "src/app/services/documentos.service";
 import { FiltrosService } from "src/app/services/filtros.service";
 import { InfoService } from "src/app/services/info.service";
-import { SpinnerService } from "src/app/services/spinner.service";
+import { FiltroComponent } from "src/app/sharedComponents/filtro/filtro.component";
 
 @Component({
      selector: "app-search-documents",
@@ -13,7 +13,7 @@ import { SpinnerService } from "src/app/services/spinner.service";
      styleUrls: ["./search-documents.component.scss"],
      changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchDocumentsComponent implements OnInit, OnDestroy {
+export class SearchDocumentsComponent implements OnInit, OnDestroy, AfterViewInit {
      /*=============================================
     =            Observables            =
     =============================================*/
@@ -61,6 +61,10 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
      // nombrado1$_$ = this.filtroS.config1$;
 
      // formA1$_$ = this.filtroS.formGrupo1$;
+     
+     @ViewChildren(FiltroComponent)
+     filtrosComp: QueryList<FiltroComponent>;
+     toggleCollapseSub:Subscription;     
 
      filtrosDocumentos;
      // filtrosResoluciones;
@@ -116,12 +120,43 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy {
           
      }
 
+     ngAfterViewInit(): void {
+
+          this.toggleCollapseSub=this.filtrosComp.first.triggerCollapse
+          .subscribe(d=>{
+               console.log("Algo hay que hacer")
+               let allToggles=this.filtrosComp.first.toggles.toArray().concat(
+                    
+                    this.filtrosComp.last.toggles.toArray()
+               );
+               console.log(allToggles)
+               let someCollap=allToggles.some(tog=>{
+                    return tog.nativeElement.previousElementSibling.checked
+               });
+
+               if(!someCollap) {
+                    allToggles.forEach(tog=>{
+                         return tog.nativeElement.previousElementSibling.checked=true
+                    });
+                    
+               }  else {
+                    allToggles.forEach(tog=>{
+                         return tog.nativeElement.previousElementSibling.checked=false
+                    });
+                         
+               }
+               console.log(someCollap)
+          })
+          // this.documentosSub.unsubscribe();
+     }
+
+
      ngOnDestroy(): void {
           //Called once, before the instance is destroyed.
           //Add 'implements OnDestroy' to the class.
           this.filtroDocumentosSub.unsubscribe();
-          // this.filtroResolucionesSub.unsubscribe();
-          // this.filtroEscritosSub.unsubscribe();
+          this.toggleCollapseSub.unsubscribe();
+
 
       
           

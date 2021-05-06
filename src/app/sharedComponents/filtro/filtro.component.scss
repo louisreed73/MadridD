@@ -106,6 +106,9 @@ label.toggleFilter {
     background:gainsboro;
     text-align: center;
     position:relative;
+    border: .003rem solid #0000001c;
+    outline-offset: -1px;
+    background: #ebebeb;
 }
 
 label.toggleFilter::after {

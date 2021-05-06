@@ -9,13 +9,12 @@ import {
      QueryList,
      ViewChildren,
 } from "@angular/core";
-import { combineLatest, of, Subscription } from "rxjs";
+import { of, Subscription } from "rxjs";
 import { catchError, delay, tap } from "rxjs/operators";
 import { DocsEscritosService } from "src/app/services/docs-escritos.service";
 import { DocumentosService } from "src/app/services/documentos.service";
 import { FiltrosService } from "src/app/services/filtros.service";
 import { InfoService } from "src/app/services/info.service";
-import { SpinnerService } from "src/app/services/spinner.service";
 import { FiltroComponent } from "src/app/sharedComponents/filtro/filtro.component";
 
 @Component({
@@ -83,7 +82,7 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
      // formA1$_$ = this.filtroS.formGrupo1$;
 
      @ViewChildren(FiltroComponent)
-     toggles: QueryList<FiltroComponent>;
+     filtrosComp: QueryList<FiltroComponent>;
      toggleCollapseSub:Subscription;
      filtrosDocumentos;
      filtrosEscritos;
@@ -134,11 +133,12 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
      }
      ngAfterViewInit(): void {
 
-          this.toggleCollapseSub=this.toggles.first.triggerCollapse
+          this.toggleCollapseSub=this.filtrosComp.first.triggerCollapse
           .subscribe(d=>{
                console.log("Algo hay que hacer")
-               let allToggles=this.toggles.first.toggles.toArray().concat(
-                    this.toggles.last.toggles.toArray()
+               let allToggles=this.filtrosComp.first.toggles.toArray().concat(
+                    
+                    this.filtrosComp.last.toggles.toArray()
                );
                console.log(allToggles)
                let someCollap=allToggles.some(tog=>{
@@ -165,7 +165,7 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
           // this.documentosSub.unsubscribe();
           this.filtroDocumentosSub.unsubscribe();
           this.filtroEscritosSub.unsubscribe();
-          this.toggleCollapseSub.unsubscribe()
+          this.toggleCollapseSub.unsubscribe();
      }
 
 }
