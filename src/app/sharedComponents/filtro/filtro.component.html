@@ -16,7 +16,7 @@
       <!-- Level 0 Flex each filter -->
       <div class="formFilterGroup">
         <app-filtro-toggle>
-          <input type="checkbox" [id]="clase+'_'+i" class="showFilterOptions">
+          <input type="checkbox" [id]="clase+'_'+i" class="showFilterOptions" #toggleEl>
           <label class="toggleFilter" [for]="clase+'_'+i">
             <!-- checking arrayForms length, ie if changed checking! -->
             <span class="informerEdited" *ngIf="filtroFormGroup.get(key).value.length">

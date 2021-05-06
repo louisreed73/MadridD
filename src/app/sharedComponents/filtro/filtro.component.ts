@@ -42,7 +42,7 @@ export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
      show$: any;
      // filtrosShowSub: Subscription;
 
-     isDirty:boolean;
+     // isDirty:boolean;
 
      propiedadesConfigKeys: Array<any>;
 
@@ -252,8 +252,13 @@ export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
 
      collapsando() {
           let someTrue = this.toggles.some(
-               (tog) => tog.input.nativeElement.checked
+               (tog) => {
+                    console.log(tog);
+                    return tog.input.nativeElement.checked
+               }
           );
+
+          console.log(someTrue)
 
           if (someTrue) {
                this.toggles.forEach((toggle) => {
@@ -281,8 +286,8 @@ export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
 
      }
      whatIs(obj) {
-          console.log(`%cQue es esto: ${JSON.stringify(Object.values(obj).some(val=>val!==""))}`,"color:lime");
-          console.log(Object.values(this.filtroFormGroup.controls[obj].value).some(val=>!!val));
+          // console.log(`%cQue es esto: ${JSON.stringify(Object.values(obj).some(val=>val!==""))}`,"color:lime");
+          // console.log(Object.values(this.filtroFormGroup.controls[obj].value).some(val=>!!val));
           return Object.values(this.filtroFormGroup.controls[obj].value).some(val=>!!val);
           // return Object.values(obj).some(val=>val!=="");
      }
