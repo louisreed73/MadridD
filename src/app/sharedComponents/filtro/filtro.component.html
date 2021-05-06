@@ -15,104 +15,104 @@
     <ng-container *ngFor="let key of keys;let i=index">
       <!-- Level 0 Flex each filter -->
       <div class="formFilterGroup">
-        <app-filtro-toggle>
-          <input type="checkbox" [id]="clase+'_'+i" class="showFilterOptions" #toggleEl>
-          <label class="toggleFilter" [for]="clase+'_'+i">
-            <!-- checking arrayForms length, ie if changed checking! -->
-            <span class="informerEdited" *ngIf="filtroFormGroup.get(key).value.length">
-              <!-- {{filtroFormGroup.get(key).value.length}} -->
-            </span>
-            <span class="informerNotEdited" *ngIf="!filtroFormGroup.get(key).value.length">
-              <!-- {{filtroFormGroup.get(key).value.length}} -->
-            </span>
-            <!-- checking arrayForms length, ie if changed checking! End-->
+        <!-- <app-filtro-toggle> -->
+        <input type="checkbox" [id]="clase+'_'+i" class="showFilterOptions">
+        <label class="toggleFilter" [for]="clase+'_'+i" #toggleEl>
+          <!-- checking arrayForms length, ie if changed checking! -->
+          <span class="informerEdited" *ngIf="filtroFormGroup.get(key).value.length">
+            <!-- {{filtroFormGroup.get(key).value.length}} -->
+          </span>
+          <span class="informerNotEdited" *ngIf="!filtroFormGroup.get(key).value.length">
+            <!-- {{filtroFormGroup.get(key).value.length}} -->
+          </span>
+          <!-- checking arrayForms length, ie if changed checking! End-->
 
-            <!-- checking Forms Groups changes length, ie if changed checking! -->
-            <span class="informerEdited" *ngIf="whatIs(key)&&dameTipo(key)==='FormGroup'">
-              <!-- {{whatIs(key)}} -->
-            </span>
-            <span class="informerNotEdited" *ngIf="!whatIs(key)&&dameTipo(key)==='FormGroup'">
-              <!-- {{'fal'}} -->
-            </span>
-            <!-- checking Forms Groups changes length, ie if changed checking! End-->
+          <!-- checking Forms Groups changes length, ie if changed checking! -->
+          <span class="informerEdited" *ngIf="whatIs(key)&&dameTipo(key)==='FormGroup'">
+            <!-- {{whatIs(key)}} -->
+          </span>
+          <span class="informerNotEdited" *ngIf="!whatIs(key)&&dameTipo(key)==='FormGroup'">
+            <!-- {{'fal'}} -->
+          </span>
+          <!-- checking Forms Groups changes length, ie if changed checking! End-->
 
-            {{configFiltro[i].name}}</label>
-          <ng-container *ngIf="dameTipo(key)==='FormGroup'">
-            <div [formGroupName]="key" class="filter_common filter_common-static">
-              <!-- {{whatIs(key)}}
+          {{configFiltro[i].name}}</label>
+        <ng-container *ngIf="dameTipo(key)==='FormGroup'">
+          <div [formGroupName]="key" class="filter_common filter_common-static">
+            <!-- {{whatIs(key)}}
               {{filtroFormGroup.controls[key].dirty}} -->
-              <ng-container *ngIf="configFiltro[i].tipo==='date'">
-                <!-- {{filtroFormGroup.controls[key].dirty}} -->
-
-                <ng-container *ngFor="let item of configFiltro[i].values;let dateI=index;">
-                  <div class="input_flexItem input_flexItem--date">
-                    <label [for]="configFiltro[i].name+'_'+dateI">{{item}}</label>
-                    <input type="date" [id]="configFiltro[i].name+'_'+dateI"
-                      [formControlName]="configFiltro[i].values[dateI]">
-                  </div>
-                </ng-container>
-              </ng-container>
-
-              <ng-container *ngIf="configFiltro[i].tipo==='input'">
-
-                <ng-container *ngFor="let item of configFiltro[i].values;let inputI=index;">
-                  <div class="input_flexItem input_flexItem--input">
-                    <label class="" [for]="configFiltro[i].name+'_'+inputI">{{item}}</label>
-                    <input type="text" [id]="configFiltro[i].name+'_'+inputI"
-                      [formControlName]="configFiltro[i].values[inputI]" class="">
-                  </div>
-                </ng-container>
-              </ng-container>
-
-              <ng-container *ngIf="configFiltro[i].tipo==='checkbox' && configFiltro[i].multi===true">
-                <ng-container *ngFor="let item of configFiltro[i].values;let checkboxI=index;">
-                  <div class="input_flexItem">
-                    <input type="checkbox" [id]="configFiltro[i].name+'_'+checkboxI"
-                      [formControlName]="configFiltro[i].values[checkboxI]" class="custom-radio-check">
-                    <label class="staticControl" [for]="configFiltro[i].name+'_'+checkboxI">{{item}}</label>
-                  </div>
-                </ng-container>
-              </ng-container>
-
-              <ng-container *ngIf="configFiltro[i].tipo==='checkbox' && configFiltro[i].multi===false">
-                <!-- {{configFiltro[i].values}}  -->
-                <ng-container *ngFor="let item of configFiltro[i].values;let checkboxI=index;">
-                  <div class="input_flexItem">
-                    <input type="radio" [id]="configFiltro[i].name+'_'+checkboxI"
-                      [formControlName]="configFiltro[i].multiValue" [name]="configFiltro[i].multiValue" [value]="item"
-                      class="custom-radio-check">
-                    <label class="staticControl" [for]="configFiltro[i].name+'_'+checkboxI">{{item}}</label>
-                  </div>
-                </ng-container>
-              </ng-container>
-
-            </div>
-
-          </ng-container>
-          <ng-container *ngIf="dameTipo(key)==='FormArray'">
-
-            <div [formArrayName]="'arrayData'+i" class="filter_common">
-              <!-- <button (click)="anadeForma('arrayData'+i,configFiltro[i].name)">Añadir tipo</button> -->
+            <ng-container *ngIf="configFiltro[i].tipo==='date'">
               <!-- {{filtroFormGroup.controls[key].dirty}} -->
 
-              <app-autocomplete [sugerenciasData]="configFiltro[i].values" [autocompleteInstance]="i"
-                (sugerenciasOut)="getSugerencia($event)">
-              </app-autocomplete>
-              <ng-container *ngFor="let item of dameformGroupArray(i); index as i2" [formGroupName]="i2">
-                <!-- {{informa)}} -->
-                <ng-container *ngFor="let key of dameControlsKeys(item)">
-                  <div class="input_flexItem">
-                    <input type="checkbox" [id]="key+'_'+i2" [formControlName]="key" class="custom-radio-check">
-                    <label class="dynamicControl" [for]="key+'_'+i2">{{key}}</label>
-                    <button class="removeControl" (click)="eliminaControl('arrayData'+i,i2)"></button>
-                  </div>
-                </ng-container>
+              <ng-container *ngFor="let item of configFiltro[i].values;let dateI=index;">
+                <div class="input_flexItem input_flexItem--date">
+                  <label [for]="configFiltro[i].name+'_'+dateI">{{item}}</label>
+                  <input type="date" [id]="configFiltro[i].name+'_'+dateI"
+                    [formControlName]="configFiltro[i].values[dateI]">
+                </div>
+              </ng-container>
+            </ng-container>
 
+            <ng-container *ngIf="configFiltro[i].tipo==='input'">
+
+              <ng-container *ngFor="let item of configFiltro[i].values;let inputI=index;">
+                <div class="input_flexItem input_flexItem--input">
+                  <label class="" [for]="configFiltro[i].name+'_'+inputI">{{item}}</label>
+                  <input type="text" [id]="configFiltro[i].name+'_'+inputI"
+                    [formControlName]="configFiltro[i].values[inputI]" class="">
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="configFiltro[i].tipo==='checkbox' && configFiltro[i].multi===true">
+              <ng-container *ngFor="let item of configFiltro[i].values;let checkboxI=index;">
+                <div class="input_flexItem">
+                  <input type="checkbox" [id]="configFiltro[i].name+'_'+checkboxI"
+                    [formControlName]="configFiltro[i].values[checkboxI]" class="custom-radio-check">
+                  <label class="staticControl" [for]="configFiltro[i].name+'_'+checkboxI">{{item}}</label>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="configFiltro[i].tipo==='checkbox' && configFiltro[i].multi===false">
+              <!-- {{configFiltro[i].values}}  -->
+              <ng-container *ngFor="let item of configFiltro[i].values;let checkboxI=index;">
+                <div class="input_flexItem">
+                  <input type="radio" [id]="configFiltro[i].name+'_'+checkboxI"
+                    [formControlName]="configFiltro[i].multiValue" [name]="configFiltro[i].multiValue" [value]="item"
+                    class="custom-radio-check">
+                  <label class="staticControl" [for]="configFiltro[i].name+'_'+checkboxI">{{item}}</label>
+                </div>
+              </ng-container>
+            </ng-container>
+
+          </div>
+
+        </ng-container>
+        <ng-container *ngIf="dameTipo(key)==='FormArray'">
+
+          <div [formArrayName]="'arrayData'+i" class="filter_common">
+            <!-- <button (click)="anadeForma('arrayData'+i,configFiltro[i].name)">Añadir tipo</button> -->
+            <!-- {{filtroFormGroup.controls[key].dirty}} -->
+
+            <app-autocomplete [sugerenciasData]="configFiltro[i].values" [autocompleteInstance]="i"
+              (sugerenciasOut)="getSugerencia($event)">
+            </app-autocomplete>
+            <ng-container *ngFor="let item of dameformGroupArray(i); index as i2" [formGroupName]="i2">
+              <!-- {{informa)}} -->
+              <ng-container *ngFor="let key of dameControlsKeys(item)">
+                <div class="input_flexItem">
+                  <input type="checkbox" [id]="key+'_'+i2" [formControlName]="key" class="custom-radio-check">
+                  <label class="dynamicControl" [for]="key+'_'+i2">{{key}}</label>
+                  <button class="removeControl" (click)="eliminaControl('arrayData'+i,i2)"></button>
+                </div>
               </ng-container>
 
-            </div>
-          </ng-container>
-        </app-filtro-toggle>
+            </ng-container>
+
+          </div>
+        </ng-container>
+        <!-- </app-filtro-toggle> -->
         <!-- Level 0 Header for each Filter -->
 
         <!-- Level 0 Header for each Filter End -->

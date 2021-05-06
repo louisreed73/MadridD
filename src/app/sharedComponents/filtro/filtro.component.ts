@@ -11,7 +11,7 @@ import {
      ViewChildren,
 } from "@angular/core";
 import { FormArray, FormControl, FormGroup } from "@angular/forms";
-import { Subscription } from "rxjs";
+import { Subject, Subscription } from "rxjs";
 import { debounceTime, tap } from "rxjs/operators";
 // import { filtroDocumentos } from 'src/app/formulariosFiltrado/formulariosFiltrado.data';
 import { DocumentosService } from "src/app/services/documentos.service";
@@ -26,15 +26,15 @@ import { FiltroToggleComponent } from "../filtro-toggle/filtro-toggle.component"
 })
 export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
      @Input() filtroscombinado1;
-     @ViewChildren(FiltroToggleComponent)
-     toggles: QueryList<FiltroToggleComponent>;
+     @ViewChildren("toggleEl")
+     toggles: QueryList<ElementRef>;
      configFiltro;
      filtroFormGroup: FormGroup;
      clase: string;
      indice = [];
      sugerencia: Object;
      filtrosArrayFormsSubs: Subscription;
-     triggerCollapseSub: Subscription;
+     triggerCollapse: Subject<any>= new Subject();
      collapsable: boolean;
 
      // Pagination request increment or reset to 1
@@ -99,11 +99,11 @@ export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
 
           if (this.filtroscombinado1.clase !== "documentos") {
                this.collapsable = false;
-               this.triggerCollapseSub = this.filtrosServ.triggerCollapse
-                    .pipe()
-                    .subscribe((d) => {
-                         this.collapsando();
-                    });
+               // this.triggerCollapseSub = this.filtrosServ.triggerCollapse
+               //      .pipe()
+               //      .subscribe((d) => {
+               //           this.collapsando();
+               //      });
           } else {
                this.collapsable = true;
           }
@@ -141,10 +141,10 @@ export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
      ngOnDestroy(): void {
           // this.filtrosSubsc.unsubscribe();
           this.filtrosArrayFormsSubs.unsubscribe();
-          if (!this.collapsable) {
+          // if (!this.collapsable) {
 
-               this.triggerCollapseSub.unsubscribe();
-          }
+          //      this.triggerCollapseSub.unsubscribe();
+          // }
      }
 
      anadeForma = (() => {
@@ -248,41 +248,45 @@ export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
      ngAfterViewInit(): void {
           //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
           //Add 'implements AfterViewInit' to the class.
+          // console.log(this.toggles)
      }
 
      collapsando() {
-          let someTrue = this.toggles.some(
-               (tog) => {
-                    console.log(tog);
-                    return tog.input.nativeElement.checked
-               }
-          );
+          console.log(this.toggles);
 
-          console.log(someTrue)
+         
+          // let someTrue = this.toggles.some(
+          //      (tog) => {
+          //           console.log(tog);
+          //           return tog.input.nativeElement.checked
+          //      }
+          // );
 
-          if (someTrue) {
-               this.toggles.forEach((toggle) => {
-                    // console.log(toggle.input.nativeElement.parentElement.parentElement.parentElement.firstChild)
-                    // console.log(toggle.input.nativeElement);
+          // console.log(someTrue)
 
-                    // toggle.input.nativeElement.checked=false;
+          // if (someTrue) {
+          //      this.toggles.forEach((toggle) => {
+          //           // console.log(toggle.input.nativeElement.parentElement.parentElement.parentElement.firstChild)
+          //           // console.log(toggle.input.nativeElement);
 
-                    toggle.input.nativeElement.checked = false;
-                    // toggle.input.nativeElement.parentElement.parentElement.previousElementSibling.classList.remove("collapsed");
-               });
-          } else {
-               this.toggles.forEach((toggle) => {
-                    // console.log(toggle.input.nativeElement);
+          //           // toggle.input.nativeElement.checked=false;
 
-                    // toggle.input.nativeElement.checked=false;
+          //           toggle.input.nativeElement.checked = false;
+          //           // toggle.input.nativeElement.parentElement.parentElement.previousElementSibling.classList.remove("collapsed");
+          //      });
+          // } else {
+          //      this.toggles.forEach((toggle) => {
+          //           // console.log(toggle.input.nativeElement);
 
-                    toggle.input.nativeElement.checked = true;
-               });
-          }
+          //           // toggle.input.nativeElement.checked=false;
 
-          if (this.collapsable) {
-               this.filtrosServ.triggerCollapse.next(true);
-          }
+          //           toggle.input.nativeElement.checked = true;
+          //      });
+          // }
+
+               this.triggerCollapse.next(true);
+          // if (this.collapsable) {
+          // }
 
      }
      whatIs(obj) {
