@@ -2,12 +2,22 @@
     margin-left:auto;
     display:flex;
     align-items:center;
-    background:white;
+    // background:white;
     color:gainsboro;
     padding:1rem;
     min-width:35rem;
-    color:rgb(4, 82, 4);
+    color:rgb(255, 255, 255);
     border-radius:.5rem;
+    position: absolute;
+    top: 23.9rem;
+    // background: rgba(241, 241, 241, 1);
+    background: rgba(0, 103, 151, 1);
+    transform: translate(-50%, -4rem);
+    left: 50%;
+}
+
+.fijo :host {
+    top:19.1rem;
 }
 
 p {

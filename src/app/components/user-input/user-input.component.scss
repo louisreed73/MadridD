@@ -7,7 +7,8 @@
     background: rgba(236, 236, 236, 1);
     border-bottom: 1px solid rgb(215 215 215);
     z-index: 10;
-    padding: 1rem 3rem;
+    // padding: 1rem 3rem;
+    padding: 1rem 3rem 5rem;
     transition: top .2s cubic-bezier(0, 1.09, 1, 1);
 }
 :host(.fijo) {
@@ -18,5 +19,5 @@
     top:0rem;
     // background: orange;
     // z-index: 10;
-    padding: 1rem 3rem 6rem;
+    padding: 1rem 3rem 5rem;
 }

@@ -1,6 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnDestroy } from "@angular/core";
-import { BehaviorSubject, combineLatest, from, of, Subscription } from "rxjs";
+import {
+     BehaviorSubject,
+     combineLatest,
+     from,
+     of,
+     Subject,
+     Subscription,
+} from "rxjs";
 import { shareReplay, switchMap, toArray } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import {
@@ -16,11 +23,12 @@ import {
      providedIn: "root",
 })
 export class FiltrosService implements OnDestroy {
-     datosDynamicValues: Array<Array<string>>;
+     // datosDynamicValues: Array<Array<string>>;
      reqValoresDocumentosSub: Subscription;
      reqValoresResolucionesSub: Subscription;
      reqValoresEscritosSub: Subscription;
      showFilters$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+     triggerCollapse: Subject<any> = new Subject();
 
      constructor(private http: HttpClient) {
           this.getRequestValoresDocumentos();
@@ -60,7 +68,7 @@ export class FiltrosService implements OnDestroy {
                     data.forEach((filtro, index) => {
                          this.creaConfig(data, index, config1);
                     });
-                    this.showFilters$.next(true);
+                    // this.showFilters$.next(true);
                });
      }
      getRequestValoresResoluciones() {
@@ -108,17 +116,6 @@ export class FiltrosService implements OnDestroy {
                          },
                     },
                ]),
-               // from([]),
-               // from([
-               //      {
-               //           data: {
-               //                cualquiera: [
-               //                     { codigo: "SENT", descripcion: "Sentencia" },
-               //                     { codigo: "AUTO", descripcion: "Auto" },
-               //                ],
-               //           },
-               //      },
-               // ]),
           ])
                .pipe(
                     switchMap((data) => {
@@ -136,7 +133,7 @@ export class FiltrosService implements OnDestroy {
                     data.forEach((filtro, index) => {
                          this.creaConfig(data, index, config2);
                     });
-                    this.showFilters$.next(true);
+                    // this.showFilters$.next(true);
                });
      }
      getRequestValoresEscritos() {

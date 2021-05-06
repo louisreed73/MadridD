@@ -82,12 +82,20 @@ header {
 .filtrosSection {
   display: flex;
   background: gainsboro;
-  width: 100%;
+  width: calc(100% - 6rem) ;
   flex-flow: row wrap;
   max-height: 22rem;
   overflow: hidden;
   overflow-y: auto;
-  padding-bottom:1rem;
+  // padding-bottom:1rem;
+  position: fixed;
+    z-index: 10;
+    top: 21.4rem;
+}
+
+.fijo .filtrosSection {
+
+  top: 12.3rem;
 }
 
 .fijoStart {
@@ -99,13 +107,13 @@ header {
 .fijo {
   position: fixed;
   display: flex;
-  width: calc(100% - 5.9rem);
-  top: 12.8rem;
+  width: calc(100% - 6rem);
+  top: 13.5rem;
   z-index: 10;
 }
 
 .noJump {
-  margin-top: 13rem;
+  margin-top: 24rem;
   position: relative;
   top: -10rem;
 }

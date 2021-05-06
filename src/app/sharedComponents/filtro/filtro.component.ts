@@ -1,4 +1,15 @@
-import { AfterViewInit, Component, Inject, Input, OnDestroy, OnInit, QueryList, ViewChildren } from "@angular/core";
+import {
+     AfterViewInit,
+     Component,
+     ElementRef,
+     Inject,
+     Input,
+     OnDestroy,
+     OnInit,
+     QueryList,
+     ViewChild,
+     ViewChildren,
+} from "@angular/core";
 import { FormArray, FormControl, FormGroup } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { debounceTime, tap } from "rxjs/operators";
@@ -15,18 +26,23 @@ import { FiltroToggleComponent } from "../filtro-toggle/filtro-toggle.component"
 })
 export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
      @Input() filtroscombinado1;
-     @ViewChildren(FiltroToggleComponent) toggles:QueryList<FiltroToggleComponent>
+     @ViewChildren(FiltroToggleComponent)
+     toggles: QueryList<FiltroToggleComponent>;
      configFiltro;
      filtroFormGroup: FormGroup;
      clase: string;
      indice = [];
      sugerencia: Object;
      filtrosArrayFormsSubs: Subscription;
+     triggerCollapseSub: Subscription;
+     collapsable: boolean;
 
      // Pagination request increment or reset to 1
      pagina: number = 1;
      show$: any;
      // filtrosShowSub: Subscription;
+
+     isDirty:boolean;
 
      propiedadesConfigKeys: Array<any>;
 
@@ -79,8 +95,18 @@ export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
      }
 
      ngOnInit(): void {
-          // console.log(this.filtros)
           console.log(this.filtroscombinado1);
+
+          if (this.filtroscombinado1.clase !== "documentos") {
+               this.collapsable = false;
+               this.triggerCollapseSub = this.filtrosServ.triggerCollapse
+                    .pipe()
+                    .subscribe((d) => {
+                         this.collapsando();
+                    });
+          } else {
+               this.collapsable = true;
+          }
 
           this.show$ = this.filtrosServ.showFilters$;
           this.configFiltro = this.filtroscombinado1.data[0];
@@ -104,6 +130,7 @@ export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
                          indice++;
                     }
                     console.log(transformedData);
+                    console.log(this.filtroFormGroup);
                     // Sending nueva petición API
                     // this.searchTrigger.updatedFiltro=transformedData;
 
@@ -114,6 +141,10 @@ export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
      ngOnDestroy(): void {
           // this.filtrosSubsc.unsubscribe();
           this.filtrosArrayFormsSubs.unsubscribe();
+          if (!this.collapsable) {
+
+               this.triggerCollapseSub.unsubscribe();
+          }
      }
 
      anadeForma = (() => {
@@ -129,16 +160,26 @@ export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
                          [`${nombrado}`]: new FormControl(true),
                     })
                );
+          console.log("la llave",(<FormArray>this.filtroFormGroup.get(arrayData)))
+
+               console.log("En el array hay: ",(<FormArray>this.filtroFormGroup.get(arrayData)).length)
           };
      })();
+
+
 
      eliminaControl(keyArray, i) {
           let key = Object.keys(
                <FormArray>this.filtroFormGroup.get(keyArray).value[i]
           )[0];
+          console.log("la llave",this.filtroFormGroup.get(keyArray))
           let numberIndice = this.indice.indexOf(key);
           this.indice.splice(numberIndice, 1);
           (<FormArray>this.filtroFormGroup.get(keyArray)).removeAt(i);
+
+          console.log("En el array hay: ",(<FormArray>this.filtroFormGroup.get(keyArray)).length);
+          
+
      }
 
      getSugerencia(e: { [k: string]: any }) {
@@ -207,38 +248,42 @@ export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
      ngAfterViewInit(): void {
           //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
           //Add 'implements AfterViewInit' to the class.
-          // console.log(this.toggles)
-
-          this.toggles.forEach(toggle=>{
-               // console.log(toggle.input.nativeElement)
-          })
      }
 
-     collapsando(){
-          let someTrue=this.toggles.some(tog=>tog.input.nativeElement.checked);
+     collapsando() {
+          let someTrue = this.toggles.some(
+               (tog) => tog.input.nativeElement.checked
+          );
 
-          if(someTrue) {
-
-               this.toggles.forEach(toggle=>{
+          if (someTrue) {
+               this.toggles.forEach((toggle) => {
                     // console.log(toggle.input.nativeElement.parentElement.parentElement.parentElement.firstChild)
                     // console.log(toggle.input.nativeElement);
-     
+
                     // toggle.input.nativeElement.checked=false;
-     
-                    toggle.input.nativeElement.checked=false;
+
+                    toggle.input.nativeElement.checked = false;
                     // toggle.input.nativeElement.parentElement.parentElement.previousElementSibling.classList.remove("collapsed");
-               })
-          }
-          
-          else {
-               this.toggles.forEach(toggle=>{
+               });
+          } else {
+               this.toggles.forEach((toggle) => {
                     // console.log(toggle.input.nativeElement);
-     
+
                     // toggle.input.nativeElement.checked=false;
-     
-                    toggle.input.nativeElement.checked=true;
-               })
-               
+
+                    toggle.input.nativeElement.checked = true;
+               });
           }
+
+          if (this.collapsable) {
+               this.filtrosServ.triggerCollapse.next(true);
+          }
+
+     }
+     whatIs(obj) {
+          console.log(`%cQue es esto: ${JSON.stringify(Object.values(obj).some(val=>val!==""))}`,"color:lime");
+          console.log(Object.values(this.filtroFormGroup.controls[obj].value).some(val=>!!val));
+          return Object.values(this.filtroFormGroup.controls[obj].value).some(val=>!!val);
+          // return Object.values(obj).some(val=>val!=="");
      }
 }
