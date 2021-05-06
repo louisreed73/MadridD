@@ -19,13 +19,21 @@
           <input type="checkbox" [id]="clase+'_'+i" class="showFilterOptions">
           <label class="toggleFilter" [for]="clase+'_'+i">
             <!-- checking arrayForms length, ie if changed checking! -->
-            <span *ngIf="filtroFormGroup.get(key).value.length">{{filtroFormGroup.get(key).value.length}}</span>
-            <span *ngIf="!filtroFormGroup.get(key).value.length">{{filtroFormGroup.get(key).value.length}}</span>
+            <span class="informerEdited" *ngIf="filtroFormGroup.get(key).value.length">
+              <!-- {{filtroFormGroup.get(key).value.length}} -->
+            </span>
+            <span class="informerNotEdited" *ngIf="!filtroFormGroup.get(key).value.length">
+              <!-- {{filtroFormGroup.get(key).value.length}} -->
+            </span>
             <!-- checking arrayForms length, ie if changed checking! End-->
 
             <!-- checking Forms Groups changes length, ie if changed checking! -->
-            <span *ngIf="whatIs(key)&&dameTipo(key)==='FormGroup'">{{whatIs(key)}}</span>
-            <span *ngIf="!whatIs(key)&&dameTipo(key)==='FormGroup'">{{'fal'}}</span>
+            <span class="informerEdited" *ngIf="whatIs(key)&&dameTipo(key)==='FormGroup'">
+              <!-- {{whatIs(key)}} -->
+            </span>
+            <span class="informerNotEdited" *ngIf="!whatIs(key)&&dameTipo(key)==='FormGroup'">
+              <!-- {{'fal'}} -->
+            </span>
             <!-- checking Forms Groups changes length, ie if changed checking! End-->
 
             {{configFiltro[i].name}}</label>

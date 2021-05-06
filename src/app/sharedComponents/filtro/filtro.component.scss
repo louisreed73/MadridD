@@ -102,10 +102,13 @@ input[type="date"], input[type="text"] {
 }
 
 
+
+
 label.toggleFilter {
     padding: 1rem 1rem 1rem 0.5rem;
     background:gainsboro;
     text-align: center;
+    position:relative;
 }
 
 label.toggleFilter::after {
@@ -274,3 +277,22 @@ label.dynamicControl {
 //         // transition: transform 1.3s ease-in-out
 //     }
 // }
+
+.informerEdited, .informerNotEdited {
+    position: absolute;
+    top: 5%;
+    left: calc(50% - .35rem);
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: rgba(0, 103, 151, 1);
+}
+.informerNotEdited {
+    // position:absolute;
+    // top:0;
+    // left:0;
+    // width: 1rem;
+    // height:1rem;
+    // border-radius:50%;
+    background: rgba(190, 190, 190, 1);
+}

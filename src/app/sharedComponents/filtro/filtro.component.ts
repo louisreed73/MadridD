@@ -160,9 +160,9 @@ export class FiltroComponent implements OnInit, OnDestroy, AfterViewInit {
                          [`${nombrado}`]: new FormControl(true),
                     })
                );
-          console.log("la llave",(<FormArray>this.filtroFormGroup.get(arrayData)))
+          // console.log("la llave",(<FormArray>this.filtroFormGroup.get(arrayData)))
 
-               console.log("En el array hay: ",(<FormArray>this.filtroFormGroup.get(arrayData)).length)
+               // console.log("En el array hay: ",(<FormArray>this.filtroFormGroup.get(arrayData)).length)
           };
      })();
 
