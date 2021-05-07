@@ -3,9 +3,9 @@
 @import "abstracts";
 @import "base";
 
-body {
-  font-family: $font-main;
-}
+// body {
+//   font-family: $font-main;
+// }
 
 
 input {
@@ -44,12 +44,23 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  // font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: $font-main;
 }
 
 
 input {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: $font-main;
+    padding: .5rem;
+    border: 1px solid gainsboro;
+    outline: none;
+    width: 12.6rem;
+    font-family: inherit;
+
+}
+
+input:focus {
+  outline: 0.25px solid green;
 }
 
 header {
