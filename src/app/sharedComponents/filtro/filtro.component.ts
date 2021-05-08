@@ -24,7 +24,7 @@ import { FiltroToggleComponent } from "../filtro-toggle/filtro-toggle.component"
      templateUrl: "./filtro.component.html",
      styleUrls: ["./filtro.component.scss"],
 })
-export class FiltroComponent implements OnInit, OnDestroy{
+export class FiltroComponent implements OnInit, OnDestroy {
      @Input() filtroscombinado1;
      @ViewChildren("toggleEl")
      toggles: QueryList<ElementRef>;
@@ -34,7 +34,7 @@ export class FiltroComponent implements OnInit, OnDestroy{
      indice = [];
      sugerencia: Object;
      filtrosArrayFormsSubs: Subscription;
-     triggerCollapse: Subject<any>= new Subject();
+     triggerCollapse: Subject<any> = new Subject();
      collapsable: boolean;
 
      // Pagination request increment or reset to 1
@@ -57,6 +57,11 @@ export class FiltroComponent implements OnInit, OnDestroy{
           return Object.keys(this.filtroFormGroup.controls);
      }
 
+     placeHold(inputI: number) {
+          console.log(inputI);
+          return inputI ? "0000" : "000";
+     }
+
      getValuesFromRadios(ind: number) {
           return this.configFiltro[ind].values;
      }
@@ -66,15 +71,6 @@ export class FiltroComponent implements OnInit, OnDestroy{
                .controls;
      }
 
-     // dameformGroupControls(key: string) {
-     //      console.log(this.configFiltro)
-     //      let controls = (<FormGroup>this.filtroFormGroup.get(key)).controls;
-     //      let controlsToArray = [];
-     //      for (let k in controls) {
-     //           controlsToArray.push(controls[k]);
-     //      }
-     //      return controlsToArray;
-     // }
 
      dameControlsKeys(item) {
           return Object.keys(item.controls);
@@ -96,14 +92,11 @@ export class FiltroComponent implements OnInit, OnDestroy{
 
      ngOnInit(): void {
           console.log(this.filtroscombinado1);
+          this.collapsable = true;
 
           if (this.filtroscombinado1.clase !== "documentos") {
                this.collapsable = false;
-               // this.triggerCollapseSub = this.filtrosServ.triggerCollapse
-               //      .pipe()
-               //      .subscribe((d) => {
-               //           this.collapsando();
-               //      });
+
           } else {
                this.collapsable = true;
           }
@@ -124,13 +117,14 @@ export class FiltroComponent implements OnInit, OnDestroy{
                     let transformedData = {};
                     let indice = 0;
                     for (let value of Object.values(data)) {
+                         
                          transformedData[
                               this.configFiltro[indice].name
                          ] = value;
                          indice++;
                     }
-                    console.log(transformedData);
-                    console.log(this.filtroFormGroup);
+                    // console.log(transformedData);
+                    // console.log(this.filtroFormGroup);
                     // Sending nueva petición API
                     // this.searchTrigger.updatedFiltro=transformedData;
 
@@ -141,7 +135,6 @@ export class FiltroComponent implements OnInit, OnDestroy{
      ngOnDestroy(): void {
           // this.filtrosSubsc.unsubscribe();
           this.filtrosArrayFormsSubs.unsubscribe();
-
      }
 
      anadeForma = (() => {
@@ -157,26 +150,25 @@ export class FiltroComponent implements OnInit, OnDestroy{
                          [`${nombrado}`]: new FormControl(true),
                     })
                );
-          // console.log("la llave",(<FormArray>this.filtroFormGroup.get(arrayData)))
+               // console.log("la llave",(<FormArray>this.filtroFormGroup.get(arrayData)))
 
                // console.log("En el array hay: ",(<FormArray>this.filtroFormGroup.get(arrayData)).length)
           };
      })();
 
-
-
      eliminaControl(keyArray, i) {
           let key = Object.keys(
                <FormArray>this.filtroFormGroup.get(keyArray).value[i]
           )[0];
-          console.log("la llave",this.filtroFormGroup.get(keyArray))
+          console.log("la llave", this.filtroFormGroup.get(keyArray));
           let numberIndice = this.indice.indexOf(key);
           this.indice.splice(numberIndice, 1);
           (<FormArray>this.filtroFormGroup.get(keyArray)).removeAt(i);
 
-          console.log("En el array hay: ",(<FormArray>this.filtroFormGroup.get(keyArray)).length);
-          
-
+          console.log(
+               "En el array hay: ",
+               (<FormArray>this.filtroFormGroup.get(keyArray)).length
+          );
      }
 
      getSugerencia(e: { [k: string]: any }) {
@@ -184,11 +176,9 @@ export class FiltroComponent implements OnInit, OnDestroy{
      }
 
      triggerNewSearch(data) {
-
           this.combinacion.stopScroll$.next(true);
 
           let actual = this.searchTrigger.updatedFiltro;
-
 
           let updatedChangesFiltro;
 
@@ -238,16 +228,15 @@ export class FiltroComponent implements OnInit, OnDestroy{
           this.searchTrigger.updatedPagina = this.pagina;
      }
 
-
-
-     collapsando() { 
-               this.triggerCollapse.next(true);
-
+     collapsando() {
+          this.triggerCollapse.next(true);
      }
 
      whatIs(obj) {
           // console.log(`%cQue es esto: ${JSON.stringify(Object.values(obj).some(val=>val!==""))}`,"color:lime");
           // console.log(Object.values(this.filtroFormGroup.controls[obj].value).some(val=>!!val));
-          return Object.values(this.filtroFormGroup.controls[obj].value).some(val=>!!val);
+          return Object.values(this.filtroFormGroup.controls[obj].value).some(
+               (val) => !!val
+          );
      }
 }

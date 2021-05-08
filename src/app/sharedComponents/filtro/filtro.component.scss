@@ -28,7 +28,7 @@ form {
 
 .p-l {
     padding-left:5.5rem;
-    margin-bottom: 1rem;
+    // margin-bottom: 1rem;
 }
 
 
@@ -36,7 +36,7 @@ form {
 .formFilterGroup {
     width:auto;
     min-width: 10.5rem;
-    margin-bottom: 1rem;
+    // margin-bottom: 1rem;
 }
 
 form:not(.p-l):last-of-type
@@ -60,7 +60,8 @@ input.showFilterOptions:checked ~ .filter_common {
     flex-direction:column;
     justify-content: space-evenly;
     align-items:flex-start;   
-    padding: 1rem 1rem 1.2rem 1rem;
+    // padding: 1rem 1rem 1.2rem 1rem;
+    padding: 1.7rem 1rem 1.7rem 1rem;
     border-radius: 0.5rem;
     border-radius: 0.5rem;
     outline: 1px solid #bbbaba;
@@ -99,7 +100,9 @@ input[type="text"] {
 }
 
 
-input[type="date"], input[type="text"] {
+input[type="date"], 
+input[type="text"],
+input[type="number"] {
     padding: 0.5rem;
     margin: 0.5rem .5rem .5rem 1.1rem;
     width: 12.6rem;
@@ -108,11 +111,29 @@ input[type="date"], input[type="text"] {
 
 }
 
+input[type="number"] {
+    padding: 0.5rem;
+    margin: 0.5rem .5rem .5rem 1.1rem;
+    width: 6.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+
+}
+
 .filter_common {
-    & .input_flexItem--date:first-of-type,
-    & .input_flexItem--input:first-of-type {
+    & .input_flexItem--date:first-of-type
+     {
         margin-top:1.2rem;
     }
+}
+
+.inputBox__Y {
+    display:flex;
+    align-items:center;
+    padding-top:1.2rem;
+}
+.inputBox__Y .input_FlexItem {
+    // margin-top:1.2rem;
 }
 
 
@@ -233,8 +254,8 @@ input.custom-radio-check:checked + label::after {
     display: block;
     content: "X";
     position: relative;
-    top: 0.05rem;
-    left: 0rem;
+    // top: 0.05rem;
+    // left: 0rem;
     color: white;
 }
 
@@ -313,4 +334,10 @@ label.dynamicControl {
     // height:1rem;
     // border-radius:50%;
     background: rgba(190, 190, 190, 1);
+}
+
+.space {
+    // color:red;
+    width:1rem;
+    display:inline-block;
 }

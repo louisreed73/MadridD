@@ -3,7 +3,7 @@ import { FormArray, FormControl, FormGroup } from "@angular/forms";
 let config1 = [
      {
           tipo: "array",
-          name: "tipo documento",
+          name: "tipo documental",
           // values: [
           //      "Acta",
           //      "Acta conciliación",
@@ -13,15 +13,16 @@ let config1 = [
           // ],
      },
      {
-          tipo: "array",
-          name: "fase procesal",
-          // values: [
-          //      "Acta B",
-          //      "Acta conciliación B",
-          //      "Acuerdo B",
-          //      "Acuse de recibo B",
-          //      "Auto B",
-          // ],
+          tipo: "date",
+          name: "fecha tramitacion",
+          values: [
+               "desde",
+               "hasta",
+          //      //      "Acta conciliación B",
+          //      //      "Acuerdo B",
+          //      //      "Acuse de recibo B",
+          //      //      "Auto B",
+          ],
      },
      {
           tipo: "array",
@@ -33,6 +34,17 @@ let config1 = [
           //      "Tramite de recibo B",
           //      "Tramite C",
           // ],
+     },
+     {
+          tipo: "input",
+          name: "procedimiento nº / año",
+          values: [
+               "numero",
+               "año",
+          //      "Acuerdo",
+          //      "Acuse de recibo",
+          //      "Auto",
+          ],
      },
      {
           tipo: "array",
@@ -50,17 +62,22 @@ let config1 = [
 let form1: FormGroup = new FormGroup({
      [`arrayData0`]: new FormArray([]),
 
-     [`arrayData1`]: new FormArray([]),
+     // [`arrayData1`]: new FormArray([]),
 
+     ["fecha tramitacion"]: new FormGroup({
+          ["desde"]: new FormControl(""),
+          ["hasta"]: new FormControl(""),
+          // another: new FormControl(""),
+     }),
      [`arrayData2`]: new FormArray([]),
 
-     [`arrayData3`]: new FormArray([]),
+     ["procedimiento nº / año"]: new FormGroup({
+          ["numero"]: new FormControl(""),
+          ["año"]: new FormControl(""),
+          // ["Input 3"]: new FormControl(""),
+     }),
 
-     // magistrado: new FormGroup({
-     //      from: new FormControl(""),
-     //      until: new FormControl(""),
-     //      another: new FormControl(""),
-     // }),
+     [`arrayData4`]: new FormArray([]),
 });
 
 /**
@@ -70,43 +87,20 @@ let form1: FormGroup = new FormGroup({
  */
 
 let config2 = [
-     {
-          tipo: "array",
-          name: "tipo resolución",
-          // values: [
-          //      "Acta",
-          //      "Acta conciliación",
-          //      "Acuerdo",
-          //      "Acuse de recibo",
-          //      "Auto",
-          // ],
-     },
-     {
-          tipo: "input",
-          name: "tipo input",
-          // values: [
-          //      "Acta",
-          //      "Acta conciliación",
-          //      "Acuerdo",
-          //      "Acuse de recibo",
-          //      "Auto",
-          // ],
-     },
-     {
-          tipo: "date",
-          name: "fecha resolución",
-          values: [
-               "resolución",
-               "sentencia",
-               //      "Acta conciliación B",
-               //      "Acuerdo B",
-               //      "Acuse de recibo B",
-               //      "Auto B",
-          ],
-     },
+     // {
+     //      tipo: "array",
+     //      name: "tipo resolución",
+     //      // values: [
+     //      //      "Acta",
+     //      //      "Acta conciliación",
+     //      //      "Acuerdo",
+     //      //      "Acuse de recibo",
+     //      //      "Auto",
+     //      // ],
+     // },
      {
           tipo: "checkbox",
-          name: "selección multi",
+          name: "tipo resolucion",
           multi: true,
           values: [
                // "resolución",
@@ -118,19 +112,55 @@ let config2 = [
           ],
      },
      {
-          tipo: "checkbox",
-          name: "selección no multi",
-          multi: false,
-          multiValue: "Opción",
+          tipo: "date",
+          name: "fecha resolucion",
           values: [
-               // "resolución",
-               // "sentencia"
+               // "desde",
+               // "hasta",
                //      "Acta conciliación B",
                //      "Acuerdo B",
                //      "Acuse de recibo B",
                //      "Auto B",
           ],
      },
+     // {
+     //      tipo: "input",
+     //      name: "tipo input",
+     //      // values: [
+     //      //      // "Acta",
+     //      //      // "Acta conciliación",
+     //      // //      "Acuerdo",
+     //      // //      "Acuse de recibo",
+     //      // //      "Auto",
+     //      // ],
+     // },
+     // {
+     //      tipo: "checkbox",
+     //      name: "selección multi",
+     //      multi: true,
+     //      values: [
+     //           // "resolución",
+     //           // "sentencia"
+     //           //      "Acta conciliación B",
+     //           //      "Acuerdo B",
+     //           //      "Acuse de recibo B",
+     //           //      "Auto B",
+     //      ],
+     // },
+     // {
+     //      tipo: "checkbox",
+     //      name: "selección no multi",
+     //      multi: false,
+     //      multiValue: "Opción",
+     //      values: [
+     //           // "resolución",
+     //           // "sentencia"
+     //           //      "Acta conciliación B",
+     //           //      "Acuerdo B",
+     //           //      "Acuse de recibo B",
+     //           //      "Auto B",
+     //      ],
+     // },
      // {
      //      tipo:"checkbox",
      //      name:"cualquiera",
@@ -161,25 +191,30 @@ let config2 = [
 ];
 
 let form2: FormGroup = new FormGroup({
-     [`arrayData0`]: new FormArray([]),
+     // [`arrayData0`]: new FormArray([]),
 
-     ["tipo input"]: new FormGroup({
-          ["Input 1"]: new FormControl(""),
-          ["Input 2 /"]: new FormControl(""),
-          ["Input 3"]: new FormControl(""),
+     ["tipo resolucion"]: new FormGroup({
+          ["auto"]: new FormControl(""),
+          ["sentencia"]: new FormControl(""),
      }),
-     ["fecha resolución"]: new FormGroup({
-          ["Auto"]: new FormControl(""),
-          ["Sentencia"]: new FormControl(""),
+     ["fecha resolucion"]: new FormGroup({
+          ["desde"]: new FormControl(""),
+          ["hasta"]: new FormControl(""),
+          // another: new FormControl(""),
      }),
-     ["selección multi"]: new FormGroup({
-          ["Tipo 1"]: new FormControl(""),
-          ["Tipo 2"]: new FormControl(""),
-     }),
-     ["selección no multi"]: new FormGroup({
-          ["Opción"]: new FormControl(""),
-          // ["selección_1"]: new FormControl(""),
-     }),
+     // ["tipo input"]: new FormGroup({
+     //      ["Input 1"]: new FormControl(""),
+     //      ["Input 2 /"]: new FormControl(""),
+     //      ["Input 3"]: new FormControl(""),
+     // }),
+     // ["selección multi"]: new FormGroup({
+     //      ["Tipo 1"]: new FormControl(""),
+     //      ["Tipo 2"]: new FormControl(""),
+     // }),
+     // ["selección no multi"]: new FormGroup({
+     //      ["Opción"]: new FormControl(""),
+     //      // ["selección_1"]: new FormControl(""),
+     // }),
      // cualquiera: new FormGroup({
      //      resolución: new FormControl(""),
      // }),
@@ -218,9 +253,9 @@ let config3 = [
      },
      {
           tipo: "date",
-          name: "fecha presentación",
+          name: "fecha presentacion",
           values: [
-               "presentación",
+               // "presentación",
                // "Acta conciliación B",
                // "Acuerdo B",
                // "Acuse de recibo B",
@@ -254,8 +289,9 @@ let config3 = [
 let form3: FormGroup = new FormGroup({
      [`arrayData0`]: new FormArray([]),
 
-     ["fecha presentación"]: new FormGroup({
-          presentación: new FormControl(""),
+     ["fecha presentacion"]: new FormGroup({
+          ["desde"]: new FormControl(""),
+          ["hasta"]: new FormControl(""),
      }),
 
      // [`arrayData2`]: new FormArray([]),

@@ -47,10 +47,32 @@ export class FiltrosService implements OnDestroy {
                this.http.get<any>(
                     `${environment.baseURLApi}/tipos-documentales`
                ),
-               this.http.get<any>(`${environment.baseURLApi}/fases-procesales`),
+               from([
+                    {
+                         data: {
+                              cualquiera: [
+                                   { codigo: null, descripcion: "desde" },
+                                   { codigo: null, descripcion: "hasta" },
+                                   // { codigo: "AUTOS", descripcion: "Input 3" },
+                              ],
+                         },
+                    },
+               ]),
+               // this.http.get<any>(`${environment.baseURLApi}/fases-procesales`),
                this.http.get<any>(
                     `${environment.baseURLApi}/tipos-procedimientos`
                ),
+               from([
+                    {
+                         data: {
+                              cualquiera: [
+                                   { codigo: null, descripcion: "numero" },
+                                   { codigo: null, descripcion: "año" },
+                                   // { codigo: "AUTOS", descripcion: "Input 3" },
+                              ],
+                         },
+                    },
+               ]),
                this.http.post<any>(`${environment.baseURLApi}/magistrados`, {}),
           ])
                .pipe(
@@ -58,7 +80,7 @@ export class FiltrosService implements OnDestroy {
                          return data.map((itemData, ind) => {
                               return itemData.data[
                                    Object.keys(data[ind].data)[0]
-                              ].map((it) => it.descripcion);
+                              ].map((it) => it.descripcion.toLowerCase());
                          });
                     }),
                     toArray(),
@@ -73,15 +95,15 @@ export class FiltrosService implements OnDestroy {
      }
      getRequestValoresResoluciones() {
           this.reqValoresResolucionesSub = combineLatest([
-               this.http.get<any>(`${environment.baseURLApi}/tipos-resolucion`),
+               // this.http.get<any>(`${environment.baseURLApi}/tipos-resolucion`),
                // from([]),
                from([
                     {
                          data: {
                               cualquiera: [
-                                   { codigo: "SENT", descripcion: "Input 1" },
-                                   { codigo: "AUTO", descripcion: "Input 2 /" },
-                                   { codigo: "AUTOS", descripcion: "Input 3" },
+                                   { codigo: null, descripcion: "auto" },
+                                   { codigo: null, descripcion: "sentencia" },
+                                   // { codigo: "AUTOS", descripcion: "Input 3" },
                               ],
                          },
                     },
@@ -90,32 +112,43 @@ export class FiltrosService implements OnDestroy {
                     {
                          data: {
                               cualquiera: [
-                                   { codigo: "SENT", descripcion: "Sentencia" },
-                                   { codigo: "AUTO", descripcion: "Auto" },
+                                   { codigo: null, descripcion: "desde" },
+                                   { codigo: null, descripcion: "hasta" },
+                                   // { codigo: "AUTOS", descripcion: "Input 3" },
                               ],
                          },
                     },
                ]),
-               from([
-                    {
-                         data: {
-                              cualquiera: [
-                                   { codigo: "SENT", descripcion: "Tipo 1" },
-                                   { codigo: "AUTO", descripcion: "Tipo 2" },
-                              ],
-                         },
-                    },
-               ]),
-               from([
-                    {
-                         data: {
-                              cualquiera: [
-                                   { codigo: "SENT", descripcion: "Option 1" },
-                                   { codigo: "AUTO", descripcion: "Option 2" },
-                              ],
-                         },
-                    },
-               ]),
+               // from([
+               //      {
+               //           data: {
+               //                cualquiera: [
+               //                     { codigo: null, descripcion: "sentencia" },
+               //                     { codigo: null, descripcion: "auto" },
+               //                ],
+               //           },
+               //      },
+               // ]),
+               // from([
+               //      {
+               //           data: {
+               //                cualquiera: [
+               //                     { codigo: "SENT", descripcion: "Tipo 1" },
+               //                     { codigo: "AUTO", descripcion: "Tipo 2" },
+               //                ],
+               //           },
+               //      },
+               // ]),
+               // from([
+               //      {
+               //           data: {
+               //                cualquiera: [
+               //                     { codigo: "SENT", descripcion: "Option 1" },
+               //                     { codigo: "AUTO", descripcion: "Option 2" },
+               //                ],
+               //           },
+               //      },
+               // ]),
           ])
                .pipe(
                     switchMap((data) => {
@@ -123,7 +156,7 @@ export class FiltrosService implements OnDestroy {
                               console.log(itemData);
                               return itemData.data[
                                    Object.keys(data[ind].data)[0]
-                              ].map((it) => it.descripcion);
+                              ].map((it) => it.descripcion.toLowerCase());
                          });
                     }),
                     toArray(),
@@ -139,13 +172,24 @@ export class FiltrosService implements OnDestroy {
      getRequestValoresEscritos() {
           this.reqValoresResolucionesSub = combineLatest([
                this.http.get<any>(`${environment.baseURLApi}/tipos-escritos`),
+               from([
+                    {
+                         data: {
+                              cualquiera: [
+                                   { codigo: null, descripcion: "desde" },
+                                   { codigo: null, descripcion: "hasta" },
+                                   // { codigo: "AUTOS", descripcion: "Input 3" },
+                              ],
+                         },
+                    },
+               ]),
           ])
                .pipe(
                     switchMap((data) => {
                          return data.map((itemData, ind) => {
                               return itemData.data[
                                    Object.keys(data[ind].data)[0]
-                              ].map((it) => it.descripcion);
+                              ].map((it) => it.descripcion.toLowerCase());
                          });
                     }),
                     toArray(),
@@ -162,6 +206,7 @@ export class FiltrosService implements OnDestroy {
      creaConfig(reqVal, reqValNumb, configVar) {
           let datosReq = [];
           reqVal[reqValNumb].forEach((item) => {
+               console.log(item)
                datosReq.push(item);
           });
           configVar[reqValNumb].values = datosReq;
