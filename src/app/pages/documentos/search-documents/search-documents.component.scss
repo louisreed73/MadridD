@@ -5,30 +5,37 @@
 
 
 
+.collapsa {
+  width: 4rem;
+  height: 2rem;
+  cursor: pointer;
+  background: rgba(188, 69, 0, 1);
+  margin: 0.7rem 1rem 0rem -1rem;
+  left: 2rem;
+  // border-radius: 50%;
+  display:inline-flex;
+  flex-flow:column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  left: 2rem;
+  z-index: 10;
+  // display:;
+  // transition: transform 1.3s ease-in-out;
 
-// .httpError {
-//   margin: 3rem;
-//   color: white;
-//   background: red;
-//   padding: 2rem 0;
-//   text-align: center
-// }
-
-// .voidSearch {
-//   margin: 3rem;
-//   color: red;
-//   // background:red;
-//   padding: 2rem 0;
-//   // text-align:center
-// }
-
-
-// .voidSearch,.httpError {
-//   margin: 5rem 0 0 3rem;
-//   color: red;
-//   /* padding: 2rem 0; */
-//   position: absolute;
-//   top: 9rem;
-//   left: 0;
-//   z-index: 10;
-// }
+  & div {
+      width:50%;
+      height:1.4px;
+      background:white;
+  }
+  
+  // &::before {
+  //     display:block;
+  //     content:"collapse / uncollapsed";
+  //     color:white;
+  //     // transform:rotate(0deg);
+  //     // transition: transform .3s ease-in-out;
+  //     font-size:.5rem;
+  // }
+  
+}

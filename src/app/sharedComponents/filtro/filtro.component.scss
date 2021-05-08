@@ -1,3 +1,8 @@
+:host {
+    width:100%;
+    // color:red;
+    
+}
 :host(.fijo) {
     position: fixed;
     display: block;
@@ -20,6 +25,7 @@ form {
     // padding-left: 5.5rem;
     position: relative;
     // padding-top:1rem;
+    width:100%;
 }
 
 // form:nth-last-of-type(1) {
@@ -27,15 +33,17 @@ form {
 // }
 
 .p-l {
-    padding-left:5.5rem;
+    // padding-left:5.5rem;
     // margin-bottom: 1rem;
 }
 
 
 
 .formFilterGroup {
-    width:auto;
-    min-width: 10.5rem;
+    // width:auto;
+    // min-width: 10.5rem;
+    flex:1 1 auto;
+    // min-width: 10.5rem;
     // margin-bottom: 1rem;
 }
 
@@ -272,50 +280,9 @@ label.dynamicControl {
 }
 
 
-.collapsa {
-    width: 4rem;
-    height: 2rem;
-    cursor: pointer;
-    background: rgba(188, 69, 0, 1);
-    margin: 0.7rem 1rem 0rem -1rem;
-    left: 2rem;
-    // border-radius: 50%;
-    display:inline-flex;
-    flex-flow:column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    left: 2rem;
-    z-index: 10;
-    // display:;
-    // transition: transform 1.3s ease-in-out;
 
-    & div {
-        width:50%;
-        height:1.4px;
-        background:white;
-    }
-    
-    // &::before {
-    //     display:block;
-    //     content:"collapse / uncollapsed";
-    //     color:white;
-    //     // transform:rotate(0deg);
-    //     // transition: transform .3s ease-in-out;
-    //     font-size:.5rem;
-    // }
-    
-}
 
-// .collapsa.collapsed {
-//     background: white;
-//     &::before {
-//         content:"-";
-//         color: rgba(188, 69, 0, 1);
-//         // transform:rotate(90deg);
-//         // transition: transform 1.3s ease-in-out
-//     }
-// }
+
 
 .informerEdited, .informerNotEdited {
     position: absolute;
