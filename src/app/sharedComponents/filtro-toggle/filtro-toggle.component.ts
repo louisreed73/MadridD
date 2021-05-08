@@ -9,7 +9,7 @@ export class FiltroToggleComponent implements OnInit {
 
   // @Input() toggle:any; 
 
-  @ContentChild("toggleEl", {static:true}) input:ElementRef
+  // @ContentChild("toggleEl", {static:true}) input:ElementRef
   
   constructor() { }
 

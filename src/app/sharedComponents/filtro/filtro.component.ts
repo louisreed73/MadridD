@@ -17,7 +17,6 @@ import { debounceTime, tap } from "rxjs/operators";
 import { DocumentosService } from "src/app/services/documentos.service";
 import { FiltrosService } from "src/app/services/filtros.service";
 import { SearchTriggerService } from "src/app/services/search-trigger.service";
-import { FiltroToggleComponent } from "../filtro-toggle/filtro-toggle.component";
 
 @Component({
      selector: "app-filtro",

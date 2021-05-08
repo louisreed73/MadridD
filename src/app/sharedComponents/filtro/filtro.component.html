@@ -17,7 +17,6 @@
     <ng-container *ngFor="let key of keys;let i=index">
       <!-- Level 0 Flex each filter -->
       <div class="formFilterGroup">
-        <!-- <app-filtro-toggle> -->
         <input type="checkbox" [id]="clase+'_'+i" class="showFilterOptions">
         <label class="toggleFilter" [for]="clase+'_'+i" #toggleEl>
           <!-- checking arrayForms length, ie if changed checking! -->
@@ -118,7 +117,6 @@
 
           </div>
         </ng-container>
-        <!-- </app-filtro-toggle> -->
         <!-- Level 0 Header for each Filter -->
 
         <!-- Level 0 Header for each Filter End -->
