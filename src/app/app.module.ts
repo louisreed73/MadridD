@@ -6,12 +6,12 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { DataRetrievalInterceptor } from "./interceptors/data-retrieval.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HeaderComponent } from "./components/header/header.component";
 
 // import {serverAPI} from "./mirage.api";
 
-
 @NgModule({
-     declarations: [AppComponent],
+     declarations: [AppComponent, HeaderComponent],
      imports: [
           BrowserModule,
           AppRoutingModule,
@@ -27,14 +27,12 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
           {
                provide: Window,
                useValue: window,
-             },
+          },
      ],
      bootstrap: [AppComponent],
 })
 export class AppModule {
-
      constructor() {
-
           // serverAPI();
      }
 }

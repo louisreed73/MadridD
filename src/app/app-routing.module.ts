@@ -10,7 +10,8 @@ import { SearchFormComponent } from "./components/search-form/search-form.compon
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { SharedUtilitiesModule } from "./sharedModules/shared-utilities/shared-utilities.module";
 // import { FijarDirective } from './directives/fijar.directive';
-import { UserInputComponent } from './components/user-input/user-input.component';
+import { UserInputComponent } from "./components/user-input/user-input.component";
+// import { HeaderComponent } from './components/header/header.component';
 
 const routes: Routes = [
      { path: "", pathMatch: "full", redirectTo: "documentos" },
@@ -50,6 +51,7 @@ const routes: Routes = [
           FilterTabsComponent,
           SearchFormComponent,
           UserInputComponent,
+          // HeaderComponent,
      ],
 })
 export class AppRoutingModule {}
