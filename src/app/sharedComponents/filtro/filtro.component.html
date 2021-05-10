@@ -19,6 +19,9 @@
       <div class="formFilterGroup">
         <input type="checkbox" [id]="clase+'_'+i" class="showFilterOptions">
         <label class="toggleFilter" [for]="clase+'_'+i" #toggleEl>
+          <div class="iconBox">
+            <img src="/assets/images/caret_icons/file_caret_1.svg" alt="" srcset="">
+          </div>
           <!-- checking arrayForms length, ie if changed checking! -->
           <span class="informerEdited" *ngIf="filtroFormGroup.get(key).value.length">
             <!-- {{filtroFormGroup.get(key).value.length}} -->
