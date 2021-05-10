@@ -216,7 +216,8 @@ label {
 
 label.dynamicControl {
 
-  margin: 0 2.6rem 0 2rem;
+//   margin: 0 2.6rem 0 2rem;
+  margin: 0 1.5rem 0 2rem;
 }
 
 label.staticControl {
@@ -270,21 +271,27 @@ input.custom-radio-check:checked+label::after {
 }
 
 .removeControl {
-  position: absolute;
-  bottom: -0.1rem;
-  right: 0;
-  width: 1.6rem;
-  height: 1.6rem;
-  border-radius: 50%;
-  background: darkred;
-  outline: none;
-  border: none;
-  border: none;
-  cursor: pointer;
-  font-size: 0.75rem;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+    position: relative;
+    /* bottom: -0.1rem; */
+    top: 0.9rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    /* font-size: 0.75rem; */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+
+  img {
+      width:100%;
+      height:100%;
+      object-fit:contain;
+  }
 }
 
 .removeControl::before {

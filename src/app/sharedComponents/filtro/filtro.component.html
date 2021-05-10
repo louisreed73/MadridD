@@ -112,7 +112,10 @@
                 <div class="input_flexItem">
                   <input type="checkbox" [id]="key+'_'+i2" [formControlName]="key" class="custom-radio-check">
                   <label class="dynamicControl" [for]="key+'_'+i2">{{key}}</label>
-                  <button class="removeControl" (click)="eliminaControl('arrayData'+i,i2)"></button>
+                  <button class="removeControl" (click)="eliminaControl('arrayData'+i,i2)">
+                    <img src="/assets/images/close_icons/close_icon_1.svg" alt="" srcset="">
+
+                  </button>
                 </div>
               </ng-container>
 
