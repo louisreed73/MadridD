@@ -92,16 +92,17 @@ input:focus {
 
 .filtrosSection {
   display: flex;
-  background: gainsboro;
-  width: calc(100% - 6rem) ;
+  background: white;
+  width: calc(100% - 6rem);
   flex-flow: row wrap;
   max-height: 22rem;
   overflow: hidden;
   overflow-y: auto;
-  // padding-bottom:1rem;
   position: fixed;
-    z-index: 10;
-    top: 21.4rem;
+  z-index: 10;
+  top: 21.4rem;
+  outline: 1px solid #dcdcdc96;
+  outline-offset: -0.1rem;
 }
 
 .fijo .filtrosSection {

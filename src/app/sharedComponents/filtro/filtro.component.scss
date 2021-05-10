@@ -1,7 +1,7 @@
 :host:first-child {
   // width:100%;
 //   color:red;
-  margin-bottom:2rem;
+//   margin-bottom:2rem;
 
 }
 
@@ -17,7 +17,7 @@
 form {
   display: flex;
   flex-flow: row wrap;
-  background: gainsboro;
+//   background: gainsboro;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -159,6 +159,7 @@ label.toggleFilter {
   display: inline-flex;
   flex-flow: row-reverse;
   justify-content: center;
+  background: #f3f3f3;
 
 }
 
