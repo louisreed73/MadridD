@@ -199,7 +199,10 @@ export class FiltrosService implements OnDestroy {
                     data.forEach((filtro, index) => {
                          this.creaConfig(data, index, config3);
                     });
-                    this.showFilters$.next(true);
+                    setTimeout((params) => {
+                         
+                         this.showFilters$.next(true);
+                    },0)
                });
      }
 

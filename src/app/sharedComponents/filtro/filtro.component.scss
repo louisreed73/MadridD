@@ -1,7 +1,7 @@
 :host:first-child {
   // width:100%;
-//   color:red;
-//   margin-bottom:2rem;
+  //   color:red;
+  //   margin-bottom:2rem;
 
 }
 
@@ -17,7 +17,7 @@
 form {
   display: flex;
   flex-flow: row wrap;
-//   background: gainsboro;
+  //   background: gainsboro;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -124,7 +124,7 @@ input[type="number"] {
 }
 
 input[type="date"] {
-  padding: 0.5rem 0rem;
+    padding: 0.5rem 0.5rem;
   margin: 0.5rem 0rem 0.5rem 0.5rem;
 }
 
@@ -188,7 +188,7 @@ label.toggleFilter .iconBox {
   left: 0.6rem;
   z-index: 10;
   transform: rotate(-180deg) scale(1.1);
-//   transition: all .1s ease-in-out;
+  //   transition: all .1s ease-in-out;
 
 
 
@@ -216,8 +216,14 @@ label {
 
 label.dynamicControl {
 
-//   margin: 0 2.6rem 0 2rem;
-  margin: 0 1.5rem 0 2rem;
+  //   margin: 0 2.6rem 0 2rem;
+  margin: 0 0.5rem 0;
+  width: 13rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  //   padding: 0.2rem 0.5rem;
+
 }
 
 label.staticControl {
@@ -271,37 +277,38 @@ input.custom-radio-check:checked+label::after {
 }
 
 .removeControl {
-    position: relative;
-    /* bottom: -0.1rem; */
-    top: 0.9rem;
-    right: 1.5rem;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    /* font-size: 0.75rem; */
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
+  position: relative;
+  /* bottom: -0.1rem; */
+  top: 0.9rem;
+  //   right: 1.5rem;
+  right: 0.6rem;
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  /* font-size: 0.75rem; */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
 
   img {
-      width:100%;
-      height:100%;
-      object-fit:contain;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 
-.removeControl::before {
-  display: block;
-  content: "X";
-  position: relative;
-  // top: 0.05rem;
-  // left: 0rem;
-  color: white;
-}
+// .removeControl::before {
+//   display: block;
+//   content: "X";
+//   position: relative;
+//   // top: 0.05rem;
+//   // left: 0rem;
+//   color: white;
+// }
 
 .cargandoFiltros {
   height: 35.5px;
@@ -347,3 +354,57 @@ label.dynamicControl {
   width: 1rem;
   display: inline-block;
 }
+
+.collapsa.isNotCollapsed {
+    width: 4rem;
+    height: 3rem;
+    cursor: pointer;
+    margin: 0.7rem 1rem 0rem -1rem;
+    // align-items: center;
+    position: fixed;
+    top: 14.6rem;
+    right: 1.5rem;
+    img {
+        width:100%;
+        height:100%;
+        object-fit:contain;
+        transform:rotate(180deg) scale(1.2);
+    }
+    p {
+        position: absolute;
+        top: 1.2rem;
+        left: -9.8rem;
+        width: 11rem;
+    }
+    
+    
+    
+}
+
+.collapsa {
+    width: 4rem;
+    height: 3rem;
+    margin: 0.7rem 1rem 0rem -1rem;
+    position: fixed;
+    display:inline-flex;
+    top: 15rem;
+    right: 1.1rem;
+    img {
+        width:100%;
+        height:100%;
+        object-fit:contain;
+        transform:rotate(270deg) scale(1.2);
+    }
+    p {
+        position: absolute;
+        top: .8rem;
+        left: -10.2rem;
+        width: 11rem;
+    }
+  
+    
+  }
+
+  .collapsableBox {
+      top:0rem
+  }

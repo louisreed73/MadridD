@@ -5,13 +5,21 @@
 <ng-container *ngIf="(show$ | async);else cargando">
   <!-- <p>Pepe funciona</p> -->
   <!-- <form [formGroup]="filtroFormGroup" [ngClass]="{'p-l': collapsable}"> -->
-  <form [formGroup]="filtroFormGroup" [ngClass]="{'p-l': collapsable}">
+  <form [formGroup]="filtroFormGroup">
     <ng-container *ngIf="collapsable">
-      
-      <div class="collapsa" (click)="collapsando()">
-        <div></div>
-        <div></div>
+      <!-- <div class="collapsableBox"> -->
+      <div class="collapsa" [ngClass]="{'isNotCollapsed': isNotCollapsed}" (click)="collapsando()">
+        <p *ngIf="isNotCollapsed;else collapsed">texto</p>
+        <ng-template #collapsed>
+          <!-- <p>Despliega Filtros</p> -->
+        </ng-template>
+
+        <!-- <div></div>
+          <div></div> -->
+        <img src="/assets/images/caret_icons/file_caret_1.svg" alt="">
       </div>
+      <!-- </div> -->
+
     </ng-container>
 
     <ng-container *ngFor="let key of keys;let i=index">
@@ -40,7 +48,8 @@
           </span>
           <!-- checking Forms Groups changes length, ie if changed checking! End-->
 
-          {{configFiltro[i].name}}</label>
+          {{configFiltro[i].name}}
+        </label>
         <ng-container *ngIf="dameTipo(key)==='FormGroup'">
           <div [formGroupName]="key" class="filter_common filter_common-static">
             <!-- {{whatIs(key)}}

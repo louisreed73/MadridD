@@ -35,6 +35,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
      filtrosArrayFormsSubs: Subscription;
      triggerCollapse: Subject<any> = new Subject();
      collapsable: boolean;
+     isNotCollapsed:boolean=true;
 
      // Pagination request increment or reset to 1
      pagina: number = 1;
@@ -228,7 +229,8 @@ export class FiltroComponent implements OnInit, OnDestroy {
      }
 
      collapsando() {
-          this.triggerCollapse.next(true);
+          this.triggerCollapse.next(this.isNotCollapsed);
+          this.isNotCollapsed=!this.isNotCollapsed
      }
 
      whatIs(obj) {

@@ -9,3 +9,11 @@ form {
     overflow: hidden;
     overflow-y: scroll;
 }
+
+p {
+    width: 14rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.2rem 0.5rem;
+}
