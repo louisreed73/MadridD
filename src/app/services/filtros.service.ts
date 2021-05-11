@@ -30,15 +30,15 @@ export class FiltrosService implements OnDestroy {
      showFilters$: BehaviorSubject<boolean> = new BehaviorSubject(false);
      triggerCollapse: Subject<any> = new Subject();
 
+     documentosCache: any[];
+
      constructor(private http: HttpClient) {
           this.getRequestValoresDocumentos();
-          this.getRequestValoresResoluciones();
-          this.getRequestValoresEscritos();
      }
 
      ngOnDestroy(): void {
           this.reqValoresDocumentosSub.unsubscribe();
-          this.reqValoresResolucionesSub.unsubscribe();
+          // this.reqValoresResolucionesSub.unsubscribe();
           this.reqValoresEscritosSub.unsubscribe();
      }
 
@@ -74,6 +74,7 @@ export class FiltrosService implements OnDestroy {
                     },
                ]),
                this.http.post<any>(`${environment.baseURLApi}/magistrados`, {}),
+               this.http.get<any>(`${environment.baseURLApi}/tipos-escritos`),
           ])
                .pipe(
                     switchMap((data) => {
@@ -87,129 +88,39 @@ export class FiltrosService implements OnDestroy {
                     shareReplay(1)
                )
                .subscribe((data) => {
-                    data.forEach((filtro, index) => {
+                    data.slice(0,(data.length - 1)).forEach((filtro, index) => {
                          this.creaConfig(data, index, config1);
                     });
-                    // this.showFilters$.next(true);
-               });
-     }
-     getRequestValoresResoluciones() {
-          this.reqValoresResolucionesSub = combineLatest([
-               // this.http.get<any>(`${environment.baseURLApi}/tipos-resolucion`),
-               // from([]),
-               from([
-                    {
-                         data: {
-                              cualquiera: [
-                                   { codigo: null, descripcion: "auto" },
-                                   { codigo: null, descripcion: "sentencia" },
-                                   // { codigo: "AUTOS", descripcion: "Input 3" },
-                              ],
-                         },
-                    },
-               ]),
-               from([
-                    {
-                         data: {
-                              cualquiera: [
-                                   { codigo: null, descripcion: "desde" },
-                                   { codigo: null, descripcion: "hasta" },
-                                   // { codigo: "AUTOS", descripcion: "Input 3" },
-                              ],
-                         },
-                    },
-               ]),
-               // from([
-               //      {
-               //           data: {
-               //                cualquiera: [
-               //                     { codigo: null, descripcion: "sentencia" },
-               //                     { codigo: null, descripcion: "auto" },
-               //                ],
-               //           },
-               //      },
-               // ]),
-               // from([
-               //      {
-               //           data: {
-               //                cualquiera: [
-               //                     { codigo: "SENT", descripcion: "Tipo 1" },
-               //                     { codigo: "AUTO", descripcion: "Tipo 2" },
-               //                ],
-               //           },
-               //      },
-               // ]),
-               // from([
-               //      {
-               //           data: {
-               //                cualquiera: [
-               //                     { codigo: "SENT", descripcion: "Option 1" },
-               //                     { codigo: "AUTO", descripcion: "Option 2" },
-               //                ],
-               //           },
-               //      },
-               // ]),
-          ])
-               .pipe(
-                    switchMap((data) => {
-                         return data.map((itemData, ind) => {
-                              console.log(itemData);
-                              return itemData.data[
-                                   Object.keys(data[ind].data)[0]
-                              ].map((it) => it.descripcion.toLowerCase());
-                         });
-                    }),
-                    toArray(),
-                    shareReplay(1)
-               )
-               .subscribe((data) => {
-                    data.forEach((filtro, index) => {
-                         this.creaConfig(data, index, config2);
-                    });
-                    // this.showFilters$.next(true);
-               });
-     }
-     getRequestValoresEscritos() {
-          this.reqValoresResolucionesSub = combineLatest([
-               this.http.get<any>(`${environment.baseURLApi}/tipos-escritos`),
-               from([
-                    {
-                         data: {
-                              cualquiera: [
-                                   { codigo: null, descripcion: "desde" },
-                                   { codigo: null, descripcion: "hasta" },
-                                   // { codigo: "AUTOS", descripcion: "Input 3" },
-                              ],
-                         },
-                    },
-               ]),
-          ])
-               .pipe(
-                    switchMap((data) => {
-                         return data.map((itemData, ind) => {
-                              return itemData.data[
-                                   Object.keys(data[ind].data)[0]
-                              ].map((it) => it.descripcion.toLowerCase());
-                         });
-                    }),
-                    toArray(),
-                    shareReplay(1)
-               )
-               .subscribe((data) => {
+
+                    // let dataRes=[...data]
+                    data.push(
+                         // ["auto","sentencia"],
+                         ["desde", "hasta"]
+                    );
+                    
                     data.forEach((filtro, index) => {
                          this.creaConfig(data, index, config3);
                     });
-                    setTimeout((params) => {
-                         
-                         this.showFilters$.next(true);
-                    },0)
+                    let dataRes = data.slice(0, data.length - 2);
+                    // console.log(dataEs);
+                    dataRes.push(
+                         ["auto","sentencia"],
+                         ["desde", "hasta"]
+                    );
+
+                    dataRes.forEach((filtro, index) => {
+                         this.creaConfig(dataRes, index, config2);
+                    });
+
+                    this.showFilters$.next(true);
                });
      }
+
 
      creaConfig(reqVal, reqValNumb, configVar) {
           let datosReq = [];
           reqVal[reqValNumb].forEach((item) => {
-               console.log(item)
+               console.log(item);
                datosReq.push(item);
           });
           configVar[reqValNumb].values = datosReq;

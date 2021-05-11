@@ -34,7 +34,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
      sugerencia: Object;
      filtrosArrayFormsSubs: Subscription;
      triggerCollapse: Subject<any> = new Subject();
-     collapsable: boolean;
+     // collapsable: boolean;
      isNotCollapsed:boolean=true;
 
      // Pagination request increment or reset to 1
@@ -92,14 +92,14 @@ export class FiltroComponent implements OnInit, OnDestroy {
 
      ngOnInit(): void {
           console.log(this.filtroscombinado1);
-          this.collapsable = true;
+          // this.collapsable = true;
 
-          if (this.filtroscombinado1.clase !== "documentos") {
-               this.collapsable = false;
+          // if (this.filtroscombinado1.clase !== "documentos") {
+          //      this.collapsable = false;
 
-          } else {
-               this.collapsable = true;
-          }
+          // } else {
+          //      this.collapsable = true;
+          // }
 
           this.show$ = this.filtrosServ.showFilters$;
           this.configFiltro = this.filtroscombinado1.data[0];
