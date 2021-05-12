@@ -142,7 +142,7 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy, AfterViewIni
                     });
                          
                }
-               console.log(someCollap)
+               // console.log(someCollap)
           })
           // this.documentosSub.unsubscribe();
      }

@@ -27,6 +27,8 @@ export class FiltroComponent implements OnInit, OnDestroy {
      @Input() filtroscombinado1;
      @ViewChildren("toggleEl")
      toggles: QueryList<ElementRef>;
+     @ViewChildren("checkedEl")
+     inpCheck: QueryList<ElementRef>;
      configFiltro;
      filtroFormGroup: FormGroup;
      clase: string;
@@ -229,8 +231,8 @@ export class FiltroComponent implements OnInit, OnDestroy {
      }
 
      collapsando() {
-          this.triggerCollapse.next(this.isNotCollapsed);
           this.isNotCollapsed=!this.isNotCollapsed
+          this.triggerCollapse.next(this.isNotCollapsed);
      }
 
      whatIs(obj) {
@@ -239,5 +241,16 @@ export class FiltroComponent implements OnInit, OnDestroy {
           return Object.values(this.filtroFormGroup.controls[obj].value).some(
                (val) => !!val
           );
+     }
+
+     filtroParent () {
+          // console.log(`%cAlgun filtro label ha collapsado!!!!`,`color:lime`);
+          // this.triggerCollapse.next(this.isNotCollapsed);
+          // this.isNotCollapsed=!this.isNotCollapsed;
+          // this.inpCheck.forEach(inp=>{
+               
+          // })
+          // this.triggerCollapse.next(this.isNotCollapsed);
+
      }
 }

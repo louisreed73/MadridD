@@ -4,10 +4,11 @@ import { SpinnerComponent } from "../../sharedComponents/spinner/spinner.compone
 import { MatProgressSpinnerModule } from "@angular/material";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FijarDirective } from "src/app/directives/fijar.directive";
-import { FiltroComponent } from '../../sharedComponents/filtro/filtro.component';
-import { AutocompleteComponent } from '../../sharedComponents/autocomplete/autocomplete.component';
-import { ButtonTriggerComponent } from '../../sharedComponents/button-trigger/button-trigger.component';
-import { InfoComponent } from '../../sharedComponents/info/info.component';
+import { FiltroComponent } from "../../sharedComponents/filtro/filtro.component";
+import { AutocompleteComponent } from "../../sharedComponents/autocomplete/autocomplete.component";
+import { ButtonTriggerComponent } from "../../sharedComponents/button-trigger/button-trigger.component";
+import { InfoComponent } from "../../sharedComponents/info/info.component";
+import { PercentageBarComponent } from "../../sharedComponents/percentage-bar/percentage-bar.component";
 
 @NgModule({
      declarations: [
@@ -17,24 +18,25 @@ import { InfoComponent } from '../../sharedComponents/info/info.component';
           FiltroComponent,
           ButtonTriggerComponent,
           InfoComponent,
-          
+          PercentageBarComponent,
      ],
      imports: [
           CommonModule,
-          FormsModule, 
+          FormsModule,
           ReactiveFormsModule,
-          MatProgressSpinnerModule, 
+          MatProgressSpinnerModule,
      ],
      exports: [
-          FormsModule, 
+          FormsModule,
           ReactiveFormsModule,
-          SpinnerComponent, 
-          MatProgressSpinnerModule, 
+          SpinnerComponent,
+          MatProgressSpinnerModule,
           FiltroComponent,
           FijarDirective,
           AutocompleteComponent,
           ButtonTriggerComponent,
           InfoComponent,
+          PercentageBarComponent,
      ],
 })
 export class SharedUtilitiesModule {}

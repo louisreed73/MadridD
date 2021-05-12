@@ -134,10 +134,7 @@ export class SearchResolucionesComponent implements OnDestroy, AfterViewInit {
           this.toggleCollapseSub=this.filtrosComp.first.triggerCollapse
           .subscribe(d=>{
                console.log("Algo hay que hacer")
-               let allToggles=this.filtrosComp.first.toggles.toArray().concat(
-                    
-                    this.filtrosComp.last.toggles.toArray()
-               );
+               let allToggles=this.filtrosComp.first.toggles.toArray();
                console.log(allToggles)
                let someCollap=allToggles.some(tog=>{
                     return tog.nativeElement.previousElementSibling.checked
@@ -154,7 +151,7 @@ export class SearchResolucionesComponent implements OnDestroy, AfterViewInit {
                     });
                          
                }
-               console.log(someCollap)
+               // console.log(someCollap)
           })
           // this.documentosSub.unsubscribe();
      }
