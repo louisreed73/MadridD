@@ -6,7 +6,6 @@ import { BehaviorSubject, Subject } from "rxjs";
 })
 export class DocsResolucionesService {
      docsResolucionesSource$: BehaviorSubject<{}> = new BehaviorSubject({})
-     // documentosResolucionesLength$: BehaviorSubject<number> = new BehaviorSubject(null);
 
      constructor() {}
 }

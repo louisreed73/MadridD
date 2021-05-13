@@ -23,7 +23,6 @@ import {
      providedIn: "root",
 })
 export class FiltrosService implements OnDestroy {
-     // datosDynamicValues: Array<Array<string>>;
      reqValoresDocumentosSub: Subscription;
      reqValoresResolucionesSub: Subscription;
      reqValoresEscritosSub: Subscription;
@@ -38,7 +37,6 @@ export class FiltrosService implements OnDestroy {
 
      ngOnDestroy(): void {
           this.reqValoresDocumentosSub.unsubscribe();
-          // this.reqValoresResolucionesSub.unsubscribe();
           this.reqValoresEscritosSub.unsubscribe();
      }
 
@@ -53,12 +51,10 @@ export class FiltrosService implements OnDestroy {
                               cualquiera: [
                                    { codigo: null, descripcion: "desde" },
                                    { codigo: null, descripcion: "hasta" },
-                                   // { codigo: "AUTOS", descripcion: "Input 3" },
                               ],
                          },
                     },
                ]),
-               // this.http.get<any>(`${environment.baseURLApi}/fases-procesales`),
                this.http.get<any>(
                     `${environment.baseURLApi}/tipos-procedimientos`
                ),
@@ -68,7 +64,6 @@ export class FiltrosService implements OnDestroy {
                               cualquiera: [
                                    { codigo: null, descripcion: "numero" },
                                    { codigo: null, descripcion: "año" },
-                                   // { codigo: "AUTOS", descripcion: "Input 3" },
                               ],
                          },
                     },
@@ -88,25 +83,17 @@ export class FiltrosService implements OnDestroy {
                     shareReplay(1)
                )
                .subscribe((data) => {
-                    data.slice(0,(data.length - 1)).forEach((filtro, index) => {
+                    data.slice(0, data.length - 1).forEach((filtro, index) => {
                          this.creaConfig(data, index, config1);
                     });
 
-                    // let dataRes=[...data]
-                    data.push(
-                         // ["auto","sentencia"],
-                         ["desde", "hasta"]
-                    );
-                    
+                    data.push(["desde", "hasta"]);
+
                     data.forEach((filtro, index) => {
                          this.creaConfig(data, index, config3);
                     });
                     let dataRes = data.slice(0, data.length - 2);
-                    // console.log(dataEs);
-                    dataRes.push(
-                         ["auto","sentencia"],
-                         ["desde", "hasta"]
-                    );
+                    dataRes.push(["auto", "sentencia"], ["desde", "hasta"]);
 
                     dataRes.forEach((filtro, index) => {
                          this.creaConfig(dataRes, index, config2);
@@ -116,11 +103,9 @@ export class FiltrosService implements OnDestroy {
                });
      }
 
-
      creaConfig(reqVal, reqValNumb, configVar) {
           let datosReq = [];
           reqVal[reqValNumb].forEach((item) => {
-               // console.log(item);
                datosReq.push(item);
           });
           configVar[reqValNumb].values = datosReq;

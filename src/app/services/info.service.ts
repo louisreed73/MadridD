@@ -12,7 +12,6 @@ export class InfoService {
   resolucionesInfoAcumLength$:BehaviorSubject<any>=new BehaviorSubject(null);
   escritosInfoTotalLength$:BehaviorSubject<any>=new BehaviorSubject(null);
   escritosInfoAcumLength$:BehaviorSubject<any>=new BehaviorSubject(null);
-  // errorHTTP$:Subject<any>=new Subject();
 
   httpErrorInfo$:Subject<any>=new Subject();
 

@@ -1,10 +1,3 @@
-:host:first-child {
-  // width:100%;
-  //   color:red;
-  //   margin-bottom:2rem;
-
-}
-
 :host(.fijo) {
   position: fixed;
   display: block;
@@ -17,36 +10,23 @@
 form {
   display: flex;
   flex-flow: row wrap;
-  //   background: gainsboro;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   border-radius: .3rem;
   margin: 0 auto;
   user-select: none;
-  // padding-left: 5.5rem;
   position: relative;
-  // padding-top:1rem;
   width: 100%;
 }
 
-// form:nth-last-of-type(1) {
-//     color:red
-// }
-
-.p-l {
-  // padding-left:5.5rem;
-  // margin-bottom: 1rem;
-}
 
 
 
 .formFilterGroup {
-  // width:auto;
-  // min-width: 10.5rem;
+
   flex: 0 1 auto;
-  // min-width: 10.5rem;
-  // margin-bottom: 1rem;
+
 }
 
 
@@ -63,7 +43,6 @@ input.showFilterOptions:checked~.filter_common {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
-  // padding: 1rem 1rem 1.2rem 1rem;
   padding: 1.7rem 1rem 1.7rem 1rem;
   border-radius: 0.5rem;
   border-radius: 0.5rem;
@@ -79,7 +58,6 @@ input.showFilterOptions:checked~.filter_common-static {
 
 
 input.showFilterOptions {
-  // display: none;
   opacity: 0;
   width: 0;
 
@@ -126,7 +104,7 @@ input[type="number"] {
 }
 
 input[type="date"] {
-    padding: 0.5rem 0.5rem;
+  padding: 0.5rem 0.5rem;
   margin: 0.5rem 0rem 0.5rem 0.5rem;
 }
 
@@ -142,16 +120,11 @@ input[type="date"] {
   padding-top: 1.2rem;
 }
 
-.inputBox__Y .input_FlexItem {
-  // margin-top:1.2rem;
-}
-
 
 
 
 label.toggleFilter {
   padding: 1.5rem 1rem 1rem 0.5rem;
-  // padding: 1rem 0.5rem 1rem 0.5rem;
   background: gainsboro;
   text-align: center;
   position: relative;
@@ -165,22 +138,7 @@ label.toggleFilter {
 
 }
 
-// label.toggleFilter::after {
-//   display: inline-flex;
-//   justify-content: center;
-//   align-items: center;
-//   // content: "\003E";
-//   width: 1.5rem;
-//   height: 1.5rem;
-//   position: relative;
-//   background-color: rgb(167, 167, 167);
-//   font-size: 1.25rem;
-//   left: 0.7rem;
-//   ;
-//   color: white;
-//   border-radius: 50%;
-//   transition: background-color .3s, color .3s, transform .1s ease-in-out;
-// }
+
 
 label.toggleFilter .iconBox {
   width: 2rem;
@@ -190,7 +148,6 @@ label.toggleFilter .iconBox {
   left: 0.6rem;
   z-index: 10;
   transform: rotate(-180deg) scale(1.1);
-  //   transition: all .1s ease-in-out;
 
   svg {
     transform: scale(.9);
@@ -200,13 +157,11 @@ label.toggleFilter .iconBox {
 
 input.showFilterOptions:checked~label.toggleFilter .iconBox {
   transform: rotate(270deg) scale(1.1);
-  // top: -0.3rem;
+
   path {
-    // fill:red;
     stroke: #007c25;
     stroke-width: 1.15;
   }
-  // left: 0.8rem;
 
 }
 
@@ -220,13 +175,11 @@ label {
 
 label.dynamicControl {
 
-  //   margin: 0 2.6rem 0 2rem;
   margin: 0 0.5rem 0;
   width: 13rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  //   padding: 0.2rem 0.5rem;
 
 }
 
@@ -241,14 +194,10 @@ label.staticControl {
 }
 
 input.custom-radio-check {
-  // opacity:0;
   display: none;
   margin-right: 2.2rem;
 }
 
-// input.custom-radio-check + label::before{
-//     position:relative;
-// }
 
 input.custom-radio-check+label::before {
   display: block;
@@ -258,7 +207,6 @@ input.custom-radio-check+label::before {
   left: -20px;
   width: 1.2rem;
   height: 1.2rem;
-  // background: red;
   border: 0.3px solid rgb(170, 170, 170);
   border-radius: .3rem;
 }
@@ -282,9 +230,7 @@ input.custom-radio-check:checked+label::after {
 
 .removeControl {
   position: relative;
-  /* bottom: -0.1rem; */
   top: 0.9rem;
-  //   right: 1.5rem;
   right: 0.6rem;
   width: 2.9rem;
   height: 2.9rem;
@@ -292,7 +238,6 @@ input.custom-radio-check:checked+label::after {
   outline: none;
   border: none;
   cursor: pointer;
-  /* font-size: 0.75rem; */
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -305,14 +250,6 @@ input.custom-radio-check:checked+label::after {
   }
 }
 
-// .removeControl::before {
-//   display: block;
-//   content: "X";
-//   position: relative;
-//   // top: 0.05rem;
-//   // left: 0rem;
-//   color: white;
-// }
 
 .cargandoFiltros {
   height: 35.5px;
@@ -343,72 +280,69 @@ label.dynamicControl {
 }
 
 .informerNotEdited {
-  // position:absolute;
-  // top:0;
-  // left:0;
-  // width: 1rem;
-  // height:1rem;
-  // border-radius:50%;
+
   background: rgba(190, 190, 190, .21);
 
 }
 
 .space {
-  // color:red;
   width: 1rem;
   display: inline-block;
 }
 
 .collapsa.isNotCollapsed {
-    width: 4rem;
-    height: 3rem;
-    cursor: pointer;
-    margin: 0.7rem 1rem 0rem -1rem;
-    // align-items: center;
-    position: fixed;
-    top: 14.6rem;
-    right: 1.5rem;
-    img {
-        width:100%;
-        height:100%;
-        object-fit:contain;
-        transform:rotate(180deg) scale(1.2);
-    }
-    p {
-        position: absolute;
-        top: 1.2rem;
-        left: -9.8rem;
-        width: 11rem;
-    }
-    
-    
-    
+  width: 4rem;
+  height: 3rem;
+  cursor: pointer;
+  margin: 0.7rem 1rem 0rem -1rem;
+  position: fixed;
+  top: 14.6rem;
+  right: 1.5rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: rotate(180deg) scale(1.2);
+  }
+
+  p {
+    position: absolute;
+    top: 1.2rem;
+    left: -9.8rem;
+    width: 11rem;
+  }
+
+
+
 }
 
 .collapsa {
-    width: 4rem;
-    height: 3rem;
-    margin: 0.7rem 1rem 0rem -1rem;
-    position: fixed;
-    display:inline-flex;
-    top: 15rem;
-    right: 1.1rem;
-    img {
-        width:100%;
-        height:100%;
-        object-fit:contain;
-        transform:rotate(270deg) scale(1.2);
-    }
-    p {
-        position: absolute;
-        top: .8rem;
-        left: -10.2rem;
-        width: 11rem;
-    }
-  
-    
+  width: 4rem;
+  height: 3rem;
+  margin: 0.7rem 1rem 0rem -1rem;
+  position: fixed;
+  display: inline-flex;
+  top: 15rem;
+  right: 1.1rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: rotate(270deg) scale(1.2);
   }
 
-  .collapsableBox {
-      top:0rem
+  p {
+    position: absolute;
+    top: .8rem;
+    left: -10.2rem;
+    width: 11rem;
   }
+
+
+}
+
+.collapsableBox {
+  top: 0rem
+}

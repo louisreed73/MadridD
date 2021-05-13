@@ -23,8 +23,7 @@ export class FijarDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // console.log(this._window);
-    // console.log(this.offset);
+
     if(this.window.pageYOffset>= +this.offset) {
       this.render.setAttribute(this.elRef.nativeElement, 'class', 'fijo');
     };
@@ -36,7 +35,6 @@ export class FijarDirective implements OnInit, OnDestroy {
         if (offSet >= +this.offset) {
           this.render.setAttribute(this.elRef.nativeElement, 'class', 'fijo');
         } else {
-          // this.render.setAttribute(this.elRef.nativeElement, 'class', '');
           this.render.removeAttribute(this.elRef.nativeElement, 'class')
 
         }

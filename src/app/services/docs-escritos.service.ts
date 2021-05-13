@@ -6,9 +6,6 @@ import { BehaviorSubject } from "rxjs";
 })
 export class DocsEscritosService {
      docsEscritosSource$: BehaviorSubject<{}> = new BehaviorSubject({});
-     // documentosEscritosLength$: BehaviorSubject<number> = new BehaviorSubject(
-     //      null
-     // );
 
      constructor() {}
 }
