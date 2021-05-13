@@ -1,5 +1,6 @@
 import { DOCUMENT } from "@angular/common";
 import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, QueryList, ViewChildren } from "@angular/core";
+import { FormArray, FormControl } from "@angular/forms";
 import { combineLatest, of, Subject, Subscription } from "rxjs";
 import { catchError, delay, map } from "rxjs/operators";
 import { DocumentosService } from "src/app/services/documentos.service";
@@ -109,6 +110,8 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy, AfterViewIni
      }
 
      ngAfterViewInit(): void {
+
+          // console.log(this.filtrosComp.first.filtroFormGroup.reset())
           this.toggleCollapseSub=this.filtrosComp.first.triggerCollapse
           .pipe(
                delay(0),
@@ -126,22 +129,23 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy, AfterViewIni
           )
           .subscribe((d)=>{
           // console.log("Estoy abriendo!");
-          console.log(d)
+          // console.log(d)
 
           })
 
-      
+          
+          
      }
-
-
+     
+     
      ngOnDestroy(): void {
           //Called once, before the instance is destroyed.
           //Add 'implements OnDestroy' to the class.
           this.filtroDocumentosSub.unsubscribe();
           this.toggleCollapseSub.unsubscribe();
-              
+          
      }
-
+     
      collapsing() {
           console.log("collapsando!!!");
           console.log("Algo hay que hacer");
@@ -154,22 +158,46 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy, AfterViewIni
           allToggles.forEach(tog=>{
                console.log(tog.nativeElement.previousElementSibling.checked)
           })
-
-               if(!someCollap) {
-                    allToggles.forEach(tog=>{
-                         this.someCollap$.next(true);
-
-                         return tog.nativeElement.previousElementSibling.checked=true;
-                    });
+          
+          if(!someCollap) {
+               allToggles.forEach(tog=>{
+                    this.someCollap$.next(true);
                     
-               }  else {
-                    allToggles.forEach(tog=>{
-                         this.someCollap$.next(false);
+                    return tog.nativeElement.previousElementSibling.checked=true;
+               });
+               
+          }  else {
+               allToggles.forEach(tog=>{
+                    this.someCollap$.next(false);
+                    
+                    return tog.nativeElement.previousElementSibling.checked=false
+               });
+               
+          }
+          
+     }
 
-                         return tog.nativeElement.previousElementSibling.checked=false
-                    });
-                         
+
+     cleanFilters() {
+          let props=Object.keys(this.filtrosComp.first.filtroFormGroup.controls);
+          this.filtrosComp.first.filtroFormGroup.reset();
+
+
+          props.forEach((property,ind)=>{
+               if(property.match("array")) {
+
+                    let AbstractContolLen=this.filtrosComp.first.filtroFormGroup.get(property).value.length;
+                    if(AbstractContolLen) {
+
+
+
+                    this.filtrosComp.first.eliminaTodo(property)
+                      
+                    }
                }
+          })
 
-        }
+
+          
+     }
 }

@@ -1,6 +1,9 @@
 <section>
   <div appFijar [offset]="10">
     <app-collapsible>
+      <p (click)="cleanFilters()">
+        Limpiar Filtros         
+      </p>
       <div class="collapsa" (click)="collapsing()">
         <p *ngIf="(someCollap$|async);else notDeployed">
           Ocultar Filtros          

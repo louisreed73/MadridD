@@ -120,12 +120,26 @@ export class FiltroComponent implements OnInit, OnDestroy {
      })();
 
      eliminaControl(keyArray, i) {
+          // console.log(keyArray,i);
           let key = Object.keys(
                <FormArray>this.filtroFormGroup.get(keyArray).value[i]
           )[0];
           let numberIndice = this.indice.indexOf(key);
           this.indice.splice(numberIndice, 1);
           (<FormArray>this.filtroFormGroup.get(keyArray)).removeAt(i);
+     }
+
+     eliminaTodo(keyArray) {
+          // console.log(keyArray,i);
+
+          let numberLength=(<FormArray>this.filtroFormGroup.get(keyArray)).length;
+
+          for (let index = (numberLength - 1); index > -1; index--) {
+               
+                         (<FormArray>this.filtroFormGroup.get(keyArray)).removeAt(index);
+               
+          }
+          this.indice=[];
      }
 
      getSugerencia(e: { [k: string]: any }) {
