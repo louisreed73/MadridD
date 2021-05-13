@@ -9,6 +9,7 @@ import { AutocompleteComponent } from "../../sharedComponents/autocomplete/autoc
 import { ButtonTriggerComponent } from "../../sharedComponents/button-trigger/button-trigger.component";
 import { InfoComponent } from "../../sharedComponents/info/info.component";
 import { PercentageBarComponent } from "../../sharedComponents/percentage-bar/percentage-bar.component";
+import { CollapsibleComponent } from '../../sharedComponents/collapsible/collapsible.component';
 
 @NgModule({
      declarations: [
@@ -19,6 +20,7 @@ import { PercentageBarComponent } from "../../sharedComponents/percentage-bar/pe
           ButtonTriggerComponent,
           InfoComponent,
           PercentageBarComponent,
+          CollapsibleComponent,
      ],
      imports: [
           CommonModule,
@@ -37,6 +39,7 @@ import { PercentageBarComponent } from "../../sharedComponents/percentage-bar/pe
           ButtonTriggerComponent,
           InfoComponent,
           PercentageBarComponent,
+          CollapsibleComponent,
      ],
 })
 export class SharedUtilitiesModule {}

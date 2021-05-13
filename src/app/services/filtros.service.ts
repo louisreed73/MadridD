@@ -120,7 +120,7 @@ export class FiltrosService implements OnDestroy {
      creaConfig(reqVal, reqValNumb, configVar) {
           let datosReq = [];
           reqVal[reqValNumb].forEach((item) => {
-               console.log(item);
+               // console.log(item);
                datosReq.push(item);
           });
           configVar[reqValNumb].values = datosReq;

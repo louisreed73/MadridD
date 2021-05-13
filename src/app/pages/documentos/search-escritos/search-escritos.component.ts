@@ -9,8 +9,8 @@ import {
      QueryList,
      ViewChildren,
 } from "@angular/core";
-import { of, Subscription } from "rxjs";
-import { catchError, delay, tap } from "rxjs/operators";
+import { of, Subject, Subscription } from "rxjs";
+import { catchError, delay, map, tap } from "rxjs/operators";
 import { DocsEscritosService } from "src/app/services/docs-escritos.service";
 import { DocumentosService } from "src/app/services/documentos.service";
 import { FiltrosService } from "src/app/services/filtros.service";
@@ -83,7 +83,9 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
 
      @ViewChildren(FiltroComponent)
      filtrosComp: QueryList<FiltroComponent>;
-     toggleCollapseSub:Subscription;
+     someCollap$:Subject<boolean>= new Subject();
+     toggleCollapseSub:Subscription;     
+
      filtrosDocumentos;
      filtrosEscritos;
 
@@ -132,30 +134,28 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
           return Array.isArray(obj);
      }
      ngAfterViewInit(): void {
-
           this.toggleCollapseSub=this.filtrosComp.first.triggerCollapse
-          .subscribe(d=>{
-               console.log("Algo hay que hacer")
-               let allToggles=this.filtrosComp.first.toggles.toArray();
-               console.log(allToggles)
-               let someCollap=allToggles.some(tog=>{
-                    return tog.nativeElement.previousElementSibling.checked
-               });
+          .pipe(
+               delay(0),
+               map((d)=>{
 
-               if(!someCollap) {
-                    allToggles.forEach(tog=>{
-                         return tog.nativeElement.previousElementSibling.checked=true
+                    let allToggles=this.filtrosComp.first.toggles.toArray();
+                    let someCollap=allToggles.some(tog=>{
+                         return tog.nativeElement.previousElementSibling.checked
                     });
-                    
-               }  else {
-                    allToggles.forEach(tog=>{
-                         return tog.nativeElement.previousElementSibling.checked=false
-                    });
-                         
-               }
-               // console.log(someCollap)
+                    // this.someCollap=someCollap;
+                    this.someCollap$.next(someCollap)
+                    // console.log(someCollap)
+                    return of(someCollap)
+               }),
+          )
+          .subscribe((d)=>{
+          // console.log("Estoy abriendo!");
+          console.log(d)
+
           })
-          // this.documentosSub.unsubscribe();
+
+      
      }
 
      ngOnDestroy(): void {
@@ -164,5 +164,36 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
           this.filtroEscritosSub.unsubscribe();
           this.toggleCollapseSub.unsubscribe();
      }
+
+     collapsing() {
+          console.log("collapsando!!!");
+          console.log("Algo hay que hacer");
+          let allToggles=this.filtrosComp.first.toggles.toArray();
+          let someCollap=allToggles.some(tog=>{
+               return tog.nativeElement.previousElementSibling.checked
+          });
+          console.log(someCollap)
+          
+          allToggles.forEach(tog=>{
+               console.log(tog.nativeElement.previousElementSibling.checked)
+          })
+
+               if(!someCollap) {
+                    allToggles.forEach(tog=>{
+                         this.someCollap$.next(true);
+
+                         return tog.nativeElement.previousElementSibling.checked=true;
+                    });
+                    
+               }  else {
+                    allToggles.forEach(tog=>{
+                         this.someCollap$.next(false);
+
+                         return tog.nativeElement.previousElementSibling.checked=false
+                    });
+                         
+               }
+
+        }
 
 }
