@@ -4,7 +4,6 @@
   }
 
 
-
   .collapsa {
     display:flex;
     flex-flow:row wrap;
@@ -14,6 +13,16 @@
     right: 0.7rem;
     & > div {
       cursor:pointer;
+    }
+  }
+
+
+  .collapsaBox {
+    display:flex;
+    flex-flow:row wrap;
+    align-items:center;
+    p{
+      min-width:9rem;
     }
   }
   
@@ -37,7 +46,7 @@
   
   .clean_Filt {
     cursor:pointer;
-    margin-right:4rem;
+    margin-right: 2rem;
     display:flex;
     flex-flow:row wrap;
     align-items: center;

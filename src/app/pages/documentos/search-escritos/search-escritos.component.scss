@@ -19,6 +19,16 @@
 }
 
 
+.collapsaBox {
+  display:flex;
+  flex-flow:row wrap;
+  align-items:center;
+  p{
+    min-width:9rem;
+  }
+}
+
+
 .collapsaBoxIcon {
   svg {
     width: 2.5rem;
@@ -38,7 +48,7 @@
 
 .clean_Filt {
   cursor:pointer;
-  margin-right:4rem;
+  margin-right: 2rem;
   display:flex;
   flex-flow:row wrap;
   align-items: center;
