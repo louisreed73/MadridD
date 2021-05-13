@@ -6,15 +6,16 @@
 
 
 
-
 .collapsa {
   display:flex;
   flex-flow:row wrap;
   align-items:center;
-  cursor:pointer;
   position:relative;
   top:0.5rem;
   right: 0.7rem;
+  & > div {
+    cursor:pointer;
+  }
 }
 
 
@@ -22,12 +23,12 @@
   svg {
     width: 2.5rem;
     height: 2.5rem;
-    transform: translate(0.7rem, 0rem) rotate(-180deg) scale(.95);
+    transform: translate(0.7rem, 0.2rem) rotate(-180deg) scale(.95);
   }
 }
 .collapsaBoxIcon.collapsed {
   svg {
-    transform: translate(0.7rem, 0rem) rotate(-90deg) scale(.95);
+    transform: translate(0.7rem, 0.2rem) rotate(-90deg) scale(.95);
     path {
       stroke: #007c25;
       stroke-width: 1.15;
@@ -35,3 +36,20 @@
   }
 }
 
+.clean_Filt {
+  cursor:pointer;
+  margin-right:4rem;
+  display:flex;
+  flex-flow:row wrap;
+  align-items: center;
+  svg {
+    width:3rem;
+    height:3rem;
+    margin-left:1rem;
+    path {
+      stroke:#006797;
+      stroke-width:1.3;
+
+    }
+  }
+}

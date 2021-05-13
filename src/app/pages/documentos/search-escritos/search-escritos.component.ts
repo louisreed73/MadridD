@@ -68,7 +68,7 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
 
      /*=====  End of Error Obj member  ======*/
 
-/*=============================================
+     /*=============================================
      =    Incorporacion Integracion nuevo Filtro 20-04-2021 =
      =============================================*/
 
@@ -82,12 +82,11 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
 
      @ViewChildren(FiltroComponent)
      filtrosComp: QueryList<FiltroComponent>;
-     someCollap$:Subject<boolean>= new Subject();
-     toggleCollapseSub:Subscription;     
+     someCollap$: Subject<boolean> = new Subject();
+     toggleCollapseSub: Subscription;
 
      filtrosDocumentos;
      filtrosEscritos;
-
 
      filtroDocumentosSub = this.filtroS
           .getFiltrosDocumentos()
@@ -96,8 +95,8 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
                // console.log(data);
                // this.filtrosDocumentos = data;
                this.filtrosDocumentos = {
-                    data:data,
-                    clase:"documentos"
+                    data: data,
+                    clase: "documentos",
                };
           });
 
@@ -108,13 +107,11 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
                // console.log(data);
                this.filtrosEscritos = {
                     data,
-                    clase:"escritos"
+                    clase: "escritos",
                };
           });
 
      /*=====  End of Incorporacion Integracion nuevo Filtro  ======*/
-
-
 
      constructor(
           private documentos: DocumentosService,
@@ -124,8 +121,6 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
           @Inject(Window) private window: Window,
           public filtroS: FiltrosService,
           private infoServ: InfoService
-
-
      ) {}
 
      // Método para comprobar que los datos del OBservable son efectivamente un array
@@ -133,28 +128,26 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
           return Array.isArray(obj);
      }
      ngAfterViewInit(): void {
-          this.toggleCollapseSub=this.filtrosComp.first.triggerCollapse
-          .pipe(
-               delay(0),
-               map((d)=>{
-
-                    let allToggles=this.filtrosComp.first.toggles.toArray();
-                    let someCollap=allToggles.some(tog=>{
-                         return tog.nativeElement.previousElementSibling.checked
-                    });
-                    // this.someCollap=someCollap;
-                    this.someCollap$.next(someCollap)
-                    // console.log(someCollap)
-                    return of(someCollap)
-               }),
-          )
-          .subscribe((d)=>{
-          // console.log("Estoy abriendo!");
-          console.log(d)
-
-          })
-
-      
+          this.toggleCollapseSub = this.filtrosComp.first.triggerCollapse
+               .pipe(
+                    delay(0),
+                    map((d) => {
+                         let allToggles =
+                              this.filtrosComp.first.toggles.toArray();
+                         let someCollap = allToggles.some((tog) => {
+                              return tog.nativeElement.previousElementSibling
+                                   .checked;
+                         });
+                         // this.someCollap=someCollap;
+                         this.someCollap$.next(someCollap);
+                         // console.log(someCollap)
+                         return of(someCollap);
+                    })
+               )
+               .subscribe((d) => {
+                    // console.log("Estoy abriendo!");
+                    console.log(d);
+               });
      }
 
      ngOnDestroy(): void {
@@ -167,32 +160,48 @@ export class SearchEscritosComponent implements OnDestroy, AfterViewInit {
      collapsing() {
           console.log("collapsando!!!");
           console.log("Algo hay que hacer");
-          let allToggles=this.filtrosComp.first.toggles.toArray();
-          let someCollap=allToggles.some(tog=>{
-               return tog.nativeElement.previousElementSibling.checked
+          let allToggles = this.filtrosComp.first.toggles.toArray();
+          let someCollap = allToggles.some((tog) => {
+               return tog.nativeElement.previousElementSibling.checked;
           });
-          console.log(someCollap)
-          
-          allToggles.forEach(tog=>{
-               console.log(tog.nativeElement.previousElementSibling.checked)
-          })
+          console.log(someCollap);
 
-               if(!someCollap) {
-                    allToggles.forEach(tog=>{
-                         this.someCollap$.next(true);
+          allToggles.forEach((tog) => {
+               console.log(tog.nativeElement.previousElementSibling.checked);
+          });
 
-                         return tog.nativeElement.previousElementSibling.checked=true;
-                    });
-                    
-               }  else {
-                    allToggles.forEach(tog=>{
-                         this.someCollap$.next(false);
+          if (!someCollap) {
+               allToggles.forEach((tog) => {
+                    this.someCollap$.next(true);
 
-                         return tog.nativeElement.previousElementSibling.checked=false
-                    });
-                         
+                    return (tog.nativeElement.previousElementSibling.checked =
+                         true);
+               });
+          } else {
+               allToggles.forEach((tog) => {
+                    this.someCollap$.next(false);
+
+                    return (tog.nativeElement.previousElementSibling.checked =
+                         false);
+               });
+          }
+     }
+
+     cleanFilters() {
+          let props = Object.keys(
+               this.filtrosComp.first.filtroFormGroup.controls
+          );
+          this.filtrosComp.first.filtroFormGroup.reset();
+
+          props.forEach((property, ind) => {
+               if (property.match("array")) {
+                    let AbstractContolLen =
+                         this.filtrosComp.first.filtroFormGroup.get(property)
+                              .value.length;
+                    if (AbstractContolLen) {
+                         this.filtrosComp.first.eliminaTodo(property);
+                    }
                }
-
-        }
-
+          });
+     }
 }

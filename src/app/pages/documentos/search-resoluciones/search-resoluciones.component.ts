@@ -195,4 +195,27 @@ export class SearchResolucionesComponent implements OnDestroy, AfterViewInit {
                }
 
         }
+
+        cleanFilters() {
+          let props=Object.keys(this.filtrosComp.first.filtroFormGroup.controls);
+          this.filtrosComp.first.filtroFormGroup.reset();
+
+
+          props.forEach((property,ind)=>{
+               if(property.match("array")) {
+
+                    let AbstractContolLen=this.filtrosComp.first.filtroFormGroup.get(property).value.length;
+                    if(AbstractContolLen) {
+
+
+
+                    this.filtrosComp.first.eliminaTodo(property)
+                      
+                    }
+               }
+          })
+
+
+          
+     }
 }
