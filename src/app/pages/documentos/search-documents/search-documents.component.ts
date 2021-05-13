@@ -1,7 +1,7 @@
 import { DOCUMENT } from "@angular/common";
 import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, QueryList, ViewChildren } from "@angular/core";
-import { combineLatest, of, Subscription } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { combineLatest, of, Subject, Subscription } from "rxjs";
+import { catchError, delay, map } from "rxjs/operators";
 import { DocumentosService } from "src/app/services/documentos.service";
 import { FiltrosService } from "src/app/services/filtros.service";
 import { InfoService } from "src/app/services/info.service";
@@ -64,6 +64,7 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy, AfterViewIni
      
      @ViewChildren(FiltroComponent)
      filtrosComp: QueryList<FiltroComponent>;
+     someCollap$:Subject<boolean>= new Subject();
      toggleCollapseSub:Subscription;     
 
      filtrosDocumentos;
@@ -81,20 +82,7 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy, AfterViewIni
                };
           });
 
-     // filtroResolucionesSub = this.filtroS
-     //      .getFiltrosResoluciones()
-     //      .pipe()
-     //      .subscribe((data) => {
-     //           // console.log(data);
-     //           this.filtrosResoluciones = {
-     //                data,
-     //                clase:"resoluciones"
-     //           };
-     //      });
-
-     /*=====  End of Incorporacion Integracion nuevo Filtro  ======*/
-
-     
+   
      
      
 
@@ -121,30 +109,28 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy, AfterViewIni
      }
 
      ngAfterViewInit(): void {
-
           this.toggleCollapseSub=this.filtrosComp.first.triggerCollapse
-          .subscribe(d=>{
-               console.log("Algo hay que hacer")
-               let allToggles=this.filtrosComp.first.toggles.toArray();
-               console.log(allToggles)
-               let someCollap=allToggles.some(tog=>{
-                    return tog.nativeElement.previousElementSibling.checked
-               });
+          .pipe(
+               delay(0),
+               map((d)=>{
 
-               if(!someCollap) {
-                    allToggles.forEach(tog=>{
-                         return tog.nativeElement.previousElementSibling.checked=true
+                    let allToggles=this.filtrosComp.first.toggles.toArray();
+                    let someCollap=allToggles.some(tog=>{
+                         return tog.nativeElement.previousElementSibling.checked
                     });
-                    
-               }  else {
-                    allToggles.forEach(tog=>{
-                         return tog.nativeElement.previousElementSibling.checked=false
-                    });
-                         
-               }
-               // console.log(someCollap)
+                    // this.someCollap=someCollap;
+                    this.someCollap$.next(someCollap)
+                    // console.log(someCollap)
+                    return of(someCollap)
+               }),
+          )
+          .subscribe((d)=>{
+          // console.log("Estoy abriendo!");
+          console.log(d)
+
           })
-          // this.documentosSub.unsubscribe();
+
+      
      }
 
 
@@ -153,9 +139,37 @@ export class SearchDocumentsComponent implements OnInit, OnDestroy, AfterViewIni
           //Add 'implements OnDestroy' to the class.
           this.filtroDocumentosSub.unsubscribe();
           this.toggleCollapseSub.unsubscribe();
-
-
-      
-          
+              
      }
+
+     collapsing() {
+          console.log("collapsando!!!");
+          console.log("Algo hay que hacer");
+          let allToggles=this.filtrosComp.first.toggles.toArray();
+          let someCollap=allToggles.some(tog=>{
+               return tog.nativeElement.previousElementSibling.checked
+          });
+          console.log(someCollap)
+          
+          allToggles.forEach(tog=>{
+               console.log(tog.nativeElement.previousElementSibling.checked)
+          })
+
+               if(!someCollap) {
+                    allToggles.forEach(tog=>{
+                         this.someCollap$.next(true);
+
+                         return tog.nativeElement.previousElementSibling.checked=true;
+                    });
+                    
+               }  else {
+                    allToggles.forEach(tog=>{
+                         this.someCollap$.next(false);
+
+                         return tog.nativeElement.previousElementSibling.checked=false
+                    });
+                         
+               }
+
+        }
 }

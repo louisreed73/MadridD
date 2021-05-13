@@ -7,36 +7,30 @@
 
 
 .collapsa {
-  width: 4rem;
-  height: 2rem;
-  cursor: pointer;
-  background: rgba(188, 69, 0, 1);
-  margin: 0.7rem 1rem 0rem -1rem;
-  left: 2rem;
-  // border-radius: 50%;
-  display:inline-flex;
-  flex-flow:column;
-  justify-content: space-evenly;
-  align-items: center;
-  position: absolute;
-  left: 2rem;
-  z-index: 10;
-  // display:;
-  // transition: transform 1.3s ease-in-out;
-
-  & div {
-      width:50%;
-      height:1.4px;
-      background:white;
-  }
-  
-  // &::before {
-  //     display:block;
-  //     content:"collapse / uncollapsed";
-  //     color:white;
-  //     // transform:rotate(0deg);
-  //     // transition: transform .3s ease-in-out;
-  //     font-size:.5rem;
-  // }
-  
+  display:flex;
+  flex-flow:row wrap;
+  align-items:center;
+  cursor:pointer;
+  position:relative;
+  top:0.5rem;
+  right: 0.7rem;
 }
+
+
+.collapsaBoxIcon {
+  svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    transform: translate(0.7rem, 0rem) rotate(-180deg) scale(.95);
+  }
+}
+.collapsaBoxIcon.collapsed {
+  svg {
+    transform: translate(0.7rem, 0rem) rotate(-90deg) scale(.95);
+    path {
+      stroke: #007c25;
+      stroke-width: 1.15;
+    }
+  }
+}
+

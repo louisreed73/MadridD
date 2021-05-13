@@ -3,7 +3,6 @@ import {
      AfterViewInit,
      ChangeDetectionStrategy,
      Component,
-     ElementRef,
      Inject,
      OnDestroy,
      QueryList,

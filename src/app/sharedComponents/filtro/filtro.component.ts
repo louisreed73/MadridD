@@ -250,7 +250,7 @@ export class FiltroComponent implements OnInit, OnDestroy {
           // this.inpCheck.forEach(inp=>{
                
           // })
-          this.triggerCollapse.next(this.isNotCollapsed);
+          this.triggerCollapse.next(null);
 
      }
 }

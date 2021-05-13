@@ -17,52 +17,21 @@
   right: 0.7rem;
 }
 
-// .colorMix {
-//   width: 2.5rem;
-//   height: 2.5rem;
-//   position:absolute;
-//   top:-0.1rem;
-//   right:-0.7rem;
-// }
 
 .collapsaBoxIcon {
   svg {
-    // background:red;
     width: 2.5rem;
     height: 2.5rem;
-    // transform: translate(0.7rem,-.4rem) rotate(180deg);
     transform: translate(0.7rem, 0rem) rotate(-180deg) scale(.95);
   }
 }
 .collapsaBoxIcon.collapsed {
   svg {
-    
-    // width: 3rem;
-    // height: 2.7rem;
-    // cursor:pointer;
-    // transform: translate(0.7rem,-.4rem) rotate(180deg);
     transform: translate(0.7rem, 0rem) rotate(-90deg) scale(.95);
     path {
-      // fill:red;
       stroke: #007c25;
       stroke-width: 1.15;
     }
   }
 }
 
-
-// .httpError {
-//   margin: 3rem;
-//   color: white;
-//   background: red;
-//   padding: 2rem 0;
-//   text-align: center
-// }
-
-// .voidSearch {
-//   margin: 3rem;
-//   color: red;
-//   // background:red;
-//   padding: 2rem 0;
-//   // text-align:center
-// }
