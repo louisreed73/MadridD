@@ -9,7 +9,9 @@ import { AutocompleteComponent } from "../../sharedComponents/autocomplete/autoc
 import { ButtonTriggerComponent } from "../../sharedComponents/button-trigger/button-trigger.component";
 import { InfoComponent } from "../../sharedComponents/info/info.component";
 import { PercentageBarComponent } from "../../sharedComponents/percentage-bar/percentage-bar.component";
-import { CollapsibleComponent } from '../../sharedComponents/collapsible/collapsible.component';
+import { CollapsibleComponent } from "../../sharedComponents/collapsible/collapsible.component";
+import { DocumentCardComponent } from "src/app/components/document-card/document-card.component";
+import { ResumeDocumentComponent } from '../../sharedComponents/resume-document/resume-document.component';
 
 @NgModule({
      declarations: [
@@ -21,6 +23,8 @@ import { CollapsibleComponent } from '../../sharedComponents/collapsible/collaps
           InfoComponent,
           PercentageBarComponent,
           CollapsibleComponent,
+          ResumeDocumentComponent,
+          // DocumentCardComponent,
      ],
      imports: [
           CommonModule,
@@ -40,6 +44,9 @@ import { CollapsibleComponent } from '../../sharedComponents/collapsible/collaps
           InfoComponent,
           PercentageBarComponent,
           CollapsibleComponent,
+          ResumeDocumentComponent,
+
+          // DocumentCardComponent,
      ],
 })
 export class SharedUtilitiesModule {}

@@ -11,6 +11,7 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { SharedUtilitiesModule } from "./sharedModules/shared-utilities/shared-utilities.module";
 // import { FijarDirective } from './directives/fijar.directive';
 import { UserInputComponent } from "./components/user-input/user-input.component";
+import { DocumentCardComponent } from "./components/document-card/document-card.component";
 // import { HeaderComponent } from './components/header/header.component';
 
 const routes: Routes = [
@@ -42,6 +43,7 @@ const routes: Routes = [
           // ReactiveFormsModule,
           InfiniteScrollModule,
           SharedUtilitiesModule,
+
      ],
      exports: [RouterModule],
      declarations: [
@@ -51,6 +53,8 @@ const routes: Routes = [
           FilterTabsComponent,
           SearchFormComponent,
           UserInputComponent,
+          // DocumentCardComponent,
+
           // HeaderComponent,
      ],
 })

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { DocumentosService } from "src/app/services/documentos.service";
 
 @Component({
      selector: "app-detail-layout",
@@ -6,7 +7,12 @@ import { Component, OnInit } from "@angular/core";
      styleUrls: ["./detail-layout.component.scss"],
 })
 export class DetailLayoutComponent implements OnInit {
-     constructor() {}
+     documento: any=23;
+     constructor(private documentosServ: DocumentosService) {}
 
-     ngOnInit() {}
+     ngOnInit() {
+          this.documento = this.documentosServ.selectedDocument;
+
+          console.log(this.documento);
+     }
 }

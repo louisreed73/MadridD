@@ -2,10 +2,16 @@
   <article>
     <div class="flexInfoBox">
       <div class="iconFileBox">
-        <img src="/assets/images/file_icons/file_icon_1.svg">
+        <!-- <a [routerLink]="['/documento',documento.id]"  (click)="selectedDocument()"> -->
+        <a (click)="selectedDocument($event)">
+          <img src="/assets/images/file_icons/file_icon_1.svg">
+        </a>
       </div>
       <div class="mainInfoBox">
-        <p>{{documento | json}}</p>
+        <!-- <p>{{documento | json}}</p> -->
+        
+
+        <!-- <app-document-card></app-document-card> -->
       </div>
       <div class="downloadBox">
         <!-- <p>{{documento | json}}</p> -->
@@ -25,7 +31,10 @@
 
     </div>
     <hr>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam quaerat placeat nihil exercitationem dolore voluptate culpa tenetur reiciendis eligendi quisquam dolores ab, voluptas corrupti optio velit, soluta dolorem mollitia consequatur quis quam autem, facere veritatis. Esse corporis, ipsam atque incidunt dolores, cumque libero explicabo, magni aut assumenda odio exercitationem dolorem deserunt. </p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam quaerat placeat nihil exercitationem dolore
+      voluptate culpa tenetur reiciendis eligendi quisquam dolores ab, voluptas corrupti optio velit, soluta dolorem
+      mollitia consequatur quis quam autem, facere veritatis. Esse corporis, ipsam atque incidunt dolores, cumque libero
+      explicabo, magni aut assumenda odio exercitationem dolorem deserunt. </p>
   </article>
 
 </a>

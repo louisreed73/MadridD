@@ -78,12 +78,12 @@ export class InfoComponent implements OnInit, OnDestroy {
      
      ngOnInit() {
           // this.actualURL$.next("pepe")
-          this.actualURL$.next(this.location.path());
+          // this.actualURL$.next(this.location.path());
           
           // console.log(this.router.url.split("\/")[1]);
           this.location.onUrlChange(urlS => {
-               console.log(urlS);
-               this.actualURL$.next(urlS)
+               // console.log(urlS);
+               // this.actualURL$.next(urlS)
                // this.getURL()
                // this.url=urlS;
           });
