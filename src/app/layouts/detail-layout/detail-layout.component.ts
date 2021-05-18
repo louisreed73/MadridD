@@ -1,3 +1,4 @@
+import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { DocumentosService } from "src/app/services/documentos.service";
 
@@ -8,11 +9,18 @@ import { DocumentosService } from "src/app/services/documentos.service";
 })
 export class DetailLayoutComponent implements OnInit {
      documento: any=23;
-     constructor(private documentosServ: DocumentosService) {}
+     constructor(
+          private documentosServ: DocumentosService,
+          private location: Location
+          ) {}
 
      ngOnInit() {
           this.documento = this.documentosServ.selectedDocument;
 
           console.log(this.documento);
      }
+
+     volver() {
+          this.location.back();
+        }
 }

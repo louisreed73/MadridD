@@ -1,5 +1,5 @@
 import { Location } from "@angular/common";
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, UrlSegment } from "@angular/router";
 
 @Component({
@@ -9,9 +9,11 @@ import { ActivatedRoute, UrlSegment } from "@angular/router";
 })
 export class DocumentoComponent implements OnInit {
      historylastURL: UrlSegment;
+     @ViewChild("link",{static:true}) link:ElementRef;
      constructor(
        private route: ActivatedRoute, 
-       private location: Location) {}
+     //   private location: Location
+       ) {}
 
      ngOnInit() {
           this.route.paramMap.subscribe((map) => {
@@ -30,7 +32,7 @@ export class DocumentoComponent implements OnInit {
           // });
      }
 
-     volver() {
-       this.location.back();
+     abrir(e) {
+       e.preventDefault();
      }
 }
