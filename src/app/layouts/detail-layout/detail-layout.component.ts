@@ -1,5 +1,5 @@
 import { Location } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { DocumentosService } from "src/app/services/documentos.service";
 
 @Component({
@@ -11,13 +11,16 @@ export class DetailLayoutComponent implements OnInit {
      documento: any=23;
      constructor(
           private documentosServ: DocumentosService,
-          private location: Location
+          private location: Location,
+       @Inject(Window) private window: Window,
+
           ) {}
 
      ngOnInit() {
           this.documento = this.documentosServ.selectedDocument;
 
           console.log(this.documento);
+          this.window.scrollTo(0,0);
      }
 
      volver() {
