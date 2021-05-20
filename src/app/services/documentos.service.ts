@@ -91,6 +91,7 @@ export class DocumentosService implements OnDestroy {
      // Logic to check acumulated data, based in page number - API pagination
      documentos$:Observable<any>;
      private _selectedDocument:any;
+     private _isShowSideBar:boolean=true;
 
      get selectedDocument() {
           return this._selectedDocument
@@ -98,6 +99,15 @@ export class DocumentosService implements OnDestroy {
 
      set selectedDocument(doc:any) {
           this._selectedDocument=doc;
+          console.log(`%c Nuevo Documento a visualizar!!!: ${JSON.stringify(this._selectedDocument,null,2)}`,"color:lime")
+     }
+
+     get isShowSideBar() {
+          return this._isShowSideBar
+     }
+
+     set isShowSideBar(val:any|null) {
+          this._isShowSideBar=!this._isShowSideBar
           console.log(`%c Nuevo Documento a visualizar!!!: ${JSON.stringify(this._selectedDocument,null,2)}`,"color:lime")
      }
      

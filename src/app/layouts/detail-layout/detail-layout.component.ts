@@ -26,4 +26,10 @@ export class DetailLayoutComponent implements OnInit {
      volver() {
           this.location.back();
         }
+
+        isShowSideBar() {
+
+          this.documentosServ.isShowSideBar=null;
+             console.log("Cambio SideoBar!!: ",this.documentosServ.isShowSideBar)
+        }
 }

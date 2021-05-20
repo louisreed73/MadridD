@@ -137,6 +137,22 @@ input:focus {
   top: 6.6rem;
 }
 
+.ng2-pdf-viewer-container {
+  height: calc(100vh - 19.8rem) !important;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.pdfViewer {
+  // transition: margin-left .3s ease-in-out;
+
+  .page {
+      // width: calc(100% - 10rem) !important;
+      // width: 950px !important;
+  }
+}
+
+
 
 
 

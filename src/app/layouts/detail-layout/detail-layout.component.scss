@@ -2,8 +2,22 @@
 //     background:gainsboro;
 // }
 
+.infoHeader {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0.2rem;
+    align-items: baseline;
+    margin: 1rem 0 4rem;
+    background: white;
+    border-radius: 0.5rem;
+
+    & > *:not(:first-child) {
+        margin-left:3rem;
+    }
+}
+
 h1,h2 {
-    margin: 1rem 0;
+    // margin: 1rem 0;
 }
 
 .gains {
@@ -13,15 +27,14 @@ h1,h2 {
 }
 
 .flexBoxAside {
-    position:relative;
+    position:absolute;
     display:flex;
     flex-flow:row wrap;
-    padding: 1rem 0;
+    width: 34rem;
+    z-index: 10;
+    // padding: 0.5rem 0 0;
     // background:red;
     // margin-bottom:2rem;
-
-
-
 }
 
 
@@ -36,15 +49,15 @@ h1,h2 {
     }
     label {
         position: relative;
-    display: block;
-    z-index: 11;
-    top: 3.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    left: 2rem;
-    margin-top: -4.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+        display: block;
+        z-index: 11;
+        top: 1.2rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        left: 0rem;
+        margin-top: -4.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
 
 
        svg {
@@ -59,11 +72,11 @@ h1,h2 {
     }
 
     .flexBoxAside aside {   
-        padding-top:3.5rem;
+        // padding-top:3.5rem;
         top:0;
         opacity:1;
         min-height:17.6rem;
-        width:auto;
+        flex: 1 1 14rem;
         backface-visibility: hidden;
         transition: 
         flex .3s ease-in-out, 
@@ -73,7 +86,9 @@ h1,h2 {
         // min-height .5s ease-in-out;
     }
 
-
+// svg {
+//     transition: transform .3s ease-in-out;
+// }
     
     input[type="checkbox"]:checked ~ label  {
         left:1.2rem;
@@ -83,21 +98,28 @@ h1,h2 {
 
     }
 
-    input[type="checkbox"] ~ .flexBoxAside aside  {
-
-        // color:white;
+    input[type="checkbox"] ~ aside  {
         flex: 1 1 auto;
-        position:relative;
+        position: relative;
+        left: -2.5rem;
+        height: 45.7rem;
+        background: white;
+        outline: 1.5px solid gainsboro;
+        outline-offset: -5.9px;
+        /* padding: .5rem; */
+        overflow: hidden;
+        overflow-y: auto;
+        padding: 2rem;
         
     }
-    input[type="checkbox"]:checked ~ .flexBoxAside aside {
+    input[type="checkbox"]:checked ~ aside {
         
         position:relative;
         flex: 0 0 auto;
         // top:1rem;
-        width:0;
-        transform: translateX(-130%);
-        opacity:0;
+        // width:0;
+        transform: translateX(-145%);
+        // opacity:0;
         // min-height:0rem;
         // overflow:hidden;
         // display:none;
@@ -118,7 +140,7 @@ main {
     padding: 1rem;
     min-height:35rem;
     background: white;
-    margin: 3.5rem 0rem 1rem 2rem;
+    margin: 0rem 0rem 1rem 0rem;
     border-radius: 0.4rem;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 30%);
     border: 1px solid rgba(138, 138, 138, .3);
@@ -136,7 +158,7 @@ input[type="checkbox"]:checked ~ .flexBoxAside main {
 .iconBackBox {
     display: inline-flex;
     align-items:center;
-    margin-top:.5rem;
+    // margin-top:.5rem;
     cursor:pointer;
 }
 
@@ -148,3 +170,5 @@ input[type="checkbox"]:checked ~ .flexBoxAside main {
         height:1.5rem;
     }
 }
+
+

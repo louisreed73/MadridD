@@ -8,7 +8,8 @@ import {
 } from "@angular/core";
 import { ActivatedRoute, UrlSegment } from "@angular/router";
 import { PdfViewerComponent } from "ng2-pdf-viewer";
-import { PDFProgressData } from "pdfjs-dist";
+import { PDFDocumentProxy, PDFProgressData } from "pdfjs-dist";
+import { DocumentosService } from "src/app/services/documentos.service";
 
 @Component({
      selector: "app-documento",
@@ -19,8 +20,8 @@ export class DocumentoComponent implements OnInit {
      historylastURL: UrlSegment;
      valor:number=0.25;
      @ViewChild("link", { static: true }) link: ElementRef;
-     pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
-     // pdfSrc = "http://www.africau.edu/images/default/sample.pdf";
+     // pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+     pdfSrc = "/assets/ejemplo_pdf_1.pdf";
 
      pdfQuery:any;
 
@@ -29,7 +30,10 @@ export class DocumentoComponent implements OnInit {
      private pdfComponent: PdfViewerComponent;
 
      
-     constructor(private route: ActivatedRoute) //   private location: Location
+     constructor(
+          private route: ActivatedRoute,
+          private documentosServ: DocumentosService
+          ) //   private location: Location
      {}
 
      ngOnInit() {
@@ -47,15 +51,26 @@ export class DocumentoComponent implements OnInit {
      //   e.preventDefault();
      // }
 
-     textLayerRendered(e: CustomEvent) {
-          console.log("(text-layer-rendered)", e);
+     textLayerRendered(e: CustomEvent | any) {
+          // console.log("(text-layer-rendered)", e);
+          // console.log(`%cNúmero de pagina: ${e.pageNumber}`,'color:gold')
      }
 
      onProgress(progressData: PDFProgressData) {
           // do anything with progress data. For example progress indicator
 
-          console.log(progressData.loaded);
-          console.log(progressData.total);
+          // console.log(progressData.loaded);
+          // console.log(progressData.total);
+     }
+     
+     pageChange (e:number) {
+          
+          console.log(e);
+     }
+
+     afterLoadComplete(pdf: PDFDocumentProxy) {
+          console.log("Cargado: ",pdf);
+          console.log(`%cNúmero de paginas: ${pdf.numPages}`,'color:lime');
      }
 
      buscando(search: string) {
@@ -70,18 +85,18 @@ export class DocumentoComponent implements OnInit {
 
      searchQueryChanged(newQuery: string) {
 
-          console.log(newQuery)
+          console.log(this.pdfComponent.pdfFindController.selected)
 
           if (newQuery !== this.pdfQuery) {
             this.pdfQuery = newQuery;
             this.pdfComponent.pdfFindController.executeCommand('find', {
               query: this.pdfQuery,
-              highlightAll: true
+              highlightAll: true,
             });
           } else {
             this.pdfComponent.pdfFindController.executeCommand('findagain', {
               query: this.pdfQuery,
-              highlightAll: true
+              highlightAll: true,
             });
           }
 
