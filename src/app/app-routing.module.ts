@@ -12,9 +12,8 @@ import { SharedUtilitiesModule } from "./sharedModules/shared-utilities/shared-u
 // import { FijarDirective } from './directives/fijar.directive';
 import { UserInputComponent } from "./components/user-input/user-input.component";
 import { DocumentCardComponent } from "./components/document-card/document-card.component";
-import { PdfViewerModule } from "ng2-pdf-viewer";
 // import { HeaderComponent } from './components/header/header.component';
-
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 const routes: Routes = [
      { path: "", pathMatch: "full", redirectTo: "documentos" },
      {
@@ -44,7 +43,7 @@ const routes: Routes = [
           // ReactiveFormsModule,
           InfiniteScrollModule,
           SharedUtilitiesModule,
-          PdfViewerModule
+          NgxExtendedPdfViewerModule
 
      ],
      exports: [RouterModule],
