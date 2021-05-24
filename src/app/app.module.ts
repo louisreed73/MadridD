@@ -7,8 +7,12 @@ import { AppComponent } from "./app.component";
 import { DataRetrievalInterceptor } from "./interceptors/data-retrieval.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HeaderComponent } from "./components/header/header.component";
-import { NgxExtendedPdfViewerService } from "ngx-extended-pdf-viewer";
-import { PdfFindbarService } from "ngx-extended-pdf-viewer/lib/toolbar/pdf-findbar/pdf-findbar-service";
+import { NgxExtendedPdfViewerModule, 
+     // NgxExtendedPdfViewerService,
+     // NgxExtendedPdfViewerServerComponent,
+
+ } from "ngx-extended-pdf-viewer";
+// import { PdfFindbarService } from "ngx-extended-pdf-viewer/lib/toolbar/pdf-findbar/pdf-findbar-service";
 
 // import {serverAPI} from "./mirage.api";
 
@@ -19,6 +23,9 @@ import { PdfFindbarService } from "ngx-extended-pdf-viewer/lib/toolbar/pdf-findb
           AppRoutingModule,
           HttpClientModule,
           BrowserAnimationsModule,
+          // NgxExtendedPdfViewerModule,
+          // NgxExtendedPdfViewerService
+           
      ],
      providers: [
           {
@@ -34,6 +41,7 @@ import { PdfFindbarService } from "ngx-extended-pdf-viewer/lib/toolbar/pdf-findb
           //      provide:"finder",
           //      useClass:PdfFindbarService
           // }
+          // NgxExtendedPdfViewerService
      ],
      bootstrap: [AppComponent],
 })

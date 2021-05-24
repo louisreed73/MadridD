@@ -10,7 +10,7 @@ import { ActivatedRoute, UrlSegment } from "@angular/router";
 import { NgxExtendedPdfViewerService } from "ngx-extended-pdf-viewer";
 import { PdfFindbarService } from "ngx-extended-pdf-viewer/lib/toolbar/pdf-findbar/pdf-findbar-service";
 import { DocumentosService } from "src/app/services/documentos.service";
-
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 @Component({
      selector: "app-documento",
      templateUrl: "./documento.component.html",
@@ -24,6 +24,7 @@ export class DocumentoComponent implements OnInit {
      pdfSrc = "/assets/ejemplo_pdf_1.pdf";
 
      pdfQuery: any;
+     // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
 
      // @ViewChild(PdfViewerComponent, { static: true })
      // private pdfComponent: PdfViewerComponent;

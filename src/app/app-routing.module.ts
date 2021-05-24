@@ -13,7 +13,8 @@ import { SharedUtilitiesModule } from "./sharedModules/shared-utilities/shared-u
 import { UserInputComponent } from "./components/user-input/user-input.component";
 import { DocumentCardComponent } from "./components/document-card/document-card.component";
 // import { HeaderComponent } from './components/header/header.component';
-import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerModule, PdfFindButtonComponent } from 'ngx-extended-pdf-viewer';
+import { PdfFindbarService } from "ngx-extended-pdf-viewer/lib/toolbar/pdf-findbar/pdf-findbar-service";
 const routes: Routes = [
      { path: "", pathMatch: "full", redirectTo: "documentos" },
      {
@@ -54,9 +55,13 @@ const routes: Routes = [
           FilterTabsComponent,
           SearchFormComponent,
           UserInputComponent,
+          
           // DocumentCardComponent,
 
           // HeaderComponent,
      ],
+     providers:[
+          // PdfFindbarService
+     ]
 })
 export class AppRoutingModule {}

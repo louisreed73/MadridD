@@ -16,11 +16,16 @@ value="1"
   (page-changing)="pageChange($event)"
   (after-load-complete)="afterLoadComplete($event)"
   ></pdf-viewer> -->
-
-<ngx-extended-pdf-viewer [src]="'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'" 
-[useBrowserLocale]="true" 
+<!-- <pdf-viewer-button-component></pdf-viewer-button-component> -->
+<!-- <ngx-extended-pdf-viewer [src]="'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'" 
+>
+</ngx-extended-pdf-viewer> -->
+<ngx-extended-pdf-viewer 
+[src]="pdfSrc" 
+useBrowserLocale="true" 
+height="80vh"
 [textLayer]="true"
-[showHandToolButton]="true" >
+></ngx-extended-pdf-viewer>
   <!-- [showPresentationModeButton]="true"
 [(page)]="page"
 [(pageLabel)]="pageLabel" -->
@@ -31,7 +36,6 @@ value="1"
     </pdf-find-input-area>
   </div> -->
 
-</ngx-extended-pdf-viewer>
 
 <!-- <ng-template #customFindbarInputArea>
   <div id="findbarInputContainer">
