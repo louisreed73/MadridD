@@ -100,7 +100,7 @@ input:focus {
   overflow-y: auto;
   position: fixed;
   z-index: 10;
-  top: 25.5rem;
+  top: 23.5rem;
   // outline: 1px solid #dcdcdc96;
   // outline-offset: -0.1rem;
   outline: 2px solid rgba(0, 103, 151, .3);
@@ -137,20 +137,13 @@ input:focus {
   top: 6.6rem;
 }
 
-.ng2-pdf-viewer-container {
-  height: calc(100vh - 19.8rem) !important;
-    overflow: hidden;
-    overflow-y: scroll;
-}
 
-.pdfViewer {
-  // transition: margin-left .3s ease-in-out;
-
-  .page {
-      // width: calc(100% - 10rem) !important;
-      // width: 950px !important;
+    ngx-extended-pdf-viewer input {
+      width:auto;
   }
-}
+
+
+
 
 
 

@@ -10,15 +10,14 @@
           </g>
         </svg>
       </span>
-      Volver
+      Volver al Listado
     </p>
-    <h1>{{'The Title'}}</h1>
-    <h2>{{'Juzgado Nº 23'}}</h2>
   </div>
   <div>
-    <div class="flexBoxAside">
+    <div class="flexBoxAside" [ngClass]="{'isNotShowSideBar': !_isShowSideBar}">
       <input type="checkbox" name="" id="showInfoDocument">
       <label for="showInfoDocument" (click)="isShowSideBar()">
+        <!-- Esconder lateral -->
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 32 32" x="0px" y="0px">
           <title>previous-1</title>
           <path fill="#006797"
@@ -32,7 +31,7 @@
         <!-- <p>Hijos de puta</p> -->
       </aside>
     </div>
-    <main>
+    <main [ngClass]="{'m-l30': _isShowSideBar}">
       <router-outlet></router-outlet>
     </main>
 

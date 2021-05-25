@@ -5,9 +5,10 @@
 .infoHeader {
     display: flex;
     flex-flow: row wrap;
-    padding: 0.2rem;
+    // padding: 0.2rem;
+    padding: 0.4rem 0.2rem 0.4rem calc(50% - 3rem);
     align-items: baseline;
-    margin: 1rem 0 4rem;
+    margin: 0.5rem 0 0.8rem;
     background: white;
     border-radius: 0.5rem;
 
@@ -30,13 +31,23 @@ h1,h2 {
     position:absolute;
     display:flex;
     flex-flow:row wrap;
+    // width: 34rem;
     width: 34rem;
     z-index: 10;
-    top: 21.8rem;
+    top: 11.45rem;
+    transition: width .4s ease-in-out;
+    // min-height:20rem;
     // padding: 0.5rem 0 0;
     // background:red;
     // margin-bottom:2rem;
 }
+.isNotShowSideBar {
+    width: 1rem;
+    // display:none;
+
+}
+
+
 
 
 
@@ -52,10 +63,10 @@ h1,h2 {
         position: relative;
         display: block;
         z-index: 11;
-        top: -3.1rem;
+        top: 1rem;
         width: 2.5rem;
         height: 2.5rem;
-        left: 0rem;
+        left: 0.5rem;
         margin-top: -4.5rem;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
@@ -103,7 +114,7 @@ h1,h2 {
         flex: 1 1 auto;
         position: relative;
         left: -2.5rem;
-        height: 45.7rem;
+        height: 46rem;
         background: white;
         outline: 1.5px solid gainsboro;
         outline-offset: -5.9px;
@@ -146,9 +157,15 @@ main {
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 30%);
     border: 1px solid rgba(138, 138, 138, .3);
     transition: flex 1s 1.5s ease-in-out, 
+    margin-left .3s ease-in-out
     // transform .3s ease-in-out, 
     // opacity .1s ease-in-out, 
     // min-height .5s ease-in-out;
+}
+
+main.m-l30 {
+
+    margin-left:33rem;
 }
 
 input[type="checkbox"]:checked ~ .flexBoxAside main {

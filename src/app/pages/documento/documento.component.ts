@@ -20,6 +20,8 @@ export class DocumentoComponent implements OnInit {
      // historylastURL: UrlSegment;
      // valor: number = 0.25;
      @ViewChild("link", { static: true }) link: ElementRef;
+     // @ViewChild("findInput", { static: true }) find: ElementRef;
+
      // pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
      pdfSrc = "/assets/ejemplo_pdf_1.pdf";
 
@@ -35,6 +37,7 @@ export class DocumentoComponent implements OnInit {
      constructor(
           private route: ActivatedRoute,
           private documentosServ: DocumentosService,
+          private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService
 //     private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService,
 //     private pdfFindbarService:PdfFindbarService
 
@@ -53,9 +56,23 @@ export class DocumentoComponent implements OnInit {
           // console.log(this.pdfComponent);
      }
 
-     pRendered(e) {
-          console.log(e)
+     ngAfterViewInit(): void {
+          //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+          //Add 'implements AfterViewInit' to the class.
+          // console.log(this.find)
      }
+
+     pRendered(e) {
+          console.log(e);
+          this.ngxExtendedPdfViewerService.find("maria",{
+               highlightAll: true,
+                matchCase: false,
+                wholeWords: false,
+                ignoreAccents: true
+          })
+
+     }
+     
 
      
 }

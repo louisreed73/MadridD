@@ -3,7 +3,7 @@
 <!-- <iframe height="600px" width="100%" src="/assets/pdfs/guitars_esp.pdf" frameborder="0"></iframe> -->
 
 <!-- <input type="text" [ngModel]="busqueda" (ngModelChange)="buscando($event)"> -->
-<input type="search" [(ngModel)]="searchtext" placeholder="search term" (input)="find($event)">
+<!-- <input type="search" [(ngModel)]="searchtext" placeholder="search term" (input)="find($event)"> -->
 <!-- <input type="number" name="" id="" [(ngModel)]="paginaAct" value="1" placeholder="1">
 <input type="number" name="" id="" [(ngModel)]="zoomAct" 
 value="1"
@@ -23,8 +23,7 @@ value="1"
 <ngx-extended-pdf-viewer 
 [src]="pdfSrc" 
 useBrowserLocale="true" 
-height="80vh"
-[backgroundColor]="'red'"
+height="76vh"
 [textLayer]="true"
 (pageRendered)="pRendered($event)"
 ></ngx-extended-pdf-viewer>

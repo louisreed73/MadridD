@@ -9,6 +9,7 @@ import { DocumentosService } from "src/app/services/documentos.service";
 })
 export class DetailLayoutComponent implements OnInit {
      documento: any=23;
+     _isShowSideBar:boolean=true;
      constructor(
           private documentosServ: DocumentosService,
           private location: Location,
@@ -29,7 +30,7 @@ export class DetailLayoutComponent implements OnInit {
 
         isShowSideBar() {
 
-          this.documentosServ.isShowSideBar=null;
-             console.log("Cambio SideoBar!!: ",this.documentosServ.isShowSideBar)
+          this._isShowSideBar=!this._isShowSideBar;
+             console.log("Cambio SideoBar!!: ")
         }
 }
