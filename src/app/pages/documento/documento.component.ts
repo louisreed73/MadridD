@@ -17,8 +17,8 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
      styleUrls: ["./documento.component.scss"],
 })
 export class DocumentoComponent implements OnInit {
-     historylastURL: UrlSegment;
-     valor: number = 0.25;
+     // historylastURL: UrlSegment;
+     // valor: number = 0.25;
      @ViewChild("link", { static: true }) link: ElementRef;
      // pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
      pdfSrc = "/assets/ejemplo_pdf_1.pdf";
@@ -51,6 +51,10 @@ export class DocumentoComponent implements OnInit {
           //      // console.log(this.historylastURL.path)
           // });
           // console.log(this.pdfComponent);
+     }
+
+     pRendered(e) {
+          console.log(e)
      }
 
      

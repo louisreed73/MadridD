@@ -24,8 +24,11 @@ value="1"
 [src]="pdfSrc" 
 useBrowserLocale="true" 
 height="80vh"
+[backgroundColor]="'red'"
 [textLayer]="true"
+(pageRendered)="pRendered($event)"
 ></ngx-extended-pdf-viewer>
+
   <!-- [showPresentationModeButton]="true"
 [(page)]="page"
 [(pageLabel)]="pageLabel" -->
