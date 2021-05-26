@@ -8,6 +8,7 @@ export class SearchTriggerService {
 
   newTriggerSearch:Subject<any>= new Subject<any>();
   triggerSearch:Observable<any>=this.newTriggerSearch.asObservable();
+  fuzzySearch:Subject<string>=new Subject()
 
   _updatedFiltro:{[k:string]:any}={};
   _updatedSearch:string=null;

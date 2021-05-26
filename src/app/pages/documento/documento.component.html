@@ -20,19 +20,19 @@ value="1"
 <!-- <ngx-extended-pdf-viewer [src]="'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'" 
 >
 </ngx-extended-pdf-viewer> -->
-<ngx-extended-pdf-viewer 
-[src]="pdfSrc" 
-useBrowserLocale="true" 
-height="76vh"
-[textLayer]="true"
-(pageRendered)="pRendered($event)"
-></ngx-extended-pdf-viewer>
+<!-- <div class="fuzzyS">
+  <input type="text" name="" id="" [(ngModel)]="fuzzyQuery">
+  <button>fuzzy</button>
+</div> -->
+<ngx-extended-pdf-viewer [src]="pdfSrc" useBrowserLocale="true" height="81vh" [textLayer]="true"
+  (pageRendered)="pRendered($event)" (updateFindMatchesCount)="buscando($event)">
+</ngx-extended-pdf-viewer>
 
-  <!-- [showPresentationModeButton]="true"
+<!-- [showPresentationModeButton]="true"
 [(page)]="page"
 [(pageLabel)]="pageLabel" -->
 
-  <!-- <div class="findbar hidden doorHanger" id="findbar">
+<!-- <div class="findbar hidden doorHanger" id="findbar">
     <pdf-find-input-area>
       <pdf-search-input-field id="findInput"></pdf-search-input-field>
     </pdf-find-input-area>

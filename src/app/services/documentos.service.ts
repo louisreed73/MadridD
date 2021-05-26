@@ -102,15 +102,7 @@ export class DocumentosService implements OnDestroy {
           console.log(`%c Nuevo Documento a visualizar!!!: ${JSON.stringify(this._selectedDocument,null,2)}`,"color:lime")
      }
 
-     // get isShowSideBar() {
-     //      return this._isShowSideBar
-     // }
-
-     // set isShowSideBar(val:any|null) {
-     //      this._isShowSideBar=!this._isShowSideBar
-     //      console.log(`%c Nuevo Documento a visualizar!!!: ${JSON.stringify(this._selectedDocument,null,2)}`,"color:lime")
-     // }
-     
+    
 
      constructor(
           private http: HttpClient,

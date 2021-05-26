@@ -3,14 +3,18 @@
 // }
 
 .infoHeader {
-    display: flex;
-    flex-flow: row wrap;
-    // padding: 0.2rem;
-    padding: 0.4rem 0.2rem 0.4rem calc(50% - 3rem);
-    align-items: baseline;
-    margin: 0.5rem 0 0.8rem;
-    background: white;
-    border-radius: 0.5rem;
+    // display: flex;
+    // flex-flow: row wrap;
+    // // padding: 0.2rem;
+    // padding: 0.4rem 0.2rem 0.4rem calc(90% - 3rem);
+    // align-items: baseline;
+    // margin: 0.5rem 0 0.8rem;
+    // background: white;
+    // border-radius: 0.5rem;
+    position: absolute;
+    top: 2.4rem;
+    left: 50%;
+    transform: translateX(-50%);
 
     & > *:not(:first-child) {
         margin-left:3rem;
@@ -24,7 +28,7 @@ h1,h2 {
 .gains {
     background: rgba(220, 220, 220, .4);
     min-height:calc(100vh - 9rem);
-    padding: 0.1rem 3rem 0;
+    padding: 0.7rem 3rem 0.1rem 4rem;
 }
 
 .flexBoxAside {
@@ -32,9 +36,9 @@ h1,h2 {
     display:flex;
     flex-flow:row wrap;
     // width: 34rem;
-    width: 34rem;
+    width: 33rem;
     z-index: 10;
-    top: 11.45rem;
+    // top: 11.45rem;
     transition: width .4s ease-in-out;
     // min-height:20rem;
     // padding: 0.5rem 0 0;
@@ -63,11 +67,11 @@ h1,h2 {
         position: relative;
         display: block;
         z-index: 11;
-        top: 1rem;
+        top: 0rem;
         width: 2.5rem;
         height: 2.5rem;
-        left: 0.5rem;
-        margin-top: -4.5rem;
+        left: 31rem;
+        // margin-top: -4.5rem;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
 
@@ -103,9 +107,10 @@ h1,h2 {
 // }
     
     input[type="checkbox"]:checked ~ label  {
-        left:1.2rem;
+        // left:1.2rem;
 
        transform: rotate(180deg);
+       left:-3.2rem;
 
 
     }
@@ -114,7 +119,7 @@ h1,h2 {
         flex: 1 1 auto;
         position: relative;
         left: -2.5rem;
-        height: 46rem;
+        height: 84.7vh;
         background: white;
         outline: 1.5px solid gainsboro;
         outline-offset: -5.9px;
@@ -165,7 +170,7 @@ main {
 
 main.m-l30 {
 
-    margin-left:33rem;
+    margin-left:34rem;
 }
 
 input[type="checkbox"]:checked ~ .flexBoxAside main {

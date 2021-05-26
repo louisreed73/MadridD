@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SearchTriggerService } from 'src/app/services/search-trigger.service';
 
 @Component({
   selector: 'app-resume-document',
@@ -8,11 +9,20 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ResumeDocumentComponent implements OnInit {
 
   @Input() documento:any;
-  constructor() { }
+  fuzzyString:string;
+  constructor(
+    private searchTriggerServ:SearchTriggerService
+  ) { }
 
   ngOnInit() {
 
     console.log(this.documento)
+  }
+
+  fuzzySearch() {
+    console.log("fuzzy searching!!!!");
+
+    this.searchTriggerServ.fuzzySearch.next(this.fuzzyString)
   }
 
 }
