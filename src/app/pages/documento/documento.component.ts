@@ -32,51 +32,28 @@ export class DocumentoComponent implements OnInit, OnDestroy {
           "shit",
      ];
 
-     tempString:string;
+     tempString:Array<string>=[];
 
 
-     buscando:any=(()=>{
+     // buscando:any=(()=>{
 
-          let count=11;
+     //      let count=11;
 
-          return (e)=>{
-               if(!e.total) {
+     //      return (e)=>{
+               
 
-                    let time=Date.now();
-                    e.tiempo=time;
-                    e.results=!!(e.total)
-     
-                         e.count=count;
-                         count--;
-                         console.log(`%cEl contador es: ${count}`,'color:lime');
-                         
-     
-                    console.log(e,count);
-                    let div=Math.round(this.tempString.length/2);
-                    console.log(`%cdividimos la frase completa entre 5 y es: ${div}`,'color:lime');
-                    let shorten=this.tempString.slice(0,div);
-                    // console.log(`%cLa divisón por el contador es: ${div*count}`,'color:lime');
-                    console.log(`%cLa frase ahora es: ${shorten}`,'color:lime');
-                    this.fuzzySearching(shorten);
-                    this.tempString=shorten;
-               }
+     //      }
+     //      // e.count+=1;
+     //      // setTimeout(()=>{
 
-               else {
-                    console.log("Hay resultados!!!!")
-               }
-
-          }
-          // e.count+=1;
-          // setTimeout(()=>{
-
-          //      this.ngxExtendedPdfViewerService.find(this.pruebas[count],{
-          //           fuzzySearch: true
-          //      })
-          // },5000)
-          // if(count<5&&!e.count) {
-          //      this.buscando(e,++count);
-          // }
-     })()
+     //      //      this.ngxExtendedPdfViewerService.find(this.pruebas[count],{
+     //      //           fuzzySearch: true
+     //      //      })
+     //      // },5000)
+     //      // if(count<5&&!e.count) {
+     //      //      this.buscando(e,++count);
+     //      // }
+     // })()
 
 
      constructor(
@@ -92,7 +69,7 @@ export class DocumentoComponent implements OnInit, OnDestroy {
           this.fuzzySubsc=this.searchTriggerServ.fuzzySearch
           .pipe(
                map(d=>{
-                    let clearedSpacesString=d.split(" ").join("");
+                    let clearedSpacesString=d.split(/\s/);
                     console.log(clearedSpacesString)
                     return clearedSpacesString
                })
@@ -101,7 +78,7 @@ export class DocumentoComponent implements OnInit, OnDestroy {
                console.log(d);
 
                this.tempString=d;
-               this.fuzzySearching(d)
+               this.fuzzySearching(d.join(""))
 
           })
      }
@@ -131,14 +108,33 @@ export class DocumentoComponent implements OnInit, OnDestroy {
           console.log(e)
      }
 
-     // buscando(e) {
+     buscando(e) {
+   
+          if(!e.total) {
 
-     //      let count=0;
-     //      return ()=>{
+               // let time=Date.now();
+               // e.tiempo=time;
+               // e.results=!!(e.total)
 
-     //           console.log(e,count++)
-     //      }
-     // }
+               //      e.count=count;
+               //      count--;
+               //      console.log(`%cEl contador es: ${count}`,'color:lime');
+                    
+
+               console.log(e);
+               let total=Math.round(this.tempString.length);
+               // console.log(`%cdividimos la frase completa entre 5 y es: ${div}`,'color:lime');
+               let shorten=this.tempString.slice(0,Math.round(total / 10 ));
+               // console.log(`%cLa divisón por el contador es: ${div*count}`,'color:lime');
+               console.log(`%cLa frase ahora es: ${shorten.join("")}`,'color:lime');
+               this.fuzzySearching(shorten.join(""));
+               this.tempString=shorten;
+          }
+
+          else {
+               console.log("Hay resultados!!!!")
+          }
+     }
      
      ngOnDestroy(): void {
           //Called once, before the instance is destroyed.
