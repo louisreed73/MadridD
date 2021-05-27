@@ -98,10 +98,8 @@ export class DocumentoComponent implements OnInit, OnDestroy {
      //  }
 
      pRendered(e) {
- 
 
                console.log(e)
-
      }
 
      estadoBusqueda(e) {
@@ -110,19 +108,10 @@ export class DocumentoComponent implements OnInit, OnDestroy {
 
      buscando(e) {
    
-          if(!e.total) {
-
-               // let time=Date.now();
-               // e.tiempo=time;
-               // e.results=!!(e.total)
-
-               //      e.count=count;
-               //      count--;
-               //      console.log(`%cEl contador es: ${count}`,'color:lime');
-                    
+          if(!e.total) {       
 
                console.log(e);
-               let total=Math.round(this.tempString.length);
+               let total=this.tempString.length;
                // console.log(`%cdividimos la frase completa entre 5 y es: ${div}`,'color:lime');
                let shorten=this.tempString.slice(0,Math.round(total / 10 ));
                // console.log(`%cLa divisón por el contador es: ${div*count}`,'color:lime');
