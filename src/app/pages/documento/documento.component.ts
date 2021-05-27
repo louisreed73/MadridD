@@ -1,47 +1,82 @@
-import { Location } from "@angular/common";
 import { DOCUMENT } from "@angular/common";
 import {
      ChangeDetectionStrategy,
      Component,
-     ElementRef,
      Inject,
      OnDestroy,
      OnInit,
-     ViewChild,
 } from "@angular/core";
-import { ActivatedRoute, UrlSegment } from "@angular/router";
-import { NgxExtendedPdfViewerService, PdfFindButtonComponent } from "ngx-extended-pdf-viewer";
-import { PdfFindbarService } from "ngx-extended-pdf-viewer/lib/toolbar/pdf-findbar/pdf-findbar-service";
+import { ActivatedRoute} from "@angular/router";
+import { NgxExtendedPdfViewerService } from "ngx-extended-pdf-viewer";
 import { DocumentosService } from "src/app/services/documentos.service";
-import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { SearchTriggerService } from "src/app/services/search-trigger.service";
-import { from, of, Subscription } from "rxjs";
-import { map, switchMap, tap } from "rxjs/operators";
+import { Subscription } from "rxjs";
+import { map} from "rxjs/operators";
+
 @Component({
      selector: "app-documento",
      templateUrl: "./documento.component.html",
      styleUrls: ["./documento.component.scss"],
+     changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class DocumentoComponent implements OnInit, OnDestroy {
-     // historylastURL: UrlSegment;
-     // valor: number = 0.25;
-     @ViewChild("link", { static: true }) link: ElementRef;
-     // @ViewChild(PdfFindButtonComponent,{static:true}) find: PdfFindButtonComponent;
-     // @ViewChild("findInput", { static: true }) find: ElementRef;
-
-     // pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
      pdfSrc = "/assets/ejemplo_pdf_3.pdf";
-
      pdfQuery: any;
-     // pdfDefaultOptions.assetsFolder = 'bleeding-edge';
-
-     // @ViewChild(PdfViewerComponent, { static: true })
-     // private pdfComponent: PdfViewerComponent;
-     page = 5;
-
      pageLabel: string;
      fuzzySubsc:Subscription;
-     pdfDownload_Name=`descarga_${(Math.random() * 10)}`;
+     pruebas:Array<string>=[
+          "summer",
+          "sommerville",
+          "motherFucker",
+          "what",
+          "shit",
+     ];
+
+     tempString:string;
+
+
+     buscando:any=(()=>{
+
+          let count=11;
+
+          return (e)=>{
+               if(!e.total) {
+
+                    let time=Date.now();
+                    e.tiempo=time;
+                    e.results=!!(e.total)
+     
+                         e.count=count;
+                         count--;
+                         console.log(`%cEl contador es: ${count}`,'color:lime');
+                         
+     
+                    console.log(e,count);
+                    let div=Math.round(this.tempString.length/2);
+                    console.log(`%cdividimos la frase completa entre 5 y es: ${div}`,'color:lime');
+                    let shorten=this.tempString.slice(0,div);
+                    // console.log(`%cLa divisón por el contador es: ${div*count}`,'color:lime');
+                    console.log(`%cLa frase ahora es: ${shorten}`,'color:lime');
+                    this.fuzzySearching(shorten);
+                    this.tempString=shorten;
+               }
+
+               else {
+                    console.log("Hay resultados!!!!")
+               }
+
+          }
+          // e.count+=1;
+          // setTimeout(()=>{
+
+          //      this.ngxExtendedPdfViewerService.find(this.pruebas[count],{
+          //           fuzzySearch: true
+          //      })
+          // },5000)
+          // if(count<5&&!e.count) {
+          //      this.buscando(e,++count);
+          // }
+     })()
 
 
      constructor(
@@ -51,26 +86,9 @@ export class DocumentoComponent implements OnInit, OnDestroy {
           private searchTriggerServ:SearchTriggerService,
           @Inject(DOCUMENT) private _document: Document,
 
-
-//     private ngxExtendedPdfViewerService: NgxExtendedPdfViewerService,
-//     private pdfFindbarService:PdfFindbarService
-
-          
-           //   private location: Location
      ) {}
 
      ngOnInit() {
-          // this.route.paramMap.subscribe((map) => {
-          //      //Comprobación del id del documento referido
-          //      console.log(map.get("id"));
-          //      // Checkeo de la comprobacion de la URL
-          //      // this.historylastURL=this.route.snapshot.url[0];
-          //      // console.log(this.historylastURL.path)
-          // });
-          // console.log(this.pdfComponent);
-          
-
-
           this.fuzzySubsc=this.searchTriggerServ.fuzzySearch
           .pipe(
                map(d=>{
@@ -82,22 +100,15 @@ export class DocumentoComponent implements OnInit, OnDestroy {
                .subscribe(d=>{
                console.log(d);
 
+               this.tempString=d;
                this.fuzzySearching(d)
-               
 
-
-                    // findButton.click();
-
-               
           })
      }
 
      ngAfterViewInit(): void {
           //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
           //Add 'implements AfterViewInit' to the class.
-          // console.log(this.find)
-
-
      }
 
      // {
@@ -110,27 +121,24 @@ export class DocumentoComponent implements OnInit, OnDestroy {
      //  }
 
      pRendered(e) {
-          // console.log(e.source.textLayerFactory.findController.state);
-          
-          // this.ngxExtendedPdfViewerService.find("maria",{
-          //      highlightAll: true,
-          //       matchCase: false,
-          //       wholeWords: false,
-          //       ignoreAccents: true
-          // })
+ 
 
-          // this.ngxExtendedPdfViewerService.
-          // console.log(this.ngxExtendedPdfViewerService)
-          // console.log(this.find)
-
-
+               console.log(e)
 
      }
 
-     buscando(e) {
-          // console.log(e);
-          // console.log(this.ngxExtendedPdfViewerService);
+     estadoBusqueda(e) {
+          console.log(e)
      }
+
+     // buscando(e) {
+
+     //      let count=0;
+     //      return ()=>{
+
+     //           console.log(e,count++)
+     //      }
+     // }
      
      ngOnDestroy(): void {
           //Called once, before the instance is destroyed.
