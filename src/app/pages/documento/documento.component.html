@@ -24,8 +24,16 @@ value="1"
   <input type="text" name="" id="" [(ngModel)]="fuzzyQuery">
   <button>fuzzy</button>
 </div> -->
-<ngx-extended-pdf-viewer [src]="pdfSrc" useBrowserLocale="true" height="81vh" [textLayer]="true"
-  (pageRendered)="pRendered($event)" (updateFindMatchesCount)="buscando($event)">
+<ngx-extended-pdf-viewer 
+[src]="pdfSrc" 
+useBrowserLocale="true" 
+height="81vh" 
+[textLayer]="true"
+(pageRendered)="pRendered($event)" 
+(updateFindMatchesCount)="buscando($event)"
+[showOpenFileButton]="false"
+[showBookmarkButton]="false"
+[filenameForDownload]="pdfDownload_Name">
 </ngx-extended-pdf-viewer>
 
 <!-- [showPresentationModeButton]="true"

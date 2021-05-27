@@ -10,13 +10,16 @@ export class ResumeDocumentComponent implements OnInit {
 
   @Input() documento:any;
   fuzzyString:string;
+  pdfDownload_Name:string;
   constructor(
     private searchTriggerServ:SearchTriggerService
   ) { }
 
   ngOnInit() {
 
-    console.log(this.documento)
+    console.log(this.documento);
+    this.pdfDownload_Name=`documento_${this.documento.id}.pdf`
+    console.log(this.pdfDownload_Name);
   }
 
   fuzzySearch() {

@@ -41,6 +41,7 @@ export class DocumentoComponent implements OnInit, OnDestroy {
 
      pageLabel: string;
      fuzzySubsc:Subscription;
+     pdfDownload_Name=`descarga_${(Math.random() * 10)}`;
 
 
      constructor(
@@ -67,6 +68,7 @@ export class DocumentoComponent implements OnInit, OnDestroy {
           //      // console.log(this.historylastURL.path)
           // });
           // console.log(this.pdfComponent);
+          
 
 
           this.fuzzySubsc=this.searchTriggerServ.fuzzySearch

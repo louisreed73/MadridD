@@ -138,9 +138,20 @@ input:focus {
 }
 
 
-    ngx-extended-pdf-viewer input {
-      width:auto;
-  }
+    ngx-extended-pdf-viewer {
+
+      input {
+        width:auto;
+        font-family: $font-main;
+        cursor:pointer !important;
+      }
+        label,button {
+  
+          font-family: $font-main;
+          cursor:pointer !important;
+        }
+    } 
+
 
   pdf-find-fuzzily {
     display: none;

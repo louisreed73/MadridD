@@ -2,6 +2,10 @@
 //     background:gainsboro;
 // }
 
+// :host(body) {
+//     overflow:hidden;
+// }
+
 .infoHeader {
     // display: flex;
     // flex-flow: row wrap;
@@ -40,7 +44,7 @@ h1,h2 {
     z-index: 10;
     // top: 11.45rem;
     transition: width .4s ease-in-out;
-    // min-height:20rem;
+    max-height:20rem;
     // padding: 0.5rem 0 0;
     // background:red;
     // margin-bottom:2rem;
@@ -62,6 +66,7 @@ h1,h2 {
         opacity:0;
         width:0;
         height:0;
+        display:none;
     }
     label {
         position: relative;
@@ -96,6 +101,7 @@ h1,h2 {
         backface-visibility: hidden;
         transition: 
         flex .3s ease-in-out, 
+        height .3s .1s ease-in-out, 
         width .1s ease-in-out, 
         transform .3s ease-in-out, 
         opacity .001s ease-in-out, 
@@ -133,6 +139,8 @@ h1,h2 {
         
         position:relative;
         flex: 0 0 auto;
+        // height:81.7vh;
+
         // top:1rem;
         // width:0;
         transform: translateX(-145%);
