@@ -34,6 +34,31 @@ export class DocumentoComponent implements OnInit, OnDestroy {
 
      tempString:Array<string>=[];
 
+     buscando:any=(()=>{
+
+          let count=10;
+
+          return (e)=>{
+               if(!e.total) {       
+                    
+                    console.log(e);
+                    let total=this.tempString.length;
+                    // console.log(`%cdividimos la frase completa entre 5 y es: ${div}`,'color:lime');
+                    let shorten=this.tempString.slice(0,Math.round(total / 2 ));
+                    // console.log(`%cLa divisón por el contador es: ${div*count}`,'color:lime');
+                    // console.log(`%cLa frase ahora es: ${shorten.join("")}`,'color:lime');
+                    this.fuzzySearching(shorten.join(""));
+                    this.tempString=shorten;
+                    console.log(`%cEl contador es:${count+=4}`,'color:gold');
+               }
+     
+               else {
+                    console.log("Hay resultados!!!!")
+               }
+
+          }
+     })()
+
 
      // buscando:any=(()=>{
 
@@ -106,16 +131,16 @@ export class DocumentoComponent implements OnInit, OnDestroy {
           console.log(e)
      }
 
-     buscando(e) {
+     _buscando(e) {
    
           if(!e.total) {       
 
                console.log(e);
                let total=this.tempString.length;
                // console.log(`%cdividimos la frase completa entre 5 y es: ${div}`,'color:lime');
-               let shorten=this.tempString.slice(0,Math.round(total / 10 ));
+               let shorten=this.tempString.slice(0,Math.round(total / 2 ));
                // console.log(`%cLa divisón por el contador es: ${div*count}`,'color:lime');
-               console.log(`%cLa frase ahora es: ${shorten.join("")}`,'color:lime');
+               // console.log(`%cLa frase ahora es: ${shorten.join("")}`,'color:lime');
                this.fuzzySearching(shorten.join(""));
                this.tempString=shorten;
           }
@@ -132,7 +157,8 @@ export class DocumentoComponent implements OnInit, OnDestroy {
      }
 
      fuzzySearching(query:string):void {
-          console.log(query)
+     console.log(`%cLa frase ahora es: ${query}`,'color:lime');
+
           let findButton=this._document.querySelector("#viewFind") as HTMLButtonElement;
                let findBar=this._document.querySelector("#findbar") as HTMLElement;
                     let searchisHidden=findBar.classList.contains("hidden");
