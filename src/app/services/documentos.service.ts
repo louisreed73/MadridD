@@ -66,6 +66,7 @@ export class DocumentosService implements OnDestroy {
 
      // query string, received from input user - to save in pipe
      search;
+
      // forms selections of user Filters to apply - to save in pipe
      formulario;
      // actual pagination number - to save in pipe
@@ -136,9 +137,10 @@ export class DocumentosService implements OnDestroy {
                tap(console.log),
                tap(([formulario, search, pagina]) => {
                     // saving all the data
-                    this.search = search;
+                    this.search = search.query;
                     this.formulario = formulario;
                     this.pagina = pagina;
+                    this.formulario.currentSearch = search.tipo;
                     console.log(`%cEsto es lo que recibo de los filtros: ${JSON.stringify(this.formulario,null,3)}`,"color:gold");
                     console.log(`%cEsto es lo que recibo de los filtros: ${JSON.stringify(this.pagina,null,3)}`,"color:gold");
                     console.log(`%cEsto es lo que recibo de los filtros: ${JSON.stringify(this.search,null,3)}`,"color:gold");

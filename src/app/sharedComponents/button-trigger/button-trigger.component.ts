@@ -1,3 +1,4 @@
+import { Location } from "@angular/common";
 import {
      AfterViewInit,
      Component,
@@ -20,7 +21,9 @@ export class ButtonTriggerComponent implements OnInit, AfterViewInit {
 
      constructor(
        @Inject(Window) private window: Window,
-       private searchTrigger:SearchTriggerService
+       private searchTrigger:SearchTriggerService,
+       private location: Location
+
        ) {}
 
      ngOnInit() {}
@@ -36,6 +39,8 @@ export class ButtonTriggerComponent implements OnInit, AfterViewInit {
                 //  tap(console.log)
                )
                .subscribe((event: Event) => {
+                    let routePath=this.location.path().replace(/\//,"")
+                    console.log("botón pulsado!!!!",routePath)
                     // console.log(event);
                     if (
                          event instanceof KeyboardEvent &&
@@ -45,6 +50,7 @@ export class ButtonTriggerComponent implements OnInit, AfterViewInit {
                         
                         this.window.scrollTo(0, 0);
                         this.searchTrigger.updatedPagina=1;
+                        this.searchTrigger.updatedSearch.tipo=routePath;
                         this.searchTrigger.newTriggerSearch.next("busca")
                     }
                     
@@ -53,6 +59,7 @@ export class ButtonTriggerComponent implements OnInit, AfterViewInit {
                          // console.log(event.type)
                          this.window.scrollTo(0, 0);
                           this.searchTrigger.updatedPagina=1;
+                        this.searchTrigger.updatedSearch.tipo=routePath;
                           this.searchTrigger.newTriggerSearch.next("busca")
                     }
                });

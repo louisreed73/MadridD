@@ -52,7 +52,8 @@ export class SearchFormComponent implements OnInit {
      constructor(
           private combinacion: DocumentosService,
           @Inject(Window) private window: Window,
-       private searchTrigger:SearchTriggerService
+       private searchTrigger:SearchTriggerService,
+       
 
 
      ) {}

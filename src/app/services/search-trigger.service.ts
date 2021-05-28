@@ -11,7 +11,7 @@ export class SearchTriggerService {
   fuzzySearch:Subject<string>=new Subject()
 
   _updatedFiltro:{[k:string]:any}={};
-  _updatedSearch:string=null;
+  _updatedSearch:any={};
   _updatedPagina:number=null;
 
 
@@ -25,9 +25,12 @@ export class SearchTriggerService {
     return this._updatedFiltro
   }
   
-  set updatedSearch(v:string) {
+  get updatedSearch():any {
+    return this._updatedSearch
+  }
+  set updatedSearch(v:any) {
     console.log("Me acaban de actualizar!!!");
-    this._updatedSearch=v;
+    this._updatedSearch.query=v;
     console.log(this.updatedSearch);
   }
 
@@ -41,9 +44,6 @@ export class SearchTriggerService {
     console.log(this.updatedPagina);
   }
 
-  get updatedSearch() {
-    return this._updatedSearch
-  }
   
 
   constructor() { 
