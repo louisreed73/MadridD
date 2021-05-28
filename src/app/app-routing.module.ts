@@ -16,7 +16,7 @@ import { DocumentCardComponent } from "./components/document-card/document-card.
 import { NgxExtendedPdfViewerModule, PdfFindButtonComponent } from 'ngx-extended-pdf-viewer';
 import { PdfFindbarService } from "ngx-extended-pdf-viewer/lib/toolbar/pdf-findbar/pdf-findbar-service";
 const routes: Routes = [
-     { path: "", pathMatch: "full", redirectTo: "documentos" },
+     { path: "", pathMatch: "full", redirectTo: "login" },
      {
           path: "",
           component: SearchLayoutComponent,
@@ -25,13 +25,20 @@ const routes: Routes = [
                     (m) => m.PagesDocumentsModule
                ),
      },
-
      {
           path: "",
-          component: DetailLayoutComponent,
-          children: [{ path: "documento/:id", component: DocumentoComponent }],
+          loadChildren: () =>
+               import("./modules/auth/auth.module").then(
+                    (m) => m.AuthModule
+               ),
      },
-     { path: "**", redirectTo: "documentos" },
+
+     {
+          path: "documento",
+          component: DetailLayoutComponent,
+          children: [{ path: ":id", component: DocumentoComponent }],
+     },
+     { path: "**", redirectTo: "login" },
 ];
 
 @NgModule({
