@@ -163,7 +163,6 @@ export class FiltroComponent implements OnInit, OnDestroy {
                          updatedChangesFiltro = {
                               ...actual,
                               documentos: data,
-                              currentFilter:"documentos"
                          };
                     }
                     break;
