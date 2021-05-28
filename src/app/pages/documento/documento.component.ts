@@ -60,26 +60,6 @@ export class DocumentoComponent implements OnInit, OnDestroy {
      })()
 
 
-     // buscando:any=(()=>{
-
-     //      let count=11;
-
-     //      return (e)=>{
-               
-
-     //      }
-     //      // e.count+=1;
-     //      // setTimeout(()=>{
-
-     //      //      this.ngxExtendedPdfViewerService.find(this.pruebas[count],{
-     //      //           fuzzySearch: true
-     //      //      })
-     //      // },5000)
-     //      // if(count<5&&!e.count) {
-     //      //      this.buscando(e,++count);
-     //      // }
-     // })()
-
 
      constructor(
           private route: ActivatedRoute,
